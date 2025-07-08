@@ -92,7 +92,6 @@ int	ft_check_colors(t_colors *colors, char **file, int *idx)
 			j += skip_letter(file[*idx][0], file[*idx][1]);
 			skip_spaces(file[*idx], &j);
 			split = ft_split(&file[*idx][j], ',');
-			split[2] = ft_substr(split[2], 0, ft_strlen(split[2]) - 1, 1);
 			set_color(colors, split, file[*idx][0]);
 		}
 		(*idx)++;
