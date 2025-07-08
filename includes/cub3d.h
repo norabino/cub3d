@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/07 18:51:26 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/07 19:02:13 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,19 @@ typedef struct s_textures
 	char	*north;
 	char	*south;
 	char	*west;
-	int[3]	f_color;
-	int[3]	c_color;
-}
+	char	*east;
+}	t_textures;
+
+typedef struct s_colors
+{
+	int[3]	floor;
+	int[3]	ceiling;
+}	t_colors;
 
 typedef	struct s_cubed
 {
 	t_textures	textures;
+	t_colors	colors;
 	char	**map;
 }	t_cubed;
 
@@ -42,7 +48,7 @@ char	*ft_strdup(char *s);
 
 void	ft_perror(char *err);
 
-char	**open_map(char *filename);
+char	**open_file(char *filename);
 int		check_extension(char *filename);
 
 #endif

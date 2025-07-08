@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_map.c                                         :+:      :+:    :+:   */
+/*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/07 18:46:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/07 19:13:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cubed.h"
+#include "../../includes/cub3d.h"
 
 int	check_extension(char *filename)
 {
@@ -28,9 +28,9 @@ int	check_extension(char *filename)
 	return (1);
 }
 
-char	**malloc_map(char *filename)
+char	**malloc_file(char *filename)
 {
-	char	**map;
+	char	**file;
 	int		fd;
 	int		nb_lines;
 
@@ -40,26 +40,26 @@ char	**malloc_map(char *filename)
 	nb_lines = 0;
 	while (get_next_line(fd))
 		nb_lines++;
-	map = (char **)malloc(sizeof(char *) * (nb_lines) + 1);
-	return (map);
+	file = (char **)malloc(sizeof(char *) * (nb_lines) + 1);
+	return (file);
 }
 
-char	**open_map(char *filename)
+char	**open_file(char *filename)
 {
 	int		fd;
-	char	**map;
+	char	**file;
 	int		i;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (ft_perror("Error when opening file...\n"), NULL);
-	map = malloc_map(filename);
+	file = malloc_file(filename);
 	i = 0;
-	map[i] = get_next_line(fd);
-	while (map[i])
+	file[i] = get_next_line(fd);
+	while (file[i])
 	{
 		i++;
-		map[i] = get_next_line(fd);
+		file[i] = get_next_line(fd);
 	}
-	return (map);
+	return (file);
 }

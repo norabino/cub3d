@@ -2,7 +2,7 @@ NAME = cub3D
 CC = cc
 SRC = \
 	src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c \
-	src/parsing/check_file.c src/parsing/open_map.c\
+	src/parsing/check_file.c src/parsing/open_map.c src/set.c\
 	src/utils/str_utils.c src/utils/utils.c \
 	src/main.c \
 
