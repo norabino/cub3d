@@ -1,0 +1,21 @@
+NO ./textures/bark.xpm
+SO ./textures/bricks.xpm 
+EA ./textures/wood.xpm
+WE ./textures/wood.xpm
+
+F 32, 32, 32
+C 0, 0, 102
+
+111
+1N1
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+111
