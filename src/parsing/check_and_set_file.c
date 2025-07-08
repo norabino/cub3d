@@ -126,6 +126,22 @@ void	ft_check_letter(t_cub3d *cub3d)
 		exit_error("Multiple spawn in map !!\nMust be one.", cub3d);
 }
 
+void	check_zero_remaining(t_cub3d *cub3d, char **work_map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (work_map[y])
+	{
+		while (work_map[y][x])
+		{
+			y = 0;
+			// a finir
+		}
+	}
+}
+
 int	ft_check_map_valid(t_cub3d *cub3d)
 {
     char	**work_map;
@@ -150,7 +166,7 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 		free_map(work_map);
 		exit_error("Accessible area touches empty spaces!", cub3d);
 	}
-	print_map(cub3d, work_map);
+	check_zero_remaining(cub3d, work_map);
 	free_map(work_map);
 	return (1);
 }
