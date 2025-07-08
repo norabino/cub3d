@@ -24,9 +24,7 @@ re: fclean all
 
 all: $(NAME)
 
-dev :
-	make fclean
-	git add .; git commit -m "auto/dev"; git push
-	make all
+dev : fclean
+	git add .; git commit -m "auto/dev"; git push --force
 
 PHONY: all clean fclean re dev
