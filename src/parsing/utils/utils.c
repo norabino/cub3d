@@ -6,11 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/07 18:14:15 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:08:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cubed.h"
+#include "../../includes/cub3d.h"
 
 void	ft_perror(char *err)
 {
@@ -23,29 +23,5 @@ void	ft_perror(char *err)
 		i++;
 	}
 	write(2, "\n", 1);
-}
-
-char	*ft_strcpy(char *dest, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		dest[i] = str[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(char *s)
-{
-	char	*res;
-
-	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!res)
-		return (NULL);
-	ft_strcpy(res, s);
-	return (res);
+	exit(1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cubed.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/07 19:02:13 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:48:24 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include <fcntl.h>
 
 # include "../src/get_next_line/get_next_line.h"
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}		t_point;
 
 typedef struct s_textures
 {
@@ -41,8 +47,11 @@ typedef	struct s_cubed
 	char	**map;
 }	t_cubed;
 
+char	*ft_strchr(char *s, int c);
 char	*ft_strrchr(char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
+char    *ft_substr(char *s, int start, int len);
+
 
 char	*ft_strdup(char *s);
 
@@ -50,5 +59,8 @@ void	ft_perror(char *err);
 
 char	**open_file(char *filename);
 int		check_extension(char *filename);
+
+char	**map_cpy(char **old);
+void	*ft_memmove(void *dest, const void *src, size_t n);
 
 #endif
