@@ -62,10 +62,10 @@ int	fill(char **tab, t_point size, t_point current, char to_fill)
     tab[current.y][current.x] = 'F';
     
     // Vérifier récursivement les 4 directions
-    if (!fill(tab, size, (t_point){current.x - 1, current.y, 0}, to_fill) ||
-        !fill(tab, size, (t_point){current.x + 1, current.y, 0}, to_fill) ||
-        !fill(tab, size, (t_point){current.x, current.y - 1, 0}, to_fill) ||
-        !fill(tab, size, (t_point){current.x, current.y + 1, 0}, to_fill))
+    if (!fill(tab, size, (t_point){current.x - 1, current.y, 0, NULL}, to_fill) ||
+        !fill(tab, size, (t_point){current.x + 1, current.y, 0, NULL}, to_fill) ||
+        !fill(tab, size, (t_point){current.x, current.y - 1, 0, NULL}, to_fill) ||
+        !fill(tab, size, (t_point){current.x, current.y + 1, 0, NULL}, to_fill))
         return (0);
     
     return (1);
@@ -114,7 +114,7 @@ int	check_no_invalid_adjacent(char **tab, t_point size)
     return (1);
 }
 
-t_point find_player_position(char **map, t_point size, t_cub3d *cub3d)
+t_point find_player_position(t_cub3d *cub3d, char **map, t_point size)
 {
     int y;
     int x;
@@ -129,11 +129,11 @@ t_point find_player_position(char **map, t_point size, t_cub3d *cub3d)
         {
             if (ft_is_letter(map[y][x]))
             {
-                return ((t_point){x, y, map[y][x]});
+                return ((t_point){x, y, map[y][x], cub3d});
             }
             x++;
         }
         y++;
     }
-    return (exit_error("Player position not found!", cub3d), (t_point){-1, -1, 0});
+    return (exit_error("Player position not found!", cub3d), (t_point){-1, -1, 0, cub3d});
 }

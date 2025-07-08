@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 17:39:01 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:01:42 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exit_error(char *err, t_cub3d *cub3d)
 	exit(1);
 }
 
-void	print_map(char **map, t_cub3d *cub3d)
+void	print_map(t_cub3d *cub3d, char **map)
 {
 	int	i;
 

@@ -27,7 +27,7 @@ int	all_text_set(t_textures textures)
 		return (0);
 	return (1);
 }
-int	ft_check_textures(t_textures *textures, char **file, int *idx, t_cub3d *cub3d)
+int	ft_check_textures(t_textures *textures, char **file, int *idx)
 {
 	int	j;
 
@@ -51,11 +51,11 @@ int	ft_check_textures(t_textures *textures, char **file, int *idx, t_cub3d *cub3
 		(*idx)++;
 	}
 	if (!all_text_set(*textures))
-		exit_error("MIssing texture", cub3d);
+		exit_error("MIssing texture", textures->cubd);
 	return (1);
 }
 
-void	set_color(t_colors *colors, char **split, char c, t_cub3d *cub3d)
+void	set_color(t_colors *colors, char **split, char c)
 {
 	int		i;
 
@@ -66,7 +66,7 @@ void	set_color(t_colors *colors, char **split, char c, t_cub3d *cub3d)
 			colors->ceiling[i] = ft_atoi(split[i]);
 			if (colors->ceiling[i] < 0
 				|| colors->ceiling[i] > 255)
-				exit_error("Wrong ceiling color args", cub3d);
+				exit_error("Wrong ceiling color args", colors->cubd);
 		}
 	else if (c == 'F')
 		while (split[++i])
@@ -74,11 +74,11 @@ void	set_color(t_colors *colors, char **split, char c, t_cub3d *cub3d)
 			colors->floor[i] = ft_atoi(split[i]);
 			if (colors->floor[i] < 0
 				|| colors->floor[i] > 255)
-				exit_error("Wrong floor color args", cub3d);
+				exit_error("Wrong floor color args", colors->cubd);
 		}
 }
 
-int	ft_check_colors(t_colors *colors, char **file, int *idx, t_cub3d *cub3d)
+int	ft_check_colors(t_colors *colors, char **file, int *idx)
 {
 	int		j;
 	char	**split;
@@ -98,11 +98,11 @@ int	ft_check_colors(t_colors *colors, char **file, int *idx, t_cub3d *cub3d)
 		(*idx)++;
 	}
 	if (!all_colors_set(*colors))
-		exit_error("Wrong colors", cub3d);
+		exit_error("Wrong colors", colors->cubd);
 	return (1);
 }
 
-void	ft_check_letter(char **map, t_cub3d *cub3d)
+void	ft_check_letter(t_cub3d *cub3d)
 {
 	int	y;
 	int	x;
@@ -110,12 +110,12 @@ void	ft_check_letter(char **map, t_cub3d *cub3d)
 	
 	y = 0;
 	nb_spawn = 0;
-	while (map[y])
+	while (cub3d->map[y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (cub3d->map[y][x])
 		{
-			if (ft_is_letter(map[y][x]))
+			if (ft_is_letter(cub3d->map[y][x]))
 				nb_spawn++;
 			x++;
 		}
@@ -127,19 +127,19 @@ void	ft_check_letter(char **map, t_cub3d *cub3d)
 		exit_error("Multiple spawn in map !!\nMust be one.", cub3d);
 }
 
-int	ft_check_map_valid(char **map, t_cub3d *cub3d)
+int	ft_check_map_valid(t_cub3d *cub3d)
 {
     char	**work_map;
     t_point	size;
 	t_point	player_pos;
 
-    ft_check_letter(map);
-    work_map = map_cpy(map);
+    ft_check_letter(cub3d);
+    work_map = map_cpy(cub3d->map);
     size.y = 0;
-    while (map[size.y])
+    while (cub3d->map[size.y])
         size.y++;
-    size.x = ft_get_max_width(map);
-    player_pos = find_player_position(work_map, size);
+    size.x = ft_get_max_width(cub3d->map);
+    player_pos = find_player_position(cub3d, work_map, size);
 	work_map[player_pos.y][player_pos.x] = '0';
     if (!flood_fill(work_map, size, player_pos))
     {
@@ -151,12 +151,12 @@ int	ft_check_map_valid(char **map, t_cub3d *cub3d)
 		free_map(work_map);
 		exit_error("Accessible area touches empty spaces!", cub3d);
 	}
-	print_map(work_map);
+	print_map(cub3d, work_map);
 	free_map(work_map);
 	return (1);
 }
 
-int	ft_check_map(char ***map, char **file, int *idx_line, t_cub3d *cub3d)
+int	ft_check_map(t_cub3d *cub3d, char **file, int *idx_line)
 {
 	int	begin;
 
@@ -167,15 +167,15 @@ int	ft_check_map(char ***map, char **file, int *idx_line, t_cub3d *cub3d)
 	begin = *idx_line;
 	while (file[*idx_line])
 		(*idx_line)++;
-	(*map) = malloc(sizeof(char *) * (*idx_line) - begin + 2);
+	cub3d->map = malloc(sizeof(char *) * (*idx_line) - begin + 2);
 	(*idx_line) = 0;
 	while (file[*idx_line + begin])
 	{
-		(*map)[*idx_line] = file[*idx_line + begin];
+		cub3d->map[*idx_line] = file[*idx_line + begin];
 		(*idx_line)++;
 	}
-	(*map)[*idx_line] = NULL;
-	ft_check_map_valid(*map);
+	cub3d->map[*idx_line] = NULL;
+	ft_check_map_valid(cub3d);
 	return (1);
 }
 
@@ -190,6 +190,6 @@ int	check_and_set_file(t_cub3d *cub3d, char **file)
 	ft_check_colors(&cub3d->colors, file, &idx_line);
 	if (tmp > idx_line)
 		idx_line = tmp;
-	ft_check_map(&cub3d->map, file, &idx_line);
+	ft_check_map(cub3d, file, &idx_line);
 	return(1);
 }

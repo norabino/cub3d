@@ -6,13 +6,13 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 17:39:01 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:58:35 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	check_extension(char *filename, t_cub3d *cub3d)
+int	check_extension(t_cub3d *cub3d, char *filename)
 {
 	char	*ext;
 	int		i;
@@ -28,7 +28,7 @@ int	check_extension(char *filename, t_cub3d *cub3d)
 	return (1);
 }
 
-char	**malloc_file(char *filename, t_cub3d *cub3d)
+char	**malloc_file(t_cub3d *cub3d, char *filename)
 {
 	char	**file;
 	int		fd;
@@ -44,7 +44,7 @@ char	**malloc_file(char *filename, t_cub3d *cub3d)
 	return (file);
 }
 
-char	**open_file(char *filename, t_cub3d *cub3d)
+char	**open_file(t_cub3d *cub3d, char *filename)
 {
 	int		fd;
 	char	**file;
@@ -53,7 +53,7 @@ char	**open_file(char *filename, t_cub3d *cub3d)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		exit_error("Error when opening file...", cub3d);
-	file = malloc_file(filename);
+	file = malloc_file(cub3d, filename);
 	i = 0;
 	file[i] = get_next_line(fd);
 	while (file[i])
