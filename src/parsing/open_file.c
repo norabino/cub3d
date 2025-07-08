@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/07 19:13:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/08 14:22:20 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	check_extension(char *filename)
 		i--;
 	ext = ft_strdup(&filename[i]);
 	if (!ext || !ft_strcmp(ext, filename))
-		return (ft_perror("No file extension.\n"), 0);
+		exit_error("No file extension.");
 	if (ft_strcmp(ext, ".cub"))
-		return (ft_perror("Wrong file extension.\n"), 0);
+		exit_error("Wrong file extension.");
 	return (1);
 }
 
@@ -36,7 +36,7 @@ char	**malloc_file(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (ft_perror("Error when opening file...\n"), NULL);
+		exit_error("Error when opening file...");
 	nb_lines = 0;
 	while (get_next_line(fd))
 		nb_lines++;
@@ -52,7 +52,7 @@ char	**open_file(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (ft_perror("Error when opening file...\n"), NULL);
+		exit_error("Error when opening file...");
 	file = malloc_file(filename);
 	i = 0;
 	file[i] = get_next_line(fd);

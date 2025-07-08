@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
+/*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
 /*   Updated: 2025/07/08 14:08:45 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int ac, char **av)
+void	init(t_cub3d *cub3d)
 {
-	t_cub3d *cub3d;
-	char	**file;
-	
-	cub3d = malloc(sizeof(t_cub3d));
-	if (ac != 2)
-		exit_error("Too few/much arguments.\nTry : ./cub3d [filename]");
-	if (!check_extension(av[1]))
-		exit_error("Must be '.cub'.");
-	file = open_file(av[1]);
-	if (!file)
-		return (1);
-	init(cub3d);
-	if (!check_and_set_file(cub3d, file))
-		return (0);
+	cub3d->textures.north = NULL;
+	cub3d->textures.south = NULL;
+	cub3d->textures.west = NULL;
+	cub3d->textures.east = NULL;
+	cub3d->colors.floor[0] = -1;
+	cub3d->colors.floor[1] = -1;
+	cub3d->colors.floor[2] = -1;
+	cub3d->colors.ceiling[0] = -1;
+	cub3d->colors.ceiling[1] = -1;
+	cub3d->colors.ceiling[1] = -1;
+	cub3d->map = NULL;
 }

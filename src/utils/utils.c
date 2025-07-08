@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 11:08:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:38:16 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_perror(char *err)
+void	exit_error(char *err)
 {
 	int	i;
 
+	write(2, "Error\n", 6);
 	i = 0;
 	while (err[i])
 	{
