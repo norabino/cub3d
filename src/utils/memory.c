@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 14:30:31 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:36:33 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**map_cpy(char **old)
 	new[len] = NULL;
 	i = -1;
 	while (++i < len)
-		new [i] = ft_strdup(old[i]);
+		new[i] = ft_strdup(old[i]);
 	return (new);
 }
 

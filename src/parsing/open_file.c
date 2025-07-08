@@ -6,13 +6,13 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 14:22:20 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:36:32 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	check_extension(char *filename)
+int	check_extension(char *filename, t_cub3d *cub3d)
 {
 	char	*ext;
 	int		i;
@@ -22,13 +22,13 @@ int	check_extension(char *filename)
 		i--;
 	ext = ft_strdup(&filename[i]);
 	if (!ext || !ft_strcmp(ext, filename))
-		exit_error("No file extension.");
+		exit_error("No file extension.", cub3d);
 	if (ft_strcmp(ext, ".cub"))
-		exit_error("Wrong file extension.");
+		exit_error("Wrong file extension.", cub3d);
 	return (1);
 }
 
-char	**malloc_file(char *filename)
+char	**malloc_file(char *filename, t_cub3d *cub3d)
 {
 	char	**file;
 	int		fd;
@@ -36,7 +36,7 @@ char	**malloc_file(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		exit_error("Error when opening file...");
+		exit_error("Error when opening file...", cub3d);
 	nb_lines = 0;
 	while (get_next_line(fd))
 		nb_lines++;
@@ -44,7 +44,7 @@ char	**malloc_file(char *filename)
 	return (file);
 }
 
-char	**open_file(char *filename)
+char	**open_file(char *filename, t_cub3d *cub3d)
 {
 	int		fd;
 	char	**file;
@@ -52,7 +52,7 @@ char	**open_file(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		exit_error("Error when opening file...");
+		exit_error("Error when opening file...", cub3d);
 	file = malloc_file(filename);
 	i = 0;
 	file[i] = get_next_line(fd);
@@ -61,5 +61,6 @@ char	**open_file(char *filename)
 		i++;
 		file[i] = get_next_line(fd);
 	}
+	file[i] = NULL;
 	return (file);
 }

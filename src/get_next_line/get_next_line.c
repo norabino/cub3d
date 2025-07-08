@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:16:40 by norabino          #+#    #+#             */
-/*   Updated: 2025/07/07 17:56:50 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:36:32 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_get_a_line(char *str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	line = ft_substr(str, 0, i + 1);
+	line = ft_substr(str, 0, i + 1, 0);
 	if (!line)
 	{
 		free(str);
@@ -68,7 +68,7 @@ char	*ft_new_remainder(char *remainder)
 		return (NULL);
 	}
 	i++;
-	str = ft_substr(remainder, i, ft_strlen(remainder) - i);
+	str = ft_substr(remainder, i, ft_strlen(remainder) - i, 0);
 	if (!str)
 	{
 		free(remainder);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:18:23 by norabino          #+#    #+#             */
-/*   Updated: 2025/07/07 18:16:33 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:36:32 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_read_to_remainder(int fd, char *remainder);
 
 int		ft_strlen(char *str);
 char	*ft_strchr(char *str, char c);
-char	*ft_substr(char *s, int start, int len);
+char	*ft_substr(char *s, int start, int len, int flg);
 char	*ft_strjoin(char *s1, char *s2);
 
 #endif

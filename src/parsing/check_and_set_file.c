@@ -27,7 +27,7 @@ int	all_text_set(t_textures textures)
 		return (0);
 	return (1);
 }
-int	ft_check_textures(t_textures *textures, char **file, int *idx)
+int	ft_check_textures(t_textures *textures, char **file, int *idx, t_cub3d *cub3d)
 {
 	int	j;
 
@@ -40,41 +40,51 @@ int	ft_check_textures(t_textures *textures, char **file, int *idx)
 			j += skip_letter(file[*idx][0], file[*idx][1]);
 			skip_spaces(file[*idx], &j);
 			if (file[*idx][0] == 'N')
-				textures->north = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j);
+				textures->north = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
 			else if (file[*idx][0] == 'S')
-				textures->south = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j);
+				textures->south = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
 			else if (file[*idx][0] == 'W')
-				textures->west = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j);
+				textures->west = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
 			else if (file[*idx][0] == 'E')
-				textures->east = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j);
+				textures->east = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
 		}
 		(*idx)++;
 	}
 	if (!all_text_set(*textures))
-		exit_error("MIssing texture");
+		exit_error("MIssing texture", cub3d);
 	return (1);
 }
 
-void	set_color(t_colors *colors, char **split, char c)
+void	set_color(t_colors *colors, char **split, char c, t_cub3d *cub3d)
 {
 	int		i;
 
 	i = -1;
 	if (c == 'C')
 		while (split[++i])
+		{
 			colors->ceiling[i] = ft_atoi(split[i]);
+			if (colors->ceiling[i] < 0
+				|| colors->ceiling[i] > 255)
+				exit_error("Wrong ceiling color args", cub3d);
+		}
 	else if (c == 'F')
 		while (split[++i])
+		{
 			colors->floor[i] = ft_atoi(split[i]);
+			if (colors->floor[i] < 0
+				|| colors->floor[i] > 255)
+				exit_error("Wrong floor color args", cub3d);
+		}
 }
 
-int	ft_check_colors(t_colors *colors, char **file, int *idx)
+int	ft_check_colors(t_colors *colors, char **file, int *idx, t_cub3d *cub3d)
 {
 	int		j;
 	char	**split;
 
 	(*idx) = 0;
-	while (file[*idx])
+	while (file[*idx] && !all_colors_set(*colors))
 	{
 		if (file[*idx][0] == 'C' || file[*idx][0] == 'F')
 		{
@@ -82,77 +92,91 @@ int	ft_check_colors(t_colors *colors, char **file, int *idx)
 			j += skip_letter(file[*idx][0], file[*idx][1]);
 			skip_spaces(file[*idx], &j);
 			split = ft_split(&file[*idx][j], ',');
+			split[2] = ft_substr(split[2], 0, ft_strlen(split[2]) - 1, 1);
 			set_color(colors, split, file[*idx][0]);
 		}
 		(*idx)++;
 	}
-	if (colors->ceiling[0] == -1 || colors->ceiling[1] == -1 || colors->ceiling[1] == -1)
-		exit_error("Wrong ceiling colors");
-	if (colors->floor[0] == -1 || colors->floor[1] == -1 || colors->floor[1] == -1)
-		exit_error("Wrong floor colors");
+	if (!all_colors_set(*colors))
+		exit_error("Wrong colors", cub3d);
 	return (1);
 }
 
-void	ft_check_letter(char **map)
+void	ft_check_letter(char **map, t_cub3d *cub3d)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 	int	nb_spawn;
 	
-	i = 0;
+	y = 0;
 	nb_spawn = 0;
-	while (map[i])
+	while (map[y])
 	{
-		j = 0;
-		while (map[i][j])
+		x = 0;
+		while (map[y][x])
 		{
-			if (ft_is_letter(map[i][j]))
+			if (ft_is_letter(map[y][x]))
 				nb_spawn++;
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 	if (nb_spawn < 1)
-		exit_error("No spawn in map !!\nMust be one.");
+		exit_error("No spawn in map !!\nMust be one.", cub3d);
 	if (nb_spawn > 1)
-		exit_error("Multiple spawn in map !!\nMust be one.");
+		exit_error("Multiple spawn in map !!\nMust be one.", cub3d);
 }
 
-int	ft_check_map_valid(char **map)
+int	ft_check_map_valid(char **map, t_cub3d *cub3d)
 {
     char	**work_map;
     t_point	size;
 	t_point	player_pos;
-    
+
     ft_check_letter(map);
     work_map = map_cpy(map);
     size.y = 0;
     while (map[size.y])
         size.y++;
-    size.x = get_max_width(map); // Utiliser la largeur maximale
-    // Trouver la position du joueur
+    size.x = ft_get_max_width(map);
     player_pos = find_player_position(work_map, size);
-    if (player_pos.x == -1)
-        exit_error("Player position not found!");
-    // Effectuer le flood fill
+	work_map[player_pos.y][player_pos.x] = '0';
     if (!flood_fill(work_map, size, player_pos))
     {
 		free_map(work_map);
-        exit_error("Map is not closed or touches invalid spaces!");
-    }
-    // Vérifier qu'aucun F ne touche un espace
-    if (!check_no_space_adjacent(work_map, size))
-    {
-        free_map(work_map);
-        exit_error("Accessible area touches empty spaces!");
-    }
-    free_map(work_map);
-    return (1);
+		exit_error("Map is not closed or touches invalid spaces!", cub3d);
+	}
+	if (!check_no_invalid_adjacent(work_map, size))
+	{
+		free_map(work_map);
+		exit_error("Accessible area touches empty spaces!", cub3d);
+	}
+	print_map(work_map);
+	free_map(work_map);
+	return (1);
 }
 
-int	ft_check_map(char ***map, char **file, int *i)
+int	ft_check_map(char ***map, char **file, int *idx_line, t_cub3d *cub3d)
 {
-	
+	int	begin;
+
+	while (file[*idx_line] && !ft_strchr(file[*idx_line], '1'))
+		(*idx_line)++;
+	if (!file[*idx_line])
+		exit_error("No map found", cub3d);
+	begin = *idx_line;
+	while (file[*idx_line])
+		(*idx_line)++;
+	(*map) = malloc(sizeof(char *) * (*idx_line) - begin + 2);
+	(*idx_line) = 0;
+	while (file[*idx_line + begin])
+	{
+		(*map)[*idx_line] = file[*idx_line + begin];
+		(*idx_line)++;
+	}
+	(*map)[*idx_line] = NULL;
+	ft_check_map_valid(*map);
+	return (1);
 }
 
 int	check_and_set_file(t_cub3d *cub3d, char **file)

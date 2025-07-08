@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 14:32:49 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:31:59 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	direction;
 }	t_point;
 
 typedef struct s_textures
@@ -42,6 +43,7 @@ typedef struct s_colors
 
 typedef	struct s_cub3d
 {
+	t_point		coords;
 	t_textures	textures;
 	t_colors	colors;
 	char	**map;
@@ -61,23 +63,26 @@ char	**ft_split(char *str, char c);
 int		ft_tablen(char **tab);
 int		ft_isdigit(char c);
 
-char	*ft_strdup(char *s);
 
-void	exit_error(char *err);
+void	print_map(char **map);
+
+
+void	exit_error(char *err, t_cub3d *cub3d);
 
 char	**open_file(char *filename);
 int		check_extension(char *filename);
 int		check_and_set_file(t_cub3d *cub3d, char **file);
 
-int		get_max_width(char **map);
+int		ft_get_max_width(char **map);
 t_point	find_player_position(char **map, t_point size);
 int		flood_fill(char **tab, t_point size, t_point begin);
-t_point	find_player_position(char **map, t_point size);
-int		check_no_space_adjacent(char **tab, t_point size);
+int		check_no_invalid_adjacent(char **tab, t_point size);
 
 void	init(t_cub3d *cub3d);
 char	**map_cpy(char **old);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	free_map(char **map);
+char	*ft_strdup(char *s);
+
 
 #endif

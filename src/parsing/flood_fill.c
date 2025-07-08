@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 18:06:11 by gicomlan          #+#    #+#             */
-/*   Updated: 2025/07/08 14:08:43 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:06:7 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// Fonction pour calculer la largeur maximale de la carte
-int	get_max_width(char **map)
+int	ft_get_max_width(char **map)
 {
     int	i;
     int	max_width;
@@ -36,17 +35,17 @@ int	fill(char **tab, t_point size, t_point current, char to_fill)
     // Vérification des limites de la carte
     if ((current.y < 0) || (current.x < 0) || (current.y >= size.y))
         return (0); // Sortie de carte = erreur
-    
+
     // Vérifier si on dépasse la largeur de cette ligne spécifique
-    if (current.x >= (int)ft_strlen(tab[current.y]))
+    if (current.x >= ft_strlen(tab[current.y]))
         return (0); // Sortie de ligne = erreur
-    
+
     // Si on est sur un bord et que c'est un espace accessible
     if ((current.x == 0 || current.y == 0 || 
-         current.x == (int)ft_strlen(tab[current.y]) - 1 || current.y == size.y - 1)
+        current.x == ft_strlen(tab[current.y]) - 1 || current.y == size.y - 1)
         && (tab[current.y][current.x] == '0' || ft_is_letter(tab[current.y][current.x])))
         return (0); // Carte ouverte sur les bords
-    
+
     // Si c'est un mur ou déjà visité
     if (tab[current.y][current.x] == '1' || tab[current.y][current.x] == 'F')
         return (1);
@@ -63,10 +62,10 @@ int	fill(char **tab, t_point size, t_point current, char to_fill)
     tab[current.y][current.x] = 'F';
     
     // Vérifier récursivement les 4 directions
-    if (!fill(tab, size, (t_point){current.x - 1, current.y}, to_fill) ||
-        !fill(tab, size, (t_point){current.x + 1, current.y}, to_fill) ||
-        !fill(tab, size, (t_point){current.x, current.y - 1}, to_fill) ||
-        !fill(tab, size, (t_point){current.x, current.y + 1}, to_fill))
+    if (!fill(tab, size, (t_point){current.x - 1, current.y, 0}, to_fill) ||
+        !fill(tab, size, (t_point){current.x + 1, current.y, 0}, to_fill) ||
+        !fill(tab, size, (t_point){current.x, current.y - 1, 0}, to_fill) ||
+        !fill(tab, size, (t_point){current.x, current.y + 1, 0}, to_fill))
         return (0);
     
     return (1);
@@ -77,8 +76,21 @@ int	flood_fill(char **tab, t_point size, t_point begin)
     return (fill(tab, size, begin, tab[begin.y][begin.x]));
 }
 
-// Fonction pour vérifier qu'aucun F ne touche un espace
-int	check_no_space_adjacent(char **tab, t_point size)
+int	check_adjacent(int i, int j, t_point size, char **tab)
+{
+    int line_length;
+	
+	line_length = ft_strlen(tab[i]);
+	if ((j > 0 && (tab[i][j-1] == ' ' || tab[i][j-1] == '\n') && tab[i][j-1])
+		|| ((j < line_length - 1) && tab[i][j+1] && (tab[i][j+1] == ' ' || tab[i][j+1] == '\n'))
+		|| (i > 0 && j < ft_strlen(tab[i-1]) && tab[i-1][j] && ((tab[i-1][j] == ' ' || tab[i-1][j] == '\n')))
+		|| (i < size.y - 1 && j < ft_strlen(tab[i+1]) && tab[i+1][j] && (tab[i+1][j] == ' ' || tab[i+1][j] == '\n')))
+		return (0);
+	return (1);
+}
+
+// Verif qu'aucune case accessible par le joueur ne touche un char invalide
+int	check_no_invalid_adjacent(char **tab, t_point size)
 {
     int i, j;
     int line_length;
@@ -92,11 +104,7 @@ int	check_no_space_adjacent(char **tab, t_point size)
         {
             if (tab[i][j] == 'F')
             {
-                // Vérifier les 4 directions adjacentes en tenant compte des longueurs
-                if ((j > 0 && tab[i][j-1] == ' ') ||
-                    (j < line_length - 1 && tab[i][j+1] == ' ') ||
-                    (i > 0 && j < (int)ft_strlen(tab[i-1]) && tab[i-1][j] == ' ') ||
-                    (i < size.y - 1 && j < (int)ft_strlen(tab[i+1]) && tab[i+1][j] == ' '))
+                if (!check_adjacent(i, j, size, tab))
                     return (0); // Erreur : F touche un espace
             }
             j++;
@@ -106,24 +114,26 @@ int	check_no_space_adjacent(char **tab, t_point size)
     return (1);
 }
 
-// Fonction pour trouver la position du joueur
-t_point	find_player_position(char **map, t_point size)
+t_point find_player_position(char **map, t_point size, t_cub3d *cub3d)
 {
-    int i, j;
+    int y;
+    int x;
     int line_length;
     
-    i = 0;
-    while (i < size.y)
+    y = 0;
+    while (y < size.y)
     {
-        line_length = ft_strlen(map[i]);
-        j = 0;
-        while (j < line_length)
+        line_length = ft_strlen(map[y]);
+        x = 0;
+        while (x < line_length)
         {
-            if (ft_is_letter(map[i][j]))
-                return ((t_point){j, i});
-            j++;
+            if (ft_is_letter(map[y][x]))
+            {
+                return ((t_point){x, y, map[y][x]});
+            }
+            x++;
         }
-        i++;
+        y++;
     }
-    return ((t_point){-1, -1}); // Joueur non trouvé
+    return (exit_error("Player position not found!", cub3d), (t_point){-1, -1, 0});
 }

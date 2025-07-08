@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 14:14:00 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:36:32 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,20 @@ int	ft_isdigit(char c)
 	return (0);
 }
 
+int	only_numbers(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_atoi(char *str)
 {
 	int	res;
@@ -89,6 +103,8 @@ int	ft_atoi(char *str)
 	i = 0;
 	sign = 1;
 	res = 0;
+	if (!only_numbers(str))
+		return (-1);
 	while ((str[i] == 32) || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
