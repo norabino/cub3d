@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   check_and_set_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 15:48:42 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 12:222:02 by norabino         ###   ########.fr       */
+/*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/07/09 11:47:06 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_check_letter(t_cub3d *cub3d)
 	int	y;
 	int	x;
 	int	nb_spawn;
-	
+
 	y = 0;
 	nb_spawn = 0;
 	while (cub3d->map[y])
@@ -147,20 +147,20 @@ void	check_zero_remaining(t_cub3d *cub3d, char **work_map)
 
 int	ft_check_map_valid(t_cub3d *cub3d)
 {
-    char	**work_map;
-    t_point	size;
+	char	**work_map;
+	t_point	size;
 	t_point	player_pos;
 
-    ft_check_letter(cub3d);
-    work_map = map_cpy(cub3d->map);
-    size.y = 0;
-    while (cub3d->map[size.y])
-        size.y++;
-    size.x = ft_get_max_width(cub3d->map);
-    player_pos = find_player_position(cub3d, work_map, size);
+	ft_check_letter(cub3d);
+	work_map = map_cpy(cub3d->map);
+	size.y = 0;
+	while (cub3d->map[size.y])
+		size.y++;
+	size.x = ft_get_max_width(cub3d->map);
+	player_pos = find_player_position(cub3d, work_map, size);
 	work_map[player_pos.y][player_pos.x] = '0';
-    if (!flood_fill(work_map, size, player_pos))
-    {
+	if (!flood_fill(work_map, size, player_pos))
+	{
 		free_map(work_map);
 		exit_error("Map is not closed or touches invalid spaces!", cub3d);
 	}
@@ -209,5 +209,5 @@ int	check_and_set_file(t_cub3d *cub3d, char **file)
 	if (tmp > idx_line)
 		idx_line = tmp;
 	ft_check_map(cub3d, file, &idx_line);
-	return(1);
+	return (1);
 }
