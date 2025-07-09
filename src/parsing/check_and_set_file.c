@@ -134,11 +134,14 @@ void	check_zero_remaining(t_cub3d *cub3d, char **work_map)
 	y = 0;
 	while (work_map[y])
 	{
+		x = 0;
 		while (work_map[y][x])
 		{
-			y = 0;
-			// a finir
+			if (work_map[y][x] == '0')
+				exit_error("Invalid map !!\nNon-accessible area...", cub3d);
+			x++;
 		}
+		y++;
 	}
 }
 
