@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 18:32:38 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/10 22:25:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	skip_spaces(char *str, int *i)
 		(*i)++;
 }
 
-int	ft_is_letter(char c)
+int	is_letter(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (1);
@@ -122,4 +122,57 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (res * sign);
+}
+
+int	in_map(char c)
+{
+	if (is_letter(c) || c == '1' || c == '0')
+		return (1);
+	return(0);
+}
+
+t_off	collen(char **map, int y, int x)
+{
+	int	top;
+	int	bottom;
+	int	i;
+
+	top = 0;
+	bottom = 0;
+	i = y;
+	while (i > -1 && in_map(map[i][x]))
+	{
+		top++;
+		i--;
+	}
+	i = y + 1;
+	while (map[i] && map[i][x] && in_map(map[i][x]))
+	{
+		bottom++;
+		i++;
+	}
+	return ((t_off){top, top + bottom});
+}
+
+t_off	linelen(char **map, int y, int x)
+{
+	int	right;
+	int	left;
+	int	i;
+	
+	right = 0;
+	left = 0;
+	i = x;
+	while (i > -1 && in_map(map[y][i]))
+	{
+		left++;
+		i--;
+	}
+	i = x + 1;
+	while (map[y][i] && in_map(map[y][i]))
+	{
+		right++;
+		i++;
+	}
+	return ((t_off){left, left + right});
 }
