@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/10 22:26:08 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/10 22:33:35 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ t_off	collen(char **map, int y, int x)
 		bottom++;
 		i++;
 	}
-	return ((t_off){top, top + bottom});
+	return ((t_off){top - 1, top + bottom - 1});
 }
 
 t_off	linelen(char **map, int y, int x)

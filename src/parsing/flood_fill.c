@@ -30,34 +30,27 @@ int	ft_get_max_width(char **map)
 	return (max_width);
 }
 
-int	flood_fill(char ***tab, t_point here, char to_fill, char new)
+int	flood_fill(char ***map, t_point here, char to_fill, char new)
 {
-	t_off	line;
-	t_off	col;
+	//t_off	line;
+	//t_off	col;
 
-	// Si on est sur un bord et que c'est un espace accessible
-	line = linelen(*tab, here.y, here.x);
-	col = collen(*tab, here.y, here.x);
-	if ((here.x >= 0 || here.y >= 0 || 
-		here.x - line.offset >= line.len - 1 || here.y - col.offset >= col.len - 1)
-		&& ((*tab)[here.y][here.x] == '0' || is_letter((*tab)[here.y][here.x])))
-		return (printf("%d, %d\n", here.y, here.x), 0); // Carte ouverte sur les bords
-	// Si c'est un mur ou déjà visité
-	if ((*tab)[here.y][here.x] == '1' || (*tab)[here.y][here.x] == 'F')
+	//line = linelen(*map, here.y, here.x);
+	//col = collen(*map, here.y, here.x);
+	if (!(*map)[here.y][here.x])
+		return (0);
+	if ((*map)[here.y][here.x] != to_fill
+		|| (*map)[here.y][here.x] == '1'
+		|| (*map)[here.y][here.x] == new)
 		return (1);
-	// Si c'est un espace vide - ERREUR
-	if ((*tab)[here.y][here.x] == ' ')
-		return (printf("%d, %d\n", here.y, here.x), 0);
-	// Si ce n'est pas le caractère à remplir, on s'arrête
-	if ((*tab)[here.y][here.x] != to_fill)
-		return (1);
-	// Marquer comme visité
-	(*tab)[here.y][here.x] = new;
+	if (!in_map((*map)[here.y][here.x]))
+		return (0);
+	(*map)[here.y][here.x] = new;
 	// Vérifier récursivement les 4 directions
-	if (!flood_fill(tab, (t_point){here.x - 1, here.y, 0, NULL}, to_fill, new) ||
-		!flood_fill(tab, (t_point){here.x + 1, here.y, 0, NULL}, to_fill, new) ||
-		!flood_fill(tab, (t_point){here.x, here.y - 1, 0, NULL}, to_fill, new) ||
-		!flood_fill(tab, (t_point){here.x, here.y + 1, 0, NULL}, to_fill, new))
+	if (!flood_fill(map, (t_point){here.x - 1, here.y, 0, NULL}, to_fill, new) ||
+		!flood_fill(map, (t_point){here.x + 1, here.y, 0, NULL}, to_fill, new) ||
+		!flood_fill(map, (t_point){here.x, here.y - 1, 0, NULL}, to_fill, new) ||
+		!flood_fill(map, (t_point){here.x, here.y + 1, 0, NULL}, to_fill, new))
 		return (printf("%d, %d\n", here.y, here.x), 0);
 	return (1);
 }
@@ -132,7 +125,7 @@ t_point find_player_position(t_cub3d *cub3d, char **map)
 	return ((t_point){-1, -1, 0, cub3d});
 }
 
-/*int	ft_check_islands(char **work_map, t_cub3d *cub3d, int nb_islands)
+int	ft_check_islands(char **work_map, t_cub3d *cub3d, int nb_islands)
 {
 	t_point	*point;
 	int	i;
@@ -146,12 +139,12 @@ t_point find_player_position(t_cub3d *cub3d, char **map)
 		point = check_zero_remaining(cub3d, work_map);
 		if (point == NULL)
 			break;
-		if (!flood_fill(work_map, NULL, *point, cub3d->alpha[cpt]))
+		if (!flood_fill(&work_map, NULL, *point, cub3d->alpha[cpt]))
 			exit_error("non", cub3d);
 
 
 	}
-}*/
+}
 //boucle i < nb_island
 	//{
 	//		fonction qui cherche le premier 0

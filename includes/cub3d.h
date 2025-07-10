@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/10 22:20:08 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/10 22:48:20 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char	**ft_split(char *str, char c);
 int		ft_tablen(char **tab);
 int		ft_isdigit(char c);
 char	*ft_strcpy(char *dest, char *str);
+int		in_map(char c);
+
 
 t_off	collen(char **map, int y, int x);
 t_off	linelen(char **map, int y, int x);
