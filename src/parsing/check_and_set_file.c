@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/09 11:47:06 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/10 15:36:29 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,9 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 		free_map(work_map);
 		exit_error("Accessible area touches empty spaces!", cub3d);
 	}
+	print_map(cub3d, cub3d->map);
+	printf("\n\n");
+	print_map(cub3d, work_map);
 	check_zero_remaining(cub3d, work_map);
 	free_map(work_map);
 	return (1);
