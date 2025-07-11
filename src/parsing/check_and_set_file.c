@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_and_set_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/10 22:26:09 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:46:19 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,100 +128,127 @@ void	ft_check_letter(t_cub3d *cub3d)
 		exit_error("Multiple spawn in map !!\nMust be one.", cub3d);
 }
 
-/*t_point	*check_zero_remaining(t_cub3d *cub3d, char **work_map)
+t_point	*check_char_remaining(t_cub3d *cub3d, char **work_map, char c)
 {
-	t_point	*point;
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	t_point	*p;
 
+	p = malloc(sizeof(t_point *));
 	y = 0;
 	while (work_map[y])
 	{
 		x = 0;
 		while (work_map[y][x])
 		{
-			if (work_map[y][x] == '0')
+			if (work_map[y][x] == c)
 			{
-				point->x = x;
-				point->y = y;
-				point->direction = 0;
-				point->cub3d = cub3d;
-				return (point);
+				p->y = y;
+				p->x = x;
+				p->direction = 0;
+				p->cub3d = cub3d;
+				return (p);
 			}
 			x++;
 		}
 		y++;
 	}
 	return (NULL);
-}*/
+}
 
-// void normalize_map(char **trash)
-// {
-// 	int	i;
-// 	int	j;
+int	check_adjacent_zeros(char **map, int y, int x)
+{
+	if (map[y][x + 1] == '0')
+		return (1);
+	else if (map[y][x - 1] == '0')
+		return (1);
+	else if (map[y + 1][x] == '0')
+		return (1);
+	else if (map[y - 1][x] == '0')
+		return (1);
+	return (0);
+}
 
-// 	i = 0;
-// 	while (trash[i])
-// 	{
-// 		j = 0;
-// 		while (trash[i][j])
-// 		{
-// 			if (trash[i][j] == '0' || trash[i][j] == '1')
-// 				trash[i][j] == 'Z';
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+void normalize_map(t_cub3d *cub3d, char **trash)
+{
+	t_point	*p;
 
-// int	count_islands(t_cub3d cub3d, char **work_map)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	nb_islands;
-// 	char **trash;
-	
-// 	trash = map_cpy(work_map);
-// 	normalize_map(trash);
-// 	nb_islands = 0;
-// 	while (trash[i])
-// 	{
-// 		j = 0;
-// 		while (trash[i][j])
-// 		{
-// 			if (trash[i][j] == 'Z')
-// 				flood_fill(trash, size, (t_point) {i, j});
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+	p = check_char_remaining(cub3d, trash, '1');
+	while (p && check_adjacent_zeros(trash, p->y, p->x))
+	{
+		trash[p->y][p->x] = '2';
+		p = check_char_remaining(cub3d, trash, '1');
+	}
+	p = check_char_remaining(cub3d, trash, '0');
+	while (p)
+	{
+		trash[p->y][p->x] = '2';
+		p = check_char_remaining(cub3d, trash, '0');
+	}
+}
+
+int	count_islands(t_cub3d *cub3d, char **work_map)
+{
+	int		nb_islands;
+	char	**trash;
+	t_point	*p;
+
+	(void)cub3d;
+	trash = map_cpy(work_map);
+	normalize_map(cub3d, trash);
+	nb_islands = 0;
+	p = check_char_remaining(cub3d, trash, '2');
+	while (p)
+	{
+		if (!flood_fill_z(&trash, *p, '2'))
+		{
+			free_map(trash);
+			exit_error("map error 1", cub3d);
+		}
+		nb_islands++;
+		p = check_char_remaining(cub3d, trash, '2');
+	}
+	free_map(trash);
+	return (nb_islands);
+}
 
 int	ft_check_map_valid(t_cub3d *cub3d)
 {
 	char	**work_map;
+	int		nb_maps;
+	int		nb_flood_fill;
 	t_point	player_pos;
+	t_point	*p;
 
+	nb_flood_fill = 0;
 	ft_check_letter(cub3d);
 	work_map = map_cpy(cub3d->map);
 	player_pos = find_player_position(cub3d, work_map);
 	work_map[player_pos.y][player_pos.x] = '0';
 	//compter le nombre island
-	if (!flood_fill(&work_map, player_pos, '0', 'F'))
+	nb_maps = count_islands(cub3d, work_map);
+	p = check_char_remaining(cub3d, work_map, '0');
+	while (p)
 	{
-		free_map(work_map);
-		exit_error("Map is not closed or touches invalid spaces!", cub3d);
+		if (!flood_fill(&work_map, *p, '0', 'F'))
+		{
+			free_map(work_map);
+			exit_error("map ouverte", cub3d);
+		}
+		nb_flood_fill++;
+		p = check_char_remaining(cub3d, work_map, '0');
 	}
 	/*if (!check_no_invalid_adjacent(work_map))
 	{
 		free_map(work_map);
 		exit_error("Accessible area touches empty spaces!", cub3d);
-	}*/
-
-	
+		}*/
 	print_map(cub3d, cub3d->map);
 	printf("\n\n");
 	print_map(cub3d, work_map);
+	printf("\nnb_flood_fill = %d\nnb_maps = %d", nb_flood_fill, nb_maps);
+	if (nb_flood_fill != nb_maps)
+		exit_error("Map contains inaccessible areas", cub3d);
 	free_map(work_map);
 	return (1);
 }

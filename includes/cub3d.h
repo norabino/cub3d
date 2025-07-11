@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/10 22:48:20 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:26:21 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ int		check_and_set_file(t_cub3d *cub3d, char **file);
 int		ft_get_max_width(char **map);
 t_point find_player_position(t_cub3d *cub3d, char **map);
 int		flood_fill(char ***tab, t_point current, char to_fill, char new);
-int		check_no_invalid_adjacent(char **tab);
-t_point	*check_zero_remaining(t_cub3d *cub3d, char **work_map);
+int		flood_fill_z(char ***map, t_point here, char to_fill);
+int		check_adjacent(int y, int x, char **map, char new);
+t_point	*check_char_remaining(t_cub3d *cub3d, char **work_map, char c);
 
 
 void	init(t_cub3d *cub3d);

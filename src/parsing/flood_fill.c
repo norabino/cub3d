@@ -30,49 +30,68 @@ int	ft_get_max_width(char **map)
 	return (max_width);
 }
 
+int	flood_fill_z(char ***map, t_point here, char to_fill)
+{
+	if (here.y < 0 || here.x < 0)
+		return (1);
+	if (!(*map)[here.y] || here.x >= ft_strlen((*map)[here.y]))
+		return (1);
+	if (!(*map)[here.y][here.x] || (*map)[here.y][here.x] != to_fill)
+		return (1);
+	(*map)[here.y][here.x] = 'Z';
+	if (!flood_fill_z(map, (t_point){here.x - 1, here.y, 0, NULL}, to_fill) ||
+		!flood_fill_z(map, (t_point){here.x + 1, here.y, 0, NULL}, to_fill) ||
+		!flood_fill_z(map, (t_point){here.x, here.y - 1, 0, NULL}, to_fill) ||
+		!flood_fill_z(map, (t_point){here.x, here.y + 1, 0, NULL}, to_fill))
+		return (0);
+	return (1);
+}
+
 int	flood_fill(char ***map, t_point here, char to_fill, char new)
 {
-	//t_off	line;
-	//t_off	col;
-
-	//line = linelen(*map, here.y, here.x);
-	//col = collen(*map, here.y, here.x);
+	// Vérifier les bornes AVANT tout accès
+	if (here.y < 0 || here.x < 0)
+		return (0);
+	if (!(*map)[here.y] || here.x >= ft_strlen((*map)[here.y]))
+		return (0);
 	if (!(*map)[here.y][here.x])
 		return (0);
 	if ((*map)[here.y][here.x] != to_fill
 		|| (*map)[here.y][here.x] == '1'
 		|| (*map)[here.y][here.x] == new)
 		return (1);
+
+	// Vérifier si on peut utiliser check_adjacent
+	if (!check_adjacent(here.y, here.x, (*map), new))
+		return (0);
+
 	if (!in_map((*map)[here.y][here.x]))
 		return (0);
 	(*map)[here.y][here.x] = new;
-	// Vérifier récursivement les 4 directions
 	if (!flood_fill(map, (t_point){here.x - 1, here.y, 0, NULL}, to_fill, new) ||
 		!flood_fill(map, (t_point){here.x + 1, here.y, 0, NULL}, to_fill, new) ||
 		!flood_fill(map, (t_point){here.x, here.y - 1, 0, NULL}, to_fill, new) ||
 		!flood_fill(map, (t_point){here.x, here.y + 1, 0, NULL}, to_fill, new))
-		return (printf("%d, %d\n", here.y, here.x), 0);
+		return (0);
 	return (1);
 }
 
-int	check_adjacent(int y, int x, char **map)
+int	check_adjacent(int y, int x, char **map, char new)
 {
-	t_off	line;
-	t_off	col;
+	// Vérifier les bornes avant chaque accès
+	if (x <= 0 || !map[y] || x >= ft_strlen(map[y]) - 1)
+		return (0);
+	if (y <= 0 || !map[y - 1] || !map[y + 1])
+		return (0);
 
-	line = linelen(map, y, x);
-	col = collen(map, y, x);
-	if (x > 0 && map[y][x - 1]
-		&& (map[y][x - 1] == ' ' || map[y][x - 1] == '\n'))
+	// Maintenant on peut accéder en sécurité
+	if ((!map[y][x - 1] || !in_map(map[y][x - 1])) && map[y][x - 1] != new)
 		return (0);
-	if ((x < line.len - 1) && map[y][x + 1]
-		&& (map[y][x + 1] == ' ' || map[y][x + 1] == '\n'))
+	if ((!map[y][x + 1] || !in_map(map[y][x + 1])) && map[y][x + 1] != new)
 		return (0);
-	if (y > 0 && x < ft_strlen(map[y - 1]) && map[y - 1][x]
-		&& (map[y - 1][x] == ' ' || map[y - 1][x] == '\n'))
+	if ((!map[y - 1][x] || !in_map(map[y - 1][x])) && map[y - 1][x] != new)
 		return (0);
-	if (y < col.len - 1 && x < ft_strlen(map[y + 1]) && map[y + 1][x]
-		&& (map[y + 1][x] == ' ' || map[y + 1][x] == '\n'))
+	if ((!map[y + 1][x] || !in_map(map[y + 1][x])) && map[y + 1][x] != new)
 		return (0);
 	return (1);
 }
@@ -125,26 +144,26 @@ t_point find_player_position(t_cub3d *cub3d, char **map)
 	return ((t_point){-1, -1, 0, cub3d});
 }
 
-int	ft_check_islands(char **work_map, t_cub3d *cub3d, int nb_islands)
-{
-	t_point	*point;
-	int	i;
-	int	j;
-	int	cpt;
+// int	ft_check_islands(char **work_map, t_cub3d *cub3d, int nb_islands)
+// {
+// 	t_point	*point;
+// 	int	i;
+// 	int	j;
+// 	int	cpt;
 
-	i = 0;
-	cpt = 0;
-	while (cpt < nb_islands)
-	{
-		point = check_zero_remaining(cub3d, work_map);
-		if (point == NULL)
-			break;
-		if (!flood_fill(&work_map, NULL, *point, cub3d->alpha[cpt]))
-			exit_error("non", cub3d);
+// 	i = 0;
+// 	cpt = 0;
+// 	while (cpt < nb_islands)
+// 	{
+// 		point = check_zero_remaining(cub3d, work_map);
+// 		if (point == NULL)
+// 			break;
+// 		if (!flood_fill(&work_map, NULL, *point, cub3d->alpha[cpt]))
+// 			exit_error("non", cub3d);
 
 
-	}
-}
+// 	}
+// }
 //boucle i < nb_island
 	//{
 	//		fonction qui cherche le premier 0
