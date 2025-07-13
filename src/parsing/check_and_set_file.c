@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/11 14:46:19 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/13 03:08:53 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,11 +160,11 @@ int	check_adjacent_zeros(char **map, int y, int x)
 {
 	if (map[y][x + 1] == '0')
 		return (1);
-	else if (map[y][x - 1] == '0')
+	else if (x != 0 && map[y][x - 1] == '0')
 		return (1);
 	else if (map[y + 1][x] == '0')
 		return (1);
-	else if (map[y - 1][x] == '0')
+	else if (y != 0 && map[y - 1][x] == '0')
 		return (1);
 	return (0);
 }
