@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/08 17:58:07 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/18 13:52:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	t_cub3d *cub3d;
+	t_cub3d	*cub3d;
 	char	**file;
-	
+
 	cub3d = malloc(sizeof(t_cub3d));
 	if (ac != 2)
 		exit_error("Too few/much arguments.\nTry : ./cub3d [filename]", cub3d);

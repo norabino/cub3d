@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/13 03:08:53 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/18 14:40:04 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	all_text_set(t_textures textures)
 int	ft_check_textures(t_textures *textures, char **file, int *idx)
 {
 	int	j;
+	int	z;
 
 	*(idx) = 0;
 	while (file[*idx] && !all_text_set(*textures))
@@ -38,15 +39,16 @@ int	ft_check_textures(t_textures *textures, char **file, int *idx)
 		skip_spaces(file[*idx], &j);
 		if (is_letter(file[*idx][j]))
 		{
-			j += skip_letter(file[*idx][0], file[*idx][1]);
+			z = j;
+			j += skip_letter(file[*idx][j], file[*idx][j + 1]);
 			skip_spaces(file[*idx], &j);
-			if (file[*idx][0] == 'N')
+			if (file[*idx][z] == 'N')
 				textures->north = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
-			else if (file[*idx][0] == 'S')
+			else if (file[*idx][z] == 'S')
 				textures->south = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
-			else if (file[*idx][0] == 'W')
+			else if (file[*idx][z] == 'W')
 				textures->west = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
-			else if (file[*idx][0] == 'E')
+			else if (file[*idx][z] == 'E')
 				textures->east = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
 		}
 		(*idx)++;
@@ -82,6 +84,7 @@ void	set_color(t_colors *colors, char **split, char c)
 int	ft_check_colors(t_colors *colors, char **file, int *idx)
 {
 	int		j;
+	int		z;
 	char	**split;
 
 	(*idx) = 0;
@@ -89,12 +92,13 @@ int	ft_check_colors(t_colors *colors, char **file, int *idx)
 	{
 		j = 0;
 		skip_spaces(file[*idx], &j);
-		if (file[*idx][0] == 'C' || file[*idx][0] == 'F')
+		if (file[*idx][j] == 'C' || file[*idx][j] == 'F')
 		{
-			j += skip_letter(file[*idx][0], file[*idx][1]);
+			z = j;
+			j += skip_letter(file[*idx][j], file[*idx][j + 1]);
 			skip_spaces(file[*idx], &j);
 			split = ft_split(&file[*idx][j], ',');
-			set_color(colors, split, file[*idx][0]);
+			set_color(colors, split, file[*idx][z]);
 		}
 		(*idx)++;
 	}
@@ -246,7 +250,7 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 	print_map(cub3d, cub3d->map);
 	printf("\n\n");
 	print_map(cub3d, work_map);
-	printf("\nnb_flood_fill = %d\nnb_maps = %d", nb_flood_fill, nb_maps);
+	printf("\nnb_flood_fill = %d\nnb_maps = %d\n", nb_flood_fill, nb_maps);
 	if (nb_flood_fill != nb_maps)
 		exit_error("Map contains inaccessible areas", cub3d);
 	free_map(work_map);
