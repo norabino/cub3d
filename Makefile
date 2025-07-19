@@ -7,14 +7,22 @@ SRC = \
 	src/get_next_line/get_next_line_utils.c \
 	\
 	src/parsing/check_and_set_file.c \
+	src/parsing/check_colors_0.c \
+	src/parsing/check_colors_1.c \
+	src/parsing/check_map.c \
+	src/parsing/check_textures_0.c \
+	src/parsing/check_textures_1.c \
 	src/parsing/flood_fill.c \
 	src/parsing/init.c \
 	src/parsing/open_file.c \
 	\
 	src/utils/ft_split.c \
 	src/utils/memory.c \
-	src/utils/str_utils.c \
-	src/utils/utils.c \
+	src/utils/monitoring_utils.c \
+	src/utils/str_utils_0.c \
+	src/utils/str_utils_1.c \
+	src/utils/str_utils_2.c \
+	src/utils/str_utils_3.c \
 
 OBJ = $(SRC:.c=.o)
 

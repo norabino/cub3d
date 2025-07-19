@@ -1,113 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils.c                                        :+:      :+:    :+:   */
+/*   str_utils_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 19:22:24 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 21:05:45 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	ft_tablen(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab && tab[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strrchr(char *s, int c)
-{
-	int	i;
-
-	i = ft_strlen(s);
-	if (c == 0)
-		return ((char *)s + ft_strlen(s));
-	while (s[i] != (char)c && i >= 0)
-		i--;
-	if (s[i] == (char)c)
-		return ((char *)s + i);
-	return (NULL);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while ((s1[i] && s2[i]) && (s1[i] == s2[i]))
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-
-int	skip_letter(char current, char next)
-{
-	if (current == 'N' && next == 'O')
-		return (2);
-	if (current == 'S' && next == 'O')
-		return (2);
-	if (current == 'W' && next == 'E')
-		return (2);
-	if (current == 'E' && next == 'A')
-		return (2);
-	return (1);
-}
-
-void	skip_spaces(char *str, int *i)
-{
-	while ((str[*i] >= 8 && str[*i] <= 13) || str[*i] == ' ')
-		(*i)++;
-}
-
-int	is_letter(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
-	return (0);
-}
-
-int	ft_isdigit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	only_numbers(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && str[i] != ' '
-			&& str[i] <= 8 && str[i] >= 13)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_nbr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isdigit(str[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int	ft_atoi(char *str)
 {
@@ -142,7 +45,7 @@ int	in_map(char c)
 {
 	if (is_letter(c) || c == '1' || c == '0')
 		return (1);
-	return(0);
+	return (0);
 }
 
 t_off	collen(char **map, int y, int x)
@@ -173,7 +76,7 @@ t_off	linelen(char **map, int y, int x)
 	int	right;
 	int	left;
 	int	i;
-	
+
 	right = 0;
 	left = 0;
 	i = x;
@@ -189,4 +92,29 @@ t_off	linelen(char **map, int y, int x)
 		i++;
 	}
 	return ((t_off){left, left + right});
+}
+
+void	ft_check_letter(t_cub3d *cub3d)
+{
+	int	y;
+	int	x;
+	int	nb_spawn;
+
+	y = 0;
+	nb_spawn = 0;
+	while (cub3d->map[y])
+	{
+		x = 0;
+		while (cub3d->map[y][x])
+		{
+			if (is_letter(cub3d->map[y][x]))
+				nb_spawn++;
+			x++;
+		}
+		y++;
+	}
+	if (nb_spawn < 1)
+		exit_error("No spawn in map !!\nMust be one.", cub3d);
+	if (nb_spawn > 1)
+		exit_error("Multiple spawn in map !!\nMust be one.", cub3d);
 }

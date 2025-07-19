@@ -6,31 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:43 by norabino          #+#    #+#             */
-/*   Updated: 2025/07/19 15:30:32 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 20:47:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-char	*ft_strndup(char *str, int n)
-{
-	char	*tab;
-	int		i;
-
-	if (n < 0)
-		return (ft_strdup(str));
-	tab = (char *)malloc(n + 1);
-	if (!tab)
-		return (NULL);
-	i = 0;
-	while (str[i] && i < n)
-	{
-		tab[i] = str[i];
-		i++;
-	}
-	tab[i] = 0;
-	return (tab);
-}
 
 int	ft_zerosep(char *str, char ***dst)
 {

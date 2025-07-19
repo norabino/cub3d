@@ -1,0 +1,97 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_utils_3.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/19 21:07:42 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/07/19 21:12:43 by jdupuis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3d.h"
+
+int	check_adjacent_zeros(char **map, int y, int x)
+{
+	if (map[y][x + 1] == '0')
+		return (1);
+	else if (x != 0 && map[y][x - 1] == '0')
+		return (1);
+	else if (map[y + 1][x] == '0')
+		return (1);
+	else if (y != 0 && map[y - 1][x] == '0')
+		return (1);
+	return (0);
+}
+
+t_point	*check_char_remaining(t_cub3d *cub3d, char **work_map, char c)
+{
+	int		y;
+	int		x;
+	t_point	*p;
+
+	p = malloc(sizeof(t_point *));
+	y = 0;
+	while (work_map[y])
+	{
+		x = 0;
+		while (work_map[y][x])
+		{
+			if (work_map[y][x] == c)
+			{
+				p->y = y;
+				p->x = x;
+				p->direction = 0;
+				p->cub3d = cub3d;
+				return (p);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (NULL);
+}
+
+void	normalize_map(t_cub3d *cub3d, char **trash)
+{
+	t_point	*p;
+
+	p = check_char_remaining(cub3d, trash, '1');
+	while (p && check_adjacent_zeros(trash, p->y, p->x))
+	{
+		trash[p->y][p->x] = '2';
+		p = check_char_remaining(cub3d, trash, '1');
+	}
+	p = check_char_remaining(cub3d, trash, '0');
+	while (p)
+	{
+		trash[p->y][p->x] = '2';
+		p = check_char_remaining(cub3d, trash, '0');
+	}
+}
+
+int	count_islands(t_cub3d *cub3d, char **work_map)
+{
+	int		nb_islands;
+	char	**trash;
+	t_point	*p;
+
+	(void)cub3d;
+	trash = map_cpy(work_map);
+	normalize_map(cub3d, trash);
+	nb_islands = 0;
+	p = check_char_remaining(cub3d, trash, '2');
+	while (p)
+	{
+		if (!flood_fill_z(&trash, *p, '2'))
+		{
+			free_map(trash);
+			exit_error("map error 1", cub3d);
+		}
+		nb_islands++;
+		p = check_char_remaining(cub3d, trash, '2');
+	}
+	free_map(trash);
+	return (nb_islands);
+}

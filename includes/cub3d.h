@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 19:52:41 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 21:51:06 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,15 @@ typedef	struct s_cub3d
 
 // FUNCTIONS :
 
+// check textures
+int		ft_check_textures(t_textures *textures, char **file, int *idx);
+
+// check colors
+int		ft_check_colors(t_colors *colors, char **file, int *idx);
+
+// check map
+int		ft_check_map(t_cub3d *cub3d, char **file, int *idx_line);
+
 // str utils
 char	*ft_strrchr(char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
@@ -77,7 +86,11 @@ int		ft_isdigit(char c);
 char	*ft_strcpy(char *dest, char *str);
 int		in_map(char c);
 char	*ft_strndup(char *str, int n);
-
+char	*ft_strdup(char *s);
+int		only_numbers(char *str);
+int		is_nbr(char *str);
+void	ft_check_letter(t_cub3d *cub3d);
+int		count_islands(t_cub3d *cub3d, char **work_map);
 
 t_off	collen(char **map, int y, int x);
 t_off	linelen(char **map, int y, int x);
@@ -90,17 +103,21 @@ int		check_extension(t_cub3d *cub3d, char *filename);
 int		check_and_set_file(t_cub3d *cub3d, char **file);
 
 int		ft_get_max_width(char **map);
-t_point find_player_position(t_cub3d *cub3d, char **map);
+t_point	find_player_position(t_cub3d *cub3d, char **map);
 int		flood_fill(char ***tab, t_point current, char to_fill, char new);
 int		flood_fill_z(char ***map, t_point here, char to_fill);
 int		check_adjacent(int y, int x, char **map, char new);
 t_point	*check_char_remaining(t_cub3d *cub3d, char **work_map, char c);
 
+int		check_text_extension(t_cub3d *cub3d, char *textures);
+int		all_text_set(t_textures textures);
+int		all_colors_set(t_colors colors);
+void	set_ceiling(t_colors *colors, char **split);
+void	set_floor(t_colors *colors, char **split);
 
 void	init(t_cub3d *cub3d);
 char	**map_cpy(char **old);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	free_map(char **map);
-char	*ft_strdup(char *s);
 
 #endif
