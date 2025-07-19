@@ -6,12 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 21:51:06 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 22:38:24 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef cub3d_H
-# define cub3d_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -20,7 +20,7 @@
 
 # include "../src/get_next_line/get_next_line.h"
 
-typedef	struct s_cub3d		t_cub3d;
+typedef struct s_cub3d	t_cub3d;
 
 typedef struct s_off
 {
@@ -47,18 +47,18 @@ typedef struct s_textures
 
 typedef struct s_colors
 {
-	int	floor[3];
-	int	ceiling[3];
+	int		floor[3];
+	int		ceiling[3];
 	t_cub3d	*cub3d;
 }	t_colors;
 
-typedef	struct s_cub3d
+typedef struct s_cub3d
 {
 	t_point		coords;
 	t_textures	textures;
 	t_colors	colors;
-	char	**map;
-	char	alpha[26];
+	char		**map;
+	char		alpha[26];
 }	t_cub3d;
 
 // FUNCTIONS :
