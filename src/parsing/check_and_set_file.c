@@ -6,20 +6,20 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/18 14:40:04 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 15:42:17 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	all_colors_set(t_colors colors)
-{
-	if (colors.ceiling[0] == -1 || colors.ceiling[1] == -1 || colors.ceiling[1] == -1)
-		return (0);
-	if (colors.floor[0] == -1 || colors.floor[1] == -1 || colors.floor[1] == -1)
-		return (0);
-	return (1);
-}
+// int	all_colors_set(t_colors colors)
+// {
+// 	if (colors.ceiling[0] == -1 || colors.ceiling[1] == -1 || colors.ceiling[1] == -1)
+// 		return (0);
+// 	if (colors.floor[0] == -1 || colors.floor[1] == -1 || colors.floor[1] == -1)
+// 		return (0);
+// 	return (1);
+// }
 
 int	all_text_set(t_textures textures)
 {
@@ -64,21 +64,25 @@ void	set_color(t_colors *colors, char **split, char c)
 
 	i = -1;
 	if (c == 'C')
+	{
 		while (split[++i])
 		{
 			colors->ceiling[i] = ft_atoi(split[i]);
 			if (colors->ceiling[i] < 0
 				|| colors->ceiling[i] > 255)
-				exit_error("Wrong ceiling color args", colors->cub3d);
+				exit_error("Wrong ceiling color args [0-255]", colors->cub3d);
 		}
+	}
 	else if (c == 'F')
+	{
 		while (split[++i])
 		{
 			colors->floor[i] = ft_atoi(split[i]);
 			if (colors->floor[i] < 0
 				|| colors->floor[i] > 255)
-				exit_error("Wrong floor color args", colors->cub3d);
+				exit_error("Wrong floor color args [0-255]", colors->cub3d);
 		}
+	}
 }
 
 int	ft_check_colors(t_colors *colors, char **file, int *idx)
@@ -88,22 +92,36 @@ int	ft_check_colors(t_colors *colors, char **file, int *idx)
 	char	**split;
 
 	(*idx) = 0;
-	while (file[*idx] && !all_colors_set(*colors))
+	while (file[*idx])
 	{
 		j = 0;
 		skip_spaces(file[*idx], &j);
-		if (file[*idx][j] == 'C' || file[*idx][j] == 'F')
+		if ((file[*idx][j] == 'C' && colors->ceiling[0] != -1)
+			|| (file[*idx][j] == 'F' && colors->floor[0] != -1))
+		{
+			if (file[*idx][j] == 'C')
+				exit_error("Duplicate ceiling color", colors->cub3d);
+			else
+				exit_error("Duplicate floor color", colors->cub3d);
+		}
+		else if (file[*idx][j] == 'C' || file[*idx][j] == 'F')
 		{
 			z = j;
 			j += skip_letter(file[*idx][j], file[*idx][j + 1]);
 			skip_spaces(file[*idx], &j);
 			split = ft_split(&file[*idx][j], ',');
+			if (ft_tablen(split) != 3)
+				exit_error("Wrong color : F/C [0-255],[0-255],[0-255]", colors->cub3d);
+			print_map(colors->cub3d, split);
 			set_color(colors, split, file[*idx][z]);
 		}
 		(*idx)++;
 	}
-	if (!all_colors_set(*colors))
-		exit_error("Wrong colors", colors->cub3d);
+	printf("[%d][%d][%d]\n", colors->floor[0], colors->floor[1], colors->floor[2]);
+	if (colors->ceiling[0] == -1 || colors->ceiling[2] == -1)
+		exit_error("Ceiling color is missing", colors->cub3d);
+	else if (colors->floor[0] == -1 || colors->floor[2] == -1)
+		exit_error("Floor color is missing", colors->cub3d);
 	return (1);
 }
 
