@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/11 14:26:21 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 19:52:41 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int		ft_tablen(char **tab);
 int		ft_isdigit(char c);
 char	*ft_strcpy(char *dest, char *str);
 int		in_map(char c);
+char	*ft_strndup(char *str, int n);
 
 
 t_off	collen(char **map, int y, int x);

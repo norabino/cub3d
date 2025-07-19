@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/10 22:33:35 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/19 19:22:24 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,20 @@ int	only_numbers(char *str)
 	return (1);
 }
 
+int	is_nbr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_atoi(char *str)
 {
 	int	res;
@@ -104,7 +118,7 @@ int	ft_atoi(char *str)
 	i = 0;
 	sign = 1;
 	res = 0;
-	if (!only_numbers(str))
+	if (!only_numbers(str) || !is_nbr(str))
 		return (-1);
 	while ((str[i] == 32) || (str[i] >= 9 && str[i] <= 13))
 		i++;

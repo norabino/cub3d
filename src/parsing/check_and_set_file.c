@@ -6,55 +6,98 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 15:42:17 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 20:39:51 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// int	all_colors_set(t_colors colors)
-// {
-// 	if (colors.ceiling[0] == -1 || colors.ceiling[1] == -1 || colors.ceiling[1] == -1)
-// 		return (0);
-// 	if (colors.floor[0] == -1 || colors.floor[1] == -1 || colors.floor[1] == -1)
-// 		return (0);
-// 	return (1);
-// }
+int	all_colors_set(t_colors colors)
+{
+	if (colors.ceiling[0] == -1 || colors.ceiling[1] == -1 || colors.ceiling[1] == -1)
+		return (0);
+	if (colors.floor[0] == -1 || colors.floor[1] == -1 || colors.floor[1] == -1)
+		return (0);
+	return (1);
+}
+
+int	check_text_extension(t_cub3d *cub3d, char *textures)
+{
+	char	*ext;
+	int		i;
+
+	i = ft_strlen(textures) - 1;
+	while (i && textures[i] != '.')
+		i--;
+	ext = ft_strndup(&textures[i], 4);
+	if (!ext || !ft_strcmp(ext, textures))
+		exit_error("No file extension.", cub3d);
+	if (ft_strcmp(ext, ".xpm"))
+		return (0);
+	return (1);
+}
 
 int	all_text_set(t_textures textures)
 {
 	if (!textures.north || !textures.south || !textures.west || !textures.east)
 		return (0);
+	if (!check_text_extension(textures.cub3d, textures.north))
+		exit_error("Wrong north texture extension.", textures.cub3d);
+	if (!check_text_extension(textures.cub3d, textures.south))
+		exit_error("Wrong south texture extension.", textures.cub3d);
+	if (!check_text_extension(textures.cub3d, textures.west))
+		exit_error("Wrong west texture extension.", textures.cub3d);
+	if (!check_text_extension(textures.cub3d, textures.east))
+		exit_error("Wrong east texture extension.", textures.cub3d);
 	return (1);
 }
+
 int	ft_check_textures(t_textures *textures, char **file, int *idx)
 {
+	int	i;
 	int	j;
 	int	z;
 
+	i = 0;
 	*(idx) = 0;
-	while (file[*idx] && !all_text_set(*textures))
+	while (file[i])
 	{
 		j = 0;
-		skip_spaces(file[*idx], &j);
-		if (is_letter(file[*idx][j]))
+		skip_spaces(file[i], &j);
+		if ((file[i][j] == 'N' && textures->north != NULL)
+			|| (file[i][j] == 'S' && textures->south != NULL)
+			|| (file[i][j] == 'W' && textures->west != NULL)
+			|| (file[i][j] == 'E' && textures->east != NULL))
+		{
+			if (file[i][j] == 'N')
+				exit_error("Duplicate north texture", textures->cub3d);
+			else if (file[i][j] == 'S')
+				exit_error("Duplicate south texture", textures->cub3d);
+			else if (file[i][j] == 'W')
+				exit_error("Duplicate west texture", textures->cub3d);
+			else if (file[i][j] == 'E')
+				exit_error("Duplicate east texture", textures->cub3d);
+		}
+		else if (is_letter(file[i][j]))
 		{
 			z = j;
-			j += skip_letter(file[*idx][j], file[*idx][j + 1]);
-			skip_spaces(file[*idx], &j);
-			if (file[*idx][z] == 'N')
-				textures->north = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
-			else if (file[*idx][z] == 'S')
-				textures->south = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
-			else if (file[*idx][z] == 'W')
-				textures->west = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
-			else if (file[*idx][z] == 'E')
-				textures->east = ft_substr(file[*idx], j, ft_strlen(file[*idx]) - j, 0);
+			j += skip_letter(file[i][j], file[i][j + 1]);
+			skip_spaces(file[i], &j);
+			if (file[i][z] == 'N' && textures->north == NULL)
+				textures->north = ft_substr(file[i], j, ft_strlen(file[i]) - j, 0);
+			else if (file[i][z] == 'S' && textures->south == NULL)
+				textures->south = ft_substr(file[i], j, ft_strlen(file[i]) - j, 0);
+			else if (file[i][z] == 'W' && textures->west == NULL)
+				textures->west = ft_substr(file[i], j, ft_strlen(file[i]) - j, 0);
+			else if (file[i][z] == 'E' && textures->east == NULL)
+				textures->east = ft_substr(file[i], j, ft_strlen(file[i]) - j, 0);
 		}
-		(*idx)++;
+		if ((*idx) == 0 && all_text_set(*textures))
+			(*idx) = i + 1;
+		i++;
 	}
 	if (!all_text_set(*textures))
-		exit_error("MIssing texture", textures->cub3d);
+		exit_error("Missing texture", textures->cub3d);
 	return (1);
 }
 
@@ -67,6 +110,8 @@ void	set_color(t_colors *colors, char **split, char c)
 	{
 		while (split[++i])
 		{
+			if (i >= 3)
+				exit_error("Invalid RGB ceiling nbs, must be 3", colors->cub3d);
 			colors->ceiling[i] = ft_atoi(split[i]);
 			if (colors->ceiling[i] < 0
 				|| colors->ceiling[i] > 255)
@@ -77,6 +122,8 @@ void	set_color(t_colors *colors, char **split, char c)
 	{
 		while (split[++i])
 		{
+			if (i >= 3)
+				exit_error("Invalid RGB floor nbs, must be 3", colors->cub3d);
 			colors->floor[i] = ft_atoi(split[i]);
 			if (colors->floor[i] < 0
 				|| colors->floor[i] > 255)
@@ -87,41 +134,41 @@ void	set_color(t_colors *colors, char **split, char c)
 
 int	ft_check_colors(t_colors *colors, char **file, int *idx)
 {
+	int		i;
 	int		j;
 	int		z;
 	char	**split;
 
+	i = 0;
 	(*idx) = 0;
-	while (file[*idx])
+	while (file[i])
 	{
 		j = 0;
-		skip_spaces(file[*idx], &j);
-		if ((file[*idx][j] == 'C' && colors->ceiling[0] != -1)
-			|| (file[*idx][j] == 'F' && colors->floor[0] != -1))
+		skip_spaces(file[i], &j);
+		if ((file[i][j] == 'C' && colors->ceiling[0] != -1)
+			|| (file[i][j] == 'F' && colors->floor[0] != -1))
 		{
-			if (file[*idx][j] == 'C')
+			if (file[i][j] == 'C')
 				exit_error("Duplicate ceiling color", colors->cub3d);
 			else
 				exit_error("Duplicate floor color", colors->cub3d);
 		}
-		else if (file[*idx][j] == 'C' || file[*idx][j] == 'F')
+		else if (file[i][j] == 'C' || file[i][j] == 'F')
 		{
 			z = j;
-			j += skip_letter(file[*idx][j], file[*idx][j + 1]);
-			skip_spaces(file[*idx], &j);
-			split = ft_split(&file[*idx][j], ',');
-			if (ft_tablen(split) != 3)
-				exit_error("Wrong color : F/C [0-255],[0-255],[0-255]", colors->cub3d);
-			print_map(colors->cub3d, split);
-			set_color(colors, split, file[*idx][z]);
+			j += skip_letter(file[i][j], file[i][j + 1]);
+			skip_spaces(file[i], &j);
+			split = ft_split(&file[i][j], ',');
+			set_color(colors, split, file[i][z]);
 		}
-		(*idx)++;
+		if ((*idx) == 0 && all_colors_set(*colors))
+			(*idx) = i + 1;
+		i++;
 	}
-	printf("[%d][%d][%d]\n", colors->floor[0], colors->floor[1], colors->floor[2]);
 	if (colors->ceiling[0] == -1 || colors->ceiling[2] == -1)
-		exit_error("Ceiling color is missing", colors->cub3d);
+		exit_error("Ceiling color is Missing", colors->cub3d);
 	else if (colors->floor[0] == -1 || colors->floor[2] == -1)
-		exit_error("Floor color is missing", colors->cub3d);
+		exit_error("Floor color is Missing", colors->cub3d);
 	return (1);
 }
 
