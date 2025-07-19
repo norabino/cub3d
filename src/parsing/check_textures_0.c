@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 21:32:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/19 22:35:26 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,22 @@ static int	check_line(char *line, t_textures *textures)
 int	ft_check_textures(t_textures *textures, char **file, int *idx)
 {
 	int	i;
+	int	found_all;
 
 	i = 0;
 	*idx = 0;
+	found_all = 0;
 	while (file[i])
 	{
-		if (*idx == 0 && check_line(file[i], textures))
+		if (!found_all && check_line(file[i], textures))
+		{
 			*idx = i + 1;
+			found_all = 1;
+		}
+		else if (found_all)
+		{
+			check_line(file[i], textures);
+		}
 		i++;
 	}
 	if (!all_text_set(*textures))
