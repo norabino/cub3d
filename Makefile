@@ -25,8 +25,13 @@ SRC = \
 	src/utils/str_utils_3.c \
 	\
 	src/raycasting/hook.c \
+	src/raycasting/hook2.c \
+	src/raycasting/hook3.c \
 	src/raycasting/init_mlx.c \
-	src/raycasting/raycasting.c 
+	src/raycasting/pixel_utils.c \
+	src/raycasting/raycasting.c \
+	src/raycasting/raycasting_utils.c \
+	src/raycasting/collision.c 
 
 OBJ = $(SRC:.c=.o)
 

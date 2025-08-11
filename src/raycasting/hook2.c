@@ -1,0 +1,120 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/11 19:30:00 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/08/11 19:32:23 by norabino         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3d.h"
+
+#define KEY_W 119
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+
+int	handle_movement(t_cub3d *cub3d)
+{
+	double	move_speed;
+	double	delta_x;
+	double	delta_y;
+
+	if (!cub3d)
+		return (0);
+	move_speed = 0.02;
+	if (cub3d->keys[KEY_W])
+	{
+		delta_x = cub3d->player.dirX * move_speed;
+		delta_y = cub3d->player.dirY * move_speed;
+		move_player(cub3d, delta_x, delta_y);
+		return (1);
+	}
+	if (cub3d->keys[KEY_S])
+	{
+		delta_x = -cub3d->player.dirX * move_speed;
+		delta_y = -cub3d->player.dirY * move_speed;
+		move_player(cub3d, delta_x, delta_y);
+		return (1);
+	}
+	return (handle_movement_strafe(cub3d, move_speed));
+}
+
+int	handle_movement_strafe(t_cub3d *cub3d, double move_speed)
+{
+	double	delta_x;
+	double	delta_y;
+
+	if (cub3d->keys[KEY_A])
+	{
+		delta_x = -cub3d->player.dirY * move_speed;
+		delta_y = cub3d->player.dirX * move_speed;
+		move_player(cub3d, delta_x, delta_y);
+		return (1);
+	}
+	if (cub3d->keys[KEY_D])
+	{
+		delta_x = cub3d->player.dirY * move_speed;
+		delta_y = -cub3d->player.dirX * move_speed;
+		move_player(cub3d, delta_x, delta_y);
+		return (1);
+	}
+	return (0);
+}
+
+int	handle_direction(t_cub3d *cub3d)
+{
+	double	rot_speed;
+
+	if (!cub3d)
+		return (0);
+	rot_speed = 0.02;
+	if (cub3d->keys[255])
+	{
+		return (handle_direction_left(cub3d, rot_speed));
+	}
+	if (cub3d->keys[254])
+	{
+		return (handle_direction_right(cub3d, rot_speed));
+	}
+	return (0);
+}
+
+int	handle_direction_left(t_cub3d *cub3d, double rot_speed)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = cub3d->player.dirX;
+	old_plane_x = cub3d->view.planeX;
+	cub3d->player.dirX = cub3d->player.dirX * cos(-rot_speed)
+		- cub3d->player.dirY * sin(-rot_speed);
+	cub3d->player.dirY = old_dir_x * sin(-rot_speed)
+		+ cub3d->player.dirY * cos(-rot_speed);
+	cub3d->view.planeX = cub3d->view.planeX * cos(-rot_speed)
+		- cub3d->view.planeY * sin(-rot_speed);
+	cub3d->view.planeY = old_plane_x * sin(-rot_speed)
+		+ cub3d->view.planeY * cos(-rot_speed);
+	return (1);
+}
+
+int	handle_direction_right(t_cub3d *cub3d, double rot_speed)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = cub3d->player.dirX;
+	old_plane_x = cub3d->view.planeX;
+	cub3d->player.dirX = cub3d->player.dirX * cos(rot_speed)
+		- cub3d->player.dirY * sin(rot_speed);
+	cub3d->player.dirY = old_dir_x * sin(rot_speed)
+		+ cub3d->player.dirY * cos(rot_speed);
+	cub3d->view.planeX = cub3d->view.planeX * cos(rot_speed)
+		- cub3d->view.planeY * sin(rot_speed);
+	cub3d->view.planeY = old_plane_x * sin(rot_speed)
+		+ cub3d->view.planeY * cos(rot_speed);
+	return (1);
+}
