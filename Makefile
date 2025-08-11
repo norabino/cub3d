@@ -23,6 +23,10 @@ SRC = \
 	src/utils/str_utils_1.c \
 	src/utils/str_utils_2.c \
 	src/utils/str_utils_3.c \
+	\
+	src/raycasting/hook.c \
+	src/raycasting/init_mlx.c \
+	src/raycasting/raycasting.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -30,7 +34,7 @@ OBJ = $(SRC:.c=.o)
 	$(CC) -Wall -Wextra -Werror -c $< -o $@ -g
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -g -o $(NAME)
+	$(CC) $(OBJ) -Lminilibx-linux -lmlx -lXext -lX11 -lm -g -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

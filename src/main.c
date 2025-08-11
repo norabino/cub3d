@@ -3,29 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/18 13:52:54 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/21 12:51:38 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	main(int ac, char **av)
+void	ft_parsing_init(t_cub3d *cub3d, int ac, char **av)
 {
-	t_cub3d	*cub3d;
 	char	**file;
 
-	cub3d = malloc(sizeof(t_cub3d));
 	if (ac != 2)
 		exit_error("Too few/much arguments.\nTry : ./cub3d [filename]", cub3d);
 	if (!check_extension(cub3d, av[1]))
 		exit_error("Must be '.cub'.", cub3d);
 	file = open_file(cub3d, av[1]);
-	if (!file)
-		return (1);
 	init(cub3d);
-	if (!check_and_set_file(cub3d, file))
-		return (0);
+	check_and_set_file(cub3d, file);
+}
+
+int	main(int ac, char **av)
+{
+	t_cub3d	*cub3d;
+
+	cub3d = malloc(sizeof(t_cub3d));
+	ft_parsing_init(cub3d, ac, av);
+
+	//cub3d_draw(cub3d);
+	init_mlx(cub3d);
+	mlx_hook(cub3d->mlx.win, 17, 1L << 17, handle_close, cub3d);
+	mlx_hook(cub3d->mlx.win, 2, 1L << 0, handle_hook, cub3d);
+	mlx_loop(cub3d->mlx.mlx);
+	handle_close(cub3d);
 }

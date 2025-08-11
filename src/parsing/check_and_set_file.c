@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   check_and_set_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 21:12:35 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/30 17:08:08 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	set_direction(t_cub3d *cub3d, char dir)
+{
+	if (dir == 'N')
+	{
+		cub3d->player.dirX = 0;
+		cub3d->player.dirY = -1;
+	}
+	else if (dir == 'S')
+	{
+		cub3d->player.dirX = 0;
+		cub3d->player.dirY = 1;
+	}
+	else if (dir == 'E')
+	{
+		cub3d->player.dirX = 1;
+		cub3d->player.dirY = 0;
+	}
+	else if (dir == 'W')
+	{
+		cub3d->player.dirX = -1;
+		cub3d->player.dirY = 0;
+	}
+}
 
 int	check_and_set_file(t_cub3d *cub3d, char **file)
 {
@@ -24,5 +48,7 @@ int	check_and_set_file(t_cub3d *cub3d, char **file)
 	if (tmp > idx_line)
 		idx_line = tmp;
 	ft_check_map(cub3d, file, &idx_line);
+	set_direction(cub3d, cub3d->player.dir);
+	cub3d->player.fov = 66;
 	return (1);
 }

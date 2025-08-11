@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 22:06:35 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/30 16:41:52 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 	ft_check_letter(cub3d);
 	*work_map = map_cpy(cub3d->map);
 	player_pos = find_player_position(cub3d, *work_map);
+	cub3d->player.dir = (*work_map)[player_pos.y][player_pos.x];
+	cub3d->player.coords = malloc(sizeof(t_point));
+	*(cub3d->player.coords) = player_pos;
 	(*work_map)[player_pos.y][player_pos.x] = '0';
 }
 

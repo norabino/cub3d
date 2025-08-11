@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/10 18:53:04 by norabino         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:34:56 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	init(t_cub3d *cub3d)
 {
+	cub3d->mlx.mlx = NULL;
+	cub3d->mlx.img = NULL;
+	cub3d->mlx.win = NULL;
 	cub3d->coords.x = -1;
 	cub3d->coords.y = -1;
 	cub3d->coords.direction = 0;
@@ -30,6 +33,8 @@ void	init(t_cub3d *cub3d)
 	cub3d->colors.ceiling[1] = -1;
 	cub3d->colors.ceiling[1] = -1;
 	cub3d->colors.cub3d = cub3d;
+	cub3d->player.coords = NULL;
+	cub3d->player.fov = 0;
 	ft_strcpy(cub3d->alpha, "abcdefghijklmnopqrstuvwxyz");
 	cub3d->map = NULL;
 }

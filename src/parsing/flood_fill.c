@@ -12,24 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-int	ft_get_max_width(char **map)
-{
-	int	i;
-	int	max_width;
-	int	current_width;
-
-	i = 0;
-	max_width = 0;
-	while (map[i])
-	{
-		current_width = ft_strlen(map[i]);
-		if (current_width > max_width)
-			max_width = current_width;
-		i++;
-	}
-	return (max_width);
-}
-
 int	flood_fill_z(char ***map, t_point here, char to_fill)
 {
 	if (here.y < 0 || here.x < 0)

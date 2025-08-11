@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 22:38:24 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/30 17:20:15 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
+
+# include "../minilibx-linux/mlx.h"
 
 # include "../src/get_next_line/get_next_line.h"
 
@@ -52,11 +55,45 @@ typedef struct s_colors
 	t_cub3d	*cub3d;
 }	t_colors;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	t_img	*img;
+}	t_mlx;
+
+typedef struct s_player
+{
+	t_point		*coords;
+	char		dir;
+	float		dirX;
+	float		dirY;
+	int			fov;
+}	t_player;
+
+typedef struct s_view
+{
+	float	planeX;
+	float	planeY;
+}	t_view;
+
 typedef struct s_cub3d
 {
+	t_mlx		mlx;
 	t_point		coords;
 	t_textures	textures;
 	t_colors	colors;
+	t_player	player;
+	t_view		view;
 	char		**map;
 	char		alpha[26];
 }	t_cub3d;
@@ -102,7 +139,6 @@ char	**open_file(t_cub3d *cub3d, char *filename);
 int		check_extension(t_cub3d *cub3d, char *filename);
 int		check_and_set_file(t_cub3d *cub3d, char **file);
 
-int		ft_get_max_width(char **map);
 t_point	find_player_position(t_cub3d *cub3d, char **map);
 int		flood_fill(char ***tab, t_point current, char to_fill, char new);
 int		flood_fill_z(char ***map, t_point here, char to_fill);
@@ -119,5 +155,16 @@ void	init(t_cub3d *cub3d);
 char	**map_cpy(char **old);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	free_map(char **map);
+t_cub3d	*init_mlx(t_cub3d *cub3d);
+
+
+//draw
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+
+//hook
+int		handle_close(t_cub3d *cub3d);
+int		handle_hook(int keycode, t_cub3d *cub3d);
+
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures_0.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 22:35:26 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/07/21 11:00:25 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ static void	handle_duplicate(char c, t_textures *textures)
 
 static void	set_texture(char c, int j, char *line, t_textures *textures)
 {
+	char	*sub;
+
+	sub = ft_substr(line, j, ft_strlen(line) - j, 0);
 	if (c == 'N' && textures->north == NULL)
-		textures->north = ft_substr(line, j, ft_strlen(line) - j, 0);
+		textures->north = sub;
 	else if (c == 'S' && textures->south == NULL)
-		textures->south = ft_substr(line, j, ft_strlen(line) - j, 0);
+		textures->south = sub;
 	else if (c == 'W' && textures->west == NULL)
-		textures->west = ft_substr(line, j, ft_strlen(line) - j, 0);
+		textures->west = sub;
 	else if (c == 'E' && textures->east == NULL)
-		textures->east = ft_substr(line, j, ft_strlen(line) - j, 0);
+		textures->east = sub;
 }
 
 static int	check_line(char *line, t_textures *textures)
@@ -48,7 +51,7 @@ static int	check_line(char *line, t_textures *textures)
 		|| (line[j] == 'W' && textures->west != NULL)
 		|| (line[j] == 'E' && textures->east != NULL))
 		handle_duplicate(line[j], textures);
-	else if (is_letter(line[j]))
+	if (is_letter(line[j]))
 	{
 		z = j;
 		j += skip_letter(line[j], line[j + 1]);
@@ -74,9 +77,7 @@ int	ft_check_textures(t_textures *textures, char **file, int *idx)
 			found_all = 1;
 		}
 		else if (found_all)
-		{
 			check_line(file[i], textures);
-		}
 		i++;
 	}
 	if (!all_text_set(*textures))
