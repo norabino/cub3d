@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/11 18:41:45 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:27:21 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 	mlx_hook(cub3d->mlx.win, 17, 1L << 17, handle_close, cub3d);
 	mlx_hook(cub3d->mlx.win, 2, 1L << 0, handle_keypress, cub3d);
 	mlx_hook(cub3d->mlx.win, 3, 1L << 1, handle_keyrelease, cub3d);
+	mlx_loop_hook(cub3d->mlx.mlx, handle_loop, cub3d);
 	mlx_loop(cub3d->mlx.mlx);
 	handle_close(cub3d);
 }

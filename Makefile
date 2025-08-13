@@ -31,6 +31,8 @@ SRC = \
 	src/raycasting/pixel_utils.c \
 	src/raycasting/raycasting.c \
 	src/raycasting/raycasting_utils.c \
+	src/raycasting/render.c \
+	src/raycasting/camera.c \
 	src/raycasting/collision.c 
 
 OBJ = $(SRC:.c=.o)

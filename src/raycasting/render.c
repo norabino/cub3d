@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/11 20:00:00 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:07:12 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
 	int	floor_color;
 	int	ceiling_color;
 
-	floor_color = (cub3d->colors.floor[0] << 16) | 
-		(cub3d->colors.floor[1] << 8) | cub3d->colors.floor[2];
-	ceiling_color = (cub3d->colors.ceiling[0] << 16) | 
-		(cub3d->colors.ceiling[1] << 8) | cub3d->colors.ceiling[2];
+	floor_color = (cub3d->colors.floor[0] << 16)
+		| (cub3d->colors.floor[1] << 8) | cub3d->colors.floor[2];
+	ceiling_color = (cub3d->colors.ceiling[0] << 16)
+		| (cub3d->colors.ceiling[1] << 8) | cub3d->colors.ceiling[2];
 	y = 0;
 	while (y < draw_start)
 	{

@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/11 13:00:00 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/13 15:42:20 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,95 +15,40 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
-/* Calculate camera plane based on field of view */
-void	calc_camera_plane(t_cub3d *cub3d)
+/* Cast single ray for one screen column */
+void	cast_single_ray(t_cub3d *cub3d, int screen_x)
 {
-	double	fov_rad;
-
-	fov_rad = cub3d->player.fov * PI / 180.0;
-	cub3d->view.planeX = -cub3d->player.dirY * tan(fov_rad / 2.0);
-	cub3d->view.planeY = cub3d->player.dirX * tan(fov_rad / 2.0);
-}
-
-/* Initialize DDA parameters for ray calculation */
-void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
-	t_dda *dda)
-{
-	dda->map_x = (int)cub3d->player.coords->x;
-	dda->map_y = (int)cub3d->player.coords->y;
-	dda->delta_dist_x = fabs(1.0 / ray_dir_x);
-	dda->delta_dist_y = fabs(1.0 / ray_dir_y);
-	dda->hit = 0;
-}
-
-/* Calculate step direction and initial side distances */
-void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
-	double ray_dir_y, t_cub3d *cub3d)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)cub3d->player.coords->x;
-	map_y = (int)cub3d->player.coords->y;
-	if (ray_dir_x < 0)
-	{
-		dda->step_x = -1;
-		dda->side_dist_x = (cub3d->player.coords->x - map_x)
-			* dda->delta_dist_x;
-	}
-	else
-	{
-		dda->step_x = 1;
-		dda->side_dist_x = (map_x + 1.0 - cub3d->player.coords->x)
-			* dda->delta_dist_x;
-	}
-	if (ray_dir_y < 0)
-	{
-		dda->step_y = -1;
-		dda->side_dist_y = (cub3d->player.coords->y - map_y)
-			* dda->delta_dist_y;
-	}
-	else
-	{
-		dda->step_y = 1;
-		dda->side_dist_y = (map_y + 1.0 - cub3d->player.coords->y)
-			* dda->delta_dist_y;
-	}
-}
-
-/* Perform DDA algorithm to find wall hit */
-void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
-{
-	while (dda->hit == 0)
-	{
-		if (dda->side_dist_x < dda->side_dist_y)
-		{
-			dda->side_dist_x += dda->delta_dist_x;
-			dda->map_x += dda->step_x;
-			dda->side = 0;
-		}
-		else
-		{
-			dda->side_dist_y += dda->delta_dist_y;
-			dda->map_y += dda->step_y;
-			dda->side = 1;
-		}
-		if (cub3d->map[(int)dda->map_y][(int)dda->map_x] == '1')
-			dda->hit = 1;
-	}
-}
-
-/* Calculate perpendicular wall distance */
-double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
-	double ray_dir_y, t_cub3d *cub3d)
-{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	double	perp_wall_dist;
+	t_dda	dda;
 
-	if (dda->side == 0)
-		perp_wall_dist = (dda->map_x - cub3d->player.coords->x
-				+ (1 - dda->step_x) / 2) / ray_dir_x;
-	else
-		perp_wall_dist = (dda->map_y - cub3d->player.coords->y
-				+ (1 - dda->step_y) / 2) / ray_dir_y;
-	return (perp_wall_dist);
+	if (!cub3d || screen_x < 0 || screen_x >= SCREEN_WIDTH)
+		return ;
+	camera_x = 2 * screen_x / (double)SCREEN_WIDTH - 1;
+	ray_dir_x = cub3d->player.dirX + cub3d->view.planeX * camera_x;
+	ray_dir_y = cub3d->player.dirY + cub3d->view.planeY * camera_x;
+	init_dda_params(cub3d, ray_dir_x, ray_dir_y, &dda);
+	init_step_and_side_dist(&dda, ray_dir_x, ray_dir_y, cub3d);
+	perform_dda_algorithm(cub3d, &dda);
+	perp_wall_dist = calc_perpendicular_wall_distance(&dda, ray_dir_x,
+			ray_dir_y, cub3d);
+	draw_wall_slice(cub3d, screen_x, perp_wall_dist, dda.side);
+}
+
+/* Main raycast function - renders entire screen */
+void	raycast(t_cub3d *cub3d)
+{
+	int	x;
+
+	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.img)
+		return ;
+	calc_camera_plane(cub3d);
+	x = 0;
+	while (x < SCREEN_WIDTH)
+	{
+		cast_single_ray(cub3d, x);
+		x++;
+	}
 }

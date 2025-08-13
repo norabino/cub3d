@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/11 19:45:25 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:54:01 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	is_valid_position(t_cub3d *cub3d, double x, double y)
 }
 
 /* Move player with collision detection */
-void	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
+int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 {
 	double	new_x;
 	double	new_y;
+	int		moved;
 
 	if (!cub3d)
-		return ;
+		return (0);
+	moved = 0;
 	new_x = cub3d->player.posX + delta_x;
 	new_y = cub3d->player.posY + delta_y;
 	if (is_valid_position(cub3d, new_x, cub3d->player.posY))
@@ -43,11 +45,14 @@ void	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 		cub3d->player.posX = new_x;
 		if (cub3d->player.coords)
 			cub3d->player.coords->x = (int)new_x;
+		moved = 1;
 	}
 	if (is_valid_position(cub3d, cub3d->player.posX, new_y))
 	{
 		cub3d->player.posY = new_y;
 		if (cub3d->player.coords)
 			cub3d->player.coords->y = (int)new_y;
+		moved = 1;
 	}
+	return (moved);
 }

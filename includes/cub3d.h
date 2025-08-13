@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/11 19:45:25 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:54:01 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,10 @@ t_cub3d	*init_mlx(t_cub3d *cub3d);
 //draw
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
-//raycasting
+//camera
 void	calc_camera_plane(t_cub3d *cub3d);
+
+//raycasting utils
 void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
 			t_dda *dda);
 void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
@@ -190,6 +192,8 @@ void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
 void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda);
 double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
 			double ray_dir_y, t_cub3d *cub3d);
+
+//render
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
 void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	int side);
@@ -197,6 +201,8 @@ void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
 			int draw_end);
 void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
 			int draw_end);
+
+//raycasting
 void	cast_single_ray(t_cub3d *cub3d, int screen_x);
 void	raycast(t_cub3d *cub3d);
 
@@ -211,10 +217,12 @@ int		handle_direction_right(t_cub3d *cub3d, double rot_speed);
 int		handle_keypress(int keycode, t_cub3d *cub3d);
 int		handle_keyrelease(int keycode, t_cub3d *cub3d);
 int		handle_loop(t_cub3d *cub3d);
+int		check_any_key_pressed(t_cub3d *cub3d);
+void	refresh_image(t_cub3d *cub3d);
 
 //collision
 int		is_valid_position(t_cub3d *cub3d, double x, double y);
-void	move_player(t_cub3d *cub3d, double delta_x, double delta_y);
+int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
 
 
 #endif

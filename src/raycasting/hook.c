@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:54:26 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/11 19:45:25 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:47:55 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,5 @@ int	handle_keyrelease(int keycode, t_cub3d *cub3d)
 		cub3d->keys[255] = 0;
 	else if (keycode == KEY_RIGHT)
 		cub3d->keys[254] = 0;
-	handle_loop(cub3d);
 	return (0);
 }
