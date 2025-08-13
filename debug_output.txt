@@ -1,0 +1,133 @@
+Error
+closed
+Key pressed: 119
+WASD key detected: 119
+Position before: (2.50, 1.50)
+handle_movement called with key: 119
+Moving forward
+Trying to move: delta(0.000, 0.500) -> new_pos(2.500, 2.000)
+Checking position: (2.500, 1.500)
+Position OK - character: 'S'
+X movement OK
+Checking position: (2.500, 2.000)
+Position OK - character: '0'
+Y movement OK
+Position after: (2.50, 2.00)
+Key pressed: 97
+WASD key detected: 97
+Position before: (2.50, 2.00)
+handle_movement called with key: 97
+Strafing left
+Trying to move: delta(-0.500, 0.000) -> new_pos(2.000, 2.000)
+Checking position: (2.000, 2.000)
+Position OK - character: '0'
+X movement OK
+Checking position: (2.000, 2.000)
+Position OK - character: '0'
+Y movement OK
+Position after: (2.00, 2.00)
+Key pressed: 100
+WASD key detected: 100
+Position before: (2.00, 2.00)
+handle_movement called with key: 100
+Strafing right
+Trying to move: delta(0.500, -0.000) -> new_pos(2.500, 2.000)
+Checking position: (2.500, 2.000)
+Position OK - character: '0'
+X movement OK
+Checking position: (2.500, 2.000)
+Position OK - character: '0'
+Y movement OK
+Position after: (2.50, 2.00)
+Key pressed: 100
+WASD key detected: 100
+Position before: (2.50, 2.00)
+handle_movement called with key: 100
+Strafing right
+Trying to move: delta(0.500, -0.000) -> new_pos(3.000, 2.000)
+Checking position: (3.000, 2.000)
+Position OK - character: '0'
+X movement OK
+Checking position: (3.000, 2.000)
+Position OK - character: '0'
+Y movement OK
+Position after: (3.00, 2.00)
+Key pressed: 115
+WASD key detected: 115
+Position before: (3.00, 2.00)
+handle_movement called with key: 115
+Moving backward
+Trying to move: delta(-0.000, -0.500) -> new_pos(3.000, 1.500)
+Checking position: (3.000, 2.000)
+Position OK - character: '0'
+X movement OK
+Checking position: (3.000, 1.500)
+Position OK - character: '0'
+Y movement OK
+Position after: (3.00, 1.50)
+Key pressed: 119
+WASD key detected: 119
+Position before: (3.00, 1.50)
+handle_movement called with key: 119
+Moving forward
+Trying to move: delta(0.000, 0.500) -> new_pos(3.000, 2.000)
+Checking position: (3.000, 1.500)
+Position OK - character: '0'
+X movement OK
+Checking position: (3.000, 2.000)
+Position OK - character: '0'
+Y movement OK
+Position after: (3.00, 2.00)
+Key pressed: 115
+WASD key detected: 115
+Position before: (3.00, 2.00)
+handle_movement called with key: 115
+Moving backward
+Trying to move: delta(-0.000, -0.500) -> new_pos(3.000, 1.500)
+Checking position: (3.000, 2.000)
+Position OK - character: '0'
+X movement OK
+Checking position: (3.000, 1.500)
+Position OK - character: '0'
+Y movement OK
+Position after: (3.00, 1.50)
+Key pressed: 100
+WASD key detected: 100
+Position before: (3.00, 1.50)
+handle_movement called with key: 100
+Strafing right
+Trying to move: delta(0.500, -0.000) -> new_pos(3.500, 1.500)
+Checking position: (3.500, 1.500)
+Position OK - character: '0'
+X movement OK
+Checking position: (3.500, 1.500)
+Position OK - character: '0'
+Y movement OK
+Position after: (3.50, 1.50)
+Key pressed: 119
+WASD key detected: 119
+Position before: (3.50, 1.50)
+handle_movement called with key: 119
+Moving forward
+Trying to move: delta(0.000, 0.500) -> new_pos(3.500, 2.000)
+Checking position: (3.500, 1.500)
+Position OK - character: '0'
+X movement OK
+Checking position: (3.500, 2.000)
+Position OK - character: '0'
+Y movement OK
+Position after: (3.50, 2.00)
+Key pressed: 97
+WASD key detected: 97
+Position before: (3.50, 2.00)
+handle_movement called with key: 97
+Strafing left
+Trying to move: delta(-0.500, 0.000) -> new_pos(3.000, 2.000)
+Checking position: (3.000, 2.000)
+Position OK - character: '0'
+X movement OK
+Checking position: (3.000, 2.000)
+Position OK - character: '0'
+Y movement OK
+Position after: (3.00, 2.00)
+Key pressed: 65307

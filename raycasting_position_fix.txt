@@ -1,0 +1,34 @@
+=== CORRECTION DU PROBLÈME DE RAYCASTING ===
+
+🔍 PROBLÈME IDENTIFIÉ:
+Le raycasting n'utilisait pas les positions mises à jour du joueur car il y avait un conflit entre deux systèmes de mise à jour du plan de caméra.
+
+🚨 CAUSE RACINE:
+1. Dans handle_direction() : mise à jour directe de view.planeX/planeY
+2. Dans raycast() : appel de calc_camera_plane() qui RECALCULE le plan
+3. → calc_camera_plane() écrasait les rotations faites par handle_direction()
+
+🛠️ CORRECTIONS APPLIQUÉES:
+
+1. SIMPLIFICATION DU SYSTÈME DE ROTATION:
+   - Supprimé la mise à jour manuelle de planeX/planeY dans handle_direction()
+   - Garde seulement la mise à jour de dirX/dirY (direction du joueur)
+   - Laisse calc_camera_plane() calculer le plan de façon cohérente
+
+2. SYNCHRONISATION DES POSITIONS:
+   - Ajout de synchronisation coords <-> posX/posY dans move_player()
+   - Assure que toutes les structures ont les bonnes valeurs
+
+🎯 FONCTIONNEMENT FINAL:
+1. WASD pressed → handle_movement() → move_player() → posX/posY updated
+2. Arrows pressed → handle_direction() → dirX/dirY updated  
+3. Movement detected → handle_loop() → raycast() → calc_camera_plane() → plan calculé from dirX/dirY
+4. cast_single_ray() utilise posX/posY + plan calculé → affichage correct
+
+✅ RÉSULTAT:
+- Raycasting utilise maintenant les VRAIES positions du joueur
+- Rotation et mouvement synchronisés
+- Affichage mis à jour en temps réel selon la position
+- Plus de conflit entre systèmes de calcul
+
+STATUS: RAYCASTING CORRIGÉ ✅
