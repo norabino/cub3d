@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/11 15:04:18 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:29:25 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	check_and_set_file(t_cub3d *cub3d, char **file)
 		idx_line = tmp;
 	ft_check_map(cub3d, file, &idx_line);
 	set_direction(cub3d, cub3d->player.dir);
-	cub3d->player.posX = (double)cub3d->player.coords->x + 0.5;
-	cub3d->player.posY = (double)cub3d->player.coords->y + 0.5;
+	cub3d->player.posX = (double)cub3d->player.posX + 0.5;
+	cub3d->player.posY = (double)cub3d->player.posY + 0.5;
 	cub3d->player.fov = 66;
 	return (1);
 }

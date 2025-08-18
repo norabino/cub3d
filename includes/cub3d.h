@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 15:05:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/18 15:30:27 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# include "./MinilibX/mlx.h"
+# include "../MinilibX/mlx.h"
 
 # include "../src/get_next_line/get_next_line.h"
 
@@ -33,14 +33,6 @@ typedef struct s_off
 	int		len;
 }	t_off;
 
-typedef struct s_point
-{
-	int		x;
-	int		y;
-	char	direction;
-	t_cub3d	*cub3d;
-}	t_point;
-
 typedef struct s_textures
 {
 	char	*north;
@@ -49,6 +41,12 @@ typedef struct s_textures
 	char	*east;
 	t_cub3d	*cub3d;
 }	t_textures;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
 
 typedef struct s_colors
 {
@@ -75,13 +73,14 @@ typedef struct s_mlx
 
 typedef struct s_player
 {
-	t_point		*coords;
 	double		posX;
 	double		posY;
 	char		dir;
 	float		dirX;
 	float		dirY;
 	int			fov;
+	char	direction;
+	t_cub3d	*cub3d;
 }	t_player;
 
 typedef struct s_view
@@ -161,7 +160,7 @@ t_point	find_player_position(t_cub3d *cub3d, char **map);
 int		flood_fill(char ***tab, t_point current, char to_fill, char new);
 int		flood_fill_z(char ***map, t_point here, char to_fill);
 int		check_adjacent(int y, int x, char **map, char new);
-t_point	*check_char_remaining(t_cub3d *cub3d, char **work_map, char c);
+t_point	*check_char_remaining(char **work_map, char c);
 
 int		check_text_extension(t_cub3d *cub3d, char *textures);
 int		all_text_set(t_textures textures);

@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/30 16:41:52 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:30:08 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 	*work_map = map_cpy(cub3d->map);
 	player_pos = find_player_position(cub3d, *work_map);
 	cub3d->player.dir = (*work_map)[player_pos.y][player_pos.x];
-	cub3d->player.coords = malloc(sizeof(t_point));
-	*(cub3d->player.coords) = player_pos;
+	cub3d->player.posX = player_pos.x;
+	cub3d->player.posY = player_pos.y;
 	(*work_map)[player_pos.y][player_pos.x] = '0';
 }
 
@@ -29,7 +29,7 @@ static int	process_flood(t_cub3d *cub3d, char **work_map, int *ff_count)
 {
 	t_point	*p;
 
-	p = check_char_remaining(cub3d, work_map, '0');
+	p = check_char_remaining(work_map, '0');
 	if (p)
 	{
 		if (!flood_fill(&work_map, *p, '0', 'F'))

@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/11 19:45:28 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:15:27 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ void	init(t_cub3d *cub3d)
 	cub3d->mlx.mlx = NULL;
 	cub3d->mlx.img = NULL;
 	cub3d->mlx.win = NULL;
-	cub3d->player.coords = malloc(sizeof(t_point));
-	cub3d->player.coords->x = -1;
-	cub3d->player.coords->y = -1;
-	cub3d->player.coords->direction = 0;
-	cub3d->player.coords->cub3d = cub3d;
+	cub3d->player.direction = 0;
+	cub3d->player.cub3d = cub3d;
 	cub3d->textures.north = NULL;
 	cub3d->textures.south = NULL;
 	cub3d->textures.west = NULL;

@@ -21,10 +21,10 @@ int	flood_fill_z(char ***map, t_point here, char to_fill)
 	if (!(*map)[here.y][here.x] || (*map)[here.y][here.x] != to_fill)
 		return (1);
 	(*map)[here.y][here.x] = 'Z';
-	if (!flood_fill_z(map, (t_point){here.x - 1, here.y, 0, NULL}, to_fill) ||
-		!flood_fill_z(map, (t_point){here.x + 1, here.y, 0, NULL}, to_fill) ||
-		!flood_fill_z(map, (t_point){here.x, here.y - 1, 0, NULL}, to_fill) ||
-		!flood_fill_z(map, (t_point){here.x, here.y + 1, 0, NULL}, to_fill))
+	if (!flood_fill_z(map, (t_point){here.x - 1, here.y}, to_fill) ||
+		!flood_fill_z(map, (t_point){here.x + 1, here.y}, to_fill) ||
+		!flood_fill_z(map, (t_point){here.x, here.y - 1}, to_fill) ||
+		!flood_fill_z(map, (t_point){here.x, here.y + 1}, to_fill))
 		return (0);
 	return (1);
 }
@@ -46,10 +46,10 @@ int	flood_fill(char ***map, t_point here, char to_f, char new)
 	if (!in_map((*map)[here.y][here.x]))
 		return (0);
 	(*map)[here.y][here.x] = new;
-	if (!flood_fill(map, (t_point){here.x - 1, here.y, 0, NULL}, to_f, new)
-		|| !flood_fill(map, (t_point){here.x + 1, here.y, 0, NULL}, to_f, new)
-		|| !flood_fill(map, (t_point){here.x, here.y - 1, 0, NULL}, to_f, new)
-		|| !flood_fill(map, (t_point){here.x, here.y + 1, 0, NULL}, to_f, new))
+	if (!flood_fill(map, (t_point){here.x - 1, here.y}, to_f, new)
+		|| !flood_fill(map, (t_point){here.x + 1, here.y,}, to_f, new)
+		|| !flood_fill(map, (t_point){here.x, here.y - 1}, to_f, new)
+		|| !flood_fill(map, (t_point){here.x, here.y + 1}, to_f, new))
 		return (0);
 	return (1);
 }
@@ -84,11 +84,11 @@ t_point	find_player_position(t_cub3d *cub3d, char **map)
 		while (x < ft_strlen(map[y]) - 1)
 		{
 			if (is_letter(map[y][x]))
-				return ((t_point){x, y, map[y][x], cub3d});
+				return ((t_point){x, y});
 			x++;
 		}
 		y++;
 	}
 	exit_error("Player position not found!", cub3d);
-	return ((t_point){-1, -1, 0, cub3d});
+	return ((t_point){-1, -1});
 }

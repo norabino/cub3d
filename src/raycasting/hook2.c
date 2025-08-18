@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/13 16:48:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:02:22 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,9 @@ int	handle_direction(t_cub3d *cub3d)
 	rot_speed = 0.03;
 	rotated = 0;
 	if (cub3d->keys[255])
-	{
 		rotated = handle_direction_left(cub3d, rot_speed);
-	}
 	if (cub3d->keys[254])
-	{
 		rotated += handle_direction_right(cub3d, rot_speed);
-	}
 	return (rotated);
 }
 
