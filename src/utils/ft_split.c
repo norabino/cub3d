@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:43 by norabino          #+#    #+#             */
-/*   Updated: 2025/07/19 20:47:54 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/18 15:08:56 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ char	**ft_split(char *str, char c)
 		tab[0] = tab[1];
 		tab[2]++;
 	}
-	dst[tab[2]] = '\0';
+	dst[tab[2]] = 0;
 	return (dst);
 }

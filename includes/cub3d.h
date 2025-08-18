@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/13 17:00:19 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:05:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# include "../minilibx-linux/mlx.h"
+# include "./MinilibX/mlx.h"
 
 # include "../src/get_next_line/get_next_line.h"
 

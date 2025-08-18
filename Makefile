@@ -41,7 +41,7 @@ OBJ = $(SRC:.c=.o)
 	$(CC) -Wall -Wextra -Werror -c $< -o $@ -g
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lminilibx-linux -lmlx -lXext -lX11 -lm -g -o $(NAME)
+	$(CC) $(OBJ) -LMinilibX -lmlx -lXext -lX11 -lm -g -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
@@ -51,9 +51,14 @@ fclean: clean
 
 re: fclean all
 
+re_mac: fclean mac
+
+mac: $(OBJ)
+	$(CC) $(OBJ) -LMinilibX -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lm -g -o $(NAME)
+
 all: $(NAME)
 
 dev : fclean
 	git add .; git commit -m "auto/dev"; git push --force
 
-PHONY: all clean fclean re dev
+.PHONY: all clean fclean re re_mac dev mac
