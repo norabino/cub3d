@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 15:15:27 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:23:00 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	init(t_cub3d *cub3d)
 		cub3d->keys[i] = 0;
 		i++;
 	}
+	cub3d->last_refresh = 0;
 }

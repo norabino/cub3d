@@ -6,16 +6,45 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 15:02:22 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:25:44 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-#define KEY_W 119
-#define KEY_A 97
-#define KEY_S 115
-#define KEY_D 100
+/*int	handle_movement(t_cub3d *cub3d)
+{
+	double	move_speed;
+	double	delta_x;
+	double	delta_y;
+	int		moved;
+
+	move_speed = 0.02;
+	if (cub3d->keys[KEY_W])
+	{
+		delta_x = cub3d->player.dirX * move_speed;
+		delta_y = cub3d->player.dirY * move_speed;
+		moved += move_player(cub3d, delta_x, delta_y);
+	}
+	if (cub3d->keys[KEY_S])
+	{
+		delta_x = -cub3d->player.dirX * move_speed;
+		delta_y = -cub3d->player.dirY * move_speed;
+		moved += move_player(cub3d, delta_x, delta_y);
+	}
+	if (cub3d->keys[KEY_A])
+	{
+		delta_x = -cub3d->player.dirY * move_speed;
+		delta_y = cub3d->player.dirX * move_speed;
+		moved += move_player(cub3d, delta_x, delta_y);
+	}
+	if (cub3d->keys[KEY_D])
+	{
+		delta_x = cub3d->player.dirY * move_speed;
+		delta_y = -cub3d->player.dirX * move_speed;
+		moved += move_player(cub3d, delta_x, delta_y);
+	}
+}*/
 
 int	handle_movement(t_cub3d *cub3d)
 {
@@ -26,7 +55,7 @@ int	handle_movement(t_cub3d *cub3d)
 
 	if (!cub3d)
 		return (0);
-	move_speed = 0.05;
+	move_speed = 0.02;
 	moved = 0;
 	if (cub3d->keys[KEY_W])
 	{

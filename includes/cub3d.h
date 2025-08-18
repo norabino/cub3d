@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 15:30:27 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:26:05 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-
+# include <sys/time.h>
 # include "../MinilibX/mlx.h"
-
 # include "../src/get_next_line/get_next_line.h"
 
 # define PI 3.14159265358979323846264338327950288
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -113,6 +116,7 @@ typedef struct s_cub3d
 	char		**map;
 	char		keys[256];
 	char		alpha[26];
+	long		last_refresh;
 }	t_cub3d;
 
 // FUNCTIONS :
@@ -219,9 +223,13 @@ int		handle_loop(t_cub3d *cub3d);
 int		check_any_key_pressed(t_cub3d *cub3d);
 void	refresh_image(t_cub3d *cub3d);
 
-//collision
+//colision
 int		is_valid_position(t_cub3d *cub3d, double x, double y);
 int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
+
+// time
+long	gettime_ms(void);
+int	check_frames(t_cub3d *cub3d);
 
 
 #endif
