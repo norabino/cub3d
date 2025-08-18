@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/13 16:07:12 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:11:14 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
 {
 	int	line_height;
 
-	if (perp_wall_dist <= 0.01)
+	if (perp_wall_dist < 0.01)
 		perp_wall_dist = 0.01;
 	line_height = (int)(SCREEN_HEIGHT / perp_wall_dist);
 	if (line_height > SCREEN_HEIGHT * 10)

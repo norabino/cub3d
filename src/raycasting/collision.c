@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/18 15:17:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:03:58 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,17 @@ int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 {
 	double	new_x;
 	double	new_y;
-	int		moved;
 
 	if (!cub3d)
 		return (0);
-	moved = 0;
 	new_x = cub3d->player.posX + delta_x;
 	new_y = cub3d->player.posY + delta_y;
-	if (is_valid_position(cub3d, new_x, cub3d->player.posY))
+	if (is_valid_position(cub3d, new_x, cub3d->player.posY) &&
+		is_valid_position(cub3d, cub3d->player.posX, new_y))
 	{
 		cub3d->player.posX = new_x;
-		moved = 1;
-	}
-	if (is_valid_position(cub3d, cub3d->player.posX, new_y))
-	{
 		cub3d->player.posY = new_y;
-		moved = 1;
+		return (1);
 	}
-	return (moved);
+	return (0);
 }

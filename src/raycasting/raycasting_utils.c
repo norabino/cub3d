@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/13 16:07:12 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:46:09 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
 {
 	if (!cub3d || !dda)
 		return ;
-	dda->map_x = cub3d->player.posX;
-	dda->map_y = cub3d->player.posY;
+	dda->map_x = (int)cub3d->player.posX;
+	dda->map_y = (int)cub3d->player.posY;
 	if (ray_dir_x == 0)
 		dda->delta_dist_x = 1e30;
 	else
@@ -35,11 +35,11 @@ void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
 void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
 	double ray_dir_y, t_cub3d *cub3d)
 {
-	double	map_x;
+	int	map_x;
 
 	if (!dda || !cub3d)
 		return ;
-	map_x = cub3d->player.posX;
+	map_x = (int)cub3d->player.posX;
 	if (ray_dir_x < 0)
 	{
 		dda->step_x = -1;
@@ -59,9 +59,9 @@ void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
 void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
 	t_cub3d *cub3d)
 {
-	double	map_y;
+	int	map_y;
 
-	map_y = cub3d->player.posY;
+	map_y = (int)cub3d->player.posY;
 	if (ray_dir_y < 0)
 	{
 		dda->step_y = -1;
@@ -98,24 +98,29 @@ void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		if ((int)dda->map_y >= 0 && (int)dda->map_x >= 0
+		if (dda->map_y >= 0 && dda->map_x >= 0
 			&& cub3d->map[(int)dda->map_y]
 			&& cub3d->map[(int)dda->map_y][(int)dda->map_x] == '1')
 			dda->hit = 1;
 	}
 }
 
-/* Calculate perpendicular wall distance */
+/* Calculate precise perpendicular wall distance */
 double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
 	double ray_dir_y, t_cub3d *cub3d)
 {
 	double	perp_wall_dist;
 
-	if (dda->side == 0)
-		perp_wall_dist = (dda->map_x - cub3d->player.posX
-				+ (1 - dda->step_x) / 2) / ray_dir_x;
-	else
-		perp_wall_dist = (dda->map_y - cub3d->player.posY
-				+ (1 - dda->step_y) / 2) / ray_dir_y;
-	return (perp_wall_dist);
+	if (dda->side == 0)  // Vertical wall hit (x-direction)
+	{
+		// Calculate perpendicular distance to vertical wall
+		perp_wall_dist = (dda->map_x - cub3d->player.posX + (1 - dda->step_x) / 2) / ray_dir_x;
+	}
+	else  // Horizontal wall hit (y-direction)
+	{
+		// Calculate perpendicular distance to horizontal wall
+		perp_wall_dist = (dda->map_y - cub3d->player.posY + (1 - dda->step_y) / 2) / ray_dir_y;
+	}
+	// Ensure distance is always positive
+	return (fabs(perp_wall_dist));
 }

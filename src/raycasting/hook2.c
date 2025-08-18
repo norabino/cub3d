@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 16:25:44 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:55:10 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 	double	delta_y;
 	int		moved;
 
+	moved = 0;
 	move_speed = 0.02;
 	if (cub3d->keys[KEY_W])
 	{
@@ -44,6 +45,7 @@
 		delta_y = -cub3d->player.dirX * move_speed;
 		moved += move_player(cub3d, delta_x, delta_y);
 	}
+	return (moved);
 }*/
 
 int	handle_movement(t_cub3d *cub3d)
