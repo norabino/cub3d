@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 15:30:08 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:42:45 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_check_map(t_cub3d *cub3d, char **file, int *idx_line)
 	(*idx_line) = 0;
 	while (file[*idx_line + begin])
 	{
-		cub3d->map[*idx_line] = file[*idx_line + begin];
+		cub3d->map[*idx_line] = ft_strdup(file[*idx_line + begin]);
 		(*idx_line)++;
 	}
 	cub3d->map[*idx_line] = NULL;

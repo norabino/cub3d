@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 21:50:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	process_color(t_colors *colors, char *line, int j, int z)
 	skip_spaces(line, &j);
 	split = ft_split(&line[j], ',');
 	set_color(colors, split, line[z]);
+	free_map(split);
 }
 
 static void	verify_colors(t_colors *colors)

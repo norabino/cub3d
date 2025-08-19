@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:07:42 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 15:32:19 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ t_point	*check_char_remaining(char **work_map, char c)
 	int		x;
 	t_point	*p;
 
-	p = malloc(sizeof(t_point *));
+	p = malloc(sizeof(t_point));
+	if (!p)
+		return (NULL);
 	y = 0;
 	while (work_map[y])
 	{
@@ -48,6 +50,7 @@ t_point	*check_char_remaining(char **work_map, char c)
 		}
 		y++;
 	}
+	free(p);
 	return (NULL);
 }
 

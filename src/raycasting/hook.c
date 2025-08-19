@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:54:26 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/13 16:47:55 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,8 @@ int	handle_close(t_cub3d *cub3d)
 {
 	if (!cub3d)
 		exit(1);
-	if (cub3d->mlx.mlx && cub3d->mlx.win)
-		mlx_destroy_window(cub3d->mlx.mlx, cub3d->mlx.win);
-	if (cub3d->mlx.img && cub3d->mlx.img->img && cub3d->mlx.mlx)
-		mlx_destroy_image(cub3d->mlx.mlx, cub3d->mlx.img->img);
-	if (cub3d->mlx.mlx)
-	{
-		mlx_destroy_display(cub3d->mlx.mlx);
-		free(cub3d->mlx.mlx);
-		cub3d->mlx.mlx = NULL;
-	}
-	exit_error("closed", cub3d);
+	ft_free(cub3d);
+	exit(0);
 	return (0);
 }
 

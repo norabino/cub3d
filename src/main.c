@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/13 16:27:21 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:42:45 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_parsing_init(t_cub3d *cub3d, int ac, char **av)
 	if (!check_extension(cub3d, av[1]))
 		exit_error("Must be '.cub'.", cub3d);
 	file = open_file(cub3d, av[1]);
-	init(cub3d);
 	check_and_set_file(cub3d, file);
+	free_map(file);
 }
 
 int	main(int ac, char **av)
@@ -32,6 +32,7 @@ int	main(int ac, char **av)
 	cub3d = malloc(sizeof(t_cub3d));
 	if (!cub3d)
 		return (1);
+	init(cub3d);
 	ft_parsing_init(cub3d, ac, av);
 	init_mlx(cub3d);
 	raycast(cub3d);
@@ -43,5 +44,5 @@ int	main(int ac, char **av)
 	mlx_hook(cub3d->mlx.win, 3, 1L << 1, handle_keyrelease, cub3d);
 	mlx_loop_hook(cub3d->mlx.mlx, handle_loop, cub3d);
 	mlx_loop(cub3d->mlx.mlx);
-	handle_close(cub3d);
+	return (0);
 }

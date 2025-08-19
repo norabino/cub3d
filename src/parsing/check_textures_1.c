@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 21:33:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@ int	check_text_extension(t_cub3d *cub3d, char *textures)
 {
 	char	*ext;
 	int		i;
+	int		u_result;
 
 	i = ft_strlen(textures) - 1;
 	while (i && textures[i] != '.')
 		i--;
 	ext = ft_strndup(&textures[i], 4);
 	if (!ext || !ft_strcmp(ext, textures))
+	{
+		if (ext)
+			free(ext);
 		exit_error("No file extension.", cub3d);
-	if (ft_strcmp(ext, ".xpm"))
+	}
+	u_result = ft_strcmp(ext, ".xpm");
+	free(ext);
+	if (u_result)
 		return (0);
 	return (1);
 }

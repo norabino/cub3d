@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/18 17:38:18 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void	init(t_cub3d *cub3d);
 char	**map_cpy(char **old);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	free_map(char **map);
+void	ft_free(t_cub3d *s_cub3d);
 t_cub3d	*init_mlx(t_cub3d *cub3d);
 
 

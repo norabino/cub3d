@@ -17,6 +17,7 @@ SRC = \
 	src/parsing/open_file.c \
 	\
 	src/utils/ft_split.c \
+	src/utils/free.c \
 	src/utils/memory.c \
 	src/utils/monitoring_utils.c \
 	src/utils/str_utils_0.c \
@@ -34,32 +35,40 @@ SRC = \
 	src/raycasting/raycasting_utils.c \
 	src/raycasting/render.c \
 	src/raycasting/camera.c \
-	src/raycasting/collision.c 
+	src/raycasting/collision.c \
 
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -c $< -o $@ -g
 
-$(NAME): $(OBJ)
+$(NAME): minilibx $(OBJ)
 	$(CC) $(OBJ) -L./MinilibX -lmlx -lXext -lX11 -lm -g -o $(NAME)
 
-clean:
+
+minilibx:
+	@echo "Compilation de la Minilibx ..."
+	@make -C MinilibX
+
+clean: clean_minilibx
 	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
 
+mac: minilibx $(OBJ)
+	$(CC) $(OBJ) -LMinilibX -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lm -g -o $(NAME)
+
+clean_minilibx:
+	make clean -C MinilibX
+
 re: fclean all
 
 re_mac: fclean mac
 
-mac: $(OBJ)
-	$(CC) $(OBJ) -LMinilibX -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lm -g -o $(NAME)
-
 all: $(NAME)
 
-dev : fclean
+dev : fclean clean_minilibx
 	git add .; git commit -m "auto/dev"; git push --force
 
-.PHONY: all clean fclean re re_mac dev mac
+.PHONY: all clean fclean re re_mac dev mac minilibx clean_minilibx
