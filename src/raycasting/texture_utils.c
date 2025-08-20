@@ -6,13 +6,19 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 15:35:50 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Calculate texture step and position */
+#define SCREEN_HEIGHT 720
+
+/*
+** Calcule à quelle vitesse on doit avancer dans la texture
+** Comme calculer de combien de centimètres avancer sur le poster
+** pour chaque pixel qu'on dessine à l'écran
+*/
 void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start)
 {
 	int		real_wall_height;
@@ -25,7 +31,10 @@ void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start)
 			+ real_wall_height / 2) * tex_calc->step;
 }
 
-/* Initialize parameters for texture drawing */
+/*
+** Prépare tous les paramètres avant de dessiner
+** Comme préparer ses pinceaux et couleurs avant de peindre
+*/
 void	init_texture_draw_params(t_texture_calc *tex_calc,
 	int draw_params[2], int *tex_height, int *draw_bounds[2])
 {
@@ -35,7 +44,11 @@ void	init_texture_draw_params(t_texture_calc *tex_calc,
 	*tex_height = tex_calc->current_texture->height;
 }
 
-/* Draw single texture pixel with bounds checking */
+/*
+** Dessine UN SEUL pixel avec la bonne couleur de texture
+** Prend la couleur du poster et la met sur l'écran au bon endroit
+** S'assure que la couleur existe bien et n'est pas hors limites
+*/
 void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
 	t_texture_calc *tex_calc)
 {

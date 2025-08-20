@@ -6,13 +6,16 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 14:50:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Clean path by removing trailing whitespace and newlines */
+/*
+** Nettoie le chemin d'un fichier en enlevant les espaces et retours à la ligne
+** Comme effacer la poussière sur une adresse pour bien la lire
+*/
 static char	*clean_path(char *path)
 {
 	int	len;
@@ -31,7 +34,11 @@ static char	*clean_path(char *path)
 	return (path);
 }
 
-/* Load a single texture from XPM file */
+/*
+** Charge UNE texture depuis un fichier XPM
+** Comme scanner une photo pour la mettre dans l'ordinateur
+** La texture devient utilisable pour décorer les murs
+*/
 int	load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path)
 {
 	char	*clean_path_str;
@@ -53,7 +60,11 @@ int	load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path)
 	return (1);
 }
 
-/* Load all wall textures */
+/*
+** Charge TOUTES les textures des 4 murs (Nord, Sud, Est, Ouest)
+** Comme préparer tous les posters qu'on va coller sur les murs
+** Si un poster ne marche pas, on arrête tout le programme
+*/
 void	load_all_textures(t_cub3d *cub3d)
 {
 	if (!cub3d)
@@ -72,7 +83,11 @@ void	load_all_textures(t_cub3d *cub3d)
 		exit_error("Error: Failed to load west texture", cub3d);
 }
 
-/* Free all texture resources */
+/*
+** Libère la mémoire de toutes les textures
+** Comme jeter tous les posters quand on déménage
+** Important pour éviter les fuites de mémoire
+*/
 void	free_textures(t_cub3d *cub3d)
 {
 	if (!cub3d || !cub3d->mlx.mlx)
@@ -87,7 +102,11 @@ void	free_textures(t_cub3d *cub3d)
 		mlx_destroy_image(cub3d->mlx.mlx, cub3d->textures.west_img.img);
 }
 
-/* Select appropriate texture based on wall orientation */
+/*
+** Choisit la bonne texture selon la direction du mur
+** Nord/Sud/Est/Ouest = textures différentes
+** Comme choisir le bon papier peint selon quelle pièce on décore
+*/
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {

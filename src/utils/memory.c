@@ -6,12 +6,17 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/11 10:34:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/*
+** Déplace des données d'un endroit à un autre en mémoire
+** Comme transporter des cartons d'un appartement à un autre
+** en faisant attention à ne pas les faire tomber
+*/
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char	*psrc;
@@ -41,6 +46,11 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (pdest);
 }
 
+/*
+** Fait une copie complète d'une carte
+** Comme photocopier chaque page d'un livre
+** pour avoir un exemplaire de secours
+*/
 char	**map_cpy(char **old)
 {
 	char	**new;
@@ -56,6 +66,11 @@ char	**map_cpy(char **old)
 	return (new);
 }
 
+/*
+** Copie un texte caractère par caractère
+** Comme recopier une phrase au tableau
+** lettre par lettre sans faire d'erreur
+*/
 char	*ft_strcpy(char *dest, char *str)
 {
 	int	i;
@@ -70,6 +85,11 @@ char	*ft_strcpy(char *dest, char *str)
 	return (dest);
 }
 
+/*
+** Crée une copie identique d'un texte en mémoire
+** Comme faire un double d'un document important
+** pour le garder en sécurité
+*/
 char	*ft_strdup(char *s)
 {
 	char	*res;
@@ -81,6 +101,11 @@ char	*ft_strdup(char *s)
 	return (res);
 }
 
+/*
+** Libère la mémoire occupée par une carte
+** Comme ranger tous les cahiers d'une étagère
+** puis démonter l'étagère elle-même
+*/
 void	free_map(char **map)
 {
 	int	i;

@@ -6,13 +6,18 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 15:28:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Check if a position is valid (not a wall) with margin */
+/*
+** Vérifie si une position est valide (pas un mur) avec une marge de sécurité
+** Comme vérifier si on peut marcher à un endroit sans se cogner
+** La marge de 0.05 évite que le joueur colle aux murs
+** Retourne 1 si on peut aller là, 0 si c'est bloqué
+*/
 int	is_valid_position(t_cub3d *cub3d, double x, double y)
 {
 	if (!cub3d || !cub3d->map)
@@ -28,7 +33,12 @@ int	is_valid_position(t_cub3d *cub3d, double x, double y)
 	return (1);
 }
 
-/* Move player with collision detection */
+/*
+** Déplace le joueur en vérifiant les collisions
+** Teste la nouvelle position avant de s'y déplacer
+** Si ça passe, on bouge. Si ça coince, on reste sur place
+** Retourne 1 si le mouvement a eu lieu, 0 sinon
+*/
 int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 {
 	double	new_x;

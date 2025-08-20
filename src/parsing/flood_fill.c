@@ -12,6 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
+/*
+** Teste si une zone est fermée en la remplissant d'eau virtuelle
+** Comme verser de l'encre sur un buvard pour voir si elle déborde
+** S'arrête quand elle touche un mur ou sort de la carte
+*/
 int	flood_fill_z(char ***map, t_point here, char to_fill)
 {
 	if (here.y < 0 || here.x < 0)
@@ -29,6 +34,11 @@ int	flood_fill_z(char ***map, t_point here, char to_fill)
 	return (1);
 }
 
+/*
+** Remplit une zone avec une nouvelle couleur comme un pot de peinture
+** Vérifie que la peinture ne coule pas par des trous dans les murs
+** Si elle sort de la carte, c'est que la carte n'est pas bien fermée
+*/
 int	flood_fill(char ***map, t_point here, char to_f, char new)
 {
 	if (here.y < 0 || here.x < 0)
@@ -54,6 +64,11 @@ int	flood_fill(char ***map, t_point here, char to_f, char new)
 	return (1);
 }
 
+/*
+** Vérifie que toutes les cases autour sont bien des murs ou déjà marquées
+** Comme un gardien qui s'assure qu'il n'y a pas de trou dans la clôture
+** avant de lâcher les animaux dans l'enclos
+*/
 int	check_adjacent(int y, int x, char **map, char new)
 {
 	if (x <= 0 || !map[y] || x >= ft_strlen(map[y]) - 1)
@@ -71,6 +86,11 @@ int	check_adjacent(int y, int x, char **map, char new)
 	return (1);
 }
 
+/*
+** Cherche le joueur sur la carte comme un jeu de cache-cache
+** Parcourt toute la carte case par case jusqu'à trouver
+** la lettre qui représente le joueur (N, S, E, W)
+*/
 t_point	find_player_position(t_cub3d *cub3d, char **map)
 {
 	int	y;

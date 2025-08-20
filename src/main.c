@@ -6,12 +6,17 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 15:28:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Initialise le parsing du fichier .cub
+** Vérifie les arguments, ouvre le fichier, et lit la configuration
+** Comme lire les instructions avant de monter un meuble
+*/
 void	ft_parsing_init(t_cub3d *cub3d, int ac, char **av)
 {
 	char	**file;
@@ -25,6 +30,13 @@ void	ft_parsing_init(t_cub3d *cub3d, int ac, char **av)
 	free_map(file);
 }
 
+/*
+** Fonction principale du programme
+** 1. Crée la structure principale du jeu
+** 2. Lit et vérifie le fichier de configuration
+** 3. Initialise l'affichage et lance le jeu
+** 4. Commence la boucle de jeu infinie
+*/
 int	main(int ac, char **av)
 {
 	t_cub3d	*cub3d;

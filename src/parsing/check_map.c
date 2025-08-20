@@ -6,12 +6,17 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 15:28:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/*
+** Prépare une copie de la carte pour les vérifications
+** Comme photocopier une carte avant de la modifier
+** pour ne pas abîmer l'originale
+*/
 static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 {
 	t_point	player_pos;
@@ -25,6 +30,11 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 	(*work_map)[player_pos.y][player_pos.x] = '0';
 }
 
+/*
+** Teste si une zone de la carte est accessible
+** Comme verser de l'eau pour voir si elle se répand partout
+** ou si elle reste coincée quelque part
+*/
 static int	process_flood(t_cub3d *cub3d, char **work_map, int *ff_count)
 {
 	t_point	*p;
@@ -43,6 +53,11 @@ static int	process_flood(t_cub3d *cub3d, char **work_map, int *ff_count)
 	return (0);
 }
 
+/*
+** Vérifie que toutes les zones de la carte sont bien fermées
+** Comme un inspecteur qui s'assure qu'il n'y a pas de trou
+** dans les murs d'une prison pour éviter les évasions
+*/
 int	ft_check_map_valid(t_cub3d *cub3d)
 {
 	char	**work_map;
@@ -63,6 +78,11 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 	return (1);
 }
 
+/*
+** Extrait et stocke la carte depuis le fichier de configuration
+** Comme découper la partie qui nous intéresse dans un journal
+** et la coller dans un album pour la garder
+*/
 int	ft_check_map(t_cub3d *cub3d, char **file, int *idx_line)
 {
 	int	begin;

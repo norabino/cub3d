@@ -6,13 +6,17 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 15:28:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Initialize cub3d structure part 1 */
+/*
+** Initialise les valeurs de base de la structure principale
+** Comme préparer une boîte à outils en remettant
+** tous les compartiments à zéro avant de commencer
+*/
 static void	init_basic_values(t_cub3d *cub3d)
 {
 	cub3d->mlx.mlx = NULL;
@@ -27,7 +31,11 @@ static void	init_basic_values(t_cub3d *cub3d)
 	cub3d->textures.cub3d = cub3d;
 }
 
-/* Initialize cub3d structure part 2 */
+/*
+** Initialise les couleurs et les touches du clavier
+** Comme régler les couleurs par défaut d'un téléviseur
+** et effacer la mémoire des touches appuyées
+*/
 static void	init_colors_and_keys(t_cub3d *cub3d)
 {
 	int	i;
@@ -51,6 +59,11 @@ static void	init_colors_and_keys(t_cub3d *cub3d)
 	cub3d->last_refresh = 0;
 }
 
+/*
+** Fonction principale d'initialisation
+** Comme préparer entièrement une nouvelle voiture avant le premier démarrage
+** en s'assurant que tout est à zéro et prêt à fonctionner
+*/
 void	init(t_cub3d *cub3d)
 {
 	init_basic_values(cub3d);
