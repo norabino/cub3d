@@ -1,10 +1,10 @@
 F 32, 32, 32
 C 0, 0, 102
 
-NO ./textures/bark.xpm
-SO ./textures/bricks.xpm 
-EA ./textures/wood.xpm
-WE ./textures/wood.xpm
+NO ./textures/cartoon_bark.xpm
+SO ./textures/cartoon_bricks.xpm 
+EA ./textures/cartoon_wood.xpm
+WE ./textures/cartoon_wood.xpm
 
 1111111111111111111
 1001001001001001001

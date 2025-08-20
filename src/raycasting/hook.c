@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:54:26 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:36:44 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-#define KEY_W 119
-#define KEY_A 97
-#define KEY_S 115
-#define KEY_D 100
-#define KEY_ESC 65307
-#define KEY_LEFT 65361
-#define KEY_RIGHT 65363
 
 int	handle_close(t_cub3d *cub3d)
 {

@@ -1,13 +1,13 @@
-   WE                            ./textures/bark.xpm
-NO      ./textures/bark.xpm
+   WE                            ./textures/cartoon_bark.xpm
+NO      ./textures/cartoon_bark.xpm
 
 
 
-SO ./textures/bark.xpm
+SO ./textures/cartoon_bark.xpm
 
 F      55,    55,     55
 
-EA ./textures/bark.xpm
+EA ./textures/cartoon_bark.xpm
 
 
 

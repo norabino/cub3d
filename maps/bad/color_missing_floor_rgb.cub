@@ -1,7 +1,7 @@
-NO ./textures/bark.xpm
-SO ./textures/bricks.xpm 
-EA ./textures/wood.xpm
-WE ./textures/wood.xpm
+NO ./textures/cartoon_bark.xpm
+SO ./textures/cartoon_bricks.xpm 
+EA ./textures/cartoon_wood.xpm
+WE ./textures/cartoon_wood.xpm
 
 F 20,20
 C 200,200,200

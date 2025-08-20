@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/18 17:03:58 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:28:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 
 	if (!cub3d)
 		return (0);
-	new_x = cub3d->player.posX + delta_x;
-	new_y = cub3d->player.posY + delta_y;
-	if (is_valid_position(cub3d, new_x, cub3d->player.posY) &&
-		is_valid_position(cub3d, cub3d->player.posX, new_y))
+	new_x = cub3d->player.pos_x + delta_x;
+	new_y = cub3d->player.pos_y + delta_y;
+	if (is_valid_position(cub3d, new_x, cub3d->player.pos_y)
+		&& is_valid_position(cub3d, cub3d->player.pos_x, new_y))
 	{
-		cub3d->player.posX = new_x;
-		cub3d->player.posY = new_y;
+		cub3d->player.pos_x = new_x;
+		cub3d->player.pos_y = new_y;
 		return (1);
 	}
 	return (0);

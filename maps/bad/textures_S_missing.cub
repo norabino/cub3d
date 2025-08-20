@@ -1,6 +1,6 @@
-NO ./textures/bark.xpm
-SO ./textures/bricks.xpm 
-EA ./textures/wood.xpm
+NO ./textures/cartoon_bark.xpm
+SO ./textures/cartoon_bricks.xpm 
+EA ./textures/cartoon_wood.xpm
 
 F 32, 32, 32
 C 0, 0, 102

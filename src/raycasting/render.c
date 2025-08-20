@@ -6,14 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 15:06:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 15:37:33 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
 
 /* Calculate line height and draw boundaries */
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
@@ -81,6 +78,7 @@ void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 {
 	int				draw_start;
 	int				draw_end;
+	int				draw_params[2];
 	t_texture_calc	tex_calc;
 
 	if (!cub3d || !dda)
@@ -88,7 +86,9 @@ void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	calc_line_bounds(perp_wall_dist, &draw_start, &draw_end);
 	select_wall_texture(cub3d, dda, &tex_calc);
 	calc_texture_coordinates(cub3d, dda, &tex_calc, perp_wall_dist);
-	draw_textured_wall_pixels(cub3d, screen_x, draw_start, draw_end,
-		&tex_calc, perp_wall_dist);
+	tex_calc.perp_wall_dist = perp_wall_dist;
+	draw_params[0] = draw_start;
+	draw_params[1] = draw_end;
+	draw_textured_wall_pixels(cub3d, screen_x, &tex_calc, draw_params);
 	draw_floor_ceiling(cub3d, screen_x, draw_start, draw_end);
 }

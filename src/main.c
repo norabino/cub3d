@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/19 15:42:45 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:28:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	main(int ac, char **av)
 	raycast(cub3d);
 	mlx_put_image_to_window(cub3d->mlx.mlx, cub3d->mlx.win,
 		cub3d->mlx.img->img, 0, 0);
-	// Hooks pour mouvement continu ultra-fluide
 	mlx_hook(cub3d->mlx.win, 17, 1L << 17, handle_close, cub3d);
 	mlx_hook(cub3d->mlx.win, 2, 1L << 0, handle_keypress, cub3d);
 	mlx_hook(cub3d->mlx.win, 3, 1L << 1, handle_keyrelease, cub3d);

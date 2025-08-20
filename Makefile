@@ -38,6 +38,7 @@ SRC = \
 	src/raycasting/collision.c \
 	src/raycasting/textures.c \
 	src/raycasting/texture_calc.c \
+	src/raycasting/texture_utils.c \
 
 OBJ = $(SRC:.c=.o)
 

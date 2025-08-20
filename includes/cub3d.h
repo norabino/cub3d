@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 15:06:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/20 15:45:23 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -91,20 +96,20 @@ typedef struct s_mlx
 
 typedef struct s_player
 {
-	double		posX;
-	double		posY;
+	double		pos_x;
+	double		pos_y;
 	char		dir;
-	float		dirX;
-	float		dirY;
+	float		dir_x;
+	float		dir_y;
 	int			fov;
-	char	direction;
-	t_cub3d	*cub3d;
+	char		direction;
+	t_cub3d		*cub3d;
 }	t_player;
 
 typedef struct s_view
 {
-	float	planeX;
-	float	planeY;
+	float	plane_x;
+	float	plane_y;
 }	t_view;
 
 typedef struct s_texture_calc
@@ -114,6 +119,7 @@ typedef struct s_texture_calc
 	int				tex_y;
 	double			step;
 	double			tex_pos;
+	double			perp_wall_dist;
 	t_texture_img	*current_texture;
 }	t_texture_calc;
 
@@ -206,7 +212,6 @@ void	free_map(char **map);
 void	ft_free(t_cub3d *s_cub3d);
 t_cub3d	*init_mlx(t_cub3d *cub3d);
 
-
 //draw
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
@@ -219,8 +224,15 @@ void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc, double perp_wall_dist);
 int		get_texture_pixel_color(t_texture_img *texture, int x, int y);
-void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
-			int draw_end, t_texture_calc *tex_calc, double perp_wall_dist);
+void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x,
+			t_texture_calc *tex_calc, int draw_params[2]);
+
+//texture utils
+void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start);
+void	init_texture_draw_params(t_texture_calc *tex_calc,
+			int draw_params[2], int *tex_height, int *draw_bounds[2]);
+void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
+			t_texture_calc *tex_calc);
 
 //camera
 void	calc_camera_plane(t_cub3d *cub3d);
@@ -269,7 +281,6 @@ int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
 
 // time
 long	gettime_ms(void);
-int	check_frames(t_cub3d *cub3d);
-
+int		check_frames(t_cub3d *cub3d);
 
 #endif

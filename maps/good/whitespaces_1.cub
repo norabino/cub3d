@@ -6,7 +6,7 @@
 
 
 
-NO ./textures/bark.xpm
+NO ./textures/cartoon_bark.xpm
 
 
 
@@ -15,9 +15,9 @@ NO ./textures/bark.xpm
 
 
 
-SO ./textures/bark.xpm
-                        WE ./textures/bark.xpm
-        EA ./textures/bark.xpm            
+SO ./textures/cartoon_bark.xpm
+                        WE ./textures/cartoon_bark.xpm
+        EA ./textures/cartoon_bark.xpm
 
         F 20,           20,             20
 C 200,          200,200
