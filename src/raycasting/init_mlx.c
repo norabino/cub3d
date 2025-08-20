@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:19:02 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/11 14:27:38 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/20 14:50:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_cub3d	*init_mlx(t_cub3d *cub3d)
 	cub3d->mlx.img->addr = mlx_get_data_addr(cub3d->mlx.img->img,
 			&cub3d->mlx.img->bits_per_pixel, &cub3d->mlx.img->line_length,
 			&cub3d->mlx.img->endian);
+	load_all_textures(cub3d);
 	return (cub3d);
 }

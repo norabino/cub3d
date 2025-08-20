@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:06:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,28 @@ typedef struct s_off
 	int		len;
 }	t_off;
 
+typedef struct s_texture_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_texture_img;
+
 typedef struct s_textures
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	t_cub3d	*cub3d;
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	t_texture_img	north_img;
+	t_texture_img	south_img;
+	t_texture_img	west_img;
+	t_texture_img	east_img;
+	t_cub3d			*cub3d;
 }	t_textures;
 
 typedef struct s_point
@@ -92,6 +107,16 @@ typedef struct s_view
 	float	planeY;
 }	t_view;
 
+typedef struct s_texture_calc
+{
+	double			wall_x;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
+	t_texture_img	*current_texture;
+}	t_texture_calc;
+
 typedef struct s_dda
 {
 	double	map_x;
@@ -104,6 +129,8 @@ typedef struct s_dda
 	int		step_y;
 	int		hit;
 	int		side;
+	double	ray_dir_x;
+	double	ray_dir_y;
 }	t_dda;
 
 typedef struct s_cub3d
@@ -183,6 +210,18 @@ t_cub3d	*init_mlx(t_cub3d *cub3d);
 //draw
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+//textures
+int		load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path);
+void	load_all_textures(t_cub3d *cub3d);
+void	free_textures(t_cub3d *cub3d);
+void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
+			t_texture_calc *tex_calc);
+void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
+			t_texture_calc *tex_calc, double perp_wall_dist);
+int		get_texture_pixel_color(t_texture_img *texture, int x, int y);
+void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
+			int draw_end, t_texture_calc *tex_calc, double perp_wall_dist);
+
 //camera
 void	calc_camera_plane(t_cub3d *cub3d);
 
@@ -200,7 +239,7 @@ double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
 //render
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
 void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
-	int side);
+			t_dda *dda);
 void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
 			int draw_end);
 void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/18 17:11:14 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:06:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,20 @@ void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
 	}
 }
 
-/* Draw vertical wall slice on screen with floor and ceiling */
+/* Draw vertical wall slice on screen with texture, floor and ceiling */
 void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
-	int side)
+	t_dda *dda)
 {
-	int	draw_start;
-	int	draw_end;
+	int				draw_start;
+	int				draw_end;
+	t_texture_calc	tex_calc;
 
-	if (!cub3d)
+	if (!cub3d || !dda)
 		return ;
-	(void)side;
 	calc_line_bounds(perp_wall_dist, &draw_start, &draw_end);
-	draw_wall_pixels(cub3d, screen_x, draw_start, draw_end);
+	select_wall_texture(cub3d, dda, &tex_calc);
+	calc_texture_coordinates(cub3d, dda, &tex_calc, perp_wall_dist);
+	draw_textured_wall_pixels(cub3d, screen_x, draw_start, draw_end,
+		&tex_calc, perp_wall_dist);
 	draw_floor_ceiling(cub3d, screen_x, draw_start, draw_end);
 }

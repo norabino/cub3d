@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/20 14:50:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_free(t_cub3d *s_cub3d)
 	if (!s_cub3d || g_already_freed)
 		return ;
 	g_already_freed = 1;
+	free_textures(s_cub3d);
 	ft_free_textures_paths(&s_cub3d->textures);
 	ft_free_textures_paths_two(&s_cub3d->textures);
 	if (s_cub3d->map)
