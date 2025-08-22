@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/22 15:36:31 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-#define SCREEN_HEIGHT 720
 
 /*
 ** Calcule la hauteur du mur à l'écran et où commencer/arrêter de dessiner
@@ -101,8 +99,6 @@ void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	int				draw_params[2];
 	t_texture_calc	tex_calc;
 
-	if (!cub3d || !dda)
-		return ;
 	calc_line_bounds(perp_wall_dist, &draw_start, &draw_end);
 	select_wall_texture(cub3d, dda, &tex_calc);
 	calc_texture_coordinates(cub3d, dda, &tex_calc, perp_wall_dist);

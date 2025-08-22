@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/22 15:22:52 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@
 void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
 	t_dda *dda)
 {
-	if (!cub3d || !dda)
+	if (!dda)
 		return ;
 	dda->map_x = (int)cub3d->player.pos_x;
 	dda->map_y = (int)cub3d->player.pos_y;
 	if (ray_dir_x == 0)
 		dda->delta_dist_x = 1e30;
 	else
-		dda->delta_dist_x = fabs(1.0 / ray_dir_x);
+		dda->delta_dist_x = ft_abs(1.0 / ray_dir_x);
 	if (ray_dir_y == 0)
 		dda->delta_dist_y = 1e30;
 	else
-		dda->delta_dist_y = fabs(1.0 / ray_dir_y);
+		dda->delta_dist_y = ft_abs(1.0 / ray_dir_y);
 	dda->hit = 0;
 }
 
@@ -45,8 +45,6 @@ void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
 {
 	int	map_x;
 
-	if (!dda || !cub3d)
-		return ;
 	map_x = (int)cub3d->player.pos_x;
 	if (ray_dir_x < 0)
 	{
@@ -57,7 +55,7 @@ void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
 	else
 	{
 		dda->step_x = 1;
-		dda->side_dist_x = (map_x + 1.0 - cub3d->player.pos_x)
+		dda->side_dist_x = (map_x + 1 - cub3d->player.pos_x)
 			* dda->delta_dist_x;
 	}
 	init_step_and_side_dist_y(dda, ray_dir_y, cub3d);
@@ -98,7 +96,7 @@ void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 {
 	int	max_iterations;
 
-	if (!cub3d || !dda || !cub3d->map)
+	if (!cub3d->map)
 		return ;
 	max_iterations = 1000;
 	while (dda->hit == 0 && max_iterations-- > 0)
@@ -144,5 +142,5 @@ double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
 		perp_wall_dist = (dda->map_y - cub3d->player.pos_y
 				+ (1 - dda->step_y) / 2) / ray_dir_y;
 	}
-	return (fabs(perp_wall_dist));
+	return (ft_abs(perp_wall_dist));
 }

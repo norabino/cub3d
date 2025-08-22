@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 15:45:23 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/22 17:16:25 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define KEY_RIGHT 65363
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
+
+# define MOVE_SPEED 0.02
+# define SENSIBILITY 0.03
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -120,7 +123,7 @@ typedef struct s_texture_calc
 	double			step;
 	double			tex_pos;
 	double			perp_wall_dist;
-	t_texture_img	*current_texture;
+	t_texture_img	*current_text;
 }	t_texture_calc;
 
 typedef struct s_dda
@@ -265,10 +268,10 @@ void	raycast(t_cub3d *cub3d);
 int		handle_close(t_cub3d *cub3d);
 int		handle_hook(int keycode, t_cub3d *cub3d);
 int		handle_movement(t_cub3d *cub3d);
-int		handle_movement_strafe(t_cub3d *cub3d, double move_speed);
+int		handle_movement_strafe(t_cub3d *cub3d);
 int		handle_direction(t_cub3d *cub3d);
-int		handle_direction_left(t_cub3d *cub3d, double rot_speed);
-int		handle_direction_right(t_cub3d *cub3d, double rot_speed);
+int		handle_direction_left(t_cub3d *cub3d);
+int		handle_direction_right(t_cub3d *cub3d);
 int		handle_keypress(int keycode, t_cub3d *cub3d);
 int		handle_keyrelease(int keycode, t_cub3d *cub3d);
 int		handle_loop(t_cub3d *cub3d);
@@ -282,5 +285,8 @@ int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
 // time
 long	gettime_ms(void);
 int		check_frames(t_cub3d *cub3d);
+
+// math utils
+double	ft_abs(double nb);
 
 #endif

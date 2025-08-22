@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:07:42 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/19 15:17:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:16:51 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,11 @@ int	count_islands(t_cub3d *cub3d, char **work_map)
 	}
 	free_map(trash);
 	return (nb_islands);
+}
+
+double	ft_abs(double nb)
+{
+	if (nb < 0)
+		nb = -nb;
+	return (nb);
 }

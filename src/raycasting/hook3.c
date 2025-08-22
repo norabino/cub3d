@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/19 14:57:49 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:15:03 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	check_any_key_pressed(t_cub3d *cub3d)
 			return (1);
 		i++;
 	}
-	if (cub3d->keys[254] || cub3d->keys[255])
-		return (1);
 	return (0);
 }
 

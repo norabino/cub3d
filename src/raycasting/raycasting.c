@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/22 15:37:03 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
 
 /*
 ** Lance UN SEUL rayon pour calculer une colonne de l'écran
@@ -29,8 +26,6 @@ void	cast_single_ray(t_cub3d *cub3d, int screen_x)
 	double	perp_wall_dist;
 	t_dda	dda;
 
-	if (!cub3d || screen_x < 0 || screen_x >= SCREEN_WIDTH)
-		return ;
 	camera_x = 2 * screen_x / (double)SCREEN_WIDTH - 1;
 	ray_dir_x = cub3d->player.dir_x + cub3d->view.plane_x * camera_x;
 	ray_dir_y = cub3d->player.dir_y + cub3d->view.plane_y * camera_x;
