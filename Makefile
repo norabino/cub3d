@@ -51,7 +51,7 @@ $(NAME): minilibx $(OBJ)
 
 minilibx:
 	@echo "Compilation de la Minilibx ..."
-	@make -C MinilibX
+	@make -C MinilibX > /dev/null 2>&1
 
 clean: clean_minilibx
 	rm -f $(OBJ)
@@ -63,7 +63,7 @@ mac: minilibx $(OBJ)
 	$(CC) $(OBJ) -LMinilibX -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lm -g -o $(NAME)
 
 clean_minilibx:
-	make clean -C MinilibX
+	@make clean -C MinilibX > /dev/null 2>&1
 
 re: fclean all
 
