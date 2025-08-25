@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 13:35:05 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:59:37 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	handle_loop(t_cub3d *cub3d)
 
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.win || !cub3d->mlx.img)
 		return (0);
-	handle_movement(cub3d);
-	handle_direction(cub3d);
-	check_any_key_pressed(cub3d);
-	if (check_frames(cub3d))
+	if (limit_fps(cub3d))
 	{
+		update_delta_time(cub3d);
+		handle_movement(cub3d);
+		handle_direction(cub3d);
+		check_any_key_pressed(cub3d);
 		cub3d->last_refresh = gettime_ms();
 		refresh_image(cub3d);
 		calculate_fps(cub3d);

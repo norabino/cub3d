@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 13:45:08 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:09:40 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 
-# define MOVE_SPEED 0.02
-# define SENSIBILITY 0.03
-# define FPS 30
+# define MOVE_SPEED 2.0
+# define SENSIBILITY 3.0
+# define FPS 120
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -157,6 +157,7 @@ typedef struct s_cub3d
 	long		fps_last_time;
 	int			fps_frame_count;
 	double		current_fps;
+	double		delta_time;
 }	t_cub3d;
 
 // FUNCTIONS :
@@ -288,8 +289,9 @@ int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
 
 // time
 long	gettime_ms(void);
-int		check_frames(t_cub3d *cub3d);
+int		limit_fps(t_cub3d *cub3d);
 void	calculate_fps(t_cub3d *cub3d);
+void	update_delta_time(t_cub3d *cub3d);
 
 // math utils
 double	ft_abs(double nb);

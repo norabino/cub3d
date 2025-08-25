@@ -16,19 +16,21 @@ int	handle_movement(t_cub3d *cub3d)
 {
 	double	delta_x;
 	double	delta_y;
+	double	frame_speed;
 	int		moved;
 
 	moved = 0;
+	frame_speed = MOVE_SPEED * cub3d->delta_time;
 	if (cub3d->keys[KEY_W])
 	{
-		delta_x = cub3d->player.dir_x * MOVE_SPEED;
-		delta_y = cub3d->player.dir_y * MOVE_SPEED;
+		delta_x = cub3d->player.dir_x * frame_speed;
+		delta_y = cub3d->player.dir_y * frame_speed;
 		moved += move_player(cub3d, delta_x, delta_y);
 	}
 	if (cub3d->keys[KEY_S])
 	{
-		delta_x = -cub3d->player.dir_x * MOVE_SPEED;
-		delta_y = -cub3d->player.dir_y * MOVE_SPEED;
+		delta_x = -cub3d->player.dir_x * frame_speed;
+		delta_y = -cub3d->player.dir_y * frame_speed;
 		moved += move_player(cub3d, delta_x, delta_y);
 	}
 	return (moved + handle_movement_strafe(cub3d));
@@ -38,19 +40,21 @@ int	handle_movement_strafe(t_cub3d *cub3d)
 {
 	double	delta_x;
 	double	delta_y;
+	double	frame_speed;
 	int		moved;
 
 	moved = 0;
+	frame_speed = MOVE_SPEED * cub3d->delta_time;
 	if (cub3d->keys[KEY_A])
 	{
-		delta_x = cub3d->player.dir_y * MOVE_SPEED;
-		delta_y = -cub3d->player.dir_x * MOVE_SPEED;
+		delta_x = cub3d->player.dir_y * frame_speed;
+		delta_y = -cub3d->player.dir_x * frame_speed;
 		moved += move_player(cub3d, delta_x, delta_y);
 	}
 	if (cub3d->keys[KEY_D])
 	{
-		delta_x = -cub3d->player.dir_y * MOVE_SPEED;
-		delta_y = cub3d->player.dir_x * MOVE_SPEED;
+		delta_x = -cub3d->player.dir_y * frame_speed;
+		delta_y = cub3d->player.dir_x * frame_speed;
 		moved += move_player(cub3d, delta_x, delta_y);
 	}
 	return (moved);
@@ -72,17 +76,19 @@ int	handle_direction_left(t_cub3d *cub3d)
 {
 	double	old_dir_x;
 	double	old_plane_x;
+	double	frame_sensitivity;
 
+	frame_sensitivity = SENSIBILITY * cub3d->delta_time;
 	old_dir_x = cub3d->player.dir_x;
 	old_plane_x = cub3d->view.plane_x;
-	cub3d->player.dir_x = cub3d->player.dir_x * cos(-SENSIBILITY)
-		- cub3d->player.dir_y * sin(-SENSIBILITY);
-	cub3d->player.dir_y = old_dir_x * sin(-SENSIBILITY)
-		+ cub3d->player.dir_y * cos(-SENSIBILITY);
-	cub3d->view.plane_x = cub3d->view.plane_x * cos(-SENSIBILITY)
-		- cub3d->view.plane_y * sin(-SENSIBILITY);
-	cub3d->view.plane_y = old_plane_x * sin(-SENSIBILITY)
-		+ cub3d->view.plane_y * cos(-SENSIBILITY);
+	cub3d->player.dir_x = cub3d->player.dir_x * cos(-frame_sensitivity)
+		- cub3d->player.dir_y * sin(-frame_sensitivity);
+	cub3d->player.dir_y = old_dir_x * sin(-frame_sensitivity)
+		+ cub3d->player.dir_y * cos(-frame_sensitivity);
+	cub3d->view.plane_x = cub3d->view.plane_x * cos(-frame_sensitivity)
+		- cub3d->view.plane_y * sin(-frame_sensitivity);
+	cub3d->view.plane_y = old_plane_x * sin(-frame_sensitivity)
+		+ cub3d->view.plane_y * cos(-frame_sensitivity);
 	return (1);
 }
 
@@ -90,16 +96,18 @@ int	handle_direction_right(t_cub3d *cub3d)
 {
 	double	old_dir_x;
 	double	old_plane_x;
+	double	frame_sensitivity;
 
+	frame_sensitivity = SENSIBILITY * cub3d->delta_time;
 	old_dir_x = cub3d->player.dir_x;
 	old_plane_x = cub3d->view.plane_x;
-	cub3d->player.dir_x = cub3d->player.dir_x * cos(SENSIBILITY)
-		- cub3d->player.dir_y * sin(SENSIBILITY);
-	cub3d->player.dir_y = old_dir_x * sin(SENSIBILITY)
-		+ cub3d->player.dir_y * cos(SENSIBILITY);
-	cub3d->view.plane_x = cub3d->view.plane_x * cos(SENSIBILITY)
-		- cub3d->view.plane_y * sin(SENSIBILITY);
-	cub3d->view.plane_y = old_plane_x * sin(SENSIBILITY)
-		+ cub3d->view.plane_y * cos(SENSIBILITY);
+	cub3d->player.dir_x = cub3d->player.dir_x * cos(frame_sensitivity)
+		- cub3d->player.dir_y * sin(frame_sensitivity);
+	cub3d->player.dir_y = old_dir_x * sin(frame_sensitivity)
+		+ cub3d->player.dir_y * cos(frame_sensitivity);
+	cub3d->view.plane_x = cub3d->view.plane_x * cos(frame_sensitivity)
+		- cub3d->view.plane_y * sin(frame_sensitivity);
+	cub3d->view.plane_y = old_plane_x * sin(frame_sensitivity)
+		+ cub3d->view.plane_y * cos(frame_sensitivity);
 	return (1);
 }

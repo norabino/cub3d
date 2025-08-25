@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/25 13:59:37 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	init_colors_and_keys(t_cub3d *cub3d)
 	cub3d->fps_last_time = gettime_ms();
 	cub3d->fps_frame_count = 0;
 	cub3d->current_fps = 0.0;
+	cub3d->delta_time = 0.0;
 }
 
 /*
