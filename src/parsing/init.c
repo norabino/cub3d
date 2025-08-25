@@ -6,16 +6,16 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 14:09:50 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:44:44 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /*
-** Initialise les valeurs de base de la structure principale
-** Comme préparer une boîte à outils en remettant
-** tous les compartiments à zéro avant de commencer
+** Initializes basic values of the main structure
+** Like preparing a toolbox by resetting
+** all compartments to zero before starting
 */
 static void	init_basic_values(t_cub3d *cub3d)
 {
@@ -32,9 +32,9 @@ static void	init_basic_values(t_cub3d *cub3d)
 }
 
 /*
-** Initialise les couleurs et les touches du clavier
-** Comme régler les couleurs par défaut d'un téléviseur
-** et effacer la mémoire des touches appuyées
+** Initializes colors and keyboard keys
+** Like setting default colors on a TV
+** and clearing the memory of pressed keys
 */
 static void	init_colors_and_keys(t_cub3d *cub3d)
 {
@@ -64,9 +64,9 @@ static void	init_colors_and_keys(t_cub3d *cub3d)
 }
 
 /*
-** Fonction principale d'initialisation
-** Comme préparer entièrement une nouvelle voiture avant le premier démarrage
-** en s'assurant que tout est à zéro et prêt à fonctionner
+** Main initialization function
+** Like fully preparing a new car before first startup
+** making sure everything is zeroed and ready to work
 */
 void	init(t_cub3d *cub3d)
 {

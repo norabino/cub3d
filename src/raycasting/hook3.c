@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 14:09:50 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:44:44 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int	handle_loop(t_cub3d *cub3d)
 {
-	/*int	movement_occurred;
-	int	rotation_occurred;
-	int	key_pressed;*/
-
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.win || !cub3d->mlx.img)
 		return (0);
 	if (limit_fps(cub3d))

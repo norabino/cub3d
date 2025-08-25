@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 14:09:49 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:49:16 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define MOVE_SPEED 2.0
 # define SENSIBILITY 3.0
 # define FPS 120
+# define COLLISION_MARGIN 0.05
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -179,7 +180,6 @@ int		skip_letter(char current, char next);
 void	skip_spaces(char *str, int *i);
 char	**ft_split(char *str, char c);
 int		ft_atoi(char *str);
-char	**ft_split(char *str, char c);
 int		ft_tablen(char **tab);
 int		ft_isdigit(char c);
 char	*ft_strcpy(char *dest, char *str);
@@ -286,6 +286,8 @@ void	refresh_image(t_cub3d *cub3d);
 //colision
 int		is_valid_position(t_cub3d *cub3d, double x, double y);
 int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
+int		check_corner_positions(t_cub3d *cub3d, double x, double y);
+int		check_bottom_corners(t_cub3d *cub3d, double x, double y);
 
 // time
 long	gettime_ms(void);

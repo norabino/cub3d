@@ -36,6 +36,7 @@ SRC = \
 	src/raycasting/render.c \
 	src/raycasting/camera.c \
 	src/raycasting/collision.c \
+	src/raycasting/collision_utils.c \
 	src/raycasting/textures.c \
 	src/raycasting/texture_calc.c \
 	src/raycasting/texture_utils.c \
