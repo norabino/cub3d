@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 14:44:44 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:56:38 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	handle_loop(t_cub3d *cub3d)
 		handle_direction(cub3d);
 		check_any_key_pressed(cub3d);
 		cub3d->last_refresh = gettime_ms();
-		refresh_image(cub3d);
 		calculate_fps(cub3d);
+		refresh_image(cub3d);
+		
 	}
 	return (0);
 }

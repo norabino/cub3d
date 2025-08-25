@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/25 14:49:21 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:59:11 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	calculate_fps(t_cub3d *cub3d)
 		cub3d->current_fps = (double)cub3d->fps_frame_count * 1000.0
 			/ elapsed_time;
 		printf("FPS: %.1f\n", cub3d->current_fps);
+		//mlx_string_put(cub3d->mlx.mlx, cub3d->mlx.win, 100, 100, 0x00FF00, "allo");
 		cub3d->fps_frame_count = 0;
 		cub3d->fps_last_time = current_time;
 	}
