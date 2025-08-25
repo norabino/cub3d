@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/22 17:16:25 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:21:15 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 # define MOVE_SPEED 0.02
 # define SENSIBILITY 0.03
+# define FPS 120
 
 typedef struct s_cub3d	t_cub3d;
 

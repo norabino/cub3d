@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/18 16:30:57 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:21:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long	gettime_ms(void)
 
 int	check_frames(t_cub3d *cub3d)
 {
-	if (gettime_ms() - cub3d->last_refresh >= 0.016)
+	if (gettime_ms() - cub3d->last_refresh >= (1 / FPS))
 		return (1);
 	return (0);
 }

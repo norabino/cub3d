@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/22 17:15:03 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:23:15 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	handle_loop(t_cub3d *cub3d)
 	{
 		cub3d->last_refresh = gettime_ms();
 		refresh_image(cub3d);
+		printf("time : %ld\n", (gettime_ms() / 1000));
 	}
 	return (0);
 }
