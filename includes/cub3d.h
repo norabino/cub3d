@@ -154,6 +154,9 @@ typedef struct s_cub3d
 	char		keys[256];
 	char		alpha[26];
 	long		last_refresh;
+	long		fps_last_time;
+	int			fps_frame_count;
+	double		current_fps;
 }	t_cub3d;
 
 // FUNCTIONS :
@@ -286,6 +289,7 @@ int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
 // time
 long	gettime_ms(void);
 int		check_frames(t_cub3d *cub3d);
+void	calculate_fps(t_cub3d *cub3d);
 
 // math utils
 double	ft_abs(double nb);

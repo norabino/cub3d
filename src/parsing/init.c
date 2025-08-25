@@ -57,6 +57,9 @@ static void	init_colors_and_keys(t_cub3d *cub3d)
 		i++;
 	}
 	cub3d->last_refresh = 0;
+	cub3d->fps_last_time = gettime_ms();
+	cub3d->fps_frame_count = 0;
+	cub3d->current_fps = 0.0;
 }
 
 /*
