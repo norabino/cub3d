@@ -25,10 +25,12 @@ SRC = \
 	src/utils/str_utils_2.c \
 	src/utils/str_utils_3.c \
 	src/utils/time.c \
+	src/utils/fps_utils.c \
 	\
 	src/raycasting/hook.c \
 	src/raycasting/hook2.c \
 	src/raycasting/hook3.c \
+	src/raycasting/mouse.c \
 	src/raycasting/init_mlx.c \
 	src/raycasting/pixel_utils.c \
 	src/raycasting/raycasting.c \

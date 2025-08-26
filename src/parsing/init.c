@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 14:44:44 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ static void	init_basic_values(t_cub3d *cub3d)
 	cub3d->textures.west = NULL;
 	cub3d->textures.east = NULL;
 	cub3d->textures.cub3d = cub3d;
+}
+
+/*
+** Initialise les paramètres de la souris et du temps
+** Comme régler l'horloge et la souris d'un ordinateur
+** avant de commencer à l'utiliser
+*/
+static void	init_mouse_and_time(t_cub3d *cub3d)
+{
+	cub3d->last_refresh = 0;
+	cub3d->fps_last_time = 0;
+	cub3d->fps_frame_count = 0;
+	cub3d->current_fps = 0.0;
+	cub3d->delta_time = 0.0;
+	cub3d->mouse_x = SCREEN_WIDTH / 2;
+	cub3d->mouse_y = SCREEN_HEIGHT / 2;
+	cub3d->mouse_last_x = SCREEN_WIDTH / 2;
+	cub3d->mouse_captured = 0;
 }
 
 /*
@@ -56,11 +74,7 @@ static void	init_colors_and_keys(t_cub3d *cub3d)
 		cub3d->keys[i] = 0;
 		i++;
 	}
-	cub3d->last_refresh = 0;
-	cub3d->fps_last_time = gettime_ms();
-	cub3d->fps_frame_count = 0;
-	cub3d->current_fps = 0.0;
-	cub3d->delta_time = 0.0;
+	init_mouse_and_time(cub3d);
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 14:51:49 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,10 @@ typedef struct s_cub3d
 	int			fps_frame_count;
 	double		current_fps;
 	double		delta_time;
+	int			mouse_x;
+	int			mouse_y;
+	int			mouse_last_x;
+	int			mouse_captured;
 }	t_cub3d;
 
 // FUNCTIONS :
@@ -282,6 +286,9 @@ int		handle_keyrelease(int keycode, t_cub3d *cub3d);
 int		handle_loop(t_cub3d *cub3d);
 int		check_any_key_pressed(t_cub3d *cub3d);
 void	refresh_image(t_cub3d *cub3d);
+int		handle_mouse_move(int x, int y, t_cub3d *cub3d);
+void	rotate_player_mouse(t_cub3d *cub3d, double angle);
+void	display_fps(t_cub3d *cub3d);
 
 //colision
 int		is_valid_position(t_cub3d *cub3d, double x, double y);

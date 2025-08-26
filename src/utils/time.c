@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/25 14:59:11 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/*
+** Obtient le temps actuel en millisecondes
+** Comme regarder sa montre pour savoir l'heure exacte
+** mais en millisecondes pour être très précis
+*/
 long	gettime_ms(void)
 {
 	struct timeval	current_time;
@@ -20,6 +25,11 @@ long	gettime_ms(void)
 	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }
 
+/*
+** Limite les FPS à une valeur maximum définie
+** Comme un régulateur de vitesse dans une voiture
+** qui empêche d'aller trop vite
+*/
 int	limit_fps(t_cub3d *cub3d)
 {
 	if ((gettime_ms() - cub3d->last_refresh) >= (1000 / FPS))
@@ -27,25 +37,35 @@ int	limit_fps(t_cub3d *cub3d)
 	return (0);
 }
 
+/*
+** Calcule et affiche les FPS actuels
+** Comme un compteur de vitesse dans une voiture
+** qui nous dit à quelle vitesse on roule
+*/
 void	calculate_fps(t_cub3d *cub3d)
 {
 	long	current_time;
 	long	elapsed_time;
 
 	current_time = gettime_ms();
+	if (cub3d->fps_last_time == 0)
+		cub3d->fps_last_time = current_time;
 	cub3d->fps_frame_count++;
 	elapsed_time = current_time - cub3d->fps_last_time;
 	if (elapsed_time >= 1000)
 	{
 		cub3d->current_fps = (double)cub3d->fps_frame_count * 1000.0
 			/ elapsed_time;
-		printf("FPS: %.1f\n", cub3d->current_fps);
-		//mlx_string_put(cub3d->mlx.mlx, cub3d->mlx.win, 100, 100, 0x00FF00, "allo");
 		cub3d->fps_frame_count = 0;
 		cub3d->fps_last_time = current_time;
 	}
 }
 
+/*
+** Met à jour le temps écoulé entre deux frames
+** Comme chronométrer le temps entre deux battements de cœur
+** pour savoir à quelle vitesse tout fonctionne
+*/
 void	update_delta_time(t_cub3d *cub3d)
 {
 	static long	last_time = 0;
