@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/26 20:50:03 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@
 # define SENSIBILITY 3.0
 # define FPS 120
 # define COLLISION_MARGIN 0.05
+
+# define MINIMAP_SIZE 150
+# define MINIMAP_X 20
+# define MINIMAP_Y 20
+# define MINIMAP_SCALE 16.0
+# define MINIMAP_COLOR_BG 0x808080
+# define MINIMAP_COLOR_WALL 0x000000
+# define MINIMAP_COLOR_BORDER 0x000000
+# define MINIMAP_COLOR_PLAYER 0xFF0000
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -304,5 +313,73 @@ void	update_delta_time(t_cub3d *cub3d);
 
 // math utils
 double	ft_abs(double nb);
+
+// minimap structures
+typedef struct s_minimap_calc
+{
+	double	player_x;
+	double	player_y;
+	double	cos_angle;
+	double	sin_angle;
+}	t_minimap_calc;
+
+typedef struct s_minimap_screen
+{
+	int	x;
+	int	y;
+}	t_minimap_screen;
+
+typedef struct s_minimap_render
+{
+	double	world_x;
+	double	world_y;
+	int		screen_x;
+	int		screen_y;
+}	t_minimap_render;
+
+typedef struct s_triangle_draw
+{
+	int	center_x;
+	int	center_y;
+	int	y;
+	int	half_width;
+}	t_triangle_draw;
+
+typedef struct s_pixel_draw
+{
+	int	x;
+	int	y;
+	int	center_x;
+	int	center_y;
+}	t_pixel_draw;
+
+typedef struct s_color_components
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_color_components;
+
+// minimap
+void	draw_minimap(t_cub3d *cub3d);
+void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y);
+void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y);
+void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y);
+int		get_triangle_half_width(int y);
+void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw);
+int		is_point_in_circle(int x, int y, int radius);
+void	rotate_point(double *x, double *y, double angle);
+int		is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y);
+void	calculate_world_pos(double *world_x, double *world_y,
+			t_minimap_calc *calc, t_minimap_screen *screen);
+void	draw_minimap_pixel(t_cub3d *cub3d, int x, int y, int radius);
+void	draw_minimap_pixel_optimized(t_cub3d *cub3d, t_pixel_draw *pixel);
+void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc);
+int		get_pixel_color(t_img *img, int x, int y);
+int		alpha_blend(int bg_color, int fg_color, double alpha);
+int		blend_color_component(int bg_color, int fg_color, int alpha_int,
+			int inv_alpha);
+int		is_arrow_pixel(int x, int y);
+int		is_arrow_border(int x, int y);
 
 #endif

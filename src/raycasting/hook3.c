@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/26 19:31:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	refresh_image(t_cub3d *cub3d)
 	if (!cub3d->mlx.img->img)
 		return ;
 	raycast(cub3d);
+	draw_minimap(cub3d);
 	mlx_put_image_to_window(cub3d->mlx.mlx, cub3d->mlx.win,
 		cub3d->mlx.img->img, 0, 0);
 	display_fps(cub3d);

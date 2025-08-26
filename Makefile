@@ -31,6 +31,10 @@ SRC = \
 	src/raycasting/hook2.c \
 	src/raycasting/hook3.c \
 	src/raycasting/mouse.c \
+	src/raycasting/minimap.c \
+	src/raycasting/minimap_utils.c \
+	src/raycasting/minimap_alpha.c \
+	src/raycasting/minimap_draw.c \
 	src/raycasting/init_mlx.c \
 	src/raycasting/pixel_utils.c \
 	src/raycasting/raycasting.c \
