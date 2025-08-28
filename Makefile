@@ -38,6 +38,7 @@ SRC = \
 	src/raycasting/minimap_draw.c \
 	src/raycasting/init_mlx.c \
 	src/raycasting/pixel_utils.c \
+	src/raycasting/portal.c \
 	src/raycasting/raycasting.c \
 	src/raycasting/raycasting_utils.c \
 	src/raycasting/render.c \

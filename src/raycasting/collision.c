@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 20:27:22 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int	vertical_move(t_cub3d *cub3d, double x, double new_y)
 */
 int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 {
-	double	new_x;
-	double	new_y;
+	double		new_x;
+	double		new_y;
+	char		name;
+	int			i;
 
 	new_x = cub3d->player.pos_x + delta_x;
 	new_y = cub3d->player.pos_y + delta_y;
@@ -82,5 +84,13 @@ int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 		&& !horizontal_move(cub3d, new_x, cub3d->player.pos_y)
 		&& !vertical_move(cub3d, cub3d->player.pos_x, new_y))
 		return (0);
+	name = is_portal(cub3d);
+	if (name)
+	{
+		i = 0;
+		while (cub3d->tp_portals[i].name != name)
+			i++;
+		teleportation(cub3d, cub3d->tp_portals[i]);
+	}
 	return (1);
 }

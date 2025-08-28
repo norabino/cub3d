@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 18:14:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 20:25:58 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,13 @@ typedef struct s_colors
 	t_cub3d	*cub3d;
 }	t_colors;
 
+typedef struct s_portal
+{
+	char name;
+	t_point	p1;
+	t_point	p2;
+}	t_portal;
+
 typedef struct s_img
 {
 	void	*img;
@@ -163,6 +170,7 @@ typedef struct s_cub3d
 	char		**map;
 	char		keys[256];
 	char		portals[26];
+	t_portal	*tp_portals;
 	long		last_refresh;
 	long		fps_last_time;
 	int			fps_frame_count;
@@ -172,6 +180,7 @@ typedef struct s_cub3d
 	int			mouse_y;
 	int			mouse_last_x;
 	int			mouse_captured;
+	int			nb_portals;
 }	t_cub3d;
 
 // FUNCTIONS :
@@ -203,7 +212,7 @@ int		only_numbers(char *str);
 int		is_nbr(char *str);
 void	ft_check_letter(t_cub3d *cub3d);
 int		count_islands(t_cub3d *cub3d, char **work_map);
- void	replace_portals_by_zero(char ***map);
+void	replace_portals_by_zero(char ***map);
 
 void	print_map(t_cub3d *cub3d, char **map);
 
@@ -232,8 +241,12 @@ void	free_map(char **map);
 void	ft_free(t_cub3d *s_cub3d);
 t_cub3d	*init_mlx(t_cub3d *cub3d);
 int		is_lowercase(char c);
+
+// portal
 void	check_correspondance(t_cub3d *cub3d);
 void	ft_check_portals(t_cub3d *cub3d);
+char	is_portal(t_cub3d *cub3d);
+void	teleportation(t_cub3d *cub3d, t_portal portal);
 
 //draw
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
