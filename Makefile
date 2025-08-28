@@ -61,7 +61,7 @@ $(OBJDIR)/%.o: src/%.c
 	$(CC) -Wall -Wextra -Werror -c $< -o $@ -g
 
 $(NAME): minilibx $(OBJ)
-	$(CC) $(OBJ) -L./MinilibX -lmlx -framework OpenGL -framework AppKit -lm -g -o $(NAME)
+	$(CC) $(OBJ) -L./MinilibX -lmlx -lXext -lX11 -lm -g -o $(NAME)
 
 
 minilibx:
