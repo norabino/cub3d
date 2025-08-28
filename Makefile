@@ -24,6 +24,7 @@ SRC = \
 	src/utils/str_utils_1.c \
 	src/utils/str_utils_2.c \
 	src/utils/str_utils_3.c \
+	src/utils/str_utils_4.c \
 	src/utils/time.c \
 	src/utils/fps_utils.c \
 	\

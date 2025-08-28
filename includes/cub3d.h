@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 20:50:03 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 17:28:53 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ typedef struct s_cub3d
 	t_view		view;
 	char		**map;
 	char		keys[256];
-	char		alpha[26];
+	char		portals[26];
 	long		last_refresh;
 	long		fps_last_time;
 	int			fps_frame_count;
@@ -203,6 +203,8 @@ int		only_numbers(char *str);
 int		is_nbr(char *str);
 void	ft_check_letter(t_cub3d *cub3d);
 int		count_islands(t_cub3d *cub3d, char **work_map);
+void	replace_portals_by_zero(char ***map);
+
 
 t_off	collen(char **map, int y, int x);
 t_off	linelen(char **map, int y, int x);
@@ -232,6 +234,9 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 void	free_map(char **map);
 void	ft_free(t_cub3d *s_cub3d);
 t_cub3d	*init_mlx(t_cub3d *cub3d);
+int		is_lowercase(char c);
+void	check_correspondance(t_cub3d *cub3d);
+void	ft_check_portals(t_cub3d *cub3d);
 
 //draw
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);

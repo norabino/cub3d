@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 17:28:56 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 	cub3d->player.pos_x = player_pos.x;
 	cub3d->player.pos_y = player_pos.y;
 	(*work_map)[player_pos.y][player_pos.x] = '0';
+	replace_portals_by_zero(work_map);
 }
 
 /*
@@ -51,6 +52,33 @@ static int	process_flood(t_cub3d *cub3d, char **work_map, int *ff_count)
 		return (1);
 	}
 	return (0);
+}
+
+void	ft_check_portals(t_cub3d *cub3d)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (cub3d->map[y])
+	{
+		while (cub3d->map[y][x])
+		{
+			if (is_lowercase(cub3d->map[y][x]))
+			{
+				if (is_lowercase(cub3d->portals[cub3d->map[y][x] - 97]))
+					cub3d->portals[cub3d->map[y][x] - 97] = 1;
+				else
+					cub3d->portals[cub3d->map[y][x] - 97]++;
+				if (cub3d->portals[cub3d->map[y][x] - 97] > 2)
+					exit_error("More than two entry/exit for portal(s)", cub3d);
+				x++;
+			}
+		}
+		y++;
+	}
+	check_correspondance(cub3d);
 }
 
 /*
