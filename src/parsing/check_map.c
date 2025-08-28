@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 17:38:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 17:38:37 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_check_portals(t_cub3d *cub3d)
 					cub3d->portals[cub3d->map[y][x] - 97]++;
 				if (cub3d->portals[cub3d->map[y][x] - 97] > 2)
 					exit_error("More than two entry/exit for portal(s)", cub3d);
-				}
+			}
 			x++;
 		}
 		y++;
