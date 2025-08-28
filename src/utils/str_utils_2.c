@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 17:41:05 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 18:05:32 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,55 +43,9 @@ int	ft_atoi(char *str)
 
 int	in_map(char c)
 {
-	if (is_letter(c) || c == '1' || c == '0' || is_lowercase(c))
+	if (c == '1' || c == '0')
 		return (1);
 	return (0);
-}
-
-t_off	collen(char **map, int y, int x)
-{
-	int	top;
-	int	bottom;
-	int	i;
-
-	top = 0;
-	bottom = 0;
-	i = y;
-	while (i > -1 && in_map(map[i][x]))
-	{
-		top++;
-		i--;
-	}
-	i = y + 1;
-	while (map[i] && map[i][x] && in_map(map[i][x]))
-	{
-		bottom++;
-		i++;
-	}
-	return ((t_off){top - 1, top + bottom - 1});
-}
-
-t_off	linelen(char **map, int y, int x)
-{
-	int	right;
-	int	left;
-	int	i;
-
-	right = 0;
-	left = 0;
-	i = x;
-	while (i > -1 && in_map(map[y][i]))
-	{
-		left++;
-		i--;
-	}
-	i = x + 1;
-	while (map[y][i] && in_map(map[y][i]))
-	{
-		right++;
-		i++;
-	}
-	return ((t_off){left, left + right});
 }
 
 void	ft_check_letter(t_cub3d *cub3d)

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 17:54:41 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 18:15:48 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@
 */
 static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	x = 0;
 	t_point	player_pos;
 
 	ft_check_letter(cub3d);
@@ -32,19 +27,8 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 	cub3d->player.dir = (*work_map)[player_pos.y][player_pos.x];
 	cub3d->player.pos_x = player_pos.x;
 	cub3d->player.pos_y = player_pos.y;
-	print_map(cub3d, *work_map);
 	(*work_map)[player_pos.y][player_pos.x] = '0';
-	while ((*work_map)[y])
-	{
-		while ((*work_map)[y][x])
-		{
-			if (is_lowercase((*work_map)[y][x]))
-				(*work_map)[y][x] = '0';
-			x++;
-		}
-		y++;
-	}
-	print_map(cub3d, *work_map);
+	replace_portals_by_zero(work_map);
 }
 
 /*
@@ -79,6 +63,7 @@ void	ft_check_portals(t_cub3d *cub3d)
 	y = 0;
 	while (cub3d->map[y])
 	{
+		x = 0;
 		while (cub3d->map[y][x])
 		{
 			if (is_lowercase(cub3d->map[y][x]))
