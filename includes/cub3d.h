@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 17:28:53 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 17:54:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ int		only_numbers(char *str);
 int		is_nbr(char *str);
 void	ft_check_letter(t_cub3d *cub3d);
 int		count_islands(t_cub3d *cub3d, char **work_map);
-void	replace_portals_by_zero(char ***map);
+// void	replace_portals_by_zero(char ****map);
 
 
 t_off	collen(char **map, int y, int x);

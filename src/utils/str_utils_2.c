@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 21:05:45 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 17:41:05 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_atoi(char *str)
 
 int	in_map(char c)
 {
-	if (is_letter(c) || c == '1' || c == '0')
+	if (is_letter(c) || c == '1' || c == '0' || is_lowercase(c))
 		return (1);
 	return (0);
 }
