@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 20:07:36 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 20:40:41 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_check_portals(t_cub3d *cub3d)
 		{
 			if (is_lowercase(cub3d->map[y][x]))
 			{
-				if (is_lowercase(cub3d->portals[cub3d->map[y][x] - 97]))
+				if (cub3d->portals[cub3d->map[y][x] - 97] == 0)
 					cub3d->portals[cub3d->map[y][x] - 97] = 1;
 				else
 					cub3d->portals[cub3d->map[y][x] - 97]++;

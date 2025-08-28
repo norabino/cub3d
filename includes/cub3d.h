@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 20:25:58 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 22:01:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <sys/time.h>
+# include <time.h>
+# include <string.h>
 # include "../MinilibX/mlx.h"
 # include "../src/get_next_line/get_next_line.h"
 
@@ -46,6 +48,7 @@
 # define MINIMAP_COLOR_WALL 0x000000
 # define MINIMAP_COLOR_BORDER 0x000000
 # define MINIMAP_COLOR_PLAYER 0xFF0000
+# define MINIMAP_COLOR_PORTAL 0x6A5ACD
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -92,12 +95,22 @@ typedef struct s_colors
 	t_cub3d	*cub3d;
 }	t_colors;
 
+typedef struct s_portal_sprite
+{
+	t_texture_img	frames[4];
+	int				current_frame;
+	int				frame_counter;
+	int				color_tint[3];
+	long			last_frame_time;
+}	t_prtl_sprite;
+
 typedef struct s_portal
 {
-	char name;
-	t_point	p1;
-	t_point	p2;
-}	t_portal;
+	char			name;
+	t_point			p1;
+	t_point			p2;
+	t_prtl_sprite	sprite;
+}	t_prtl;
 
 typedef struct s_img
 {
@@ -124,6 +137,7 @@ typedef struct s_player
 	float		dir_y;
 	int			fov;
 	char		direction;
+	t_point		last_prtl_pos;
 	t_cub3d		*cub3d;
 }	t_player;
 
@@ -142,6 +156,9 @@ typedef struct s_texture_calc
 	double			tex_pos;
 	double			perp_wall_dist;
 	t_texture_img	*current_text;
+	int				is_portal;
+	int				portal_index;
+	int				portal_color[3];
 }	t_texture_calc;
 
 typedef struct s_dda
@@ -169,8 +186,8 @@ typedef struct s_cub3d
 	t_view		view;
 	char		**map;
 	char		keys[256];
-	char		portals[26];
-	t_portal	*tp_portals;
+	int			portals[26];
+	t_prtl		*tp_portals;
 	long		last_refresh;
 	long		fps_last_time;
 	int			fps_frame_count;
@@ -245,8 +262,16 @@ int		is_lowercase(char c);
 // portal
 void	check_correspondance(t_cub3d *cub3d);
 void	ft_check_portals(t_cub3d *cub3d);
+void	set_prtls(t_cub3d *cub3d);
+void	set_direction(t_cub3d *cub3d, char dir);
+int		tp_already_set(t_cub3d *cub3d, char name);
+t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x);
+t_prtl	find_a_portal(t_cub3d *cub3d, char **map);
 char	is_portal(t_cub3d *cub3d);
-void	teleportation(t_cub3d *cub3d, t_portal portal);
+void	teleportation(t_cub3d *cub3d, t_prtl portal);
+void	init_prtl_sprites(t_cub3d *cub3d);
+void	update_portal_animations(t_cub3d *cub3d);
+void	free_portal_sprites(t_cub3d *cub3d);
 
 //draw
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
@@ -256,6 +281,8 @@ int		load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path);
 void	load_all_textures(t_cub3d *cub3d);
 void	free_textures(t_cub3d *cub3d);
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
+			t_texture_calc *tex_calc);
+void	select_wall_texture_extended(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
 void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc, double perp_wall_dist);
@@ -385,6 +412,8 @@ void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw);
 int		is_point_in_circle(int x, int y, int radius);
 void	rotate_point(double *x, double *y, double angle);
 int		is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y);
+int		is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y);
+void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y);
 void	calculate_world_pos(double *world_x, double *world_y,
 			t_minimap_calc *calc, t_minimap_screen *screen);
 void	draw_minimap_pixel(t_cub3d *cub3d, int x, int y, int radius);

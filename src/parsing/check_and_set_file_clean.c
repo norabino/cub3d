@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_and_set_file.c                               :+:      :+:    :+:   */
+/*   check_and_set_file_clean.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -41,19 +41,20 @@ int	check_and_set_file(t_cub3d *cub3d, char **file)
 	int	idx_line;
 	int	tmp;
 
-	idx_line = 0;
-	ft_check_textures(&cub3d->textures, file, &idx_line);
-	tmp = idx_line;
-	ft_check_colors(&cub3d->colors, file, &idx_line);
-	if (tmp > idx_line)
-		idx_line = tmp;
-	ft_check_map(cub3d, file, &idx_line);
-	ft_check_portals(cub3d);
+	tmp = 0;
+	if (!file)
+		return (0);
+	idx_line = check_textures(cub3d, file);
+	if (idx_line == -1)
+		return (0);
+	idx_line = check_colors(cub3d, file, idx_line);
+	if (idx_line == -1)
+		return (0);
+	cub3d->map = get_map(file, idx_line);
+	if (!cub3d->map)
+		return (0);
+	tmp = check_map(cub3d);
 	set_prtls(cub3d);
 	init_prtl_sprites(cub3d);
-	set_direction(cub3d, cub3d->player.dir);
-	cub3d->player.pos_x = (double)cub3d->player.pos_x + 0.5;
-	cub3d->player.pos_y = (double)cub3d->player.pos_y + 0.5;
-	cub3d->player.fov = 66;
-	return (1);
+	return (tmp);
 }

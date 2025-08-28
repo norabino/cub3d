@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/22 15:58:26 by norabino         ###   ########.fr       */
+/*   Updated: 2025/08/28 21:58:59 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,20 +110,5 @@ void	free_textures(t_cub3d *cub3d)
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {
-	if (!tex_calc)
-		return ;
-	if (dda->side == 0)
-	{
-		if (dda->ray_dir_x > 0)
-			tex_calc->current_text = &cub3d->textures.west_img;
-		else
-			tex_calc->current_text = &cub3d->textures.east_img;
-	}
-	else
-	{
-		if (dda->ray_dir_y > 0)
-			tex_calc->current_text = &cub3d->textures.north_img;
-		else
-			tex_calc->current_text = &cub3d->textures.south_img;
-	}
+	select_wall_texture_extended(cub3d, dda, tex_calc);
 }

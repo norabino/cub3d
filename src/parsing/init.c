@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 20:06:23 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 22:00:59 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	init_basic_values(t_cub3d *cub3d)
 	cub3d->mlx.win = NULL;
 	cub3d->player.direction = 0;
 	cub3d->player.cub3d = cub3d;
+	cub3d->player.last_prtl_pos.x = -1;
+	cub3d->player.last_prtl_pos.y = -1;
 	cub3d->textures.north = NULL;
 	cub3d->textures.south = NULL;
 	cub3d->textures.west = NULL;
@@ -67,7 +69,12 @@ static void	init_colors_and_keys(t_cub3d *cub3d)
 	cub3d->colors.ceiling[2] = -1;
 	cub3d->colors.cub3d = cub3d;
 	cub3d->player.fov = 0;
-	ft_strcpy(cub3d->portals, "abcdefghijklmnopqrstuvwxyz");
+	i = 0;
+	while (i < 26)
+	{
+		cub3d->portals[i] = 0;
+		i++;
+	}
 	cub3d->tp_portals = NULL;
 	cub3d->map = NULL;
 	i = 0;

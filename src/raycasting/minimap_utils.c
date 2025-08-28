@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 20:50:03 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 21:32:29 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 	if ((int)world_x >= ft_strlen(cub3d->map[(int)world_y]))
 		return (0);
 	return (cub3d->map[(int)world_y][(int)world_x] == '1');
+}
+
+/*
+** Vérifie si une position est un portail dans la carte
+** Optimisé avec vérifications early-exit
+*/
+int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
+{
+	if (world_x < 0 || world_y < 0)
+		return (0);
+	if ((int)world_y >= ft_tablen(cub3d->map))
+		return (0);
+	if (!cub3d->map[(int)world_y])
+		return (0);
+	if ((int)world_x >= ft_strlen(cub3d->map[(int)world_y]))
+		return (0);
+	return (is_lowercase(cub3d->map[(int)world_y][(int)world_x]));
 }
 
 /*

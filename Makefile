@@ -7,6 +7,8 @@ SRC = \
 	src/get_next_line/get_next_line_utils.c \
 	\
 	src/parsing/check_and_set_file.c \
+	src/parsing/portal_parsing.c \
+	src/parsing/portal_utils.c \
 	src/parsing/check_colors_0.c \
 	src/parsing/check_colors_1.c \
 	src/parsing/check_map.c \
@@ -46,6 +48,7 @@ SRC = \
 	src/raycasting/collision.c \
 	src/raycasting/collision_utils.c \
 	src/raycasting/textures.c \
+	src/raycasting/portal_textures.c \
 	src/raycasting/texture_calc.c \
 	src/raycasting/texture_utils.c \
 
@@ -55,7 +58,7 @@ OBJ = $(SRC:.c=.o)
 	$(CC) -Wall -Wextra -Werror -c $< -o $@ -g
 
 $(NAME): minilibx $(OBJ)
-	$(CC) $(OBJ) -L./MinilibX -lmlx -lXext -lX11 -lm -g -o $(NAME)
+	$(CC) $(OBJ) -L./MinilibX -lmlx -framework OpenGL -framework AppKit -lm -g -o $(NAME)
 
 
 minilibx:

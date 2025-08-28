@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 20:50:03 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 21:58:59 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,38 @@ void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 }
 
 /*
+** Dessine les portails sur la minimap en couleur bleu/violet galaxie
+** Optimisé pour les FPS et conforme à la norme
+*/
+void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y)
+{
+	t_minimap_calc		calc;
+	t_minimap_screen	screen;
+	t_minimap_render	render;
+
+	init_minimap_calc(cub3d, &calc);
+	render.screen_y = -MINIMAP_SIZE / 2;
+	while (render.screen_y < MINIMAP_SIZE / 2)
+	{
+		render.screen_x = -MINIMAP_SIZE / 2;
+		while (render.screen_x < MINIMAP_SIZE / 2)
+		{
+			screen.x = render.screen_x;
+			screen.y = render.screen_y;
+			calculate_world_pos(&render.world_x, &render.world_y,
+				&calc, &screen);
+			if (is_portal_at_pos(cub3d, render.world_x, render.world_y)
+				&& is_point_in_circle(render.screen_x, render.screen_y,
+					MINIMAP_SIZE / 2 - 2))
+				my_mlx_pixel_put(cub3d->mlx.img, center_x + render.screen_x,
+					center_y + render.screen_y, MINIMAP_COLOR_PORTAL);
+			render.screen_x++;
+		}
+		render.screen_y++;
+	}
+}
+
+/*
 ** Dessine le joueur comme une flèche de boussole rouge avec contour noir
 ** Optimisé: utilise la largeur pré-calculée pour chaque ligne
 */
@@ -122,5 +154,6 @@ void	draw_minimap(t_cub3d *cub3d)
 	center_y = MINIMAP_Y + MINIMAP_SIZE / 2;
 	draw_minimap_background(cub3d, center_x, center_y);
 	draw_minimap_walls(cub3d, center_x, center_y);
+	draw_minimap_portals(cub3d, center_x, center_y);
 	draw_minimap_player(cub3d, center_x, center_y);
 }

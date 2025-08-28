@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/28 21:15:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	ft_free(t_cub3d *s_cub3d)
 	free_textures(s_cub3d);
 	ft_free_textures_paths(&s_cub3d->textures);
 	ft_free_textures_paths_two(&s_cub3d->textures);
+	if (s_cub3d->nb_portals > 0)
+		free_portal_sprites(s_cub3d);
 	if (s_cub3d->map)
 	{
 		free_map(s_cub3d->map);
