@@ -33,7 +33,6 @@ static t_prtl	create_portal_from_position(t_cub3d *cub3d, char **map,
 	portal.p1.x = x;
 	portal.p1.y = y;
 	portal.p2 = find_correspondance(cub3d, y, x);
-	map[y][x] = ' ';
 	return (portal);
 }
 

@@ -43,7 +43,6 @@ t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x)
 			{
 				result.x = x;
 				result.y = y;
-				cub3d->map[y][x] = ' ';
 				return (result);
 			}
 			x++;

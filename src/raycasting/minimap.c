@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 21:58:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/29 00:32:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,27 +116,6 @@ void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y)
 			render.screen_x++;
 		}
 		render.screen_y++;
-	}
-}
-
-/*
-** Dessine le joueur comme une flèche de boussole rouge avec contour noir
-** Optimisé: utilise la largeur pré-calculée pour chaque ligne
-*/
-void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y)
-{
-	int				y;
-	t_triangle_draw	draw;
-
-	draw.center_x = center_x;
-	draw.center_y = center_y;
-	y = -9;
-	while (y <= 0)
-	{
-		draw.y = y;
-		draw.half_width = get_triangle_half_width(y);
-		draw_triangle_line(cub3d, &draw);
-		y++;
 	}
 }
 

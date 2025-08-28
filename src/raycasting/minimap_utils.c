@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 21:32:29 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/29 00:32:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,33 +92,4 @@ void	rotate_point(double *x, double *y, double angle)
 	old_y = *y;
 	*x = old_x * cos(-angle) - old_y * sin(-angle);
 	*y = old_x * sin(-angle) + old_y * cos(-angle);
-}
-
-/*
-** Dessine un pixel de la minimap avec opacité selon sa distance du centre
-** Utilise un vrai alpha blending avec les textures existantes
-** Optimisé: calcul de distance optimisé avec early exit
-*/
-void	draw_minimap_pixel(t_cub3d *cub3d, int x, int y, int radius)
-{
-	int	dx;
-	int	dy;
-	int	dist_sq;
-	int	existing_color;
-	int	blended_color;
-
-	dx = x - (MINIMAP_X + MINIMAP_SIZE / 2);
-	dy = y - (MINIMAP_Y + MINIMAP_SIZE / 2);
-	dist_sq = dx * dx + dy * dy;
-	if (dist_sq <= radius * radius)
-	{
-		if (dist_sq <= (radius - 2) * (radius - 2))
-		{
-			existing_color = get_pixel_color(cub3d->mlx.img, x, y);
-			blended_color = alpha_blend(existing_color, 0x808080, 0.7);
-			my_mlx_pixel_put(cub3d->mlx.img, x, y, blended_color);
-		}
-		else
-			my_mlx_pixel_put(cub3d->mlx.img, x, y, MINIMAP_COLOR_BORDER);
-	}
 }

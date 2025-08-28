@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 22:00:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/29 00:17:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_prtl_sprites(t_cub3d *cub3d)
 		j = 0;
 		while (j < 4)
 		{
-			snprintf(path, sizeof(path), "textures/portail/tp%d.xpm", j);
+			snprintf(path, sizeof(path), "textures/portal/tp%d.xpm", j);
 			load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], path);
 			j++;
 		}

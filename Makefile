@@ -1,5 +1,6 @@
 NAME = cub3D
 CC = cc
+OBJDIR = objects
 SRC = \
 	src/main.c \
 	\
@@ -38,6 +39,7 @@ SRC = \
 	src/raycasting/minimap_utils.c \
 	src/raycasting/minimap_alpha.c \
 	src/raycasting/minimap_draw.c \
+	src/raycasting/minimap_player.c \
 	src/raycasting/init_mlx.c \
 	src/raycasting/pixel_utils.c \
 	src/raycasting/portal.c \
@@ -52,9 +54,10 @@ SRC = \
 	src/raycasting/texture_calc.c \
 	src/raycasting/texture_utils.c \
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:src/%.c=$(OBJDIR)/%.o)
 
-%.o: %.c
+$(OBJDIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	$(CC) -Wall -Wextra -Werror -c $< -o $@ -g
 
 $(NAME): minilibx $(OBJ)
@@ -66,7 +69,7 @@ minilibx:
 	@make -C MinilibX > /dev/null 2>&1
 
 clean: clean_minilibx
-	rm -f $(OBJ)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)

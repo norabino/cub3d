@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 22:01:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/29 00:07:51 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,186 +177,6 @@ typedef struct s_dda
 	double	ray_dir_y;
 }	t_dda;
 
-typedef struct s_cub3d
-{
-	t_mlx		mlx;
-	t_textures	textures;
-	t_colors	colors;
-	t_player	player;
-	t_view		view;
-	char		**map;
-	char		keys[256];
-	int			portals[26];
-	t_prtl		*tp_portals;
-	long		last_refresh;
-	long		fps_last_time;
-	int			fps_frame_count;
-	double		current_fps;
-	double		delta_time;
-	int			mouse_x;
-	int			mouse_y;
-	int			mouse_last_x;
-	int			mouse_captured;
-	int			nb_portals;
-}	t_cub3d;
-
-// FUNCTIONS :
-
-// check textures
-int		ft_check_textures(t_textures *textures, char **file, int *idx);
-
-// check colors
-int		ft_check_colors(t_colors *colors, char **file, int *idx);
-
-// check map
-int		ft_check_map(t_cub3d *cub3d, char **file, int *idx_line);
-
-// str utils
-char	*ft_strrchr(char *s, int c);
-int		ft_strcmp(char *s1, char *s2);
-int		is_letter(char c);
-int		skip_letter(char current, char next);
-void	skip_spaces(char *str, int *i);
-char	**ft_split(char *str, char c);
-int		ft_atoi(char *str);
-int		ft_tablen(char **tab);
-int		ft_isdigit(char c);
-char	*ft_strcpy(char *dest, char *str);
-int		in_map(char c);
-char	*ft_strndup(char *str, int n);
-char	*ft_strdup(char *s);
-int		only_numbers(char *str);
-int		is_nbr(char *str);
-void	ft_check_letter(t_cub3d *cub3d);
-int		count_islands(t_cub3d *cub3d, char **work_map);
-void	replace_portals_by_zero(char ***map);
-
-void	print_map(t_cub3d *cub3d, char **map);
-
-void	exit_error(char *err, t_cub3d *cub3d);
-
-char	**open_file(t_cub3d *cub3d, char *filename);
-int		check_extension(t_cub3d *cub3d, char *filename);
-int		check_and_set_file(t_cub3d *cub3d, char **file);
-
-t_point	find_player_position(t_cub3d *cub3d, char **map);
-int		flood_fill(char ***tab, t_point current, char to_fill, char new);
-int		flood_fill_z(char ***map, t_point here, char to_fill);
-int		check_adjacent(int y, int x, char **map, char new);
-t_point	*check_char_remaining(char **work_map, char c);
-
-int		check_text_extension(t_cub3d *cub3d, char *textures);
-int		all_text_set(t_textures textures);
-int		all_colors_set(t_colors colors);
-void	set_ceiling(t_colors *colors, char **split);
-void	set_floor(t_colors *colors, char **split);
-
-void	init(t_cub3d *cub3d);
-char	**map_cpy(char **old);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-void	free_map(char **map);
-void	ft_free(t_cub3d *s_cub3d);
-t_cub3d	*init_mlx(t_cub3d *cub3d);
-int		is_lowercase(char c);
-
-// portal
-void	check_correspondance(t_cub3d *cub3d);
-void	ft_check_portals(t_cub3d *cub3d);
-void	set_prtls(t_cub3d *cub3d);
-void	set_direction(t_cub3d *cub3d, char dir);
-int		tp_already_set(t_cub3d *cub3d, char name);
-t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x);
-t_prtl	find_a_portal(t_cub3d *cub3d, char **map);
-char	is_portal(t_cub3d *cub3d);
-void	teleportation(t_cub3d *cub3d, t_prtl portal);
-void	init_prtl_sprites(t_cub3d *cub3d);
-void	update_portal_animations(t_cub3d *cub3d);
-void	free_portal_sprites(t_cub3d *cub3d);
-
-//draw
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-
-//textures
-int		load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path);
-void	load_all_textures(t_cub3d *cub3d);
-void	free_textures(t_cub3d *cub3d);
-void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
-			t_texture_calc *tex_calc);
-void	select_wall_texture_extended(t_cub3d *cub3d, t_dda *dda,
-			t_texture_calc *tex_calc);
-void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
-			t_texture_calc *tex_calc, double perp_wall_dist);
-int		get_texture_pixel_color(t_texture_img *texture, int x, int y);
-void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x,
-			t_texture_calc *tex_calc, int draw_params[2]);
-
-//texture utils
-void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start);
-void	init_texture_draw_params(t_texture_calc *tex_calc,
-			int draw_params[2], int *tex_height, int *draw_bounds[2]);
-void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
-			t_texture_calc *tex_calc);
-
-//camera
-void	calc_camera_plane(t_cub3d *cub3d);
-
-//raycasting utils
-void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
-			t_dda *dda);
-void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
-			double ray_dir_y, t_cub3d *cub3d);
-void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
-			t_cub3d *cub3d);
-void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda);
-double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
-			double ray_dir_y, t_cub3d *cub3d);
-
-//render
-void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
-void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
-			t_dda *dda);
-void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
-			int draw_end);
-void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
-			int draw_end);
-
-//raycasting
-void	cast_single_ray(t_cub3d *cub3d, int screen_x);
-void	raycast(t_cub3d *cub3d);
-
-//hook
-int		handle_close(t_cub3d *cub3d);
-int		handle_hook(int keycode, t_cub3d *cub3d);
-int		handle_movement(t_cub3d *cub3d);
-int		handle_movement_strafe(t_cub3d *cub3d);
-int		handle_direction(t_cub3d *cub3d);
-int		handle_direction_left(t_cub3d *cub3d);
-int		handle_direction_right(t_cub3d *cub3d);
-int		handle_keypress(int keycode, t_cub3d *cub3d);
-int		handle_keyrelease(int keycode, t_cub3d *cub3d);
-int		handle_loop(t_cub3d *cub3d);
-int		check_any_key_pressed(t_cub3d *cub3d);
-void	refresh_image(t_cub3d *cub3d);
-int		handle_mouse_move(int x, int y, t_cub3d *cub3d);
-void	rotate_player_mouse(t_cub3d *cub3d, double angle);
-void	display_fps(t_cub3d *cub3d);
-
-//colision
-int		is_valid_position(t_cub3d *cub3d, double x, double y);
-int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
-int		check_corner_positions(t_cub3d *cub3d, double x, double y);
-int		check_bottom_corners(t_cub3d *cub3d, double x, double y);
-
-// time
-long	gettime_ms(void);
-int		limit_fps(t_cub3d *cub3d);
-void	calculate_fps(t_cub3d *cub3d);
-void	update_delta_time(t_cub3d *cub3d);
-
-// math utils
-double	ft_abs(double nb);
-
-// minimap structures
 typedef struct s_minimap_calc
 {
 	double	player_x;
@@ -402,28 +222,250 @@ typedef struct s_color_components
 	int	b;
 }	t_color_components;
 
-// minimap
-void	draw_minimap(t_cub3d *cub3d);
-void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y);
-void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y);
-void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y);
-int		get_triangle_half_width(int y);
-void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw);
-int		is_point_in_circle(int x, int y, int radius);
-void	rotate_point(double *x, double *y, double angle);
-int		is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y);
-int		is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y);
-void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y);
-void	calculate_world_pos(double *world_x, double *world_y,
-			t_minimap_calc *calc, t_minimap_screen *screen);
-void	draw_minimap_pixel(t_cub3d *cub3d, int x, int y, int radius);
-void	draw_minimap_pixel_optimized(t_cub3d *cub3d, t_pixel_draw *pixel);
-void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc);
-int		get_pixel_color(t_img *img, int x, int y);
+typedef struct s_cub3d
+{
+	t_mlx		mlx;
+	t_textures	textures;
+	t_colors	colors;
+	t_player	player;
+	t_view		view;
+	char		**map;
+	char		keys[256];
+	int			portals[26];
+	t_prtl		*tp_portals;
+	long		last_refresh;
+	long		fps_last_time;
+	int			fps_frame_count;
+	double		current_fps;
+	double		delta_time;
+	int			mouse_x;
+	int			mouse_y;
+	int			mouse_last_x;
+	int			mouse_captured;
+	int			nb_portals;
+}	t_cub3d;
+
+// ============================================================================
+// CAMERA FUNCTIONS
+// ============================================================================
+
+void	calc_camera_plane(t_cub3d *cub3d);
+
+// ============================================================================
+// COLLISION FUNCTIONS
+// ============================================================================
+
+int		check_bottom_corners(t_cub3d *cub3d, double x, double y);
+int		check_corner_positions(t_cub3d *cub3d, double x, double y);
+int		is_valid_position(t_cub3d *cub3d, double x, double y);
+int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
+
+// ============================================================================
+// ERROR AND UTILITY FUNCTIONS
+// ============================================================================
+
+void	exit_error(char *err, t_cub3d *cub3d);
+void	ft_free(t_cub3d *s_cub3d);
+void	print_map(t_cub3d *cub3d, char **map);
+
+// ============================================================================
+// FILE PARSING FUNCTIONS
+// ============================================================================
+
+int		all_colors_set(t_colors colors);
+int		all_text_set(t_textures textures);
+int		check_and_set_file(t_cub3d *cub3d, char **file);
+int		check_extension(t_cub3d *cub3d, char *filename);
+int		check_text_extension(t_cub3d *cub3d, char *textures);
+int		ft_check_colors(t_colors *colors, char **file, int *idx);
+int		ft_check_map(t_cub3d *cub3d, char **file, int *idx_line);
+int		ft_check_textures(t_textures *textures, char **file, int *idx);
+char	**open_file(t_cub3d *cub3d, char *filename);
+void	set_ceiling(t_colors *colors, char **split);
+void	set_floor(t_colors *colors, char **split);
+
+// ============================================================================
+// FPS AND TIME FUNCTIONS
+// ============================================================================
+
+void	calculate_fps(t_cub3d *cub3d);
+void	display_fps(t_cub3d *cub3d);
+long	gettime_ms(void);
+int		limit_fps(t_cub3d *cub3d);
+void	update_delta_time(t_cub3d *cub3d);
+
+// ============================================================================
+// INPUT HANDLING FUNCTIONS
+// ============================================================================
+
+int		check_any_key_pressed(t_cub3d *cub3d);
+int		handle_close(t_cub3d *cub3d);
+int		handle_direction(t_cub3d *cub3d);
+int		handle_direction_left(t_cub3d *cub3d);
+int		handle_direction_right(t_cub3d *cub3d);
+int		handle_hook(int keycode, t_cub3d *cub3d);
+int		handle_keypress(int keycode, t_cub3d *cub3d);
+int		handle_keyrelease(int keycode, t_cub3d *cub3d);
+int		handle_loop(t_cub3d *cub3d);
+int		handle_mouse_move(int x, int y, t_cub3d *cub3d);
+int		handle_movement(t_cub3d *cub3d);
+int		handle_movement_strafe(t_cub3d *cub3d);
+void	refresh_image(t_cub3d *cub3d);
+void	rotate_player_mouse(t_cub3d *cub3d, double angle);
+
+// ============================================================================
+// INITIALIZATION FUNCTIONS
+// ============================================================================
+
+void	init(t_cub3d *cub3d);
+t_cub3d	*init_mlx(t_cub3d *cub3d);
+
+// ============================================================================
+// MAP PARSING AND VALIDATION FUNCTIONS
+// ============================================================================
+
+int		check_adjacent(int y, int x, char **map, char new);
+t_point	*check_char_remaining(char **work_map, char c);
+int		count_islands(t_cub3d *cub3d, char **work_map);
+t_point	find_player_position(t_cub3d *cub3d, char **map);
+int		flood_fill(char ***tab, t_point current, char to_fill, char new);
+int		flood_fill_z(char ***map, t_point here, char to_fill);
+void	ft_check_letter(t_cub3d *cub3d);
+char	**map_cpy(char **old);
+void	replace_portals_by_zero(char ***map);
+
+// ============================================================================
+// MATHEMATICAL UTILITY FUNCTIONS
+// ============================================================================
+
+double	ft_abs(double nb);
+
+// ============================================================================
+// MEMORY MANAGEMENT FUNCTIONS
+// ============================================================================
+
+void	free_map(char **map);
+void	*ft_memmove(void *dest, const void *src, size_t n);
+
+// ============================================================================
+// MINIMAP FUNCTIONS
+// ============================================================================
+
 int		alpha_blend(int bg_color, int fg_color, double alpha);
 int		blend_color_component(int bg_color, int fg_color, int alpha_int,
 			int inv_alpha);
-int		is_arrow_pixel(int x, int y);
+void	calculate_world_pos(double *world_x, double *world_y,
+			t_minimap_calc *calc, t_minimap_screen *screen);
+void	draw_minimap(t_cub3d *cub3d);
+void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y);
+void	draw_minimap_pixel(t_cub3d *cub3d, int x, int y, int radius);
+void	draw_minimap_pixel_optimized(t_cub3d *cub3d, t_pixel_draw *pixel);
+void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y);
+void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y);
+void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y);
+void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw);
+int		get_pixel_color(t_img *img, int x, int y);
+int		get_triangle_half_width(int y);
+void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc);
 int		is_arrow_border(int x, int y);
+int		is_arrow_pixel(int x, int y);
+int		is_point_in_circle(int x, int y, int radius);
+int		is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y);
+int		is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y);
+void	rotate_point(double *x, double *y, double angle);
+
+// ============================================================================
+// PIXEL DRAWING FUNCTIONS
+// ============================================================================
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+// ============================================================================
+// PORTAL FUNCTIONS
+// ============================================================================
+
+void	check_correspondance(t_cub3d *cub3d);
+t_prtl	find_a_portal(t_cub3d *cub3d, char **map);
+t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x);
+void	free_portal_sprites(t_cub3d *cub3d);
+void	ft_check_portals(t_cub3d *cub3d);
+void	init_prtl_sprites(t_cub3d *cub3d);
+char	is_portal(t_cub3d *cub3d);
+void	set_direction(t_cub3d *cub3d, char dir);
+void	set_prtls(t_cub3d *cub3d);
+void	teleportation(t_cub3d *cub3d, t_prtl portal);
+int		tp_already_set(t_cub3d *cub3d, char name);
+void	update_portal_animations(t_cub3d *cub3d);
+
+// ============================================================================
+// RAYCASTING FUNCTIONS
+// ============================================================================
+
+double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
+			double ray_dir_y, t_cub3d *cub3d);
+void	cast_single_ray(t_cub3d *cub3d, int screen_x);
+void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
+			t_dda *dda);
+void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
+			double ray_dir_y, t_cub3d *cub3d);
+void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
+			t_cub3d *cub3d);
+void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda);
+void	raycast(t_cub3d *cub3d);
+
+// ============================================================================
+// RENDERING FUNCTIONS
+// ============================================================================
+
+void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
+void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
+			int draw_end);
+void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
+			int draw_end);
+void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
+			t_dda *dda);
+
+// ============================================================================
+// STRING UTILITY FUNCTIONS
+// ============================================================================
+
+int		ft_atoi(char *str);
+int		ft_isdigit(char c);
+char	**ft_split(char *str, char c);
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strcpy(char *dest, char *str);
+char	*ft_strdup(char *s);
+char	*ft_strndup(char *str, int n);
+char	*ft_strrchr(char *s, int c);
+int		ft_tablen(char **tab);
+int		in_map(char c);
+int		is_letter(char c);
+int		is_lowercase(char c);
+int		is_nbr(char *str);
+int		only_numbers(char *str);
+int		skip_letter(char current, char next);
+void	skip_spaces(char *str, int *i);
+
+// ============================================================================
+// TEXTURE FUNCTIONS
+// ============================================================================
+
+void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
+			t_texture_calc *tex_calc, double perp_wall_dist);
+void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start);
+void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
+			t_texture_calc *tex_calc);
+void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x,
+			t_texture_calc *tex_calc, int draw_params[2]);
+void	free_textures(t_cub3d *cub3d);
+int		get_texture_pixel_color(t_texture_img *texture, int x, int y);
+void	init_texture_draw_params(t_texture_calc *tex_calc,
+			int draw_params[2], int *tex_height, int *draw_bounds[2]);
+void	load_all_textures(t_cub3d *cub3d);
+int		load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path);
+void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
+			t_texture_calc *tex_calc);
+void	select_wall_texture_extended(t_cub3d *cub3d, t_dda *dda,
+			t_texture_calc *tex_calc);
 
 #endif
