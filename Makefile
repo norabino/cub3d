@@ -31,28 +31,29 @@ SRC = \
 	src/utils/time.c \
 	src/utils/fps_utils.c \
 	\
-	src/raycasting/hook.c \
-	src/raycasting/hook2.c \
-	src/raycasting/hook3.c \
-	src/raycasting/mouse.c \
-	src/raycasting/minimap.c \
-	src/raycasting/minimap_utils.c \
-	src/raycasting/minimap_alpha.c \
-	src/raycasting/minimap_draw.c \
-	src/raycasting/minimap_player.c \
-	src/raycasting/init_mlx.c \
-	src/raycasting/pixel_utils.c \
-	src/raycasting/portal.c \
-	src/raycasting/raycasting.c \
-	src/raycasting/raycasting_utils.c \
-	src/raycasting/render.c \
 	src/raycasting/camera.c \
 	src/raycasting/collision.c \
 	src/raycasting/collision_utils.c \
-	src/raycasting/textures.c \
+	src/raycasting/fade.c \
+	src/raycasting/hook.c \
+	src/raycasting/hook2.c \
+	src/raycasting/hook3.c \
+	src/raycasting/init_mlx.c \
+	src/raycasting/minimap_alpha.c \
+	src/raycasting/minimap_draw.c \
+	src/raycasting/minimap_player.c \
+	src/raycasting/minimap_utils.c \
+	src/raycasting/minimap.c \
+	src/raycasting/mouse.c \
+	src/raycasting/pixel_utils.c \
 	src/raycasting/portal_textures.c \
+	src/raycasting/portal.c \
+	src/raycasting/raycasting_utils.c \
+	src/raycasting/raycasting.c \
+	src/raycasting/render.c \
 	src/raycasting/texture_calc.c \
 	src/raycasting/texture_utils.c \
+	src/raycasting/textures.c \
 
 OBJ = $(SRC:src/%.c=$(OBJDIR)/%.o)
 

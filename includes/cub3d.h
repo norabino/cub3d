@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/29 00:07:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/29 17:36:28 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ typedef struct s_off
 	int		offset;
 	int		len;
 }	t_off;
+
+// Fondu écran
+void draw_fade(t_cub3d *cub3d, double alpha);
 
 typedef struct s_texture_img
 {
@@ -396,6 +399,7 @@ void	set_prtls(t_cub3d *cub3d);
 void	teleportation(t_cub3d *cub3d, t_prtl portal);
 int		tp_already_set(t_cub3d *cub3d, char name);
 void	update_portal_animations(t_cub3d *cub3d);
+void	draw_fade(t_cub3d *cub3d, double alpha);
 
 // ============================================================================
 // RAYCASTING FUNCTIONS

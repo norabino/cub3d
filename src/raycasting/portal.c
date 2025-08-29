@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/29 00:17:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/08/29 17:45:01 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void	teleportation(t_cub3d *cub3d, t_prtl portal)
 	else
 		new = portal.p1;
 	cub3d->player.last_prtl_pos = new;
-	cub3d->player.pos_x = new.x + 0.5;
-	cub3d->player.pos_y = new.y + 0.5;
 }
 
 void	init_prtl_sprites(t_cub3d *cub3d)
@@ -75,9 +73,19 @@ void	init_prtl_sprites(t_cub3d *cub3d)
 		cub3d->tp_portals[i].sprite.current_frame = 0;
 		cub3d->tp_portals[i].sprite.frame_counter = 0;
 		cub3d->tp_portals[i].sprite.last_frame_time = gettime_ms();
-		cub3d->tp_portals[i].sprite.color_tint[0] = 100 + (rand() % 156);
-		cub3d->tp_portals[i].sprite.color_tint[1] = 100 + (rand() % 156);
-		cub3d->tp_portals[i].sprite.color_tint[2] = 100 + (rand() % 156);
+		// Couleurs distinctes pour chaque portail
+		int palette[6][3] = {
+			{180, 90, 90},    // Rouge doux
+			{90, 180, 90},    // Vert doux
+			{90, 90, 140},    // Bleu très doux
+			{180, 180, 90},   // Jaune doux
+			{180, 90, 180},   // Magenta doux
+			{90, 180, 180}    // Cyan doux
+		};
+		int color_idx = i % 6;
+		cub3d->tp_portals[i].sprite.color_tint[0] = palette[color_idx][0];
+		cub3d->tp_portals[i].sprite.color_tint[1] = palette[color_idx][1];
+		cub3d->tp_portals[i].sprite.color_tint[2] = palette[color_idx][2];
 		i++;
 	}
 }
