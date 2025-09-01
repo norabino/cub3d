@@ -2,6 +2,8 @@ NAME = cub3D
 CC = cc
 OBJDIR = objects
 
+all: $(NAME)
+
 # Main entry point
 MAIN_SRC = \
 	src/main.c \
@@ -117,4 +119,4 @@ re_mac: fclean mac
 dev : fclean clean_minilibx
 	git add .; git commit -m "auto/dev"; git push --force
 
-.PHONY: all clean fclean re minilibx dev
+.PHONY: all clean clean_minilibx fclean re re_mac mac minilibx dev
