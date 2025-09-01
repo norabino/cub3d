@@ -4,7 +4,7 @@ EA ./textures/neon_wall.xpm
 WE ./textures/neon_wall.xpm
 
 F ./textures/purple_planks.xpm
-C 132, 0, 132
+C ./textures/stars_sky.xpm
 
 1111111111111111111111111111111
 1000000000000010000000000000001

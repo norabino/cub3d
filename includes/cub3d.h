@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,21 +294,26 @@ int		check_extension(t_cub3d *cub3d, char *filename, char *ext);
 int		check_line(t_cub3d *cub3d, char *line, t_textures *textures);
 int		check_text_extension(t_cub3d *cub3d, char *textures);
 int		count_file_lines(int fd);
-int		extract_filename(char *line, int j, char **filename);
-int		ft_check_colors(t_colors *colors, char **file, int *idx);
+int		extract_filename_from_line(char *line, int j, char **filename);
+int		validate_all_colors(t_colors *colors, char **file, int *idx);
 int		ft_check_map(t_cub3d *cub3d, char **file, int *idx_line);
-int		ft_check_textures(t_cub3d *cub3d, char **file, int *idx);
-int		is_file_path(char *str);
+int		validate_all_textures(t_cub3d *cub3d, char **file, int *idx);
+int		is_valid_file_path(char *str);
 char	**open_file(t_cub3d *cub3d, char *filename);
-int		process_color_line(t_colors *colors, char *line, int *idx, int i);
-int		process_texture_line(t_cub3d *cub3d, char **file, int i,
+int		parse_color_line(t_colors *colors, char *line, int *idx, int i);
+int		process_single_texture_line(t_cub3d *cub3d, char **file, int i,
 			int *found_all);
-void	process_texture_found(t_cub3d *cub3d, char *line, int j, int z);
+void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z);
 void	read_file_lines(char **file, int fd);
 void	set_ceiling(t_colors *colors, char **split);
 void	set_floor(t_colors *colors, char **split);
-void	set_texture(char c, int j, char *line, t_textures *textures);
-void	verify_colors(t_colors *colors);
+void	assign_texture(char c, int j, char *line, t_textures *textures);
+void	assign_color_values(t_colors *colors, char **split, char c);
+void	validate_colors_complete(t_colors *colors);
+int		parse_texture_line(t_cub3d *cub3d, char *line, t_textures *textures);
+void	init_game_state(t_cub3d *cub3d);
+void	parse_config_file(t_cub3d *cub3d, int ac, char **av);
+int		validate_config_file(t_cub3d *cub3d, char **file);
 
 // ============================================================================
 // FPS AND TIME FUNCTIONS

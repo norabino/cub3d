@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_and_set_file.c                               :+:      :+:    :+:   */
+/*   config_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
+/*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
 /*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	set_direction(t_cub3d *cub3d, char dir)
-{
-	if (dir == 'N')
-	{
-		cub3d->player.dir_x = 0;
-		cub3d->player.dir_y = -1;
-	}
-	else if (dir == 'S')
-	{
-		cub3d->player.dir_x = 0;
-		cub3d->player.dir_y = 1;
-	}
-	else if (dir == 'E')
-	{
-		cub3d->player.dir_x = 1;
-		cub3d->player.dir_y = 0;
-	}
-	else if (dir == 'W')
-	{
-		cub3d->player.dir_x = -1;
-		cub3d->player.dir_y = 0;
-	}
-}
-
-int	check_and_set_file(t_cub3d *cub3d, char **file)
+int	validate_config_file(t_cub3d *cub3d, char **file)
 {
 	int	idx_line;
 	int	tmp;

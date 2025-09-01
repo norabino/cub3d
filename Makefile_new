@@ -2,19 +2,15 @@ NAME = cub3D
 CC = cc
 OBJDIR = objects
 
-# Main entry point
-MAIN_SRC = \
-	src/main.c \
-
-# Initialization system files
-INIT_SRC = \
-	src/init/game_init.c \
-	src/init/init_mlx.c \
+# Core system files
+CORE_SRC = \
+	src/core/main.c \
+	src/core/game_init.c \
+	src/core/init_mlx.c \
 
 # Parsing and file handling
 PARSING_SRC = \
 	src/parsing/check_and_set_file.c \
-	src/parsing/config_validator.c \
 	src/parsing/color_parser.c \
 	src/parsing/color_validator.c \
 	src/parsing/texture_parser.c \
@@ -81,7 +77,7 @@ GNL_SRC = \
 	src/get_next_line/get_next_line_utils.c \
 
 # All source files
-SRC = $(MAIN_SRC) $(INIT_SRC) $(PARSING_SRC) $(INPUT_SRC) $(UI_SRC) $(RENDERING_SRC) $(UTILS_SRC) $(GNL_SRC)
+SRC = $(CORE_SRC) $(PARSING_SRC) $(INPUT_SRC) $(UI_SRC) $(RENDERING_SRC) $(UTILS_SRC) $(GNL_SRC)
 
 OBJ = $(SRC:src/%.c=$(OBJDIR)/%.o)
 
@@ -96,12 +92,6 @@ minilibx:
 	@echo "Compilation de la Minilibx ..."
 	@make -s -C MinilibX > /dev/null 2>&1
 
-clean_minilibx:
-	@make clean -C MinilibX > /dev/null 2>&1
-
-mac: minilibx $(OBJ)
-	$(CC) $(OBJ) -LMinilibX -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lm -g -o $(NAME)
-
 clean:
 	rm -rf $(OBJDIR)
 	@make -s clean -C MinilibX > /dev/null 2>&1
@@ -112,9 +102,7 @@ fclean: clean
 
 re: fclean $(NAME)
 
-re_mac: fclean mac
-
-dev : fclean clean_minilibx
-	git add .; git commit -m "auto/dev"; git push --force
+dev: $(NAME)
+	./$(NAME) maps/game/portal_labyrinth.cub
 
 .PHONY: all clean fclean re minilibx dev

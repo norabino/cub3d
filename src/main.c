@@ -6,40 +6,25 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 18:18:48 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:24:24 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-/*
-** Initializes the parsing of the .cub file
-** Checks arguments, opens file, and reads configuration
-** Like reading instructions before assembling furniture
-*/
-void	ft_parsing_init(t_cub3d *cub3d, int ac, char **av)
+void	parse_config_file(t_cub3d *cub3d, int ac, char **av)
 {
 	char	**file;
 
 	if (ac != 2)
-	{
 		exit_error("Too few/much arguments.\nTry : ./cub3d [filename]",
 			cub3d);
-	}
 	if (!check_extension(cub3d, av[1], ".cub"))
 		exit_error("Must be '.cub'.", cub3d);
 	file = open_file(cub3d, av[1]);
-	check_and_set_file(cub3d, file);
+	validate_config_file(cub3d, file);
 	free_map(file);
 }
-
-/*
-** Main function of the program
-** 1. Creates the main game structure
-** 2. Reads and verifies the configuration file
-** 3. Initializes display and launches the game
-** 4. Starts the infinite game loop
-*/
 
 int	main(int ac, char **av)
 {
@@ -49,8 +34,8 @@ int	main(int ac, char **av)
 	cub3d = malloc(sizeof(t_cub3d));
 	if (!cub3d)
 		return (1);
-	init(cub3d);
-	ft_parsing_init(cub3d, ac, av);
+	init_game_state(cub3d);
+	parse_config_file(cub3d, ac, av);
 	init_mlx(cub3d);
 	raycast(cub3d);
 	mlx_put_image_to_window(cub3d->mlx.mlx, cub3d->mlx.win,
