@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 21:50:53 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/01 20:49:58 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int	all_colors_set(t_colors colors)
 {
-	if (colors.ceiling[0] == -1
-		|| colors.ceiling[1] == -1
-		|| colors.ceiling[1] == -1)
-		return (0);
-	if (colors.floor[0] == -1 || colors.floor[1] == -1 || colors.floor[1] == -1)
-		return (0);
-	return (1);
+	int	ceiling_complete;
+	int	floor_complete;
+
+	ceiling_complete = (colors.cub3d->textures.ceiling != NULL)
+		|| (colors.ceiling[0] != -1 && colors.ceiling[1] != -1
+			&& colors.ceiling[2] != -1);
+	floor_complete = (colors.cub3d->textures.floor != NULL)
+		|| (colors.floor[0] != -1 && colors.floor[1] != -1
+			&& colors.floor[2] != -1);
+	return (ceiling_complete && floor_complete);
 }
 
 void	set_ceiling(t_colors *colors, char **split)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 18:05:32 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/01 20:02:36 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int	in_map(char c)
 	return (0);
 }
 
+int	is_player_spawn(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (1);
+	return (0);
+}
+
 void	ft_check_letter(t_cub3d *cub3d)
 {
 	int	y;
@@ -61,7 +68,7 @@ void	ft_check_letter(t_cub3d *cub3d)
 		x = 0;
 		while (cub3d->map[y][x])
 		{
-			if (is_letter(cub3d->map[y][x]))
+			if (is_player_spawn(cub3d->map[y][x]))
 				nb_spawn++;
 			x++;
 		}

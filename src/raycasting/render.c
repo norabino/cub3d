@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/22 15:36:31 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:38:37 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,42 +54,12 @@ void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
 }
 
 /*
-** Dessine le sol et le plafond au-dessus et en-dessous du mur
-** Le plafond = partie haute de l'écran, le sol = partie basse
-** Comme peindre le ciel en haut et l'herbe en bas d'un dessin
-*/
-void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
-	int draw_end)
-{
-	int	y;
-	int	floor_color;
-	int	ceiling_color;
-
-	floor_color = (cub3d->colors.floor[0] << 16)
-		| (cub3d->colors.floor[1] << 8) | cub3d->colors.floor[2];
-	ceiling_color = (cub3d->colors.ceiling[0] << 16)
-		| (cub3d->colors.ceiling[1] << 8) | cub3d->colors.ceiling[2];
-	y = 0;
-	while (y < draw_start)
-	{
-		my_mlx_pixel_put(cub3d->mlx.img, screen_x, y, ceiling_color);
-		y++;
-	}
-	y = draw_end;
-	while (y < SCREEN_HEIGHT)
-	{
-		my_mlx_pixel_put(cub3d->mlx.img, screen_x, y, floor_color);
-		y++;
-	}
-}
-
-/*
 ** Dessine une ligne verticale complète à l'écran : mur + sol + plafond
 ** C'est LA fonction principale qui assemble tout :
 ** 1. Calcule où dessiner le mur
 ** 2. Choisit la bonne texture selon l'orientation du mur
 ** 3. Dessine le mur avec sa texture
-** 4. Ajoute le sol et le plafond autour
+** 4. Ajoute le sol et le plafond autour avec les textures/couleurs
 */
 void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	t_dda *dda)
@@ -106,5 +76,6 @@ void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	draw_params[0] = draw_start;
 	draw_params[1] = draw_end;
 	draw_textured_wall_pixels(cub3d, screen_x, &tex_calc, draw_params);
-	draw_floor_ceiling(cub3d, screen_x, draw_start, draw_end);
+	render_fc_textures(cub3d, screen_x, draw_start, draw_end);
+	render_fc_colors(cub3d, screen_x, draw_start, draw_end);
 }

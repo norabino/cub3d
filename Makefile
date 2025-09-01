@@ -12,9 +12,12 @@ SRC = \
 	src/parsing/portal_utils.c \
 	src/parsing/check_colors_0.c \
 	src/parsing/check_colors_1.c \
+	src/parsing/check_colors_2.c \
 	src/parsing/check_map.c \
 	src/parsing/check_textures_0.c \
 	src/parsing/check_textures_1.c \
+	src/parsing/check_textures_2.c \
+	src/parsing/file_utils.c \
 	src/parsing/flood_fill.c \
 	src/parsing/init.c \
 	src/parsing/open_file.c \
@@ -34,7 +37,6 @@ SRC = \
 	src/raycasting/camera.c \
 	src/raycasting/collision.c \
 	src/raycasting/collision_utils.c \
-	src/raycasting/fade.c \
 	src/raycasting/hook.c \
 	src/raycasting/hook2.c \
 	src/raycasting/hook3.c \
@@ -48,9 +50,12 @@ SRC = \
 	src/raycasting/pixel_utils.c \
 	src/raycasting/portal_textures.c \
 	src/raycasting/portal.c \
+	src/raycasting/portal_utils2.c \
 	src/raycasting/raycasting_utils.c \
 	src/raycasting/raycasting.c \
 	src/raycasting/render.c \
+	src/raycasting/floor_ceiling.c \
+	src/raycasting/floor_ceiling_utils.c \
 	src/raycasting/texture_calc.c \
 	src/raycasting/texture_utils.c \
 	src/raycasting/textures.c \

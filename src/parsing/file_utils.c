@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_textures_1.c                                 :+:      :+:    :+:   */
+/*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 17:30:18 by norabino          #+#    #+#             */
-/*   Updated: 2024/12/19 17:30:18 by norabino         ###   ########.fr       */
+/*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
+/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	all_text_set(t_textures textures)
+int	count_file_lines(int fd)
 {
-	(void)textures;
-	return (1);
+	char	*s_line;
+	int		nb_lines;
+
+	nb_lines = 0;
+	s_line = get_next_line(fd);
+	while (s_line)
+	{
+		free(s_line);
+		nb_lines++;
+		s_line = get_next_line(fd);
+	}
+	return (nb_lines);
 }

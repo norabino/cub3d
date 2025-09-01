@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/29 17:45:01 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,83 +51,66 @@ void	teleportation(t_cub3d *cub3d, t_prtl portal)
 		new = portal.p2;
 	else
 		new = portal.p1;
+	cub3d->player.pos_x = new.x + 0.5;
+	cub3d->player.pos_y = new.y + 0.5;
 	cub3d->player.last_prtl_pos = new;
+}
+
+static void	set_portal_color(t_prtl_sprite *sprite, int portal_index)
+{
+	int	palette[6][3];
+	int	color_idx;
+
+	palette[0][0] = 180;
+	palette[0][1] = 90;
+	palette[0][2] = 90;
+	palette[1][0] = 90;
+	palette[1][1] = 180;
+	palette[1][2] = 90;
+	palette[2][0] = 90;
+	palette[2][1] = 90;
+	palette[2][2] = 140;
+	palette[3][0] = 180;
+	palette[3][1] = 180;
+	palette[3][2] = 90;
+	palette[4][0] = 180;
+	palette[4][1] = 90;
+	palette[4][2] = 180;
+	palette[5][0] = 90;
+	palette[5][1] = 180;
+	palette[5][2] = 180;
+	color_idx = portal_index % 6;
+	sprite->color_tint[0] = palette[color_idx][0];
+	sprite->color_tint[1] = palette[color_idx][1];
+	sprite->color_tint[2] = palette[color_idx][2];
+}
+
+static void	init_single_portal(t_cub3d *cub3d, int i)
+{
+	int		j;
+	char	path[256];
+
+	j = 0;
+	while (j < 4)
+	{
+		snprintf(path, sizeof(path), "textures/portal/tp%d.xpm", j);
+		load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], path);
+		j++;
+	}
+	cub3d->tp_portals[i].sprite.current_frame = 0;
+	cub3d->tp_portals[i].sprite.frame_counter = 0;
+	cub3d->tp_portals[i].sprite.last_frame_time = gettime_ms();
+	set_portal_color(&cub3d->tp_portals[i].sprite, i);
 }
 
 void	init_prtl_sprites(t_cub3d *cub3d)
 {
-	int		i;
-	int		j;
-	char	path[256];
-
-	i = 0;
-	while (i < cub3d->nb_portals)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			snprintf(path, sizeof(path), "textures/portal/tp%d.xpm", j);
-			load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], path);
-			j++;
-		}
-		cub3d->tp_portals[i].sprite.current_frame = 0;
-		cub3d->tp_portals[i].sprite.frame_counter = 0;
-		cub3d->tp_portals[i].sprite.last_frame_time = gettime_ms();
-		// Couleurs distinctes pour chaque portail
-		int palette[6][3] = {
-			{180, 90, 90},    // Rouge doux
-			{90, 180, 90},    // Vert doux
-			{90, 90, 140},    // Bleu très doux
-			{180, 180, 90},   // Jaune doux
-			{180, 90, 180},   // Magenta doux
-			{90, 180, 180}    // Cyan doux
-		};
-		int color_idx = i % 6;
-		cub3d->tp_portals[i].sprite.color_tint[0] = palette[color_idx][0];
-		cub3d->tp_portals[i].sprite.color_tint[1] = palette[color_idx][1];
-		cub3d->tp_portals[i].sprite.color_tint[2] = palette[color_idx][2];
-		i++;
-	}
-}
-
-void	update_portal_animations(t_cub3d *cub3d)
-{
-	int		i;
-	long	current_time;
-	long	frame_duration;
-
-	current_time = gettime_ms();
-	frame_duration = 1000 / 60;
-	i = 0;
-	while (i < cub3d->nb_portals)
-	{
-		if ((current_time - cub3d->tp_portals[i].sprite.last_frame_time)
-			>= frame_duration)
-		{
-			cub3d->tp_portals[i].sprite.current_frame
-				= (cub3d->tp_portals[i].sprite.current_frame + 1) % 4;
-			cub3d->tp_portals[i].sprite.last_frame_time = current_time;
-		}
-		i++;
-	}
-}
-
-void	free_portal_sprites(t_cub3d *cub3d)
-{
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{
-		j = 0;
-		while (j < 4)
-		{
-			if (cub3d->tp_portals[i].sprite.frames[j].img)
-				mlx_destroy_image(cub3d->mlx.mlx,
-					cub3d->tp_portals[i].sprite.frames[j].img);
-			j++;
-		}
+		init_single_portal(cub3d, i);
 		i++;
 	}
 }

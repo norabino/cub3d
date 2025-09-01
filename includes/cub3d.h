@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/29 17:36:28 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_off
 }	t_off;
 
 // Fondu écran
-void draw_fade(t_cub3d *cub3d, double alpha);
+void	draw_fade(t_cub3d *cub3d, double alpha);
 
 typedef struct s_texture_img
 {
@@ -78,10 +78,14 @@ typedef struct s_textures
 	char			*south;
 	char			*west;
 	char			*east;
+	char			*floor;
+	char			*ceiling;
 	t_texture_img	north_img;
 	t_texture_img	south_img;
 	t_texture_img	west_img;
 	t_texture_img	east_img;
+	t_texture_img	floor_img;
+	t_texture_img	ceiling_img;
 	t_cub3d			*cub3d;
 }	t_textures;
 
@@ -194,6 +198,14 @@ typedef struct s_minimap_screen
 	int	y;
 }	t_minimap_screen;
 
+typedef struct s_fc_coords
+{
+	double	floor_x;
+	double	floor_y;
+	int		screen_x;
+	int		y;
+}	t_fc_coords;
+
 typedef struct s_minimap_render
 {
 	double	world_x;
@@ -278,14 +290,25 @@ void	print_map(t_cub3d *cub3d, char **map);
 int		all_colors_set(t_colors colors);
 int		all_text_set(t_textures textures);
 int		check_and_set_file(t_cub3d *cub3d, char **file);
-int		check_extension(t_cub3d *cub3d, char *filename);
+int		check_extension(t_cub3d *cub3d, char *filename, char *ext);
+int		check_line(t_cub3d *cub3d, char *line, t_textures *textures);
 int		check_text_extension(t_cub3d *cub3d, char *textures);
+int		count_file_lines(int fd);
+int		extract_filename(char *line, int j, char **filename);
 int		ft_check_colors(t_colors *colors, char **file, int *idx);
 int		ft_check_map(t_cub3d *cub3d, char **file, int *idx_line);
-int		ft_check_textures(t_textures *textures, char **file, int *idx);
+int		ft_check_textures(t_cub3d *cub3d, char **file, int *idx);
+int		is_file_path(char *str);
 char	**open_file(t_cub3d *cub3d, char *filename);
+int		process_color_line(t_colors *colors, char *line, int *idx, int i);
+int		process_texture_line(t_cub3d *cub3d, char **file, int i,
+			int *found_all);
+void	process_texture_found(t_cub3d *cub3d, char *line, int j, int z);
+void	read_file_lines(char **file, int fd);
 void	set_ceiling(t_colors *colors, char **split);
 void	set_floor(t_colors *colors, char **split);
+void	set_texture(char c, int j, char *line, t_textures *textures);
+void	verify_colors(t_colors *colors);
 
 // ============================================================================
 // FPS AND TIME FUNCTIONS
@@ -421,6 +444,8 @@ void	raycast(t_cub3d *cub3d);
 // RENDERING FUNCTIONS
 // ============================================================================
 
+void	apply_fc_texture(t_cub3d *cub3d, t_texture_img *texture,
+			t_fc_coords *coords);
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
 void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
 			int draw_end);
@@ -428,6 +453,16 @@ void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
 			int draw_end);
 void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 			t_dda *dda);
+void	render_ceiling_texture(t_cub3d *cub3d, int screen_x, int draw_start);
+void	render_fc_colors(t_cub3d *cub3d, int screen_x,
+			int draw_start, int draw_end);
+void	render_fc_pixel(t_cub3d *cub3d, int screen_x, int y,
+			t_texture_img *texture);
+void	render_fc_textures(t_cub3d *cub3d, int screen_x,
+			int draw_start, int draw_end);
+void	render_floor_texture(t_cub3d *cub3d, int screen_x, int draw_end);
+void	render_ceiling_color(t_cub3d *cub3d, int screen_x, int draw_start);
+void	render_floor_color(t_cub3d *cub3d, int screen_x, int draw_end);
 
 // ============================================================================
 // STRING UTILITY FUNCTIONS
@@ -446,6 +481,7 @@ int		in_map(char c);
 int		is_letter(char c);
 int		is_lowercase(char c);
 int		is_nbr(char *str);
+int		is_player_spawn(char c);
 int		only_numbers(char *str);
 int		skip_letter(char current, char next);
 void	skip_spaces(char *str, int *i);

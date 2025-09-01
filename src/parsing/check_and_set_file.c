@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_and_set_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/29 00:09:36 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/01 19:28:53 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_and_set_file(t_cub3d *cub3d, char **file)
 	int	tmp;
 
 	idx_line = 0;
-	ft_check_textures(&cub3d->textures, file, &idx_line);
+	ft_check_textures(cub3d, file, &idx_line);
 	tmp = idx_line;
 	ft_check_colors(&cub3d->colors, file, &idx_line);
 	if (tmp > idx_line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/07/19 20:50:43 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/01 18:16:16 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	skip_spaces(char *str, int *i)
 
 int	is_letter(char c)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == 'F' || c == 'C')
 		return (1);
 	return (0);
 }

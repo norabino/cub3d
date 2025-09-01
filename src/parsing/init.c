@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 22:00:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/01 19:15:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ static void	init_basic_values(t_cub3d *cub3d)
 	cub3d->textures.south = NULL;
 	cub3d->textures.west = NULL;
 	cub3d->textures.east = NULL;
+	cub3d->textures.floor = NULL;
+	cub3d->textures.ceiling = NULL;
+	cub3d->textures.north_img.img = NULL;
+	cub3d->textures.south_img.img = NULL;
+	cub3d->textures.west_img.img = NULL;
+	cub3d->textures.east_img.img = NULL;
+	cub3d->textures.floor_img.img = NULL;
+	cub3d->textures.ceiling_img.img = NULL;
 	cub3d->textures.cub3d = cub3d;
 	cub3d->nb_portals = 0;
 }

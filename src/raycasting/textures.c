@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/28 21:58:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/01 18:51:07 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ void	load_all_textures(t_cub3d *cub3d)
 	if (!load_texture(cub3d, &cub3d->textures.west_img,
 			cub3d->textures.west))
 		exit_error("Error: Failed to load west texture", cub3d);
+	if (cub3d->textures.floor && !load_texture(cub3d,
+			&cub3d->textures.floor_img, cub3d->textures.floor))
+		exit_error("Error: Failed to load floor texture", cub3d);
+	if (cub3d->textures.ceiling && !load_texture(cub3d,
+			&cub3d->textures.ceiling_img, cub3d->textures.ceiling))
+		exit_error("Error: Failed to load ceiling texture", cub3d);
 }
 
 /*
@@ -100,6 +106,10 @@ void	free_textures(t_cub3d *cub3d)
 		mlx_destroy_image(cub3d->mlx.mlx, cub3d->textures.east_img.img);
 	if (cub3d->textures.west_img.img)
 		mlx_destroy_image(cub3d->mlx.mlx, cub3d->textures.west_img.img);
+	if (cub3d->textures.floor_img.img)
+		mlx_destroy_image(cub3d->mlx.mlx, cub3d->textures.floor_img.img);
+	if (cub3d->textures.ceiling_img.img)
+		mlx_destroy_image(cub3d->mlx.mlx, cub3d->textures.ceiling_img.img);
 }
 
 /*
