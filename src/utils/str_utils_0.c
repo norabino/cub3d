@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils_0.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 19:08:23 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/02 07:26:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ char	*ft_strrchr(char *s, int c)
 	i = ft_strlen(s);
 	if (c == 0)
 		return ((char *)s + ft_strlen(s));
-	while (s[i] != (char)c && i >= 0)
+	while (i >= 0 && s[i] != (char)c)
 		i--;
-	if (s[i] == (char)c)
+	if (i >= 0 && s[i] == (char)c)
 		return ((char *)s + i);
 	return (NULL);
 }

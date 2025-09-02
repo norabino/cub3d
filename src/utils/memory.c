@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 19:08:56 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,24 @@ char	**map_cpy(char **old)
 	int		len;
 	int		i;
 
+	if (!old)
+		return (NULL);
 	len = ft_tablen(old);
-	new = malloc(sizeof(char *) * (len + 1));
-	new[len] = NULL;
-	i = -1;
-	while (++i < len)
+	new = calloc(len + 1, sizeof(char *));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (i < len && old[i])
+	{
 		new[i] = ft_strdup(old[i]);
+		if (!new[i])
+		{
+			free_map(new);
+			return (NULL);
+		}
+		i++;
+	}
+	new[i] = NULL;
 	return (new);
 }
 
@@ -110,6 +122,8 @@ void	free_map(char **map)
 {
 	int	i;
 
+	if (!map)
+		return ;
 	i = 0;
 	while (map[i])
 	{

@@ -16,17 +16,20 @@ static void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 	char map_char)
 {
 	int	i;
+	int	safe_frame;
 
+	if (!cub3d || !tex_calc || !cub3d->tp_portals || cub3d->nb_portals <= 0)
+		return ;
 	tex_calc->is_portal = 1;
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{
 		if (cub3d->tp_portals[i].name == map_char)
 		{
+			safe_frame = cub3d->tp_portals[i].sprite.current_frame % 4;
 			tex_calc->portal_index = i;
 			tex_calc->current_text
-				= &cub3d->tp_portals[i].sprite.frames[
-				cub3d->tp_portals[i].sprite.current_frame];
+				= &cub3d->tp_portals[i].sprite.frames[safe_frame];
 			tex_calc->portal_color[0]
 				= cub3d->tp_portals[i].sprite.color_tint[0];
 			tex_calc->portal_color[1]

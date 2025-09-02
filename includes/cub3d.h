@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 03:25:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,6 +443,7 @@ void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
 void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
 			t_cub3d *cub3d);
 void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda);
+void	perform_dda_step(t_dda *dda);
 void	raycast(t_cub3d *cub3d);
 
 // ============================================================================

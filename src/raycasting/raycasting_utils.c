@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/28 18:28:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		if (dda->map_y >= 0 && dda->map_x >= 0
-			&& cub3d->map[(int)dda->map_y]
+		if (dda->map_y >= 0 && dda->map_x >= 0 && cub3d->map[(int)dda->map_y]
 			&& (cub3d->map[(int)dda->map_y][(int)dda->map_x] == '1'
 			|| is_lowercase(cub3d->map[(int)dda->map_y][(int)dda->map_x])))
 			dda->hit = 1;

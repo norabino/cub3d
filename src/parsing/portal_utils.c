@@ -60,24 +60,18 @@ void	set_prtls(t_cub3d *cub3d)
 {
 	int	i;
 
-	printf("DEBUG: Setting up portals, nb_portals = %d\n", cub3d->nb_portals);
 	if (cub3d->nb_portals <= 0)
 	{
-		printf("DEBUG: No portals to set up\n");
 		cub3d->tp_portals = NULL;
-		return;
+		return ;
 	}
-	cub3d->tp_portals = malloc(sizeof(t_prtl) * (cub3d->nb_portals + 1));
+	cub3d->tp_portals = calloc(cub3d->nb_portals + 1, sizeof(t_prtl));
 	if (!cub3d->tp_portals)
 		exit_error("Failed to allocate memory for portals", cub3d);
-	printf("DEBUG: Allocated memory for %d portals\n", cub3d->nb_portals);
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{
-		printf("DEBUG: Finding portal %d\n", i);
 		cub3d->tp_portals[i] = find_a_portal(cub3d, cub3d->map);
-		printf("DEBUG: Found portal '%c' at position (%d, %d)\n", 
-			cub3d->tp_portals[i].name, cub3d->tp_portals[i].p1.x, cub3d->tp_portals[i].p1.y);
 		i++;
 	}
 	cub3d->tp_portals[i] = (t_prtl){0, {-1, -1}, {-1, -1},

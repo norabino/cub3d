@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/02 03:25:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 07:59:39 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,28 +94,19 @@ void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
 */
 void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 {
-	int	max_iterations;
+	int		max_iterations;
+	char	map_char;
 
 	if (!cub3d->map)
 		return ;
 	max_iterations = 1000;
 	while (dda->hit == 0 && max_iterations-- > 0)
 	{
-		if (dda->side_dist_x < dda->side_dist_y)
-		{
-			dda->side_dist_x += dda->delta_dist_x;
-			dda->map_x += dda->step_x;
-			dda->side = 0;
-		}
-		else
-		{
-			dda->side_dist_y += dda->delta_dist_y;
-			dda->map_y += dda->step_y;
-			dda->side = 1;
-		}
+		perform_dda_step(dda);
 		if (dda->map_y >= 0 && dda->map_x >= 0)
 		{
-			char map_char = safe_map_access(cub3d, (int)dda->map_y, (int)dda->map_x);
+			map_char = safe_map_access(cub3d, (int)dda->map_y,
+					(int)dda->map_x);
 			if (map_char == '1' || is_lowercase(map_char))
 				dda->hit = 1;
 		}

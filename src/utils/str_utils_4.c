@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 16:41:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 03:30:08 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 07:30:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ void	check_correspondance(t_cub3d *cub3d)
 
 	i = 0;
 	cpt = 0;
-	printf("DEBUG: Checking portal correspondences...\n");
 	while (i < 26)
 	{
 		if (cub3d->portals[i] > 0)
 		{
-			printf("DEBUG: Portal '%c' appears %d times\n", (char)('a' + i), cub3d->portals[i]);
 			if (cub3d->portals[i] == 2)
 				cpt++;
 			else if (cub3d->portals[i] != 1)
@@ -39,7 +37,6 @@ void	check_correspondance(t_cub3d *cub3d)
 		}
 		i++;
 	}
-	printf("DEBUG: Found %d valid portal pairs\n", cpt);
 	cub3d->nb_portals = cpt;
 }
 

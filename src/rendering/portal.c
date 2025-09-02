@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 03:30:07 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 char	is_portal(t_cub3d *cub3d)
 {
-	int	pos_x;
-	int	pos_y;
+	int		pos_x;
+	int		pos_y;
+	char	map_char;
 
 	pos_x = (int)cub3d->player.pos_x;
 	pos_y = (int)cub3d->player.pos_y;
@@ -26,7 +27,7 @@ char	is_portal(t_cub3d *cub3d)
 		cub3d->player.last_prtl_pos.x = -1;
 		cub3d->player.last_prtl_pos.y = -1;
 	}
-	char map_char = safe_map_access(cub3d, pos_y, pos_x);
+	map_char = safe_map_access(cub3d, pos_y, pos_x);
 	if (is_lowercase(map_char))
 		return (map_char);
 	return (0);
@@ -92,7 +93,7 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 	char	path[256];
 
 	if (!cub3d || !cub3d->tp_portals || i >= cub3d->nb_portals)
-		return;
+		return ;
 	j = 0;
 	while (j < 4)
 	{
@@ -100,7 +101,7 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 		if (!load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], path))
 		{
 			printf("Error: Failed to load portal texture %s\n", path);
-			return;
+			return ;
 		}
 		j++;
 	}
@@ -114,14 +115,10 @@ void	init_prtl_sprites(t_cub3d *cub3d)
 {
 	int	i;
 
-	printf("DEBUG: Initializing portal sprites for %d portals\n", cub3d->nb_portals);
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{
-		printf("DEBUG: Initializing sprite for portal %d ('%c')\n", i, cub3d->tp_portals[i].name);
 		init_single_portal(cub3d, i);
-		printf("DEBUG: Portal %d sprite initialized successfully\n", i);
 		i++;
 	}
-	printf("DEBUG: All portal sprites initialized\n");
 }

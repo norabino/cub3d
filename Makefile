@@ -57,6 +57,7 @@ RENDERING_SRC = \
 	src/rendering/portal_utils2.c \
 	src/rendering/raycasting.c \
 	src/rendering/raycasting_utils.c \
+	src/rendering/dda_utils.c \
 	src/rendering/render.c \
 	src/rendering/texture_calc.c \
 	src/rendering/texture_utils.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/02 07:26:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**malloc_file(t_cub3d *cub3d, char *filename)
 		exit_error("Error when opening file...", cub3d);
 	nb_lines = count_file_lines(fd);
 	close(fd);
-	file = (char **)malloc(sizeof(char *) * (nb_lines + 1));
+	file = (char **)calloc(nb_lines + 1, sizeof(char *));
 	if (!file)
 		exit_error("Error allocating file memory...", cub3d);
 	return (file);

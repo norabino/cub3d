@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_utils.c                                      :+:      :+:    :+:   */
+/*   dda_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Created: 2025/09/02 03:50:00 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /*
-** Met un pixel coloré dans l'image à la position x,y
-** Comme colorier un point précis sur une feuille de papier
-** Fait attention à ne pas dessiner en dehors de l'image
+** Effectue un pas de l'algorithme DDA
 */
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	perform_dda_step(t_dda *dda)
 {
-	char	*dst;
-
-	if (!img->addr)
-		return ;
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	if (dda->side_dist_x < dda->side_dist_y)
+	{
+		dda->side_dist_x += dda->delta_dist_x;
+		dda->map_x += dda->step_x;
+		dda->side = 0;
+	}
+	else
+	{
+		dda->side_dist_y += dda->delta_dist_y;
+		dda->map_y += dda->step_y;
+		dda->side = 1;
+	}
 }

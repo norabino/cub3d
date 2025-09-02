@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 03:08:12 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 07:30:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,15 @@ int	ft_check_map(t_cub3d *cub3d, char **file, int *idx_line)
 	begin = *idx_line;
 	while (file[*idx_line])
 		(*idx_line)++;
-	cub3d->map = malloc(sizeof(char *) * (*idx_line) - begin + 2);
+	cub3d->map = calloc((*idx_line) - begin + 2, sizeof(char *));
+	if (!cub3d->map)
+		exit_error("Failed to allocate memory for map", cub3d);
 	(*idx_line) = 0;
 	while (file[*idx_line + begin])
 	{
 		cub3d->map[*idx_line] = ft_strdup(file[*idx_line + begin]);
+		if (!cub3d->map[*idx_line])
+			exit_error("Failed to duplicate map line", cub3d);
 		(*idx_line)++;
 	}
 	cub3d->map[*idx_line] = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 char	is_portal(t_cub3d *cub3d)
 {
-	int	pos_x;
-	int	pos_y;
+	int		pos_x;
+	int		pos_y;
+	char	map_char;
 
 	pos_x = (int)cub3d->player.pos_x;
 	pos_y = (int)cub3d->player.pos_y;
@@ -26,8 +27,9 @@ char	is_portal(t_cub3d *cub3d)
 		cub3d->player.last_prtl_pos.x = -1;
 		cub3d->player.last_prtl_pos.y = -1;
 	}
-	if (is_lowercase(cub3d->map[pos_y][pos_x]))
-		return (cub3d->map[pos_y][pos_x]);
+	map_char = safe_map_access(cub3d, pos_y, pos_x);
+	if (is_lowercase(map_char))
+		return (map_char);
 	return (0);
 }
 

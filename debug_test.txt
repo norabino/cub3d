@@ -1,3 +1,0 @@
-printf 'Debug: Starting program
-';
-./cub3D maps/bad/test_portals.cub
