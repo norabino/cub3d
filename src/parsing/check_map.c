@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 20:40:41 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 03:08:12 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ static int	process_flood(t_cub3d *cub3d, char **work_map, int *ff_count)
 	{
 		if (!flood_fill(&work_map, *p, '0', 'F'))
 		{
+			free(p);
 			free_map(work_map);
 			exit_error("map ouverte", cub3d);
 		}
+		free(p);
 		(*ff_count)++;
 		return (1);
 	}

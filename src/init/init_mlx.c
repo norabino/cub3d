@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:19:02 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/28 22:00:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 02:50:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /*
 ** Initialise MinilibX et prépare l'affichage
 ** Crée la fenêtre, prépare l'image pour dessiner dessus
-** Charge toutes les textures des murs
-** C'est comme préparer une toile et ses pinceaux avant de peindre
 */
 t_cub3d	*init_mlx(t_cub3d *cub3d)
 {

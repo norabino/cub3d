@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:32:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/02 02:58:13 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parse_config_file(t_cub3d *cub3d, int ac, char **av)
 		exit_error("Too few/much arguments.\nTry : ./cub3d [filename]",
 			cub3d);
 	if (!check_extension(cub3d, av[1], ".cub"))
-		exit_error("Must be '.cub'.", cub3d);
+		exit_error("Wrong extension.\nMust be '.cub'.", cub3d);
 	file = open_file(cub3d, av[1]);
 	validate_config_file(cub3d, file);
 	free_map(file);

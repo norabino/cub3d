@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_validator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/02 02:59:58 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	validate_all_textures(t_cub3d *cub3d, char **file, int *idx)
 		i++;
 	}
 	if (!all_text_set(cub3d->textures))
-		exit_error("Missing texture", cub3d);
+		exit_error("Missing texture(s)", cub3d);
 	return (1);
 }

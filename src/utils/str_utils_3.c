@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:07:42 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 17:17:22 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 03:08:12 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,20 @@ void	normalize_map(char **trash)
 	while (p && check_adjacent_zeros(trash, p->y, p->x))
 	{
 		trash[p->y][p->x] = '2';
+		free(p);
 		p = check_char_remaining(trash, '1');
 	}
+	if (p)
+		free(p);
 	p = check_char_remaining(trash, '0');
 	while (p)
 	{
 		trash[p->y][p->x] = '2';
+		free(p);
 		p = check_char_remaining(trash, '0');
 	}
+	if (p)
+		free(p);
 }
 
 int	count_islands(t_cub3d *cub3d, char **work_map)
@@ -87,10 +93,12 @@ int	count_islands(t_cub3d *cub3d, char **work_map)
 	{
 		if (!flood_fill_z(&trash, *p, '2'))
 		{
+			free(p);
 			free_map(trash);
 			exit_error("map error 1", cub3d);
 		}
 		nb_islands++;
+		free(p);
 		p = check_char_remaining(trash, '2');
 	}
 	free_map(trash);
