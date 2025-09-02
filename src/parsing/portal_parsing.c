@@ -16,6 +16,8 @@ int	tp_already_set(t_cub3d *cub3d, char name)
 {
 	int	i;
 
+	if (!cub3d || !cub3d->tp_portals || cub3d->nb_portals <= 0)
+		return (0);
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{

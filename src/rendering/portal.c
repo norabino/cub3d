@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/02 03:30:07 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ char	is_portal(t_cub3d *cub3d)
 		cub3d->player.last_prtl_pos.x = -1;
 		cub3d->player.last_prtl_pos.y = -1;
 	}
-	if (is_lowercase(cub3d->map[pos_y][pos_x]))
-		return (cub3d->map[pos_y][pos_x]);
+	char map_char = safe_map_access(cub3d, pos_y, pos_x);
+	if (is_lowercase(map_char))
+		return (map_char);
 	return (0);
 }
 
@@ -90,11 +91,17 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 	int		j;
 	char	path[256];
 
+	if (!cub3d || !cub3d->tp_portals || i >= cub3d->nb_portals)
+		return;
 	j = 0;
 	while (j < 4)
 	{
 		snprintf(path, sizeof(path), "textures/portal/tp%d.xpm", j);
-		load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], path);
+		if (!load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], path))
+		{
+			printf("Error: Failed to load portal texture %s\n", path);
+			return;
+		}
 		j++;
 	}
 	cub3d->tp_portals[i].sprite.current_frame = 0;
@@ -107,10 +114,14 @@ void	init_prtl_sprites(t_cub3d *cub3d)
 {
 	int	i;
 
+	printf("DEBUG: Initializing portal sprites for %d portals\n", cub3d->nb_portals);
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{
+		printf("DEBUG: Initializing sprite for portal %d ('%c')\n", i, cub3d->tp_portals[i].name);
 		init_single_portal(cub3d, i);
+		printf("DEBUG: Portal %d sprite initialized successfully\n", i);
 		i++;
 	}
+	printf("DEBUG: All portal sprites initialized\n");
 }

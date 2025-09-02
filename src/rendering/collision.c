@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/28 20:27:22 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 03:25:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	is_valid_position(t_cub3d *cub3d, double x, double y)
 {
 	if (x < COLLISION_MARGIN || y < COLLISION_MARGIN)
 		return (0);
-	if (cub3d->map[(int)y] == NULL || cub3d->map[(int)y][(int)x] == '\0'
-		|| cub3d->map[(int)y][(int)x] == '1')
+	char map_char = safe_map_access(cub3d, (int)y, (int)x);
+	if (map_char == '\0' || map_char == '1')
 		return (0);
 	if (!check_corner_positions(cub3d, x, y))
 		return (0);

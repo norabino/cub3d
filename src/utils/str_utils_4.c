@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 16:41:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 20:40:41 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 03:30:08 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void	check_correspondance(t_cub3d *cub3d)
 
 	i = 0;
 	cpt = 0;
+	printf("DEBUG: Checking portal correspondences...\n");
 	while (i < 26)
 	{
 		if (cub3d->portals[i] > 0)
 		{
+			printf("DEBUG: Portal '%c' appears %d times\n", (char)('a' + i), cub3d->portals[i]);
 			if (cub3d->portals[i] == 2)
 				cpt++;
 			else if (cub3d->portals[i] != 1)
@@ -37,6 +39,7 @@ void	check_correspondance(t_cub3d *cub3d)
 		}
 		i++;
 	}
+	printf("DEBUG: Found %d valid portal pairs\n", cpt);
 	cub3d->nb_portals = cpt;
 }
 
@@ -58,4 +61,17 @@ void	replace_portals_by_zero(char ***map)
 		}
 		y++;
 	}
+}
+
+char	safe_map_access(t_cub3d *cub3d, int y, int x)
+{
+	if (!cub3d || !cub3d->map)
+		return ('1');
+	if (y < 0 || x < 0)
+		return ('1');
+	if (!cub3d->map[y])
+		return ('1');
+	if (x >= (int)ft_strlen(cub3d->map[y]))
+		return ('1');
+	return (cub3d->map[y][x]);
 }

@@ -75,13 +75,17 @@ int	check_adjacent(int y, int x, char **map, char new)
 		return (0);
 	if (y <= 0 || !map[y - 1] || !map[y + 1])
 		return (0);
-	if ((!map[y][x - 1] || !in_map(map[y][x - 1])) && map[y][x - 1] != new)
+	if (x >= ft_strlen(map[y]) || 
+		(!in_map(map[y][x - 1]) && map[y][x - 1] != new))
 		return (0);
-	if ((!map[y][x + 1] || !in_map(map[y][x + 1])) && map[y][x + 1] != new)
+	if (x + 1 >= ft_strlen(map[y]) || 
+		(!in_map(map[y][x + 1]) && map[y][x + 1] != new))
 		return (0);
-	if ((!map[y - 1][x] || !in_map(map[y - 1][x])) && map[y - 1][x] != new)
+	if (x >= ft_strlen(map[y - 1]) || 
+		(!in_map(map[y - 1][x]) && map[y - 1][x] != new))
 		return (0);
-	if ((!map[y + 1][x] || !in_map(map[y + 1][x])) && map[y + 1][x] != new)
+	if (x >= ft_strlen(map[y + 1]) || 
+		(!in_map(map[y + 1][x]) && map[y + 1][x] != new))
 		return (0);
 	return (1);
 }

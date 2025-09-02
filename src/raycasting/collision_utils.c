@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 03:25:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@
 */
 int	check_corner_positions(t_cub3d *cub3d, double x, double y)
 {
-	if (cub3d->map[(int)(y - COLLISION_MARGIN)] == NULL ||
-		cub3d->map[(int)(y - COLLISION_MARGIN)][(int)(x - COLLISION_MARGIN)]
-		== '\0' ||
-		cub3d->map[(int)(y - COLLISION_MARGIN)][(int)(x - COLLISION_MARGIN)]
-		== '1')
-		return (0);
-	if (cub3d->map[(int)(y - COLLISION_MARGIN)] == NULL ||
-		cub3d->map[(int)(y - COLLISION_MARGIN)][(int)(x + COLLISION_MARGIN)]
-		== '\0' ||
-		cub3d->map[(int)(y - COLLISION_MARGIN)][(int)(x + COLLISION_MARGIN)]
-		== '1')
+	int margin_y = (int)(y - COLLISION_MARGIN);
+	int left_x = (int)(x - COLLISION_MARGIN);
+	int right_x = (int)(x + COLLISION_MARGIN);
+	
+	char left_char = safe_map_access(cub3d, margin_y, left_x);
+	char right_char = safe_map_access(cub3d, margin_y, right_x);
+	
+	if (left_char == '1' || right_char == '1')
 		return (0);
 	return (1);
 }
@@ -41,17 +38,14 @@ int	check_corner_positions(t_cub3d *cub3d, double x, double y)
 */
 int	check_bottom_corners(t_cub3d *cub3d, double x, double y)
 {
-	if (cub3d->map[(int)(y + COLLISION_MARGIN)] == NULL ||
-		cub3d->map[(int)(y + COLLISION_MARGIN)][(int)(x - COLLISION_MARGIN)]
-		== '\0' ||
-		cub3d->map[(int)(y + COLLISION_MARGIN)][(int)(x - COLLISION_MARGIN)]
-		== '1')
-		return (0);
-	if (cub3d->map[(int)(y + COLLISION_MARGIN)] == NULL ||
-		cub3d->map[(int)(y + COLLISION_MARGIN)][(int)(x + COLLISION_MARGIN)]
-		== '\0' ||
-		cub3d->map[(int)(y + COLLISION_MARGIN)][(int)(x + COLLISION_MARGIN)]
-		== '1')
+	int margin_y = (int)(y + COLLISION_MARGIN);
+	int left_x = (int)(x - COLLISION_MARGIN);
+	int right_x = (int)(x + COLLISION_MARGIN);
+	
+	char left_char = safe_map_access(cub3d, margin_y, left_x);
+	char right_char = safe_map_access(cub3d, margin_y, right_x);
+	
+	if (left_char == '1' || right_char == '1')
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/29 00:32:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/02 03:25:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,8 @@
 */
 int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 {
-	if (world_x < 0 || world_y < 0)
-		return (0);
-	if ((int)world_y >= ft_tablen(cub3d->map))
-		return (0);
-	if (!cub3d->map[(int)world_y])
-		return (0);
-	if ((int)world_x >= ft_strlen(cub3d->map[(int)world_y]))
-		return (0);
-	return (cub3d->map[(int)world_y][(int)world_x] == '1');
+	char map_char = safe_map_access(cub3d, (int)world_y, (int)world_x);
+	return (map_char == '1');
 }
 
 /*
@@ -35,15 +28,8 @@ int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 */
 int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 {
-	if (world_x < 0 || world_y < 0)
-		return (0);
-	if ((int)world_y >= ft_tablen(cub3d->map))
-		return (0);
-	if (!cub3d->map[(int)world_y])
-		return (0);
-	if ((int)world_x >= ft_strlen(cub3d->map[(int)world_y]))
-		return (0);
-	return (is_lowercase(cub3d->map[(int)world_y][(int)world_x]));
+	char map_char = safe_map_access(cub3d, (int)world_y, (int)world_x);
+	return (is_lowercase(map_char));
 }
 
 /*
