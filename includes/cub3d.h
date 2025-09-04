@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:56:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 00:58:47 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 # define MOVE_SPEED 2.0
 # define SENSIBILITY 3.0
-# define FPS 120
+# define FPS 60
 # define FOV 66
 # define COLLISION_MARGIN 0.05
 
