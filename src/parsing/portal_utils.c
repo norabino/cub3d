@@ -65,7 +65,7 @@ void	set_prtls(t_cub3d *cub3d)
 		cub3d->tp_portals = NULL;
 		return ;
 	}
-	cub3d->tp_portals = calloc(cub3d->nb_portals + 1, sizeof(t_prtl));
+	cub3d->tp_portals = ft_calloc(cub3d->nb_portals + 1, sizeof(t_prtl));
 	if (!cub3d->tp_portals)
 		exit_error("Failed to allocate memory for portals", cub3d);
 	i = 0;

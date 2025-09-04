@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 16:41:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:30:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/04 16:46:15 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_correspondance(t_cub3d *cub3d)
 		{
 			if (cub3d->portals[i] == 2)
 				cpt++;
-			else if (cub3d->portals[i] != 1)
+			else
 				exit_error("No correspondance for portal(s)", cub3d);
 		}
 		i++;
@@ -71,4 +71,18 @@ char	safe_map_access(t_cub3d *cub3d, int y, int x)
 	if (x >= (int)ft_strlen(cub3d->map[y]))
 		return ('1');
 	return (cub3d->map[y][x]);
+}
+
+char	*ft_strcpy(char *dest, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

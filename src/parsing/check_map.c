@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:30:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/04 16:41:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 ** Comme verser de l'eau pour voir si elle se répand partout
 ** ou si elle reste coincée quelque part
 */
-static int	process_flood(t_cub3d *cub3d, char **work_map, int *ff_count)
+static int	process_flood(t_cub3d *cub3d, char **work_map)
 {
 	t_point	*p;
 
@@ -50,7 +50,6 @@ static int	process_flood(t_cub3d *cub3d, char **work_map, int *ff_count)
 			exit_error("map ouverte", cub3d);
 		}
 		free(p);
-		(*ff_count)++;
 		return (1);
 	}
 	return (0);
@@ -70,10 +69,7 @@ void	ft_check_portals(t_cub3d *cub3d)
 		{
 			if (is_lowercase(cub3d->map[y][x]))
 			{
-				if (cub3d->portals[cub3d->map[y][x] - 97] == 0)
-					cub3d->portals[cub3d->map[y][x] - 97] = 1;
-				else
-					cub3d->portals[cub3d->map[y][x] - 97]++;
+				cub3d->portals[cub3d->map[y][x] - 97]++;
 				if (cub3d->portals[cub3d->map[y][x] - 97] > 2)
 					exit_error("More than two entry/exit for portal(s)", cub3d);
 			}
@@ -98,8 +94,8 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 	nb_flood_fill = 0;
 	prepare_map(cub3d, &work_map);
 	nb_maps = count_islands(cub3d, work_map);
-	while (process_flood(cub3d, work_map, &nb_flood_fill))
-		;
+	while (process_flood(cub3d, work_map))
+		nb_flood_fill++;
 	if (nb_flood_fill != nb_maps)
 	{
 		free_map(work_map);

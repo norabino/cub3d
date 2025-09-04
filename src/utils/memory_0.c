@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/04 15:47:36 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,14 @@ char	**map_cpy(char **old)
 	return (new);
 }
 
-/*
-** Copie un texte caractère par caractère
-** Comme recopier une phrase au tableau
-** lettre par lettre sans faire d'erreur
-*/
-char	*ft_strcpy(char *dest, char *str)
+void	ft_bzero(void *s, int n)
 {
-	int	i;
+	unsigned char	*ptr;
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		dest[i] = str[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	ptr = (unsigned char *)s;
+	while (n--)
+		*ptr++ = 0;
 }
-
 /*
 ** Crée une copie identique d'un texte en mémoire
 ** Comme faire un double d'un document important

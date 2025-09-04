@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:21:36 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ int	parse_color_line(t_colors *colors, char *line, int *idx, int i)
 	skip_spaces(line, &j);
 	if ((line[j] == 'C' || line[j] == 'F'))
 	{
-		if (ft_strrchr(line, '.') && ft_strrchr(line, '.')[1] == 'x'
-			&& ft_strrchr(line, '.')[2] == 'p'
-			&& ft_strrchr(line, '.')[3] == 'm')
+		if (check_extension(colors->cub3d, line, ".xpm"))
 			return (0);
 		validate_no_color_duplicate(colors, line[j]);
 		z = j;

@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitoring_utils.c                                 :+:      :+:    :+:   */
+/*   memory_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:46:45 by jdupuis          ###   ########.fr       */
+/*   Created: 2025/09/04 16:47:21 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/09/04 16:48:24 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	exit_error(char *err, t_cub3d *cub3d)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	i;
+	unsigned char	*res;
 
-	(void)cub3d;
-	write(2, "Error\n", 6);
-	i = 0;
-	while (err[i])
+	if (nmemb == 0 || size == 0)
 	{
-		write(2, &err[i], 1);
-		i++;
+		res = malloc(nmemb * size * 1);
+		if (!res)
+			return (NULL);
+		return (res);
 	}
-	write(2, "\n", 1);
-	ft_free(cub3d);
-	exit(1);
-}
-
-void	print_map(t_cub3d *cub3d, char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map && map[i])
-	{
-		printf("%s", map[i]);
-		i++;
-	}
-	if (!map)
-		exit_error("print map error map nulle", cub3d);
+	if (nmemb * size > __INT_MAX__)
+		return (NULL);
+	res = (void *)malloc(nmemb * size);
+	if (!res)
+		return (NULL);
+	ft_bzero(res, nmemb * size);
+	return (res);
 }

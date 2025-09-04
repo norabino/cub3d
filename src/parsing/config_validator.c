@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:57:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	validate_config_file(t_cub3d *cub3d, char **file)
 	set_direction(cub3d, cub3d->player.dir);
 	cub3d->player.pos_x = (double)cub3d->player.pos_x + 0.5;
 	cub3d->player.pos_y = (double)cub3d->player.pos_y + 0.5;
-	cub3d->player.fov = 66;
+	cub3d->player.fov = FOV;
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/04 15:55:43 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ static void	init_time_and_fps(t_cub3d *cub3d)
 
 static void	init_colors_and_input(t_cub3d *cub3d)
 {
-	int	i;
-
 	cub3d->colors.floor[0] = -1;
 	cub3d->colors.floor[1] = -1;
 	cub3d->colors.floor[2] = -1;
@@ -62,20 +60,10 @@ static void	init_colors_and_input(t_cub3d *cub3d)
 	cub3d->colors.ceiling[2] = -1;
 	cub3d->colors.cub3d = cub3d;
 	cub3d->player.fov = 0;
-	i = 0;
-	while (i < 26)
-	{
-		cub3d->portals[i] = 0;
-		i++;
-	}
+	ft_bzero(cub3d->portals, 26);
 	cub3d->tp_portals = NULL;
 	cub3d->map = NULL;
-	i = 0;
-	while (i < 256)
-	{
-		cub3d->keys[i] = 0;
-		i++;
-	}
+	ft_bzero(cub3d->keys, 256);
 	init_time_and_fps(cub3d);
 }
 

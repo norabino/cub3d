@@ -67,7 +67,8 @@ RENDERING_SRC = \
 UTILS_SRC = \
 	src/utils/ft_split.c \
 	src/utils/free.c \
-	src/utils/memory.c \
+	src/utils/memory_0.c \
+	src/utils/memory_1.c \
 	src/utils/monitoring_utils.c \
 	src/utils/str_utils_0.c \
 	src/utils/str_utils_1.c \

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/04 15:59:17 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	validate_no_texture_duplicate(char c, t_textures *textures)
+static void	texture_duplicate(char c, t_textures *textures)
 {
 	if (c == 'N')
 		exit_error("Duplicate north texture", textures->cub3d);
@@ -85,7 +85,7 @@ int	parse_texture_line(t_cub3d *cub3d, char *line, t_textures *textures)
 		|| (line[j] == 'E' && textures->east != NULL)
 		|| (line[j] == 'F' && textures->floor != NULL)
 		|| (line[j] == 'C' && textures->ceiling != NULL))
-		validate_no_texture_duplicate(line[j], textures);
+		texture_duplicate(line[j], textures);
 	if (is_letter(line[j]))
 	{
 		z = j;

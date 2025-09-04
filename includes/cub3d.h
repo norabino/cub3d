@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/04 16:56:59 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define MOVE_SPEED 2.0
 # define SENSIBILITY 3.0
 # define FPS 120
+# define FOV 66
 # define COLLISION_MARGIN 0.05
 
 # define MINIMAP_SIZE 150
@@ -57,9 +58,6 @@ typedef struct s_off
 	int		offset;
 	int		len;
 }	t_off;
-
-// Fondu écran
-void	draw_fade(t_cub3d *cub3d, double alpha);
 
 typedef struct s_texture_img
 {
@@ -377,6 +375,8 @@ double	ft_abs(double nb);
 
 void	free_map(char **map);
 void	*ft_memmove(void *dest, const void *src, size_t n);
+void	ft_bzero(void *s, int n);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 // ============================================================================
 // MINIMAP FUNCTIONS
