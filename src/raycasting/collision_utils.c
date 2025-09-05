@@ -6,14 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 18:10:48 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /* Vérifie les collisions aux coins supérieurs du joueur */
-/* Vérifie les positions des coins pour la collision */
 int	check_corner_positions(t_cub3d *cub3d, double x, double y)
 {
 	int		margin_y;
@@ -33,7 +32,6 @@ int	check_corner_positions(t_cub3d *cub3d, double x, double y)
 }
 
 /* Vérifie les collisions aux coins inférieurs du joueur */
-/* Vérifie les coins inférieurs pour la collision */
 int	check_bottom_corners(t_cub3d *cub3d, double x, double y)
 {
 	int		margin_y;

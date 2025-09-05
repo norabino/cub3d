@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:36:27 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 17:59:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,30 @@ static void	set_portal_color(t_prtl_sprite *sprite, int portal_index)
 static void	init_single_portal(t_cub3d *cub3d, int i)
 {
 	int		j;
-	char	path[256];
+	char	*right_path;
+	char	*join1;
+	char	*join2;
+	char	*num_str;
 
-	j = 0;
-	while (j < 4)
+	cub3d->tp_portals[i].sprite.frames = malloc(sizeof(t_texture_img) * 16);
+	if (!cub3d->tp_portals[i].sprite.frames)
+		return ;
+	j = -1;
+	while (++j < 16)
 	{
-		snprintf(path, sizeof(path), "textures/portal/tp%d.xpm", j);
-		load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], path);
-		j++;
+		num_str = ft_itoa(j);
+		join1 = ft_strjoin(num_str, ".xpm");
+		free(num_str);
+		num_str = NULL;
+		join2 = ft_strjoin("Portal_", join1);
+		free(join1);
+		join1 = NULL;
+		right_path = ft_strjoin(cub3d->textures.portals, join2);
+		free(join2);
+		join2 = NULL;
+		load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], right_path);
+		free(right_path);
+		right_path = NULL;
 	}
 	cub3d->tp_portals[i].sprite.current_frame = 0;
 	cub3d->tp_portals[i].sprite.frame_counter = 0;

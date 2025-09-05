@@ -14,7 +14,7 @@
 
 /* Sélectionne la texture animée d'un portail spécifique */
 static void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
-	char map_char)
+			char map_char)
 {
 	int	i;
 	int	safe_frame;
@@ -27,7 +27,9 @@ static void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 	{
 		if (cub3d->tp_portals[i].name == map_char)
 		{
-			safe_frame = cub3d->tp_portals[i].sprite.current_frame % 4;
+			if (!cub3d->tp_portals[i].sprite.frames)
+				i = 0;
+			safe_frame = cub3d->tp_portals[i].sprite.current_frame % 16;
 			tex_calc->portal_index = i;
 			tex_calc->current_text
 				= &cub3d->tp_portals[i].sprite.frames[safe_frame];

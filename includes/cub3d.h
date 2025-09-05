@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 16:15:24 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 17:43:09 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,6 +382,7 @@ void	free_map(char **map);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	ft_bzero(void *s, int n);
 void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_itoa(int n);
 
 // ============================================================================
 // MINIMAP FUNCTIONS

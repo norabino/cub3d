@@ -39,7 +39,8 @@ PARSING_SRC = \
 	src/parsing/portal_parsing.c \
 	src/parsing/portal_utils.c \
 	src/parsing/texture_parser.c \
-	src/parsing/texture_utils.c \
+	src/parsing/texture_utils_0.c \
+	src/parsing/texture_utils_1.c \
 	src/parsing/texture_validator.c \
 
 # Raycasting system

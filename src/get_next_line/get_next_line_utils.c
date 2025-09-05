@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:19:40 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 17:59:42 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,31 +67,21 @@ char	*ft_substr(char *s, int start, int len, int flg)
 	return (str);
 }
 
-/* Vérifie et prépare les chaînes avant jointure */
-void	*ft_check_join(char **s1, char **s2)
-{
-	if (!*s1 && !*s2)
-		return (NULL);
-	if (!*s1)
-	{
-		*s1 = (char *)malloc(1 * sizeof(char));
-		if (!*s1)
-			return (NULL);
-		(*s1)[0] = 0;
-	}
-	if (!*s2)
-		return (NULL);
-	return ("CHECK OK");
-}
-
-/* Joint deux chaînes de caractères */
+/* Joint deux chaînes de caractères - version spéciale pour get_next_line */
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
-	if (!ft_check_join(&s1, &s2))
+	if (!s1)
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		if (!s1)
+			return (NULL);
+		s1[0] = 0;
+	}
+	if (!s2)
 		return (NULL);
 	str = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!str)
@@ -104,6 +94,5 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j] != '\0')
 		str[i++] = s2[j++];
 	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	free(s1);
 	return (str);
 }
