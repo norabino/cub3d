@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 16:05:43 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:16:51 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	texture_duplicate(char c, t_textures *textures)
 	else if (c == 'C')
 		exit_error("Duplicate ceiling texture", textures->cub3d);
 	else if (c == 'P')
-		exit_error("")
+		exit_error("Duplicate portal folder", textures->cub3d);
 }
 
 static char	*clean_texture_string(char *line, int j)
@@ -88,7 +88,7 @@ int	parse_texture_line(t_cub3d *cub3d, char *line, t_textures *textures)
 		|| (line[j] == 'E' && textures->east)
 		|| (line[j] == 'F' && textures->floor)
 		|| (line[j] == 'C' && textures->ceiling)
-		|| (line[j] == 'P' && textures->portal))
+		|| (line[j] == 'P' && textures->portals))
 		texture_duplicate(line[j], textures);
 	if (is_letter(line[j]))
 	{

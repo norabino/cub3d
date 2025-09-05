@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils_0.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:25:54 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:18:50 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	skip_letter(char current, char next)
 	if (current == 'W' && next == 'E')
 		return (2);
 	if (current == 'E' && next == 'A')
+		return (2);
+	if (current == 'P' && next == 'O')
 		return (2);
 	return (1);
 }
