@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:47:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 03:15:51 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
 		&& check_extension(cub3d, filename, ".xpm"))
 	{
 		free(filename);
-		assign_texture(line[z], j, line, &cub3d->textures);
+		set_texture(line[z], j, line, &cub3d->textures);
 	}
 	else
 		free(filename);
@@ -96,4 +96,35 @@ int	all_text_set(t_textures textures)
 			textures.ceiling, ".xpm"))
 		exit_error("Wrong ceiling texture extension.", textures.cub3d);
 	return (1);
+}
+
+/* Assigne une texture selon son identifiant */
+void	set_texture(char c, int j, char *line, t_textures *textures)
+{
+	char	*sub;
+	int		len;
+	int		i;
+
+	len = ft_strlen(line) - j;
+	sub = ft_substr(line, j, len, 0);
+	len = ft_strlen(sub);
+	i = len - 1;
+	while (i >= 0 && (sub[i] == ' ' || sub[i] == '\t' || sub[i] == '\n' || sub[i] == '\r'))
+	{
+		sub[i] = '\0';
+		i--;
+	}
+	if (c == 'N' && textures->north == NULL)
+		textures->north = sub;
+	else if (c == 'S' && textures->south == NULL)
+		textures->south = sub;
+	else if (c == 'W' && textures->west == NULL)
+		textures->west = sub;
+	else if (c == 'E' && textures->east == NULL)
+		textures->east = sub;
+	else
+	{
+		free(sub);
+		exit_error("Duplicate or invalid texture identifier.", textures->cub3d);
+	}
 }
