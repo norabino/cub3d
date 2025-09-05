@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 16:13:56 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:14:36 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,23 @@ typedef struct s_texture_img
 	int		height;
 }	t_texture_img;
 
+typedef struct s_portal_sprite
+{
+	t_texture_img	*frames;
+	int				current_frame;
+	int				frame_counter;
+	int				color_tint[3];
+	long			last_frame_time;
+}	t_prtl_sprite;
+
+typedef struct s_portal
+{
+	char			name;
+	t_point			p1;
+	t_point			p2;
+	t_prtl_sprite	sprite;
+}	t_prtl;
+
 typedef struct s_textures
 {
 	char			*north;
@@ -101,23 +118,6 @@ typedef struct s_colors
 	int		ceiling[3];
 	t_cub3d	*cub3d;
 }	t_colors;
-
-typedef struct s_portal_sprite
-{
-	t_texture_img	*frames;
-	int				current_frame;
-	int				frame_counter;
-	int				color_tint[3];
-	long			last_frame_time;
-}	t_prtl_sprite;
-
-typedef struct s_portal
-{
-	char			name;
-	t_point			p1;
-	t_point			p2;
-	t_prtl_sprite	sprite;
-}	t_prtl;
 
 typedef struct s_img
 {
