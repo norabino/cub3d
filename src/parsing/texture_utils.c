@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 03:15:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:11:21 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
 	char	*filename;
 
 	extract_filename_from_line(line, j, &filename);
-	if (is_valid_file_path(filename)
-		&& check_extension(cub3d, filename, ".xpm"))
+	if ((line[z] == 'P') || (is_valid_file_path(filename)
+		&& check_extension(cub3d, filename, ".xpm")))
 	{
 		free(filename);
 		set_texture(line[z], j, line, &cub3d->textures);
@@ -114,14 +114,16 @@ void	set_texture(char c, int j, char *line, t_textures *textures)
 		sub[i] = '\0';
 		i--;
 	}
-	if (c == 'N' && textures->north == NULL)
+	if (c == 'N' && !textures->north)
 		textures->north = sub;
-	else if (c == 'S' && textures->south == NULL)
+	else if (c == 'S' && !textures->south)
 		textures->south = sub;
-	else if (c == 'W' && textures->west == NULL)
+	else if (c == 'W' && !textures->west)
 		textures->west = sub;
-	else if (c == 'E' && textures->east == NULL)
+	else if (c == 'E' && !textures->east)
 		textures->east = sub;
+	else if (c == 'P' && !textures->portals)
+		textures->portals = sub;
 	else
 	{
 		free(sub);

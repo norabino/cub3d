@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:06:04 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	skip_spaces(char *str, int *i)
 /* Vérifie si un caractère est une lettre de direction ou couleur */
 int	is_letter(char c)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == 'F' || c == 'C')
+	if (c == 'N' || c == 'S' || c == 'W' ||
+		c == 'E' || c == 'F' || c == 'C' || c == 'P')
 		return (1);
 	return (0);
 }

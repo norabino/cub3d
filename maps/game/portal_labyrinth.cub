@@ -3,6 +3,8 @@ SO ./textures/cartoon_bark.xpm
 EA ./textures/cartoon_wood.xpm
 WE ./textures/neon_wall.xpm
 
+PORTAL ./textures/portal/
+
 C 135,206,235
 F 139,69,19
 

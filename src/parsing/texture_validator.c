@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:47:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:12:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	validate_all_textures(t_cub3d *cub3d, char **file, int *idx)
 			*idx = result;
 		i++;
 	}
+	printf("%s\n", cub3d->textures.portals);
 	if (!all_text_set(cub3d->textures))
 		exit_error("Missing texture(s)", cub3d);
 	return (1);
