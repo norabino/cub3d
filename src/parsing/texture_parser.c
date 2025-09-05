@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 15:59:17 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:29:22 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Gère les erreurs de textures dupliquées */
 static void	texture_duplicate(char c, t_textures *textures)
 {
 	if (c == 'N')

@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/22 15:37:03 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 01:25:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Lance UN SEUL rayon pour calculer une colonne de l'écran
-** Imagine que tu lances une balle en ligne droite depuis tes yeux
-** jusqu'à ce qu'elle touche un mur, puis tu mesures la distance
-** Plus c'est loin = mur petit à l'écran, plus c'est proche = mur grand
-*/
+/* Lance un rayon pour calculer une colonne de l'écran */
 void	cast_single_ray(t_cub3d *cub3d, int screen_x)
 {
 	double	camera_x;
@@ -39,12 +34,7 @@ void	cast_single_ray(t_cub3d *cub3d, int screen_x)
 	draw_wall_slice(cub3d, screen_x, perp_wall_dist, &dda);
 }
 
-/*
-** Fonction principale du raycasting - dessine tout l'écran
-** Lance 1280 rayons (un pour chaque colonne de pixels)
-** C'est comme scanner l'horizon de gauche à droite avec une lampe torche
-** et dessiner ce qu'on voit colonne par colonne
-*/
+/* Fonction principale du raycasting - dessine tout l'écran */
 void	raycast(t_cub3d *cub3d)
 {
 	int	x;

@@ -12,6 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
+/* Vérifie si un portail avec ce nom existe déjà */
 int	tp_already_set(t_cub3d *cub3d, char name)
 {
 	int	i;

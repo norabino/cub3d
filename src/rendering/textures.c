@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/01 18:51:07 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 01:55:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Nettoie le chemin d'un fichier en enlevant les espaces et retours à la ligne
-** Comme effacer la poussière sur une adresse pour bien la lire
-*/
+/* Nettoie le chemin d'un fichier en enlevant les espaces */
 static char	*clean_path(char *path)
 {
 	int	len;
@@ -34,11 +31,7 @@ static char	*clean_path(char *path)
 	return (path);
 }
 
-/*
-** Charge UNE texture depuis un fichier XPM
-** Comme scanner une photo pour la mettre dans l'ordinateur
-** La texture devient utilisable pour décorer les murs
-*/
+/* Charge une texture depuis un fichier XPM */
 int	load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path)
 {
 	char	*clean_path_str;
@@ -60,11 +53,7 @@ int	load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path)
 	return (1);
 }
 
-/*
-** Charge TOUTES les textures des 4 murs (Nord, Sud, Est, Ouest)
-** Comme préparer tous les posters qu'on va coller sur les murs
-** Si un poster ne marche pas, on arrête tout le programme
-*/
+/* Charge toutes les textures des 4 murs */
 void	load_all_textures(t_cub3d *cub3d)
 {
 	if (!cub3d)
@@ -89,11 +78,7 @@ void	load_all_textures(t_cub3d *cub3d)
 		exit_error("Error: Failed to load ceiling texture", cub3d);
 }
 
-/*
-** Libère la mémoire de toutes les textures
-** Comme jeter tous les posters quand on déménage
-** Important pour éviter les fuites de mémoire
-*/
+/* Libère la mémoire de toutes les textures */
 void	free_textures(t_cub3d *cub3d)
 {
 	if (!cub3d || !cub3d->mlx.mlx)
@@ -112,11 +97,7 @@ void	free_textures(t_cub3d *cub3d)
 		mlx_destroy_image(cub3d->mlx.mlx, cub3d->textures.ceiling_img.img);
 }
 
-/*
-** Choisit la bonne texture selon la direction du mur
-** Nord/Sud/Est/Ouest = textures différentes
-** Comme choisir le bon papier peint selon quelle pièce on décore
-*/
+/* Choisit la bonne texture selon la direction du mur */
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {

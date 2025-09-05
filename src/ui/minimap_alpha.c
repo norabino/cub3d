@@ -6,16 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 22:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 20:54:25 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Lit la couleur d'un pixel existant dans l'image
-** Utilise l'accès direct aux données de l'image pour la performance
-*/
+/* Lit la couleur d'un pixel existant dans l'image */
 int	get_pixel_color(t_img *img, int x, int y)
 {
 	char	*dst;
@@ -26,11 +23,7 @@ int	get_pixel_color(t_img *img, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-/*
-** Applique un alpha blending entre deux couleurs
-** alpha = 0.0 (transparent) à 1.0 (opaque)
-** Optimisé: utilise des opérations entières au lieu de float
-*/
+/* Applique un alpha blending entre deux couleurs */
 int	alpha_blend(int bg_color, int fg_color, double alpha)
 {
 	int	alpha_int;
@@ -43,10 +36,7 @@ int	alpha_blend(int bg_color, int fg_color, double alpha)
 	return (result);
 }
 
-/*
-** Calcule la largeur pour une ligne donnée du triangle
-** Remplace la table globale par un calcul direct
-*/
+/* Calcule la largeur pour une ligne donnée du triangle */
 static int	get_triangle_width_for_row(int y)
 {
 	int	row_index;
@@ -66,11 +56,7 @@ static int	get_triangle_width_for_row(int y)
 		return (9);
 }
 
-/*
-** Vérifie si le pixel fait partie de la forme de la flèche
-** Triangle plus haut que large (10 lignes de haut, 9 pixels de large max)
-** Optimisé: utilise un calcul direct au lieu d'une table globale
-*/
+/* Vérifie si le pixel fait partie de la forme de la flèche */
 int	is_arrow_pixel(int x, int y)
 {
 	int	triangle_width;
@@ -83,10 +69,7 @@ int	is_arrow_pixel(int x, int y)
 	return (x >= -half_width && x <= half_width);
 }
 
-/*
-** Vérifie si le pixel fait partie du contour noir
-** Optimisé: utilise la même fonction de calcul et vérifie les bords
-*/
+/* Vérifie si le pixel fait partie du contour noir */
 int	is_arrow_border(int x, int y)
 {
 	int	triangle_width;

@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/28 21:58:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Calcule à quelle vitesse on doit avancer dans la texture
-** Comme calculer de combien de centimètres avancer sur le poster
-** pour chaque pixel qu'on dessine à l'écran
-*/
+/* Calcule la vitesse d'avancement dans la texture */
 void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start)
 {
 	int		real_wall_height;
@@ -29,9 +25,7 @@ void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start)
 			+ real_wall_height / 2) * tex_calc->step;
 }
 
-/*
-** Prépare tous les paramètres avant de dessiner
-*/
+/* Prépare tous les paramètres avant de dessiner */
 void	init_texture_draw_params(t_texture_calc *tex_calc,
 	int draw_params[2], int *tex_height, int *draw_bounds[2])
 {
@@ -41,11 +35,7 @@ void	init_texture_draw_params(t_texture_calc *tex_calc,
 	*tex_height = tex_calc->current_text->height;
 }
 
-/*
-** Dessine UN SEUL pixel avec la bonne couleur de texture
-** Prend la couleur du poster et la met sur l'écran au bon endroit
-** S'assure que la couleur existe bien et n'est pas hors limites
-*/
+/* Applique une teinte colorée à la couleur du pixel */
 static int	apply_portal_tint(int color, t_texture_calc *tex_calc)
 {
 	int	r;
@@ -64,6 +54,7 @@ static int	apply_portal_tint(int color, t_texture_calc *tex_calc)
 	return ((r << 16) | (g << 8) | b);
 }
 
+/* Dessine un pixel unique de texture à l'écran */
 void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
 	t_texture_calc *tex_calc)
 {

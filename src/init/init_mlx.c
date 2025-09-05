@@ -6,16 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:19:02 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/02 03:19:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Initialise MinilibX et prépare l'affichage
-** Crée la fenêtre, prépare l'image pour dessiner dessus
-*/
+/* Initialise MinilibX et prépare l'affichage */
 t_cub3d	*init_mlx(t_cub3d *cub3d)
 {
 	cub3d->mlx.img = malloc(sizeof(t_img));

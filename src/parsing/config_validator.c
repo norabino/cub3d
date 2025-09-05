@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:57:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:04:55 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Valide un fichier de configuration .cub complet */
 int	validate_config_file(t_cub3d *cub3d, char **file)
 {
 	int	idx_line;

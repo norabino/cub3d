@@ -12,11 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-/*
-** Calcule les coordonnées de texture pour mapper une image sur un mur
-** Simple : imagine que tu colles un poster sur un mur, cette fonction
-** calcule quelle partie du poster tu dois prendre pour chaque pixel
-*/
+/* Calcule les coordonnées de texture pour mapper une image sur un mur */
 void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc, double perp_wall_dist)
 {
@@ -35,11 +31,7 @@ void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
 		tex_calc->tex_x = tex_calc->current_text->width - tex_calc->tex_x - 1;
 }
 
-/*
-** Récupère la couleur d'un pixel dans une texture
-** Comme regarder la couleur d'un point précis sur une photo
-** Utilise des astuces mathématiques rapides pour aller plus vite
-*/
+/* Récupère la couleur d'un pixel dans une texture */
 int	get_texture_pixel_color(t_texture_img *texture, int x, int y)
 {
 	int	offset;
@@ -52,11 +44,7 @@ int	get_texture_pixel_color(t_texture_img *texture, int x, int y)
 	return (*(int *)(texture->addr + offset));
 }
 
-/*
-** Dessine une colonne verticale de mur avec sa texture
-** Comme colorier une ligne verticale de l'écran en prenant les couleurs
-** du poster qu'on a collé sur le mur, pixel par pixel de haut en bas
-*/
+/* Dessine une colonne verticale de mur avec sa texture */
 void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x,
 	t_texture_calc *tex_calc, int draw_params[2])
 {

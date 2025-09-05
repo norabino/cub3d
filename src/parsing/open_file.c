@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:26:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Extrait l'extension d'un nom de fichier */
 static char	*extract_extension(char *filename)
 {
 	char	*ext;
@@ -28,6 +29,7 @@ static char	*extract_extension(char *filename)
 	return (ext);
 }
 
+/* Vérifie si l'extension du fichier est correcte */
 int	check_extension(t_cub3d *cub3d, char *filename, char *extension)
 {
 	char	*ext;
@@ -48,6 +50,7 @@ int	check_extension(t_cub3d *cub3d, char *filename, char *extension)
 	return (1);
 }
 
+/* Alloue la mémoire pour stocker un fichier */
 char	**malloc_file(t_cub3d *cub3d, char *filename)
 {
 	char	**file;
@@ -65,6 +68,7 @@ char	**malloc_file(t_cub3d *cub3d, char *filename)
 	return (file);
 }
 
+/* Lit toutes les lignes d'un fichier */
 void	read_file_lines(char **file, int fd)
 {
 	int	i;
@@ -79,6 +83,7 @@ void	read_file_lines(char **file, int fd)
 	file[i] = NULL;
 }
 
+/* Ouvre et lit un fichier complet en mémoire */
 char	**open_file(t_cub3d *cub3d, char *filename)
 {
 	int		fd;

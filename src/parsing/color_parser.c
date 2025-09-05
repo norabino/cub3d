@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:21:36 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Assigne les valeurs de couleur selon le type (C ou F) */
 void	assign_color_values(t_colors *colors, char **split, char c)
 {
 	if (c == 'C')
@@ -20,6 +21,7 @@ void	assign_color_values(t_colors *colors, char **split, char c)
 		set_floor(colors, split);
 }
 
+/* Valide qu'il n'y a pas de couleur dupliquée */
 static void	validate_no_color_duplicate(t_colors *colors, char c)
 {
 	if (c == 'C' && colors->ceiling[0] != -1)
@@ -28,6 +30,7 @@ static void	validate_no_color_duplicate(t_colors *colors, char c)
 		exit_error("Duplicate floor color", colors->cub3d);
 }
 
+/* Parse et valide les valeurs de couleur depuis une ligne */
 static void	parse_color_values(t_colors *colors, char *line, int j, int z)
 {
 	char	**split;
@@ -39,6 +42,7 @@ static void	parse_color_values(t_colors *colors, char *line, int j, int z)
 	free_map(split);
 }
 
+/* Valide que toutes les couleurs nécessaires sont définies */
 void	validate_colors_complete(t_colors *colors)
 {
 	int	ceiling_texture_exists;
@@ -54,6 +58,7 @@ void	validate_colors_complete(t_colors *colors)
 		exit_error("Floor color is Missing", colors->cub3d);
 }
 
+/* Parse une ligne de couleur et met à jour les structures */
 int	parse_color_line(t_colors *colors, char *line, int *idx, int i)
 {
 	int	j;

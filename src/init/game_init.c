@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 15:55:43 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Initialise les valeurs de base de la structure du jeu */
 static void	init_basic_values(t_cub3d *cub3d)
 {
 	cub3d->mlx.mlx = NULL;
@@ -37,6 +38,7 @@ static void	init_basic_values(t_cub3d *cub3d)
 	cub3d->nb_portals = 0;
 }
 
+/* Initialise les variables de temps et FPS */
 static void	init_time_and_fps(t_cub3d *cub3d)
 {
 	cub3d->last_refresh = 0;
@@ -50,6 +52,7 @@ static void	init_time_and_fps(t_cub3d *cub3d)
 	cub3d->mouse_captured = 0;
 }
 
+/* Initialise les couleurs et paramètres d'entrée */
 static void	init_colors_and_input(t_cub3d *cub3d)
 {
 	cub3d->colors.floor[0] = -1;
@@ -67,6 +70,7 @@ static void	init_colors_and_input(t_cub3d *cub3d)
 	init_time_and_fps(cub3d);
 }
 
+/* Initialise l'état global du jeu */
 void	init_game_state(t_cub3d *cub3d)
 {
 	init_basic_values(cub3d);

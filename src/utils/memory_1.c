@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:47:21 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:48:24 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Alloue et initialise à zéro un bloc de mémoire */
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*res;

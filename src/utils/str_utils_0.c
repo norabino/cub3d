@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:26:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:25:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Copie une partie d'un texte sur un nombre limité de caractères
-** Comme recopier seulement les 5 premiers mots d'une phrase
-** au lieu de toute la phrase
-*/
+/* Copie n caractères d'une chaîne vers une nouvelle chaîne */
 char	*ft_strndup(char *str, int n)
 {
 	char	*tab;
@@ -37,11 +33,7 @@ char	*ft_strndup(char *str, int n)
 	return (tab);
 }
 
-/*
-** Compte le nombre de lignes dans un tableau de textes
-** Comme compter le nombre de pages dans un livre
-** en tournant chaque page une par une
-*/
+/* Compte le nombre de lignes dans un tableau de chaînes */
 int	ft_tablen(char **tab)
 {
 	int	i;
@@ -52,11 +44,7 @@ int	ft_tablen(char **tab)
 	return (i);
 }
 
-/*
-** Cherche un caractère dans un texte en partant de la fin
-** Comme chercher la dernière occurrence d'une lettre
-** dans un mot en lisant de droite à gauche
-*/
+/* Cherche un caractère dans une chaîne en partant de la fin */
 char	*ft_strrchr(char *s, int c)
 {
 	int	i;
@@ -71,11 +59,7 @@ char	*ft_strrchr(char *s, int c)
 	return (NULL);
 }
 
-/*
-** Compare deux textes pour voir s'ils sont identiques
-** Comme comparer deux mots pour voir s'ils sont
-** exactement les mêmes lettre par lettre
-*/
+/* Compare deux chaînes pour vérifier si elles sont identiques */
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -86,11 +70,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-/*
-** Détermine combien de lettres il faut ignorer selon le mot
-** Comme savoir si on lit "NO" (2 lettres) ou juste "N" (1 lettre)
-** pour reconnaître les directions North, South, East, West
-*/
+/* Détermine le nombre de caractères à ignorer selon l'identifiant */
 int	skip_letter(char current, char next)
 {
 	if (current == 'N' && next == 'O')

@@ -6,16 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:30:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:05:10 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Vérifie si une position est un mur dans la carte
-** Optimisé avec vérifications early-exit
-*/
+/* Vérifie si une position est un mur dans la carte */
 int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 {
 	if (world_x < 0 || world_y < 0)
@@ -29,10 +26,7 @@ int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 	return (cub3d->map[(int)world_y][(int)world_x] == '1');
 }
 
-/*
-** Vérifie si une position est un portail dans la carte
-** Optimisé avec vérifications early-exit
-*/
+/* Vérifie si une position est un portail dans la carte */
 int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 {
 	if (world_x < 0 || world_y < 0)
@@ -46,10 +40,7 @@ int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 	return (is_lowercase(cub3d->map[(int)world_y][(int)world_x]));
 }
 
-/*
-** Calcule la position mondiale à partir des coordonnées d'écran
-** Optimisé: pré-calcule cos et sin pour éviter les appels répétés
-*/
+/* Calcule la position mondiale à partir des coordonnées d'écran */
 void	calculate_world_pos(double *world_x, double *world_y,
 	t_minimap_calc *calc, t_minimap_screen *screen)
 {
@@ -64,25 +55,19 @@ void	calculate_world_pos(double *world_x, double *world_y,
 			+ relative_y * calc->cos_angle);
 }
 
-/*
-** Initialise les calculs pour la minimap
-** Optimisé: pré-calcule l'angle et les fonctions trigonométriques
-*/
+/* Initialise les calculs pour la minimap */
 void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc)
 {
 	double	player_angle;
 
 	calc->player_x = cub3d->player.pos_x;
 	calc->player_y = cub3d->player.pos_y;
-	player_angle = atan2(cub3d->player.dir_y, cub3d->player.dir_x) + M_PI / 2;
+	player_angle = atan2(cub3d->player.dir_y, cub3d->player.dir_x) + PI / 2;
 	calc->cos_angle = cos(player_angle);
 	calc->sin_angle = sin(player_angle);
 }
 
-/*
-** Fait tourner un point autour de l'origine de manière intuitive
-** Fonction legacy maintenue pour compatibilité
-*/
+/* Fait tourner un point autour de l'origine */
 void	rotate_point(double *x, double *y, double angle)
 {
 	double	old_x;

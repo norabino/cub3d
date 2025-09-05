@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 19:07:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:55:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Fait tourner le joueur avec la souris
-** Comme tourner la tête quand on bouge la souris
-** vers la droite ou la gauche
-*/
+/* Fait tourner le joueur avec la souris */
 void	rotate_player_mouse(t_cub3d *cub3d, double angle)
 {
 	double	old_dir_x;
@@ -34,11 +30,7 @@ void	rotate_player_mouse(t_cub3d *cub3d, double angle)
 		+ cub3d->view.plane_y * cos(angle);
 }
 
-/*
-** Gère le mouvement de la souris pour contrôler la vue
-** Comme utiliser une manette pour regarder autour de soi
-** dans un jeu vidéo
-*/
+/* Gère le mouvement de la souris pour contrôler la vue */
 int	handle_mouse_move(int x, int y, t_cub3d *cub3d)
 {
 	int		delta_x;

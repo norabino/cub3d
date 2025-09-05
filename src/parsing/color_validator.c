@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/04 16:22:58 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:36:27 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Valide toutes les couleurs du fichier de configuration */
 int	validate_all_colors(t_colors *colors, char **file, int *idx)
 {
 	int	i;
@@ -27,6 +28,7 @@ int	validate_all_colors(t_colors *colors, char **file, int *idx)
 	return (1);
 }
 
+/* Vérifie si toutes les couleurs sont définies */
 int	all_colors_set(t_colors colors)
 {
 	int	ceiling_complete;
@@ -41,6 +43,7 @@ int	all_colors_set(t_colors colors)
 	return (ceiling_complete && floor_complete);
 }
 
+/* Définit la couleur du plafond */
 void	set_ceiling(t_colors *colors, char **split)
 {
 	int	i;
@@ -56,6 +59,7 @@ void	set_ceiling(t_colors *colors, char **split)
 	}
 }
 
+/* Définit la couleur du sol */
 void	set_floor(t_colors *colors, char **split)
 {
 	int	i;

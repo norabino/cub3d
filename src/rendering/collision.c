@@ -6,18 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Checks if a position is valid around the player with a safety margin
-** Tests multiple points around the player position to create a collision
-** "bubble" that prevents sticking to walls
-** The COLLISION_MARGIN constant defines the minimum distance from walls
-*/
+/* Vérifie les collisions autour du joueur avec marge de sécurité */
 int	is_valid_position(t_cub3d *cub3d, double x, double y)
 {
 	char	map_char;
@@ -34,6 +29,7 @@ int	is_valid_position(t_cub3d *cub3d, double x, double y)
 	return (1);
 }
 
+/* Tente un mouvement perpendiculaire (diagonal) */
 int	perpendicular_move(t_cub3d *cub3d, double new_x, double new_y)
 {
 	if (is_valid_position(cub3d, new_x, new_y))
@@ -45,6 +41,7 @@ int	perpendicular_move(t_cub3d *cub3d, double new_x, double new_y)
 	return (0);
 }
 
+/* Tente un mouvement horizontal uniquement */
 int	horizontal_move(t_cub3d *cub3d, double new_x, double y)
 {
 	if (is_valid_position(cub3d, new_x, y))
@@ -56,6 +53,7 @@ int	horizontal_move(t_cub3d *cub3d, double new_x, double y)
 	return (0);
 }
 
+/* Tente un mouvement vertical uniquement */
 int	vertical_move(t_cub3d *cub3d, double x, double new_y)
 {
 	if (is_valid_position(cub3d, x, new_y))
@@ -67,12 +65,7 @@ int	vertical_move(t_cub3d *cub3d, double x, double new_y)
 	return (0);
 }
 
-/*
-** Déplace le joueur en vérifiant les collisions
-** Teste la nouvelle position avant de s'y déplacer
-** Si ça passe, on bouge. Si ça coince, on reste sur place
-** Retourne 1 si le mouvement a eu lieu, 0 sinon
-*/
+/* Déplace le joueur en vérifiant les collisions */
 int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 {
 	double		new_x;

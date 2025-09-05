@@ -54,7 +54,7 @@ RENDERING_SRC = \
 	src/rendering/pixel_utils.c \
 	src/rendering/portal.c \
 	src/rendering/portal_textures.c \
-	src/rendering/portal_utils2.c \
+	src/rendering/portal_utils.c \
 	src/rendering/raycasting.c \
 	src/rendering/raycasting_utils.c \
 	src/rendering/dda_utils.c \
@@ -77,7 +77,6 @@ UTILS_SRC = \
 	src/utils/str_utils_4.c \
 	src/utils/time.c \
 	src/utils/fps_utils.c \
-	src/utils/ft_free.c \
 
 # Get Next Line
 GNL_SRC = \

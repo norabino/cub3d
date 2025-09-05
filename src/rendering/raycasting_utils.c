@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/02 07:59:39 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:25:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Prépare les paramètres de base pour l'algorithme DDA
-** DDA = méthode mathématique pour suivre une ligne droite sur une grille
-** Comme préparer une règle et un compas avant de tracer une ligne droite
-*/
+/* Prépare les paramètres de base pour l'algorithme DDA */
 void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
 	t_dda *dda)
 {
@@ -35,11 +31,7 @@ void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
 	dda->hit = 0;
 }
 
-/*
-** Calcule dans quelle direction avancer et les distances initiales
-** Détermine si on va vers la droite/gauche et haut/bas
-** Prépare les mesures pour savoir quand on atteint le prochain mur
-*/
+/* Calcule direction et distances initiales pour DDA */
 void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
 	double ray_dir_y, t_cub3d *cub3d)
 {
@@ -61,11 +53,7 @@ void	init_step_and_side_dist(t_dda *dda, double ray_dir_x,
 	init_step_and_side_dist_y(dda, ray_dir_y, cub3d);
 }
 
-/*
-** Fonction d'aide pour init_step_and_side_dist (direction Y - verticale)
-** Calcule spécifiquement comment avancer vers le haut ou le bas
-** Séparée de la direction X pour respecter la limite de 25 lignes
-*/
+/* Fonction d'aide pour init_step_and_side_dist (direction Y) */
 void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
 	t_cub3d *cub3d)
 {
@@ -86,12 +74,7 @@ void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
 	}
 }
 
-/*
-** Exécute l'algorithme DDA pour trouver où le rayon touche un mur
-** DDA = avance case par case sur la grille jusqu'à toucher un mur
-** Comme un jeu de l'oie : on avance case par case jusqu'à l'obstacle
-** La limite de 1000 évite les boucles infinies
-*/
+/* Exécute l'algorithme DDA pour trouver l'intersection avec un mur */
 void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 {
 	int		max_iterations;
@@ -113,13 +96,7 @@ void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 	}
 }
 
-/*
-** Calcule la distance exacte perpendiculaire jusqu'au mur
-** Perpendiculaire = distance la plus courte, en ligne droite
-** Important pour éviter l'effet "fish-eye" (déformation de poisson)
-** Plus technique : corrige la distance pour qu'elle soit toujours mesurée
-** perpendiculairement à l'écran, pas en diagonale
-*/
+/* Calcule la distance perpendiculaire au mur (évite fish-eye) */
 double	calc_perpendicular_wall_distance(t_dda *dda, double ray_dir_x,
 	double ray_dir_y, t_cub3d *cub3d)
 {

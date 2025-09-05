@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/02 02:59:58 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:47:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Valide toutes les textures présentes dans le fichier de configuration */
 int	validate_all_textures(t_cub3d *cub3d, char **file, int *idx)
 {
 	int	i;

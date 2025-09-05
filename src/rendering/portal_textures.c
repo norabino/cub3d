@@ -12,6 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
+/* Sélectionne la texture animée d'un portail spécifique */
 static void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 	char map_char)
 {
@@ -42,6 +43,7 @@ static void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 	}
 }
 
+/* Sélectionne la texture standard pour un mur normal */
 static void	select_wall_normal_texture(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {
@@ -61,6 +63,7 @@ static void	select_wall_normal_texture(t_cub3d *cub3d, t_dda *dda,
 	}
 }
 
+/* Sélectionne la texture appropriée pour les murs ou portails */
 void	select_wall_texture_extended(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {

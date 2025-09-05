@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:43:27 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Convertit un nombre entier en chaîne de caractères
-** Comme écrire un nombre sur une feuille de papier
-** chiffre par chiffre
-*/
+/* Convertit un nombre entier en chaîne de caractères */
 static int	convert_int_to_string(int fps_int, char *fps_str, int i)
 {
 	int	temp;
@@ -41,11 +37,7 @@ static int	convert_int_to_string(int fps_int, char *fps_str, int i)
 	return (i);
 }
 
-/*
-** Affiche les FPS en haut à droite de l'écran en vert
-** Comme un indicateur lumineux sur un tableau de bord
-** qui nous montre les performances en temps réel
-*/
+/* Affiche les FPS en haut à droite de l'écran */
 void	display_fps(t_cub3d *cub3d)
 {
 	char	fps_str[20];

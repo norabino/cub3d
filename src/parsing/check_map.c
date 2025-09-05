@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:41:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Prépare une copie de la carte pour les vérifications
-** Comme photocopier une carte avant de la modifier
-** pour ne pas abîmer l'originale
-*/
+/* Prépare une copie de la carte pour les vérifications */
 static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 {
 	t_point	player_pos;
@@ -31,11 +27,7 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 	replace_portals_by_zero(work_map);
 }
 
-/*
-** Teste si une zone de la carte est accessible
-** Comme verser de l'eau pour voir si elle se répand partout
-** ou si elle reste coincée quelque part
-*/
+/* Teste si une zone de la carte est accessible avec flood fill */
 static int	process_flood(t_cub3d *cub3d, char **work_map)
 {
 	t_point	*p;
@@ -55,6 +47,7 @@ static int	process_flood(t_cub3d *cub3d, char **work_map)
 	return (0);
 }
 
+/* Vérifie la validité des portails sur la carte */
 void	ft_check_portals(t_cub3d *cub3d)
 {
 	int	x;
@@ -80,11 +73,7 @@ void	ft_check_portals(t_cub3d *cub3d)
 	check_correspondance(cub3d);
 }
 
-/*
-** Vérifie que toutes les zones de la carte sont bien fermées
-** Comme un inspecteur qui s'assure qu'il n'y a pas de trou
-** dans les murs d'une prison pour éviter les évasions
-*/
+/* Vérifie que toutes les zones de la carte sont bien fermées */
 int	ft_check_map_valid(t_cub3d *cub3d)
 {
 	char	**work_map;
@@ -105,11 +94,7 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 	return (1);
 }
 
-/*
-** Extrait et stocke la carte depuis le fichier de configuration
-** Comme découper la partie qui nous intéresse dans un journal
-** et la coller dans un album pour la garder
-*/
+/* Extrait et stocke la carte depuis le fichier de configuration */
 int	ft_check_map(t_cub3d *cub3d, char **file, int *idx_line)
 {
 	int	begin;

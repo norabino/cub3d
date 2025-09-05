@@ -12,10 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-/*
-** Dessine le joueur comme une flèche de boussole rouge avec contour noir
-** Optimisé: utilise la largeur pré-calculée pour chaque ligne
-*/
+/* Dessine le joueur comme une flèche de boussole rouge avec contour noir */
 void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y)
 {
 	int				y;
@@ -33,11 +30,7 @@ void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
-/*
-** Dessine un pixel de la minimap avec opacité selon sa distance du centre
-** Utilise un vrai alpha blending avec les textures existantes
-** Optimisé: calcul de distance optimisé avec early exit
-*/
+/* Dessine un pixel de la minimap avec opacité selon sa distance du centre */
 void	draw_minimap_pixel(t_cub3d *cub3d, int x, int y, int radius)
 {
 	int	dx;

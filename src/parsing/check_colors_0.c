@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:29:22 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Définit une couleur selon le type (C pour plafond, F pour sol) */
 void	set_color(t_colors *colors, char **split, char c)
 {
 	if (c == 'C')
@@ -20,6 +21,7 @@ void	set_color(t_colors *colors, char **split, char c)
 		set_floor(colors, split);
 }
 
+/* Vérifie s'il y a une couleur dupliquée */
 static void	check_duplicate(t_colors *colors, char c)
 {
 	if (c == 'C' && colors->ceiling[0] != -1)
@@ -39,6 +41,7 @@ static void	process_color(t_colors *colors, char *line, int j, int z)
 	free_map(split);
 }
 
+/* Vérifie que toutes les couleurs sont définies */
 void	verify_colors(t_colors *colors)
 {
 	int	ceiling_texture_exists;
@@ -54,6 +57,7 @@ void	verify_colors(t_colors *colors)
 		exit_error("Floor color is Missing", colors->cub3d);
 }
 
+/* Traite une ligne de couleur du fichier de configuration */
 int	process_color_line(t_colors *colors, char *line, int *idx, int i)
 {
 	int	j;

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:16:40 by norabino          #+#    #+#             */
-/*   Updated: 2025/07/08 17:39:00 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/* Lit le fichier et stocke le contenu dans remainder */
 char	*ft_read_to_remainder(int fd, char *remainder)
 {
 	char	*buffer;
@@ -35,6 +36,7 @@ char	*ft_read_to_remainder(int fd, char *remainder)
 	return (remainder);
 }
 
+/* Extrait une ligne complète du buffer */
 char	*ft_get_a_line(char *str)
 {
 	int		i;
@@ -54,6 +56,7 @@ char	*ft_get_a_line(char *str)
 	return (line);
 }
 
+/* Prépare le remainder pour la prochaine lecture */
 char	*ft_new_remainder(char *remainder)
 {
 	int		i;
@@ -78,6 +81,7 @@ char	*ft_new_remainder(char *remainder)
 	return (str);
 }
 
+/* Fonction principale qui lit la prochaine ligne */
 char	*get_next_line(int fd)
 {
 	static char		*remainder[4096];

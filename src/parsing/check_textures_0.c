@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures_0.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:29:22 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Gère les erreurs de textures dupliquées */
 static void	handle_duplicate(char c, t_textures *textures)
 {
 	if (c == 'N')
@@ -64,6 +65,7 @@ static void	assign_texture(char c, char *sub, t_textures *textures)
 		free(sub);
 }
 
+/* Définit le chemin d'une texture selon son type */
 void	set_texture(char c, int j, char *line, t_textures *textures)
 {
 	char	*sub;
@@ -72,6 +74,7 @@ void	set_texture(char c, int j, char *line, t_textures *textures)
 	assign_texture(c, sub, textures);
 }
 
+/* Vérifie une ligne pour les identifiants de texture */
 int	check_line(t_cub3d *cub3d, char *line, t_textures *textures)
 {
 	int		j;

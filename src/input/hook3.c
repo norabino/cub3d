@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:43:27 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Boucle principale du jeu qui s'exécute en continu
-** Comme le cœur qui bat régulièrement pour faire vivre le corps
-** Met à jour les mouvements, la vue et l'affichage
-*/
+/* Boucle principale du jeu qui s'exécute en continu */
 int	handle_loop(t_cub3d *cub3d)
 {
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.win || !cub3d->mlx.img)
@@ -36,11 +32,7 @@ int	handle_loop(t_cub3d *cub3d)
 	return (0);
 }
 
-/*
-** Vérifie si une touche du clavier est actuellement pressée
-** Comme regarder si quelqu'un appuie sur un bouton
-** pour savoir si on doit faire quelque chose
-*/
+/* Vérifie si une touche du clavier est actuellement pressée */
 int	check_any_key_pressed(t_cub3d *cub3d)
 {
 	int	i;
@@ -57,11 +49,7 @@ int	check_any_key_pressed(t_cub3d *cub3d)
 	return (0);
 }
 
-/*
-** Rafraîchit l'image à l'écran
-** Comme repeindre un tableau à chaque fois qu'on change quelque chose
-** pour que l'écran montre toujours la bonne image
-*/
+/* Rafraîchit l'image à l'écran */
 void	refresh_image(t_cub3d *cub3d)
 {
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.win || !cub3d->mlx.img)

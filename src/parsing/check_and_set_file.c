@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_and_set_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 21:19:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:04:55 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Définit la direction initiale du joueur selon le caractère */
 void	set_direction(t_cub3d *cub3d, char dir)
 {
 	if (dir == 'N')
@@ -36,6 +37,7 @@ void	set_direction(t_cub3d *cub3d, char dir)
 	}
 }
 
+/* Vérifie et configure un fichier de configuration */
 int	check_and_set_file(t_cub3d *cub3d, char **file)
 {
 	int	idx_line;

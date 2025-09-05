@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:47:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Vérifie si le joueur est sur un portail et peut se téléporter */
 char	is_portal(t_cub3d *cub3d)
 {
 	int		pos_x;
@@ -33,6 +34,7 @@ char	is_portal(t_cub3d *cub3d)
 	return (0);
 }
 
+/* Effectue la téléportation du joueur vers le portail correspondant */
 void	teleportation(t_cub3d *cub3d, t_prtl portal)
 {
 	t_point	new;
@@ -111,6 +113,7 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 	set_portal_color(&cub3d->tp_portals[i].sprite, i);
 }
 
+/* Initialise tous les sprites et animations des portails */
 void	init_prtl_sprites(t_cub3d *cub3d)
 {
 	int	i;

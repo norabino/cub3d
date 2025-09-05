@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:19:40 by norabino          #+#    #+#             */
-/*   Updated: 2025/07/08 17:39:01 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/* Calcule la longueur d'une chaîne */
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -22,6 +23,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+/* Cherche un caractère dans une chaîne */
 char	*ft_strchr(char *str, char c)
 {
 	int	i;
@@ -38,6 +40,7 @@ char	*ft_strchr(char *str, char c)
 	return (NULL);
 }
 
+/* Extrait une sous-chaîne à partir d'une position donnée */
 char	*ft_substr(char *s, int start, int len, int flg)
 {
 	int		i;
@@ -64,6 +67,7 @@ char	*ft_substr(char *s, int start, int len, int flg)
 	return (str);
 }
 
+/* Vérifie et prépare les chaînes avant jointure */
 void	*ft_check_join(char **s1, char **s2)
 {
 	if (!*s1 && !*s2)
@@ -80,6 +84,7 @@ void	*ft_check_join(char **s1, char **s2)
 	return ("CHECK OK");
 }
 
+/* Joint deux chaînes de caractères */
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;

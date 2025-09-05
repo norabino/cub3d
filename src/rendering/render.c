@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/01 18:38:37 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Calcule la hauteur du mur à l'écran et où commencer/arrêter de dessiner
-** Plus le mur est proche, plus il paraît grand à l'écran
-** Comme regarder un arbre : de près il remplit tout, de loin il est petit
-*/
+/* Calcule la hauteur du mur à l'écran et les limites de dessin */
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
 {
 	int	line_height;
@@ -34,10 +30,7 @@ void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
 		*draw_end = SCREEN_HEIGHT - 1;
 }
 
-/*
-** Dessine un mur en couleur unie (version simple sans texture)
-** Colorie tous les pixels du mur avec la même couleur verte
-*/
+/* Dessine un mur en couleur unie (version simple sans texture) */
 void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
 	int draw_end)
 {
@@ -53,14 +46,7 @@ void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
 	}
 }
 
-/*
-** Dessine une ligne verticale complète à l'écran : mur + sol + plafond
-** C'est LA fonction principale qui assemble tout :
-** 1. Calcule où dessiner le mur
-** 2. Choisit la bonne texture selon l'orientation du mur
-** 3. Dessine le mur avec sa texture
-** 4. Ajoute le sol et le plafond autour avec les textures/couleurs
-*/
+/* Dessine une ligne verticale complète à l'écran : mur + sol + plafond */
 void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	t_dda *dda)
 {

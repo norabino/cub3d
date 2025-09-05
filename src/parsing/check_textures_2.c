@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:58:53 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Extrait le nom de fichier d'une ligne de configuration */
 int	extract_filename(char *line, int j, char **filename)
 {
 	int	len;
@@ -29,6 +30,7 @@ int	extract_filename(char *line, int j, char **filename)
 	return (1);
 }
 
+/* Vérifie si une chaîne contient un chemin de fichier */
 int	is_file_path(char *str)
 {
 	int	i;
@@ -43,6 +45,7 @@ int	is_file_path(char *str)
 	return (0);
 }
 
+/* Traite une texture trouvée dans le fichier de configuration */
 void	process_texture_found(t_cub3d *cub3d, char *line, int j, int z)
 {
 	char	*filename;

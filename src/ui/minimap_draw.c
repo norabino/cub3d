@@ -6,16 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 22:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/26 20:50:03 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:58:05 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Version optimisée de draw_minimap_pixel avec pré-calculs
-** Évite les calculs répétitifs et améliore les performances
-*/
+/* Version optimisée de draw_minimap_pixel avec pré-calculs */
 void	draw_minimap_pixel_optimized(t_cub3d *cub3d, t_pixel_draw *pixel)
 {
 	int	dx;
@@ -43,9 +40,7 @@ void	draw_minimap_pixel_optimized(t_cub3d *cub3d, t_pixel_draw *pixel)
 	}
 }
 
-/*
-** Calcule la largeur du triangle pour une ligne donnée
-*/
+/* Calcule la largeur du triangle pour une ligne donnée */
 int	get_triangle_half_width(int y)
 {
 	int	row_index;
@@ -63,9 +58,7 @@ int	get_triangle_half_width(int y)
 		return (4);
 }
 
-/*
-** Dessine une ligne du triangle
-*/
+/* Dessine une ligne du triangle */
 void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw)
 {
 	int	x;

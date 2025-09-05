@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hook2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/08/25 14:09:50 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Gère le mouvement avant/arrière du joueur */
 int	handle_movement(t_cub3d *cub3d)
 {
 	double	delta_x;
@@ -36,6 +37,7 @@ int	handle_movement(t_cub3d *cub3d)
 	return (moved + handle_movement_strafe(cub3d));
 }
 
+/* Gère le mouvement latéral (strafe) du joueur */
 int	handle_movement_strafe(t_cub3d *cub3d)
 {
 	double	delta_x;
@@ -60,6 +62,7 @@ int	handle_movement_strafe(t_cub3d *cub3d)
 	return (moved);
 }
 
+/* Gère les changements de direction du joueur */
 int	handle_direction(t_cub3d *cub3d)
 {
 	int		rotated;
@@ -72,6 +75,7 @@ int	handle_direction(t_cub3d *cub3d)
 	return (rotated);
 }
 
+/* Gère la rotation vers la gauche */
 int	handle_direction_left(t_cub3d *cub3d)
 {
 	double	old_dir_x;
@@ -92,6 +96,7 @@ int	handle_direction_left(t_cub3d *cub3d)
 	return (1);
 }
 
+/* Gère la rotation vers la droite */
 int	handle_direction_right(t_cub3d *cub3d)
 {
 	double	old_dir_x;

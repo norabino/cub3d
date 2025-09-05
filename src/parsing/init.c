@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/01 19:15:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Initializes basic values of the main structure
-** Like preparing a toolbox by resetting
-** all compartments to zero before starting
-*/
+/* Initialise les valeurs de base de la structure principale */
 static void	init_basic_values(t_cub3d *cub3d)
 {
 	cub3d->mlx.mlx = NULL;
@@ -42,11 +38,7 @@ static void	init_basic_values(t_cub3d *cub3d)
 	cub3d->nb_portals = 0;
 }
 
-/*
-** Initialise les paramètres de la souris et du temps
-** Comme régler l'horloge et la souris d'un ordinateur
-** avant de commencer à l'utiliser
-*/
+/* Initialise les paramètres de la souris et du temps */
 static void	init_mouse_and_time(t_cub3d *cub3d)
 {
 	cub3d->last_refresh = 0;
@@ -60,11 +52,7 @@ static void	init_mouse_and_time(t_cub3d *cub3d)
 	cub3d->mouse_captured = 0;
 }
 
-/*
-** Initializes colors and keyboard keys
-** Like setting default colors on a TV
-** and clearing the memory of pressed keys
-*/
+/* Initialise les couleurs et les touches du clavier */
 static void	init_colors_and_keys(t_cub3d *cub3d)
 {
 	int	i;
@@ -94,11 +82,7 @@ static void	init_colors_and_keys(t_cub3d *cub3d)
 	init_mouse_and_time(cub3d);
 }
 
-/*
-** Main initialization function
-** Like fully preparing a new car before first startup
-** making sure everything is zeroed and ready to work
-*/
+/* Fonction principale d'initialisation */
 void	init(t_cub3d *cub3d)
 {
 	init_basic_values(cub3d);

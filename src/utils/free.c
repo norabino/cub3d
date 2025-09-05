@@ -6,17 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/02 07:26:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:25:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Libère les chemins des textures Nord et Sud
-** Comme jeter les adresses qu'on n'utilise plus
-** pour éviter d'encombrer le carnet d'adresses
-*/
+/* Libère les chemins des textures Nord et Sud */
 static void	ft_free_textures_paths(t_textures *s_textures)
 {
 	if (s_textures->north)
@@ -31,11 +27,7 @@ static void	ft_free_textures_paths(t_textures *s_textures)
 	}
 }
 
-/*
-** Libère les chemins des textures Ouest et Est
-** Comme continuer à nettoyer le carnet d'adresses
-** en jetant les deux dernières adresses inutiles
-*/
+/* Libère les chemins des textures Ouest et Est */
 static void	ft_free_textures_paths_two(t_textures *s_textures)
 {
 	if (s_textures->west)
@@ -50,11 +42,7 @@ static void	ft_free_textures_paths_two(t_textures *s_textures)
 	}
 }
 
-/*
-** Libère les images de la bibliothèque graphique
-** Comme détruire une photo et jeter l'appareil photo
-** quand on n'en a plus besoin
-*/
+/* Libère les images de la bibliothèque graphique */
 static void	ft_free_mlx(t_mlx *s_mlx)
 {
 	if (s_mlx->img && s_mlx->img->img && s_mlx->mlx)
@@ -69,11 +57,7 @@ static void	ft_free_mlx(t_mlx *s_mlx)
 	}
 }
 
-/*
-** Libère la fenêtre et la connexion graphique
-** Comme fermer une fenêtre de maison et couper l'électricité
-** quand on déménage pour de bon
-*/
+/* Libère la fenêtre et la connexion graphique */
 static void	ft_free_mlx_two(t_mlx *s_mlx)
 {
 	if (s_mlx->win && s_mlx->mlx)
@@ -89,11 +73,7 @@ static void	ft_free_mlx_two(t_mlx *s_mlx)
 	}
 }
 
-/*
-** Fonction principale de nettoyage de toute la mémoire
-** Comme faire le grand ménage d'une maison avant de la vendre
-** en jetant tout ce qui ne sert plus et en rangeant le reste
-*/
+/* Fonction principale de nettoyage de toute la mémoire */
 void	ft_free(t_cub3d *s_cub3d)
 {
 	static int	g_already_freed = 0;

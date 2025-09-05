@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/04 16:13:54 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:47:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Extrait le nom de fichier d'une ligne de configuration */
 int	extract_filename_from_line(char *line, int j, char **filename)
 {
 	int	len;
@@ -29,6 +30,7 @@ int	extract_filename_from_line(char *line, int j, char **filename)
 	return (1);
 }
 
+/* Vérifie si la chaîne contient un chemin de fichier valide */
 int	is_valid_file_path(char *str)
 {
 	int	i;
@@ -43,6 +45,7 @@ int	is_valid_file_path(char *str)
 	return (0);
 }
 
+/* Traite un chemin de texture trouvé dans une ligne */
 void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
 {
 	char	*filename;
@@ -58,6 +61,7 @@ void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
 		free(filename);
 }
 
+/* Traite une ligne de texture et met à jour l'état de validation */
 int	process_single_texture_line(t_cub3d *cub3d, char **file, int i,
 	int *found_all)
 {
@@ -71,6 +75,7 @@ int	process_single_texture_line(t_cub3d *cub3d, char **file, int i,
 	return (-1);
 }
 
+/* Vérifie que toutes les textures sont définies et valides */
 int	all_text_set(t_textures textures)
 {
 	if (!textures.north || !textures.south || !textures.west

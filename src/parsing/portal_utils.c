@@ -12,6 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
+/* Crée un portail vide avec des valeurs par défaut */
 static t_prtl	create_empty_portal(void)
 {
 	t_prtl	portal;
@@ -56,6 +57,7 @@ t_prtl	find_a_portal(t_cub3d *cub3d, char **map)
 	return (create_empty_portal());
 }
 
+/* Initialise les portails dans la structure du jeu */
 void	set_prtls(t_cub3d *cub3d)
 {
 	int	i;

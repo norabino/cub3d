@@ -6,16 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:54:26 by norabino          #+#    #+#             */
-/*   Updated: 2025/08/20 16:05:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Gère la fermeture du programme (bouton X de la fenêtre)
-** Nettoie la mémoire et ferme proprement le programme
-*/
+/* Gère la fermeture du programme (bouton X de la fenêtre) */
 int	handle_close(t_cub3d *cub3d)
 {
 	if (!cub3d)
@@ -25,11 +22,7 @@ int	handle_close(t_cub3d *cub3d)
 	return (0);
 }
 
-/*
-** Gère l'appui sur une touche du clavier
-** Enregistre quelle touche est pressée pour l'utiliser plus tard
-** ESC = quitter, flèches = rotation, WASD = mouvement
-*/
+/* Gère l'appui sur une touche du clavier */
 int	handle_keypress(int keycode, t_cub3d *cub3d)
 {
 	if (!cub3d)
@@ -45,11 +38,7 @@ int	handle_keypress(int keycode, t_cub3d *cub3d)
 	return (0);
 }
 
-/*
-** Gère le relâchement d'une touche du clavier
-** Marque la touche comme "non pressée" quand on la lâche
-** Important pour arrêter le mouvement quand on lâche WASD
-*/
+/* Gère le relâchement d'une touche du clavier */
 int	handle_keyrelease(int keycode, t_cub3d *cub3d)
 {
 	if (!cub3d)

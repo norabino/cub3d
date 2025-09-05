@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:46:45 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Affiche une erreur et termine le programme */
 void	exit_error(char *err, t_cub3d *cub3d)
 {
 	int	i;
@@ -29,6 +30,7 @@ void	exit_error(char *err, t_cub3d *cub3d)
 	exit(1);
 }
 
+/* Affiche une carte pour debugging */
 void	print_map(t_cub3d *cub3d, char **map)
 {
 	int	i;

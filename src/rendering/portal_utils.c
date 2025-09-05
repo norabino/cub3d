@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   portal_utils2.c                                    :+:      :+:    :+:   */
+/*   portal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:25:18 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/02 07:59:35 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 02:49:39 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Met à jour les animations des portails selon le temps écoulé */
 void	update_portal_animations(t_cub3d *cub3d)
 {
 	int		i;
@@ -37,6 +38,7 @@ void	update_portal_animations(t_cub3d *cub3d)
 	}
 }
 
+/* Libère la mémoire utilisée par les sprites des portails */
 void	free_portal_sprites(t_cub3d *cub3d)
 {
 	int	i;

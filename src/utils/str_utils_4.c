@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 16:41:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/04 16:46:15 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+/* Vérifie si un caractère est une lettre minuscule */
 int	is_lowercase(char c)
 {
 	if (c >= 'a' && c <= 'z')
@@ -19,6 +20,7 @@ int	is_lowercase(char c)
 	return (0);
 }
 
+/* Vérifie que chaque portail a exactement un correspondant */
 void	check_correspondance(t_cub3d *cub3d)
 {
 	int	i;
@@ -40,6 +42,7 @@ void	check_correspondance(t_cub3d *cub3d)
 	cub3d->nb_portals = cpt;
 }
 
+/* Remplace tous les portails par des zéros dans la carte */
 void	replace_portals_by_zero(char ***map)
 {
 	int	x;
@@ -60,6 +63,7 @@ void	replace_portals_by_zero(char ***map)
 	}
 }
 
+/* Accède sécurisé à la carte en évitant les débordements */
 char	safe_map_access(t_cub3d *cub3d, int y, int x)
 {
 	if (!cub3d || !cub3d->map)
@@ -73,6 +77,7 @@ char	safe_map_access(t_cub3d *cub3d, int y, int x)
 	return (cub3d->map[y][x]);
 }
 
+/* Copie une chaîne dans une autre */
 char	*ft_strcpy(char *dest, char *str)
 {
 	int	i;

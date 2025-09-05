@@ -6,16 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/02 07:43:27 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 01:55:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** Vérifie si un point est dans le cercle de la minimap
-** Optimisé: évite sqrt() pour de meilleures performances
-*/
+/* Vérifie si un point est dans le cercle de la minimap */
 int	is_point_in_circle(int x, int y, int radius)
 {
 	int	dx;
@@ -26,10 +23,7 @@ int	is_point_in_circle(int x, int y, int radius)
 	return (dx * dx + dy * dy <= radius * radius);
 }
 
-/*
-** Dessine le fond rond gris de la minimap avec le contour noir
-** Optimisé: pré-calcule les valeurs constantes et utilise early exit
-*/
+/* Dessine le fond rond gris de la minimap avec contour */
 void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y)
 {
 	int				x;
@@ -55,10 +49,7 @@ void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
-/*
-** Dessine les murs de la carte sur la minimap
-** Optimisé pour les FPS et conforme à la norme
-*/
+/* Dessine les murs de la carte sur la minimap */
 void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 {
 	t_minimap_calc		calc;
@@ -87,10 +78,7 @@ void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
-/*
-** Dessine les portails sur la minimap en couleur bleu/violet galaxie
-** Optimisé pour les FPS et conforme à la norme
-*/
+/* Dessine les portails sur la minimap en couleur bleu */
 void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y)
 {
 	t_minimap_calc		calc;
@@ -119,11 +107,7 @@ void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
-/*
-** Fonction principale qui dessine toute la minimap
-** Comme peindre un tableau : d'abord le fond, puis les détails
-** et enfin le personnage principal au premier plan
-*/
+/* Fonction principale qui dessine toute la minimap */
 void	draw_minimap(t_cub3d *cub3d)
 {
 	int	center_x;
