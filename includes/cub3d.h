@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 16:03:24 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:13:56 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_textures
 	char			*east;
 	char			*floor;
 	char			*ceiling;
-	char			*portals:
+	char			*portals;
 	t_texture_img	north_img;
 	t_texture_img	south_img;
 	t_texture_img	west_img;
