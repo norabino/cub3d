@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 16:50:59 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 17:43:09 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:40:27 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ int	load_portals_texture(t_cub3d *cub3d, t_prtl_sprite *sprite, char *path)
 	char	*temp1;
 	char	*temp2;
 
-	// Allouer de la mémoire pour 16 frames d'animation
 	sprite->frames = malloc(sizeof(t_texture_img) * 16);
 	if (!sprite->frames)
 		return (0);
-	
 	i = 0;
 	while (i < 16)
 	{

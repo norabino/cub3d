@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 17:37:44 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:40:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
 
 	extract_filename_from_line(line, j, &filename);
 	if ((line[z] == 'P') || (is_valid_file_path(filename)
-		&& check_extension(cub3d, filename, ".xpm")))
+			&& check_extension(cub3d, filename, ".xpm")))
 	{
 		free(filename);
 		set_texture(line[z], j, line, &cub3d->textures);
@@ -109,7 +109,8 @@ void	set_texture(char c, int j, char *line, t_textures *textures)
 	sub = ft_substr(line, j, len, 0);
 	len = ft_strlen(sub);
 	i = len - 1;
-	while (i >= 0 && (sub[i] == ' ' || sub[i] == '\t' || sub[i] == '\n' || sub[i] == '\r'))
+	while (i >= 0 && (sub[i] == ' ' || sub[i] == '\t'
+			|| sub[i] == '\n' || sub[i] == '\r'))
 	{
 		sub[i] = '\0';
 		i--;
@@ -124,6 +125,10 @@ void	set_texture(char c, int j, char *line, t_textures *textures)
 		textures->east = sub;
 	else if (c == 'P' && !textures->portals)
 		textures->portals = sub;
+	else if (c == 'F' && !textures->floor)
+		textures->floor = sub;
+	else if (c == 'C' && !textures->ceiling)
+		textures->ceiling = sub;
 	else
 	{
 		free(sub);

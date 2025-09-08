@@ -28,7 +28,7 @@ static void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 		if (cub3d->tp_portals[i].name == map_char)
 		{
 			if (!cub3d->tp_portals[i].sprite.frames)
-				i = 0;
+				tex_calc->portal_index = 0;
 			safe_frame = cub3d->tp_portals[i].sprite.current_frame % 16;
 			tex_calc->portal_index = i;
 			tex_calc->current_text
