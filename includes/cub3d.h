@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/06 23:22:11 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:36:02 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_point
 typedef struct s_portal_sprite
 {
 	t_texture_img	*frames;
+	char			**path;
 	int				current_frame;
 	int				frame_counter;
 	int				color_tint[3];
@@ -520,5 +521,7 @@ void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
 void	select_wall_texture_extended(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
+int		load_portals_texture(t_cub3d *cub3d, t_prtl_sprite *sprite, char *path);
+
 
 #endif
