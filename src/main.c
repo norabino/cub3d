@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 19:07:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	cub3d = malloc(sizeof(t_cub3d));
 	if (!cub3d)
 		return (1);
-	init_game_state(cub3d);
+	init(cub3d);
 	parse_config_file(cub3d, ac, av);
 	init_mlx(cub3d);
 	raycast(cub3d);

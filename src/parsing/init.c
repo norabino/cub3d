@@ -6,85 +6,98 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 19:28:09 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Initialise les valeurs de base de la structure principale */
-static void	init_basic_values(t_cub3d *cub3d)
+static void	init_portals(t_cub3d *cub3d)
 {
-	cub3d->mlx.mlx = NULL;
-	cub3d->mlx.img = NULL;
-	cub3d->mlx.win = NULL;
-	cub3d->player.direction = 0;
-	cub3d->player.cub3d = cub3d;
-	cub3d->player.last_prtl_pos.x = -1;
-	cub3d->player.last_prtl_pos.y = -1;
+	cub3d->tp_portals = NULL;
+	cub3d->prtl_sprites.current_frame = 0;
+	cub3d->prtl_sprites.frame_counter = 0;
+	cub3d->prtl_sprites.frames = 0;
+	cub3d->prtl_sprites.last_frame_time = 0;
+	cub3d->prtl_sprites.path = 0;
+	cub3d->nb_portals = 0;
+}
+
+/* Initialise les valeurs de base de la structure principale */
+static void	init_textures(t_cub3d *cub3d)
+{
 	cub3d->textures.north = NULL;
 	cub3d->textures.south = NULL;
 	cub3d->textures.west = NULL;
 	cub3d->textures.east = NULL;
 	cub3d->textures.floor = NULL;
 	cub3d->textures.ceiling = NULL;
-	cub3d->textures.north_img.img = NULL;
-	cub3d->textures.south_img.img = NULL;
-	cub3d->textures.west_img.img = NULL;
-	cub3d->textures.east_img.img = NULL;
-	cub3d->textures.floor_img.img = NULL;
-	cub3d->textures.ceiling_img.img = NULL;
-	cub3d->textures.cub3d = cub3d;
-	cub3d->nb_portals = 0;
+	cub3d->textures
+}
+
+/* Initialise les valeurs de base de la structure principale */
+static void	init_mlx(t_cub3d *cub3d)
+{
+	cub3d->mlx.mlx = NULL;
+	cub3d->mlx.img = NULL;
+	cub3d->mlx.win = NULL;
+}
+
+static void	init_player(t_cub3d *cub3d)
+{
+	cub3d->player.fov = 0;
+	cub3d->player.direction = 0;
+	cub3d->player.cub3d = cub3d;
+	cub3d->player.last_prtl_pos.x = -1;
+	cub3d->player.last_prtl_pos.y = -1;
 }
 
 /* Initialise les paramètres de la souris et du temps */
-static void	init_mouse_and_time(t_cub3d *cub3d)
+static void	init_mouse(t_cub3d *cub3d)
 {
-	cub3d->last_refresh = 0;
-	cub3d->fps_last_time = 0;
-	cub3d->fps_frame_count = 0;
-	cub3d->current_fps = 0.0;
-	cub3d->delta_time = 0.0;
-	cub3d->mouse_x = SCREEN_WIDTH / 2;
-	cub3d->mouse_y = SCREEN_HEIGHT / 2;
-	cub3d->mouse_last_x = SCREEN_WIDTH / 2;
-	cub3d->mouse_captured = 0;
+	cub3d->mouse.x = SCREEN_WIDTH / 2;
+	cub3d->mouse.y = SCREEN_HEIGHT / 2;
+	cub3d->mouse.last_x = SCREEN_WIDTH / 2;
+	cub3d->mouse.captured = 0;
+}
+
+static void	init_time(t_cub3d *cub3d)
+{
+	cub3d->time.last_refresh = 0;
+	cub3d->time.fps_last_time = 0;
+	cub3d->time.fps_frame_count = 0;
+	cub3d->time.current_fps = 0.0;
+	cub3d->time.delta_time = 0.0;
 }
 
 /* Initialise les couleurs et les touches du clavier */
-static void	init_colors_and_keys(t_cub3d *cub3d)
+static void	init_colors(t_cub3d *cub3d)
 {
-	int	i;
-
 	cub3d->colors.floor[0] = -1;
 	cub3d->colors.floor[1] = -1;
 	cub3d->colors.floor[2] = -1;
 	cub3d->colors.ceiling[0] = -1;
 	cub3d->colors.ceiling[1] = -1;
 	cub3d->colors.ceiling[2] = -1;
-	cub3d->colors.cub3d = cub3d;
-	cub3d->player.fov = 0;
-	i = 0;
-	while (i < 26)
-	{
-		cub3d->portals[i] = 0;
-		i++;
-	}
-	cub3d->tp_portals = NULL;
-	cub3d->map = NULL;
-	i = 0;
-	while (i < 256)
-	{
-		cub3d->keys[i] = 0;
-		i++;
-	}
-	init_mouse_and_time(cub3d);
+}
+
+static void	init_view(t_cub3d *cub3d)
+{
+	cub3d->view.plane_x = -1;
+	cub3d->view.plane_y = -1;
 }
 
 /* Fonction principale d'initialisation */
 void	init(t_cub3d *cub3d)
 {
-	init_basic_values(cub3d);
-	init_colors_and_keys(cub3d);
+	cub3d->map = NULL;
+	init_mlx(cub3d); 
+	init_player(cub3d);
+	init_colors(cub3d);
+	init_textures(cub3d);
+	init_time(cub3d);
+	init_view(cub3d);
+	init_mouse(cub3d);
+	init_portals(cub3d);
+	ft_bzero(cub3d->input_state, 256);
 }

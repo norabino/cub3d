@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 16:31:11 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 18:40:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,36 +60,6 @@ void	teleportation(t_cub3d *cub3d, t_prtl portal)
 	cub3d->player.last_prtl_pos = new;
 }
 
-/* Définit la couleur du sprite d'un portail */
-/*static void	set_portal_color(t_prtl_sprite *sprite, int portal_index)
-{
-	int	palette[6][3];
-	int	color_idx;
-
-	palette[0][0] = 180;
-	palette[0][1] = 90;
-	palette[0][2] = 90;
-	palette[1][0] = 90;
-	palette[1][1] = 180;
-	palette[1][2] = 90;
-	palette[2][0] = 90;
-	palette[2][1] = 90;
-	palette[2][2] = 140;
-	palette[3][0] = 180;
-	palette[3][1] = 180;
-	palette[3][2] = 90;
-	palette[4][0] = 180;
-	palette[4][1] = 90;
-	palette[4][2] = 180;
-	palette[5][0] = 90;
-	palette[5][1] = 180;
-	palette[5][2] = 180;
-	color_idx = portal_index % 6;
-	sprite->color_tint[0] = palette[color_idx][0];
-	sprite->color_tint[1] = palette[color_idx][1];
-	sprite->color_tint[2] = palette[color_idx][2];
-}*/
-
 /* Initialise un seul portail avec ses propriétés *//*
 static void	init_single_portal(t_cub3d *cub3d, int i)
 {
@@ -119,11 +89,46 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 		free(right_path);
 		right_path = NULL;
 	}
-	cub3d->tp_portals[i].sprite.current_frame = 0;
-	cub3d->tp_portals[i].sprite.frame_counter = 0;
-	cub3d->tp_portals[i].sprite.last_frame_time = gettime_ms();
-	set_portal_color(&cub3d->tp_portals[i].sprite, i);
+	
 }*/
+
+int	load_portal_texture(t_cub3d *cub3d, t_prtl_sprite sprite)
+{
+	int		i;
+	int		fd;
+	char	*frame_num;
+	char	*temp1;
+	char	*temp2;
+
+	i = 0;
+	fd = 0;
+	while (1)
+	{
+		frame_num = ft_itoa(i);
+		temp1 = ft_strjoin(frame_num, ".xpm");
+		temp2 = ft_strjoin("/Portal_", temp1);
+		sprite->path[i] = ft_strjoin(cub3d->textures.portals, temp2);
+		fd = open(sprite->path[i], O_RDONLY);
+		free(frame_num);
+		free(temp1);
+		free(temp2);
+		if (fd != -1)
+		{
+			close(fd);
+			break ;
+		}
+		close(fd);
+		i++;
+	}
+	sprite->frames = malloc(sizeof(t_texture_img) * i);
+	i = 0;
+	while (sprite->path[--i] && i)
+		load_texture(cub3d, &sprite->frames[i], sprite->path[i]);
+	sprite->current_frame = 0;
+	sprite->frame_counter = 0;
+	sprite->last_frame_time = 0;
+	return (1);
+}
 
 /* Initialise tous les sprites de portails */
 void	init_prtl_sprites(t_cub3d *cub3d)
@@ -133,8 +138,7 @@ void	init_prtl_sprites(t_cub3d *cub3d)
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{
-		load_portals_texture(cub3d, &cub3d->tp_portals->sprite, cub3d->textures.portals);
-		//init_single_portal(cub3d, i);
+		load_portal_texture(cub3d, &cub3d-);
 		i++;
 	}
 }

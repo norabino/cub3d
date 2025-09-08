@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 18:54:25 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	assign_color_values(t_colors *colors, char **split, char c)
 }
 
 /* Valide qu'il n'y a pas de couleur dupliquée */
-static void	validate_no_color_duplicate(t_colors *colors, char c)
+static void	validate_no_color_duplicate(t_cub3d *cub3d, char c)
 {
-	if (c == 'C' && colors->ceiling[0] != -1)
-		exit_error("Duplicate ceiling color", colors->cub3d);
-	if (c == 'F' && colors->floor[0] != -1)
-		exit_error("Duplicate floor color", colors->cub3d);
+	if (c == 'C' && cub3d->colors->ceiling[0] != -1)
+		exit_error("Duplicate ceiling color", cub3d);
+	if (c == 'F' && cub3d->colors->floor[0] != -1)
+		exit_error("Duplicate floor color", cub3d);
 }
 
 /* Parse et valide les valeurs de couleur depuis une ligne */
@@ -59,7 +59,7 @@ void	validate_colors_complete(t_colors *colors)
 }
 
 /* Parse une ligne de couleur et met à jour les structures */
-int	parse_color_line(t_colors *colors, char *line, int *idx, int i)
+int	parse_color_line(t_cub3d *cub3d, char *line, int *idx, int i)
 {
 	int	j;
 	int	z;
@@ -68,13 +68,13 @@ int	parse_color_line(t_colors *colors, char *line, int *idx, int i)
 	skip_spaces(line, &j);
 	if ((line[j] == 'C' || line[j] == 'F'))
 	{
-		if (check_extension(colors->cub3d, line, ".xpm"))
+		if (check_extension(cub3d, line, ".xpm"))
 			return (0);
-		validate_no_color_duplicate(colors, line[j]);
+		validate_no_color_duplicate(cub3d, line[j]);
 		z = j;
 		parse_color_values(colors, line, j, z);
 	}
-	if ((*idx) == 0 && all_colors_set(*colors))
+	if ((*idx) == 0 && all_colors_set(cub3d->colors))
 		(*idx) = i + 1;
 	return (1);
 }

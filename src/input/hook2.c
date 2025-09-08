@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 19:10:50 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	handle_movement(t_cub3d *cub3d)
 
 	moved = 0;
 	frame_speed = MOVE_SPEED * cub3d->delta_time;
-	if (cub3d->keys[KEY_W])
+	if (cub3d->input_state[KEY_W])
 	{
 		delta_x = cub3d->player.dir_x * frame_speed;
 		delta_y = cub3d->player.dir_y * frame_speed;
 		moved += move_player(cub3d, delta_x, delta_y);
 	}
-	if (cub3d->keys[KEY_S])
+	if (cub3d->input_state[KEY_S])
 	{
 		delta_x = -cub3d->player.dir_x * frame_speed;
 		delta_y = -cub3d->player.dir_y * frame_speed;
@@ -47,13 +47,13 @@ int	handle_movement_strafe(t_cub3d *cub3d)
 
 	moved = 0;
 	frame_speed = MOVE_SPEED * cub3d->delta_time;
-	if (cub3d->keys[KEY_A])
+	if (cub3d->input_state[KEY_A])
 	{
 		delta_x = cub3d->player.dir_y * frame_speed;
 		delta_y = -cub3d->player.dir_x * frame_speed;
 		moved += move_player(cub3d, delta_x, delta_y);
 	}
-	if (cub3d->keys[KEY_D])
+	if (cub3d->input_state[KEY_D])
 	{
 		delta_x = -cub3d->player.dir_y * frame_speed;
 		delta_y = cub3d->player.dir_x * frame_speed;
@@ -68,9 +68,9 @@ int	handle_direction(t_cub3d *cub3d)
 	int		rotated;
 
 	rotated = 0;
-	if (cub3d->keys[255])
+	if (cub3d->input_state[255])
 		rotated = handle_direction_left(cub3d);
-	if (cub3d->keys[254])
+	if (cub3d->input_state[254])
 		rotated += handle_direction_right(cub3d);
 	return (rotated);
 }

@@ -6,22 +6,31 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:36:27 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 19:09:50 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /* Valide toutes les couleurs du fichier de configuration */
-int	validate_all_colors(t_colors *colors, char **file, int *idx)
+int	validate_all_colors(t_cub3d *cub3d, char **file, int *idx)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	(*idx) = 0;
 	while (file[i])
 	{
-		parse_color_line(colors, file[i], idx, i);
+		skip_spaces(file[i], &j);
+		if (!file[i][j])
+		{
+			i++;
+			continue ;
+		}
+		if (!is_letter(file[i][j]) && file[i][j] != '1')
+			exit_error("Invalid line", cub3d);
+		parse_color_line(cub3d, file[i], idx, i);
 		i++;
 	}
 	validate_colors_complete(colors);

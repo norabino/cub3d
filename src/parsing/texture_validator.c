@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 17:33:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 19:10:07 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	validate_all_textures(t_cub3d *cub3d, char **file, int *idx)
 {
 	int	i;
+	int	j;
 	int	found_all;
 	int	result;
 
@@ -24,15 +25,19 @@ int	validate_all_textures(t_cub3d *cub3d, char **file, int *idx)
 	found_all = 0;
 	while (file[i])
 	{
+		skip_spaces(file[i], &j);
+		if (!file[i][j])
+		{
+			i++;
+			continue ;
+		}
+		if (!is_letter(file[i][j]) && !ft_strchr(file[*idx_line], '1'))
+			exit_error("Invalid line", cub3d);
 		result = process_single_texture_line(cub3d, file, i, &found_all);
 		if (result != -1)
 			*idx = result;
 		i++;
 	}
-	if (cub3d->textures.portals)
-		printf("Portals path: %s\n", cub3d->textures.portals);
-	else
-		printf("No portals defined in this map\n");
 	if (!all_text_set(cub3d->textures))
 		exit_error("Missing texture(s)", cub3d);
 	return (1);

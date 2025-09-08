@@ -6,13 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 16:50:59 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 16:35:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/08 18:27:30 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*int	load_portals_texture(t_cub3d *cub3d, t_prtl_sprite *sprite, char *path)
+/*int	load_portal_texture(t_cub3d *cub3d, t_prtl_sprite *sprite, char *path)
 {
 	int		i;
 	char	*frame_path;
@@ -50,36 +50,14 @@
 	return (1);
 }*/
 
-int	load_portals_texture(t_cub3d *cub3d, t_prtl_sprite *sprite, char *path)
+int	try_to_open(t_cub3d *cub3d, char *path)
 {
-	int		i;
-	int		fd;
-	char	*frame_num;
-	char	*temp1;
-	char	*temp2;
+	int	fd;
 
-	i = 0;
-	fd = 0;
-	while (1)
-	{
-		frame_num = ft_itoa(i);
-		temp1 = ft_strjoin(frame_num, ".xpm");
-		temp2 = ft_strjoin("/Portal_", temp1);
-		sprite->path[i] = ft_strjoin(path, temp2);
-		fd = open(sprite->path[i], O_RDONLY);
-		free(frame_num);
-		free(temp1);
-		free(temp2);
-		if (fd != -1)
-			break ;
-		i++;
-	}
-	sprite->frames = malloc(sizeof(t_texture_img) * i);
-	i = 0;
-	while (sprite->path[--i] && i)
-		load_texture(cub3d, &sprite->frames[i], sprite->path[i]);
-	sprite->current_frame = 0;
-	sprite->frame_counter = 0;
-	sprite->last_frame_time = 0;
-	return (1);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), 0);
+	return (close(fd), 1);
 }
+
+
