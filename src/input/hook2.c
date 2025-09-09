@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 19:10:50 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 22:20:53 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	handle_movement(t_cub3d *cub3d)
 	int		moved;
 
 	moved = 0;
-	frame_speed = MOVE_SPEED * cub3d->delta_time;
+	frame_speed = MOVE_SPEED * cub3d->time.delta_time;
 	if (cub3d->input_state[KEY_W])
 	{
 		delta_x = cub3d->player.dir_x * frame_speed;
@@ -46,7 +46,7 @@ int	handle_movement_strafe(t_cub3d *cub3d)
 	int		moved;
 
 	moved = 0;
-	frame_speed = MOVE_SPEED * cub3d->delta_time;
+	frame_speed = MOVE_SPEED * cub3d->time.delta_time;
 	if (cub3d->input_state[KEY_A])
 	{
 		delta_x = cub3d->player.dir_y * frame_speed;
@@ -82,7 +82,7 @@ int	handle_direction_left(t_cub3d *cub3d)
 	double	old_plane_x;
 	double	frame_sensitivity;
 
-	frame_sensitivity = SENSIBILITY * cub3d->delta_time;
+	frame_sensitivity = SENSIBILITY * cub3d->time.delta_time;
 	old_dir_x = cub3d->player.dir_x;
 	old_plane_x = cub3d->view.plane_x;
 	cub3d->player.dir_x = cub3d->player.dir_x * cos(-frame_sensitivity)
@@ -103,7 +103,7 @@ int	handle_direction_right(t_cub3d *cub3d)
 	double	old_plane_x;
 	double	frame_sensitivity;
 
-	frame_sensitivity = SENSIBILITY * cub3d->delta_time;
+	frame_sensitivity = SENSIBILITY * cub3d->time.delta_time;
 	old_dir_x = cub3d->player.dir_x;
 	old_plane_x = cub3d->view.plane_x;
 	cub3d->player.dir_x = cub3d->player.dir_x * cos(frame_sensitivity)

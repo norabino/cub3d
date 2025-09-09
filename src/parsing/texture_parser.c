@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 21:55:07 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:01:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,50 +29,6 @@ static void	texture_duplicate(char c, t_cub3d *cub3d)
 		exit_error("Duplicate ceiling texture", cub3d);
 	else if (c == 'P')
 		exit_error("Duplicate portal folder", cub3d);
-}
-
-static char	*clean_texture_string(char *line, int j)
-{
-	char	*sub;
-	int		len;
-	int		i;
-
-	sub = ft_substr(line, j, ft_strlen(line) - j, 0);
-	len = ft_strlen(sub);
-	i = len - 1;
-	while (i >= 0 && (sub[i] == ' ' || sub[i] == '\t' || sub[i] == '\n'
-			|| sub[i] == '\r'))
-	{
-		sub[i] = '\0';
-		i--;
-	}
-	return (sub);
-}
-
-static void	assign_texture_path(char c, char *sub, t_textures *textures)
-{
-	if (c == 'N' && textures->north == NULL)
-		textures->north = sub;
-	else if (c == 'S' && textures->south == NULL)
-		textures->south = sub;
-	else if (c == 'W' && textures->west == NULL)
-		textures->west = sub;
-	else if (c == 'E' && textures->east == NULL)
-		textures->east = sub;
-	else if (c == 'F' && textures->floor == NULL)
-		textures->floor = sub;
-	else if (c == 'C' && textures->ceiling == NULL)
-		textures->ceiling = sub;
-	else
-		free(sub);
-}
-
-void	assign_texture(char c, int j, char *line)
-{
-	char	*sub;
-
-	sub = clean_texture_string(line, j);
-	assign_texture_path(c, sub, textures);
 }
 
 int	parse_texture_line(t_cub3d *cub3d, char *line)

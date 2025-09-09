@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 19:10:50 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 22:21:13 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	handle_loop(t_cub3d *cub3d)
 		check_any_key_pressed(cub3d);
 		if (cub3d->nb_portals > 0)
 			update_portal_animations(cub3d);
-		cub3d->last_refresh = gettime_ms();
+		cub3d->time.last_refresh = gettime_ms();
 		calculate_fps(cub3d);
 		refresh_image(cub3d);
 	}

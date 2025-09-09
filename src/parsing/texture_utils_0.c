@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/09 21:56:09 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:19:04 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	process_single_texture_line(t_cub3d *cub3d, char **file, int i,
 		return (i + 1);
 	}
 	else if (*found_all)
-		parse_texture_line(cub3d, file[i], &cub3d->cub3d->textures);
+		parse_texture_line(cub3d, file[i]);
 	return (-1);
 }
 
@@ -81,18 +81,18 @@ int	all_text_set(t_cub3d *cub3d)
 	if (!cub3d->textures.north || !cub3d->textures.south
 		|| !cub3d->textures.west || !cub3d->textures.east)
 		return (0);
-	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.north, ".xpm"))
+	if (!check_extension(cub3d, cub3d->textures.north, ".xpm"))
 		exit_error("Wrong north texture extension.", cub3d);
-	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.south, ".xpm"))
+	if (!check_extension(cub3d, cub3d->textures.south, ".xpm"))
 		exit_error("Wrong south texture extension.", cub3d);
-	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.west, ".xpm"))
+	if (!check_extension(cub3d, cub3d->textures.west, ".xpm"))
 		exit_error("Wrong west texture extension.", cub3d);
-	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.east, ".xpm"))
+	if (!check_extension(cub3d, cub3d->textures.east, ".xpm"))
 		exit_error("Wrong east texture extension.", cub3d);
-	if (cub3d->textures.floor && !check_extension(cub3d->textures.cub3d,
+	if (cub3d->textures.floor && !check_extension(cub3d,
 			cub3d->textures.floor, ".xpm"))
 		exit_error("Wrong floor texture extension.", cub3d);
-	if (cub3d->textures.ceiling && !check_extension(cub3d->textures.cub3d,
+	if (cub3d->textures.ceiling && !check_extension(cub3d,
 			cub3d->textures.ceiling, ".xpm"))
 		exit_error("Wrong ceiling texture extension.", cub3d);
 	return (1);
@@ -124,7 +124,10 @@ void	set_texture(char c, int j, char *line, t_cub3d *cub3d)
 	else if (c == 'E' && !cub3d->textures.east)
 		cub3d->textures.east = sub;
 	else if (c == 'P' && !cub3d->textures.portals)
+	{
+		printf("sub = %s\n", sub);
 		cub3d->textures.portals = sub;
+	}
 	else if (c == 'F' && !cub3d->textures.floor)
 		cub3d->textures.floor = sub;
 	else if (c == 'C' && !cub3d->textures.ceiling)

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 20:10:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 22:19:58 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 		return (1);
 	init(cub3d);
 	parse_config_file(cub3d, ac, av);
-	init_mlx(cub3d);
+	init_minilibx(cub3d);
 	raycast(cub3d);
 	mlx_put_image_to_window(cub3d->mlx.mlx, cub3d->mlx.win,
 		cub3d->mlx.img->img, 0, 0);

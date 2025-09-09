@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils_0.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 16:18:50 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/09 23:08:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,6 @@ int	ft_tablen(char **tab)
 	while (tab && tab[i])
 		i++;
 	return (i);
-}
-
-/* Cherche un caractère dans une chaîne en partant de la fin */
-char	*ft_strrchr(char *s, int c)
-{
-	int	i;
-
-	i = ft_strlen(s);
-	if (c == 0)
-		return ((char *)s + ft_strlen(s));
-	while (i >= 0 && s[i] != (char)c)
-		i--;
-	if (i >= 0 && s[i] == (char)c)
-		return ((char *)s + i);
-	return (NULL);
 }
 
 /* Compare deux chaînes pour vérifier si elles sont identiques */

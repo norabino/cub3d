@@ -6,41 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 21:35:12 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:11:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-/* Déplace des données d'un endroit à un autre en mémoire */
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	unsigned char	*psrc;
-	unsigned char	*pdest;
-	size_t			i;
-
-	i = 0;
-	psrc = (unsigned char *)src;
-	pdest = (unsigned char *)dest;
-	if (pdest < psrc && (pdest != NULL || psrc != NULL))
-	{
-		while (n != 0)
-		{
-			pdest[i] = psrc[i];
-			i++;
-			n--;
-		}
-	}
-	else if (pdest != NULL || psrc != NULL)
-	{
-		while (n != 0)
-		{
-			pdest[n - 1] = psrc[n - 1];
-			n--;
-		}
-	}
-	return (pdest);
-}
 
 /* Fait une copie complète d'une carte */
 char	**map_cpy(char **old)

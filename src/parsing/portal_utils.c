@@ -12,19 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-/* Crée un portail vide avec des valeurs par défaut */
-static t_prtl	create_empty_portal(void)
-{
-	t_prtl	portal;
-
-	portal.name = '\0';
-	portal.p1.x = -1;
-	portal.p1.y = -1;
-	portal.p2.x = -1;
-	portal.p2.y = -1;
-	return (portal);
-}
-
 static t_prtl	create_portal_from_position(t_cub3d *cub3d, char **map,
 	int y, int x)
 {
@@ -54,7 +41,7 @@ t_prtl	find_a_portal(t_cub3d *cub3d, char **map)
 		}
 		y++;
 	}
-	return (create_empty_portal());
+	return ((t_prtl){0, {-1, -1}, {-1, -1}});
 }
 
 /* Initialise les portails dans la structure du jeu */
@@ -76,6 +63,5 @@ void	set_prtls(t_cub3d *cub3d)
 		cub3d->tp_portals[i] = find_a_portal(cub3d, cub3d->map);
 		i++;
 	}
-	cub3d->tp_portals[i] = (t_prtl){0, {-1, -1}, {-1, -1},
-	{NULL, NULL, 0, 0, {100, 100, 100}, 0}};
+	cub3d->tp_portals[i] = (t_prtl){0, {-1, -1}, {-1, -1}};
 }

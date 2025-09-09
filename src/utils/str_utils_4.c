@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 16:41:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:43:22 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,22 @@ void	replace_portals_by_zero(char ***map)
 /* Accède sécurisé à la carte en évitant les débordements */
 char	safe_map_access(t_cub3d *cub3d, int y, int x)
 {
+	int	map_height;
+	int	i;
+
 	if (!cub3d || !cub3d->map)
 		return ('1');
 	if (y < 0 || x < 0)
+		return ('1');
+	// Calculer la hauteur de la carte de manière sécurisée
+	map_height = 0;
+	i = 0;
+	while (i < 2000 && cub3d->map[i] != NULL) // Limite de sécurité
+	{
+		map_height++;
+		i++;
+	}
+	if (y >= map_height)
 		return ('1');
 	if (!cub3d->map[y])
 		return ('1');

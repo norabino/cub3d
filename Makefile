@@ -39,7 +39,6 @@ PARSING_SRC = \
 	src/parsing/portal_utils.c \
 	src/parsing/texture_parser.c \
 	src/parsing/texture_utils_0.c \
-	src/parsing/texture_utils_1.c \
 	src/parsing/texture_validator.c \
 
 # Raycasting system
@@ -101,9 +100,7 @@ $(NAME): minilibx $(OBJ)
 
 minilibx:
 	@echo "Compilation de la Minilibx ..."
-	@make -s -C MinilibX
-	
-# > /dev/null 2>&1
+	@make -s -C MinilibX > /dev/null 2>&1
 
 clean_minilibx:
 	@make clean -C MinilibX > /dev/null 2>&1

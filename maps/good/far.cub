@@ -3,6 +3,8 @@ SO ./textures/cartoon_bricks.xpm
 EA ./textures/cartoon_wood.xpm
 WE ./textures/cartoon_wood.xpm
 
+PO ./textures/portal/
+
 F 32, 32, 32
 C 0, 0, 102
 

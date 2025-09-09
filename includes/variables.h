@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:21:04 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 19:23:21 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:38:38 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 #define MOVE_SPEED 2.0
 #define SENSIBILITY 3.0
-#define FPS 60
+#define FPS 120
 #define FOV 66
 #define COLLISION_MARGIN 0.05
 

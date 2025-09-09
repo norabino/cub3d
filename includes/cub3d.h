@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 21:55:21 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:47:29 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,34 @@ int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
 
 void	exit_error(char *err, t_cub3d *cub3d);
 void	ft_free(t_cub3d *s_cub3d);
-void	print_map(t_cub3d *cub3d, char **map);
-int		try_to_open(t_cub3d *cub3d, char *path);
 
 
 // ============================================================================
 // FILE PARSING FUNCTIONS
 // ============================================================================
 
-int		all_colors_set(t_colors colors);
+int		all_colors_set(t_cub3d *cub3d);
 int		all_text_set(t_cub3d *cub3d);
 int		check_and_set_file(t_cub3d *cub3d, char **file);
 int		check_extension(t_cub3d *cub3d, char *filename, char *ext);
-int		check_line(t_cub3d *cub3d, char *line, t_textures *textures);
-int		check_text_extension(t_cub3d *cub3d, char *textures);
 int		count_file_lines(int fd);
 int		extract_filename_from_line(char *line, int j, char **filename);
-int		validate_all_colors(t_colors *colors, char **file, int *idx);
+int		validate_all_colors(t_cub3d *cub3d, char **file, int *idx);
 int		ft_check_map(t_cub3d *cub3d, char **file, int *idx_line);
 int		validate_all_textures(t_cub3d *cub3d, char **file, int *idx);
 int		is_valid_file_path(char *str);
 char	**open_file(t_cub3d *cub3d, char *filename);
-int		parse_color_line(t_colors *colors, char *line, int *idx, int i);
-int		process_color_line(t_colors *colors, char *line, int *idx, int i);
+int		parse_color_line(t_cub3d *cub3d, char *line, int *idx, int i);
 int		process_single_texture_line(t_cub3d *cub3d, char **file, int i,
 			int *found_all);
 void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z);
 void	process_texture_found(t_cub3d *cub3d, char *line, int j, int z);
 void	read_file_lines(char **file, int fd);
-void	set_ceiling(t_colors *colors, char **split);
-void	set_floor(t_colors *colors, char **split);
-void	set_texture(char c, int j, char *line, t_textures *textures);
-void	verify_colors(t_colors *colors);
-void	assign_color_values(t_colors *colors, char **split, char c);
-void	validate_colors_complete(t_colors *colors);
+void	set_ceiling(t_cub3d *cub3d, char **split);
+void	set_floor(t_cub3d *cub3d, char **split);
+void	set_texture(char c, int j, char *line, t_cub3d *cub3d);
+void	assign_color_values(t_cub3d *cub3d, char **split, char c);
+void	validate_colors_complete(t_cub3d *cub3d);
 int		parse_texture_line(t_cub3d *cub3d, char *line);
 void	parse_config_file(t_cub3d *cub3d, int ac, char **av);
 int		validate_config_file(t_cub3d *cub3d, char **file);
@@ -100,7 +94,6 @@ int		handle_close(t_cub3d *cub3d);
 int		handle_direction(t_cub3d *cub3d);
 int		handle_direction_left(t_cub3d *cub3d);
 int		handle_direction_right(t_cub3d *cub3d);
-int		handle_hook(int keycode, t_cub3d *cub3d);
 int		handle_keypress(int keycode, t_cub3d *cub3d);
 int		handle_keyrelease(int keycode, t_cub3d *cub3d);
 int		handle_loop(t_cub3d *cub3d);
@@ -115,7 +108,7 @@ void	rotate_player_mouse(t_cub3d *cub3d, double angle);
 // ============================================================================
 
 void	init(t_cub3d *cub3d);
-t_cub3d	*init_mlx(t_cub3d *cub3d);
+void	init_minilibx(t_cub3d *cub3d);
 
 // ============================================================================
 // MAP PARSING AND VALIDATION FUNCTIONS
@@ -148,11 +141,10 @@ void	calc_camera_plane(t_cub3d *cub3d);
 // ============================================================================
 
 void	free_map(char **map);
-void	*ft_memmove(void *dest, const void *src, size_t n);
 void	ft_bzero(void *s, int n);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_itoa(int n);
-void	ft_free(void *data);
+void	secure_free(void *data);
 
 // ============================================================================
 // MINIMAP FUNCTIONS
@@ -203,7 +195,6 @@ void	set_prtls(t_cub3d *cub3d);
 void	teleportation(t_cub3d *cub3d, t_prtl portal);
 int		tp_already_set(t_cub3d *cub3d, char name);
 void	update_portal_animations(t_cub3d *cub3d);
-void	draw_fade(t_cub3d *cub3d, double alpha);
 
 // ============================================================================
 // RAYCASTING FUNCTIONS
@@ -229,8 +220,6 @@ void	raycast(t_cub3d *cub3d);
 void	apply_fc_texture(t_cub3d *cub3d, t_texture_img *texture,
 			t_fc_coords *coords);
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
-void	draw_floor_ceiling(t_cub3d *cub3d, int screen_x, int draw_start,
-			int draw_end);
 void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
 			int draw_end);
 void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
@@ -257,7 +246,6 @@ int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *dest, char *str);
 char	*ft_strdup(char *s);
 char	*ft_strndup(char *str, int n);
-char	*ft_strrchr(char *s, int c);
 int		ft_tablen(char **tab);
 int		in_map(char c);
 int		is_letter(char c);
@@ -290,6 +278,6 @@ void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
 void	select_wall_texture_extended(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
-int		load_portal_texture(t_cub3d *cub3d, t_prtl_sprite *sprite, char *path);
+int		load_portal_texture(t_cub3d *cub3d);
 
 #endif

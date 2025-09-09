@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:04:55 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 22:28:26 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_and_set_file(t_cub3d *cub3d, char **file)
 	idx_line = 0;
 	validate_all_textures(cub3d, file, &idx_line);
 	tmp = idx_line;
-	validate_all_colors(&cub3d->colors, file, &idx_line);
+	validate_all_colors(cub3d, file, &idx_line);
 	if (tmp > idx_line)
 		idx_line = tmp;
 	ft_check_map(cub3d, file, &idx_line);

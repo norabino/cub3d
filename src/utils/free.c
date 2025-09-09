@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/09 21:47:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 22:14:48 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 static void	ft_free_textures_paths(t_textures *textures)
 {
 	if (textures->north)
-		ft_free(textures->north);
+		secure_free(textures->north);
 	if (textures->south)
-		ft_free(textures->south);
+		secure_free(textures->south);
 	if (textures->west)
-		ft_free(textures->west);
+		secure_free(textures->west);
 	if (textures->east)
-		ft_free(textures->east);
+		secure_free(textures->east);
 	if (textures->ceiling)
-		ft_free(textures->ceiling);
+		secure_free(textures->ceiling);
 	if (textures->floor)
-		ft_free(textures->floor);
+		secure_free(textures->floor);
 }
 
 /* Libère les images de la bibliothèque graphique */
@@ -38,7 +38,7 @@ static void	ft_free_mlx(t_mlx *mlx)
 		mlx->img->img = NULL;
 	}
 	if (mlx->img)
-		ft_free(mlx->img);
+		secure_free(mlx->img);
 	if (mlx->win && mlx->mlx)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
@@ -47,8 +47,7 @@ static void	ft_free_mlx(t_mlx *mlx)
 	if (mlx->mlx)
 	{
 		mlx_destroy_display(mlx->mlx);
-		free(mlx->mlx);
-		mlx->mlx = NULL;
+		secure_free(mlx->mlx);
 	}
 }
 
@@ -67,6 +66,6 @@ void	ft_free(t_cub3d *cub3d)
 	if (cub3d->map)
 		free_map(cub3d->map);
 	ft_free_mlx(&cub3d->mlx);
-	free(cub3d);
+	secure_free(cub3d);
 	already_freed = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:47:21 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 21:46:08 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 22:45:19 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*ft_itoa(int n)
 	return (res);
 }
 
-void	ft_free(void *data)
+void	secure_free(void *data)
 {
 	free(data);
 	data = NULL;

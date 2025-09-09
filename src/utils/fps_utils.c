@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 22:44:09 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	display_fps(t_cub3d *cub3d)
 	int		i;
 	int		fps_int;
 
-	fps_int = (int)(cub3d->current_fps + 0.5);
+	fps_int = (int)(cub3d->time.current_fps + 0.5);
 	i = 0;
 	fps_str[i++] = 'F';
 	fps_str[i++] = 'P';

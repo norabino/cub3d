@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 18:51:22 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:02:23 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Passe les espaces et caractères de contrôle dans une chaîne */
 void	skip_spaces(char *str, int *i)
 {
-	while ((str[*i] >= 8 && str[*i] <= 13) || str[*i] == ' ')
+	while (str[*i] && ((str[*i] >= 8 && str[*i] <= 13) || str[*i] == ' '))
 		(*i)++;
 }
 
@@ -45,7 +45,7 @@ int	only_numbers(char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]) && str[i] != ' '
-			&& str[i] <= 8 && str[i] >= 13)
+			&& str[i] != '\t' && str[i] != '\n' && str[i] != '\r')
 			return (0);
 		i++;
 	}

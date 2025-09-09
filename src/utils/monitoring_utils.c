@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:08:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,4 @@ void	exit_error(char *err, t_cub3d *cub3d)
 	write(2, "\n", 1);
 	ft_free(cub3d);
 	exit(1);
-}
-
-/* Affiche une carte pour debugging */
-void	print_map(t_cub3d *cub3d, char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map && map[i])
-	{
-		printf("%s", map[i]);
-		i++;
-	}
-	if (!map)
-		exit_error("print map error map nulle", cub3d);
 }

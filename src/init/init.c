@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 20:11:53 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:29:02 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	init_textures(t_cub3d *cub3d)
 	cub3d->textures.east = NULL;
 	cub3d->textures.floor = NULL;
 	cub3d->textures.ceiling = NULL;
-	cub3d->textures
+	cub3d->textures.portals = NULL;
 }
 
 /* Initialise les valeurs de base de la structure principale */
@@ -47,7 +47,6 @@ static void	init_player(t_cub3d *cub3d)
 {
 	cub3d->player.fov = 0;
 	cub3d->player.direction = 0;
-	cub3d->player.cub3d = cub3d;
 	cub3d->player.last_prtl_pos.x = -1;
 	cub3d->player.last_prtl_pos.y = -1;
 }
