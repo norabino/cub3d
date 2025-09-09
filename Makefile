@@ -10,7 +10,7 @@ MAIN_SRC = \
 
 # Initialization system files
 INIT_SRC = \
-	src/init/game_init.c \
+	src/init/init.c \
 	src/init/init_mlx.c \
 
 # Get Next Line
@@ -34,7 +34,6 @@ PARSING_SRC = \
 	src/parsing/config_validator.c \
 	src/parsing/file_utils.c \
 	src/parsing/flood_fill.c \
-	src/parsing/init.c \
 	src/parsing/open_file.c \
 	src/parsing/portal_parsing.c \
 	src/parsing/portal_utils.c \
@@ -102,7 +101,9 @@ $(NAME): minilibx $(OBJ)
 
 minilibx:
 	@echo "Compilation de la Minilibx ..."
-	@make -s -C MinilibX > /dev/null 2>&1
+	@make -s -C MinilibX
+	
+# > /dev/null 2>&1
 
 clean_minilibx:
 	@make clean -C MinilibX > /dev/null 2>&1

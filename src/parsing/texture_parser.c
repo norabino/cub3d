@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 18:56:33 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 21:55:07 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	texture_duplicate(char c, t_cub3d *cub3d)
 		exit_error("Duplicate north texture", cub3d);
 	else if (c == 'S')
 		exit_error("Duplicate south texture", cub3d);
-	else if (c == 'W')>
+	else if (c == 'W')
 		exit_error("Duplicate west texture", cub3d);
 	else if (c == 'E')
 		exit_error("Duplicate east texture", cub3d);
@@ -67,7 +67,7 @@ static void	assign_texture_path(char c, char *sub, t_textures *textures)
 		free(sub);
 }
 
-void	assign_texture(char c, int j, char *line, t_textures *textures)
+void	assign_texture(char c, int j, char *line)
 {
 	char	*sub;
 
@@ -82,13 +82,13 @@ int	parse_texture_line(t_cub3d *cub3d, char *line)
 
 	j = 0;
 	skip_spaces(line, &j);
-	if ((line[j] == 'N' && cub3d->textures->north)
-		|| (line[j] == 'S' && cub3d->textures->south)
-		|| (line[j] == 'W' && cub3d->textures->west)
-		|| (line[j] == 'E' && cub3d->textures->east)
-		|| (line[j] == 'F' && cub3d->textures->floor)
-		|| (line[j] == 'C' && cub3d->textures->ceiling)
-		|| (line[j] == 'P' && cub3d->textures->portals))
+	if ((line[j] == 'N' && cub3d->textures.north)
+		|| (line[j] == 'S' && cub3d->textures.south)
+		|| (line[j] == 'W' && cub3d->textures.west)
+		|| (line[j] == 'E' && cub3d->textures.east)
+		|| (line[j] == 'F' && cub3d->textures.floor)
+		|| (line[j] == 'C' && cub3d->textures.ceiling)
+		|| (line[j] == 'P' && cub3d->textures.portals))
 		texture_duplicate(line[j], cub3d);
 	if (!is_letter(line[j]))
 		exit_error("Invalid line", cub3d);
@@ -99,5 +99,5 @@ int	parse_texture_line(t_cub3d *cub3d, char *line)
 		skip_spaces(line, &j);
 		process_texture_path_found(cub3d, line, j, z);
 	}
-	return (all_text_set(cub3d->textures));
+	return (all_text_set(cub3d));
 }

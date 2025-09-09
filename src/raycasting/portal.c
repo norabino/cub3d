@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 18:40:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 20:16:05 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 	char	*join2;
 	char	*num_str;
 
-	cub3d->tp_portals[i].sprite.frames = malloc(sizeof(t_texture_img) * 16);
-	if (!cub3d->tp_portals[i].sprite.frames)
+	cub3d->prtl_sprites.frames = malloc(sizeof(t_texture_img) * 16);
+	if (!cub3d->prtl_sprites.frames)
 		return ;
 	j = -1;
 	while (++j < 16)
@@ -85,7 +85,7 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 		right_path = ft_strjoin(cub3d->textures.portals, join2);
 		free(join2);
 		join2 = NULL;
-		load_texture(cub3d, &cub3d->tp_portals[i].sprite.frames[j], right_path);
+		load_texture(cub3d, &cub3d->prtl_sprites.frames[j], right_path);
 		free(right_path);
 		right_path = NULL;
 	}

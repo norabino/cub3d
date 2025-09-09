@@ -6,93 +6,67 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 01:25:54 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 21:47:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /* Libère les chemins des textures Nord et Sud */
-static void	ft_free_textures_paths(t_textures *s_textures)
+static void	ft_free_textures_paths(t_textures *textures)
 {
-	if (s_textures->north)
-	{
-		free(s_textures->north);
-		s_textures->north = NULL;
-	}
-	if (s_textures->south)
-	{
-		free(s_textures->south);
-		s_textures->south = NULL;
-	}
-}
-
-/* Libère les chemins des textures Ouest et Est */
-static void	ft_free_textures_paths_two(t_textures *s_textures)
-{
-	if (s_textures->west)
-	{
-		free(s_textures->west);
-		s_textures->west = NULL;
-	}
-	if (s_textures->east)
-	{
-		free(s_textures->east);
-		s_textures->east = NULL;
-	}
+	if (textures->north)
+		ft_free(textures->north);
+	if (textures->south)
+		ft_free(textures->south);
+	if (textures->west)
+		ft_free(textures->west);
+	if (textures->east)
+		ft_free(textures->east);
+	if (textures->ceiling)
+		ft_free(textures->ceiling);
+	if (textures->floor)
+		ft_free(textures->floor);
 }
 
 /* Libère les images de la bibliothèque graphique */
-static void	ft_free_mlx(t_mlx *s_mlx)
+static void	ft_free_mlx(t_mlx *mlx)
 {
-	if (s_mlx->img && s_mlx->img->img && s_mlx->mlx)
+	if (mlx->img && mlx->img->img && mlx->mlx)
 	{
-		mlx_destroy_image(s_mlx->mlx, s_mlx->img->img);
-		s_mlx->img->img = NULL;
+		mlx_destroy_image(mlx->mlx, mlx->img->img);
+		mlx->img->img = NULL;
 	}
-	if (s_mlx->img)
+	if (mlx->img)
+		ft_free(mlx->img);
+	if (mlx->win && mlx->mlx)
 	{
-		free(s_mlx->img);
-		s_mlx->img = NULL;
+		mlx_destroy_window(mlx->mlx, mlx->win);
+		mlx->win = NULL;
 	}
-}
-
-/* Libère la fenêtre et la connexion graphique */
-static void	ft_free_mlx_two(t_mlx *s_mlx)
-{
-	if (s_mlx->win && s_mlx->mlx)
+	if (mlx->mlx)
 	{
-		mlx_destroy_window(s_mlx->mlx, s_mlx->win);
-		s_mlx->win = NULL;
-	}
-	if (s_mlx->mlx)
-	{
-		mlx_destroy_display(s_mlx->mlx);
-		free(s_mlx->mlx);
-		s_mlx->mlx = NULL;
+		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
+		mlx->mlx = NULL;
 	}
 }
 
 /* Fonction principale de nettoyage de toute la mémoire */
-void	ft_free(t_cub3d *s_cub3d)
+void	ft_free(t_cub3d *cub3d)
 {
-	static int	g_already_freed = 0;
+	static int	already_freed = 0;
 
-	if (!s_cub3d || g_already_freed)
+	if (!cub3d || already_freed)
 		return ;
-	g_already_freed = 1;
-	if (s_cub3d->nb_portals > 0)
-		free_portal_sprites(s_cub3d);
-	free_textures(s_cub3d);
-	ft_free_textures_paths(&s_cub3d->textures);
-	ft_free_textures_paths_two(&s_cub3d->textures);
-	if (s_cub3d->map)
-	{
-		free_map(s_cub3d->map);
-		s_cub3d->map = NULL;
-	}
-	ft_free_mlx(&s_cub3d->mlx);
-	ft_free_mlx_two(&s_cub3d->mlx);
-	free(s_cub3d);
-	g_already_freed = 0;
+	already_freed = 1;
+	if (cub3d->nb_portals > 0)
+		free_portal_sprites(cub3d);
+	free_textures(cub3d);
+	ft_free_textures_paths(&cub3d->textures);
+	if (cub3d->map)
+		free_map(cub3d->map);
+	ft_free_mlx(&cub3d->mlx);
+	free(cub3d);
+	already_freed = 0;
 }

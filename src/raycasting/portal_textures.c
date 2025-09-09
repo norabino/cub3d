@@ -27,18 +27,18 @@ static void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 	{
 		if (cub3d->tp_portals[i].name == map_char)
 		{
-			if (!cub3d->tp_portals[i].sprite.frames)
+			if (!cub3d->prtl_sprites.frames)
 				tex_calc->portal_index = 0;
-			safe_frame = cub3d->tp_portals[i].sprite.current_frame % 16;
+			safe_frame = cub3d->prtl_sprites.current_frame % 16;
 			tex_calc->portal_index = i;
 			tex_calc->current_text
-				= &cub3d->tp_portals[i].sprite.frames[safe_frame];
+				= &cub3d->prtl_sprites.frames[safe_frame];
 			tex_calc->portal_color[0]
-				= cub3d->tp_portals[i].sprite.color_tint[0];
+				= cub3d->prtl_sprites.color_tint[0];
 			tex_calc->portal_color[1]
-				= cub3d->tp_portals[i].sprite.color_tint[1];
+				= cub3d->prtl_sprites.color_tint[1];
 			tex_calc->portal_color[2]
-				= cub3d->tp_portals[i].sprite.color_tint[2];
+				= cub3d->prtl_sprites.color_tint[2];
 			return ;
 		}
 		i++;

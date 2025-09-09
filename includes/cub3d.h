@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 19:24:12 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 21:55:21 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		try_to_open(t_cub3d *cub3d, char *path);
 // ============================================================================
 
 int		all_colors_set(t_colors colors);
-int		all_text_set(t_textures textures);
+int		all_text_set(t_cub3d *cub3d);
 int		check_and_set_file(t_cub3d *cub3d, char **file);
 int		check_extension(t_cub3d *cub3d, char *filename, char *ext);
 int		check_line(t_cub3d *cub3d, char *line, t_textures *textures);
@@ -77,7 +77,7 @@ void	set_texture(char c, int j, char *line, t_textures *textures);
 void	verify_colors(t_colors *colors);
 void	assign_color_values(t_colors *colors, char **split, char c);
 void	validate_colors_complete(t_colors *colors);
-int		parse_texture_line(t_cub3d *cub3d, char *line, t_textures *textures);
+int		parse_texture_line(t_cub3d *cub3d, char *line);
 void	parse_config_file(t_cub3d *cub3d, int ac, char **av);
 int		validate_config_file(t_cub3d *cub3d, char **file);
 
@@ -152,6 +152,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 void	ft_bzero(void *s, int n);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_itoa(int n);
+void	ft_free(void *data);
 
 // ============================================================================
 // MINIMAP FUNCTIONS

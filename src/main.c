@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/08 19:07:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 20:10:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	mlx_hook(cub3d->mlx.win, 2, 1L << 0, handle_keypress, cub3d);
 	mlx_hook(cub3d->mlx.win, 3, 1L << 1, handle_keyrelease, cub3d);
 	mlx_hook(cub3d->mlx.win, 6, 1L << 6, handle_mouse_move, cub3d);
-	cub3d->mouse_captured = 1;
+	cub3d->mouse.captured = 1;
 	mlx_loop_hook(cub3d->mlx.mlx, handle_loop, cub3d);
 	mlx_loop(cub3d->mlx.mlx);
 	return (0);

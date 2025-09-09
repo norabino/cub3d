@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/08 15:40:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 21:56:09 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
 			&& check_extension(cub3d, filename, ".xpm")))
 	{
 		free(filename);
-		set_texture(line[z], j, line, &cub3d->textures);
+		set_texture(line[z], j, line, cub3d);
 	}
 	else
 		free(filename);
@@ -65,41 +65,41 @@ void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
 int	process_single_texture_line(t_cub3d *cub3d, char **file, int i,
 	int *found_all)
 {
-	if (!(*found_all) && parse_texture_line(cub3d, file[i], &cub3d->textures))
+	if (!(*found_all) && parse_texture_line(cub3d, file[i]))
 	{
 		*found_all = 1;
 		return (i + 1);
 	}
 	else if (*found_all)
-		parse_texture_line(cub3d, file[i], &cub3d->textures);
+		parse_texture_line(cub3d, file[i], &cub3d->cub3d->textures);
 	return (-1);
 }
 
-/* Vérifie que toutes les textures sont définies et valides */
-int	all_text_set(t_textures textures)
+/* Vérifie que toutes les cub3d->textures sont définies et valides */
+int	all_text_set(t_cub3d *cub3d)
 {
-	if (!textures.north || !textures.south || !textures.west
-		|| !textures.east)
+	if (!cub3d->textures.north || !cub3d->textures.south
+		|| !cub3d->textures.west || !cub3d->textures.east)
 		return (0);
-	if (!check_extension(textures.cub3d, textures.north, ".xpm"))
-		exit_error("Wrong north texture extension.", textures.cub3d);
-	if (!check_extension(textures.cub3d, textures.south, ".xpm"))
-		exit_error("Wrong south texture extension.", textures.cub3d);
-	if (!check_extension(textures.cub3d, textures.west, ".xpm"))
-		exit_error("Wrong west texture extension.", textures.cub3d);
-	if (!check_extension(textures.cub3d, textures.east, ".xpm"))
-		exit_error("Wrong east texture extension.", textures.cub3d);
-	if (textures.floor && !check_extension(textures.cub3d,
-			textures.floor, ".xpm"))
-		exit_error("Wrong floor texture extension.", textures.cub3d);
-	if (textures.ceiling && !check_extension(textures.cub3d,
-			textures.ceiling, ".xpm"))
-		exit_error("Wrong ceiling texture extension.", textures.cub3d);
+	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.north, ".xpm"))
+		exit_error("Wrong north texture extension.", cub3d);
+	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.south, ".xpm"))
+		exit_error("Wrong south texture extension.", cub3d);
+	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.west, ".xpm"))
+		exit_error("Wrong west texture extension.", cub3d);
+	if (!check_extension(cub3d->textures.cub3d, cub3d->textures.east, ".xpm"))
+		exit_error("Wrong east texture extension.", cub3d);
+	if (cub3d->textures.floor && !check_extension(cub3d->textures.cub3d,
+			cub3d->textures.floor, ".xpm"))
+		exit_error("Wrong floor texture extension.", cub3d);
+	if (cub3d->textures.ceiling && !check_extension(cub3d->textures.cub3d,
+			cub3d->textures.ceiling, ".xpm"))
+		exit_error("Wrong ceiling texture extension.", cub3d);
 	return (1);
 }
 
 /* Assigne une texture selon son identifiant */
-void	set_texture(char c, int j, char *line, t_textures *textures)
+void	set_texture(char c, int j, char *line, t_cub3d *cub3d)
 {
 	char	*sub;
 	int		len;
@@ -115,23 +115,23 @@ void	set_texture(char c, int j, char *line, t_textures *textures)
 		sub[i] = '\0';
 		i--;
 	}
-	if (c == 'N' && !textures->north)
-		textures->north = sub;
-	else if (c == 'S' && !textures->south)
-		textures->south = sub;
-	else if (c == 'W' && !textures->west)
-		textures->west = sub;
-	else if (c == 'E' && !textures->east)
-		textures->east = sub;
-	else if (c == 'P' && !textures->portals)
-		textures->portals = sub;
-	else if (c == 'F' && !textures->floor)
-		textures->floor = sub;
-	else if (c == 'C' && !textures->ceiling)
-		textures->ceiling = sub;
+	if (c == 'N' && !cub3d->textures.north)
+		cub3d->textures.north = sub;
+	else if (c == 'S' && !cub3d->textures.south)
+		cub3d->textures.south = sub;
+	else if (c == 'W' && !cub3d->textures.west)
+		cub3d->textures.west = sub;
+	else if (c == 'E' && !cub3d->textures.east)
+		cub3d->textures.east = sub;
+	else if (c == 'P' && !cub3d->textures.portals)
+		cub3d->textures.portals = sub;
+	else if (c == 'F' && !cub3d->textures.floor)
+		cub3d->textures.floor = sub;
+	else if (c == 'C' && !cub3d->textures.ceiling)
+		cub3d->textures.ceiling = sub;
 	else
 	{
 		free(sub);
-		exit_error("Duplicate or invalid texture identifier.", textures->cub3d);
+		exit_error("Duplicate or invalid texture identifier.", cub3d);
 	}
 }
