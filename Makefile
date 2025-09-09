@@ -20,9 +20,9 @@ GNL_SRC = \
 
 # Input handling
 INPUT_SRC = \
-	src/input/hook.c \
-	src/input/hook2.c \
-	src/input/hook3.c \
+	src/input/hook_0.c \
+	src/input/hook_1.c \
+	src/input/hook_2.c \
 	src/input/mouse.c \
 
 # Parsing and file handling
