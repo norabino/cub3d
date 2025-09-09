@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/09 23:02:23 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/10 00:05:09 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	validate_all_colors(t_cub3d *cub3d, char **file, int *idx)
 			continue ;
 		}
 		if (!is_letter(file[i][j]) && file[i][j] != '1')
+		{
+			cub3d->invalid_arg = ft_strdup(file[i]);
 			exit_error("Invalid line", cub3d);
+		}
 		parse_color_line(cub3d, file[i], idx, i);
 		i++;
 	}

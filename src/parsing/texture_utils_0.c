@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/09 23:19:04 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/09 23:53:21 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,7 @@ void	set_texture(char c, int j, char *line, t_cub3d *cub3d)
 	else if (c == 'E' && !cub3d->textures.east)
 		cub3d->textures.east = sub;
 	else if (c == 'P' && !cub3d->textures.portals)
-	{
-		printf("sub = %s\n", sub);
 		cub3d->textures.portals = sub;
-	}
 	else if (c == 'F' && !cub3d->textures.floor)
 		cub3d->textures.floor = sub;
 	else if (c == 'C' && !cub3d->textures.ceiling)

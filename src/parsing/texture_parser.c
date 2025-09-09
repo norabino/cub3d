@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 23:01:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/10 00:05:36 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	parse_texture_line(t_cub3d *cub3d, char *line)
 		|| (line[j] == 'P' && cub3d->textures.portals))
 		texture_duplicate(line[j], cub3d);
 	if (!is_letter(line[j]))
+	{
+		cub3d->invalid_arg = ft_strdup(line);
 		exit_error("Invalid line", cub3d);
+	}
 	if (is_letter(line[j]))
 	{
 		z = j;
