@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 00:02:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/10 17:08:47 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	init(t_cub3d *cub3d)
 {
 	cub3d->map = NULL;
 	cub3d->invalid_arg = NULL;
+	cub3d->nb_error_line = -1;
 	init_mlx(cub3d);
 	init_player(cub3d);
 	init_colors(cub3d);

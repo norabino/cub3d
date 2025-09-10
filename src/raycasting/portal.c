@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 23:36:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/10 16:34:59 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,9 @@ int	load_portal_texture(t_cub3d *cub3d)
 	char	*temp2;
 	char	*full_path;
 
-	// Première passe : compter le nombre de frames disponibles
 	i = 0;
 	cub3d->prtl_sprites.frame_counter = 0;
-	while (i < 100) // Limite raisonnable pour éviter une boucle infinie
+	while (i < 100)
 	{
 		frame_num = ft_itoa(i);
 		temp1 = ft_strjoin(frame_num, ".xpm");
@@ -116,16 +115,13 @@ int	load_portal_texture(t_cub3d *cub3d)
 		free(temp2);
 		free(full_path);
 		if (fd == -1)
-			break;
+			break ;
 		close(fd);
 		cub3d->prtl_sprites.frame_counter++;
 		i++;
 	}
-	
 	if (cub3d->prtl_sprites.frame_counter == 0)
 		return (0);
-		
-	// Allouer les tableaux
 	cub3d->prtl_sprites.path = malloc(sizeof(char*) * (cub3d->prtl_sprites.frame_counter + 1));
 	if (!cub3d->prtl_sprites.path)
 		return (0);
@@ -135,8 +131,6 @@ int	load_portal_texture(t_cub3d *cub3d)
 		free(cub3d->prtl_sprites.path);
 		return (0);
 	}
-	
-	// Initialiser toutes les images à NULL
 	i = 0;
 	while (i < cub3d->prtl_sprites.frame_counter)
 	{
@@ -144,8 +138,6 @@ int	load_portal_texture(t_cub3d *cub3d)
 		cub3d->prtl_sprites.frames[i].addr = NULL;
 		i++;
 	}
-	
-	// Deuxième passe : charger les textures
 	i = 0;
 	while (i < cub3d->prtl_sprites.frame_counter)
 	{
@@ -159,8 +151,7 @@ int	load_portal_texture(t_cub3d *cub3d)
 		free(temp2);
 		i++;
 	}
-	cub3d->prtl_sprites.path[cub3d->prtl_sprites.frame_counter] = NULL; // Terminer le tableau
-	
+	cub3d->prtl_sprites.path[cub3d->prtl_sprites.frame_counter] = NULL;
 	cub3d->prtl_sprites.current_frame = 0;
 	cub3d->prtl_sprites.last_frame_time = 0;
 	return (1);
@@ -169,7 +160,6 @@ int	load_portal_texture(t_cub3d *cub3d)
 /* Initialise tous les sprites de portails */
 void	init_prtl_sprites(t_cub3d *cub3d)
 {
-	// Ne charger les sprites qu'une seule fois pour tous les portails
 	if (cub3d->nb_portals > 0)
 		load_portal_texture(cub3d);
 }

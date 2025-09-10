@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 23:59:15 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/10 17:05:45 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,4 +213,5 @@ typedef struct s_cub3d
 	int				nb_portals;
 	char			input_state[256];
 	char 			*invalid_arg;
+	int				nb_error_line;
 }	t_cub3d;

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/10 00:05:27 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/10 17:42:22 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int	validate_all_textures(t_cub3d *cub3d, char **file, int *idx)
 			i++;
 			continue ;
 		}
-		if (!is_letter(file[i][j]) && !ft_strchr(file[i], '1'))
+		if (!is_letter(file[i][j]) && !all_text_set(cub3d)
+			&& !all_colors_set(cub3d))
 		{
 			cub3d->invalid_arg = ft_strdup(file[i]);
+			cub3d->nb_error_line = i;
 			exit_error("Invalid line", cub3d);
 		}
 		if (is_letter(file[i][j]))
