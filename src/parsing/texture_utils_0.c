@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/10 17:32:05 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 11:59:46 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,38 @@ int	is_valid_file_path(char *str)
 }
 
 /* Traite un chemin de texture trouvé dans une ligne */
-void	process_texture_path_found(t_cub3d *cub3d, char *line, int j, int z)
+void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i)
 {
 	char	*filename;
 
-	extract_filename_from_line(line, j, &filename);
-	if ((line[z] == 'P') || (is_valid_file_path(filename)
-			&& check_extension(cub3d, filename, ".xpm")))
+	extract_filename_from_line(cub3d->file[i], j, &filename);
+	if ((cub3d->file[i][z] == 'P') || (is_valid_file_path(filename)
+			&& check_extension(cub3d, filename, ".xpm")
+			&& try_to_open(filename)))
 	{
 		free(filename);
-		set_texture(line[z], j, line, cub3d);
+		set_texture(cub3d->file[i][z], j, cub3d->file[i], cub3d);
 	}
 	else
+	{
 		free(filename);
+		cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
+		cub3d->nb_error_line = i;
+		exit_error("Wrong texture path", cub3d);
+	}
 }
 
 /* Traite une ligne de texture et met à jour l'état de validation */
-int	process_single_texture_line(t_cub3d *cub3d, char **file, int i,
+int	process_single_texture_line(t_cub3d *cub3d, int i,
 	int *found_all)
 {
-	if (!(*found_all) && parse_texture_line(cub3d, file[i]))
+	if (!(*found_all) && parse_texture_line(cub3d, i))
 	{
 		*found_all = 1;
 		return (i + 1);
 	}
 	else if (*found_all)
-		parse_texture_line(cub3d, file[i]);
+		parse_texture_line(cub3d, i);
 	return (-1);
 }
 

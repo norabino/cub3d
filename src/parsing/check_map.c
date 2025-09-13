@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 16:57:36 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 12:02:46 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,22 +95,22 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 }
 
 /* Extrait et stocke la carte depuis le fichier de configuration */
-int	ft_check_map(t_cub3d *cub3d, char **file, int *idx_line)
+int	ft_check_map(t_cub3d *cub3d, int *idx_line)
 {
 	int	begin;
 
-	while (file[*idx_line] && !ft_strchr(file[*idx_line], '1'))
+	while (cub3d->file[*idx_line] && !ft_strchr(cub3d->file[*idx_line], '1'))
 		(*idx_line)++;
-	if (!file[*idx_line])
+	if (!cub3d->file[*idx_line])
 		exit_error("No map found", cub3d);
 	begin = *idx_line;
-	while (file[*idx_line])
+	while (cub3d->file[*idx_line])
 		(*idx_line)++;
 	cub3d->map = calloc((*idx_line) - begin + 2, sizeof(char *));
 	(*idx_line) = 0;
-	while (file[*idx_line + begin])
+	while (cub3d->file[*idx_line + begin])
 	{
-		cub3d->map[*idx_line] = ft_strdup(file[*idx_line + begin]);
+		cub3d->map[*idx_line] = ft_strdup(cub3d->file[*idx_line + begin]);
 		(*idx_line)++;
 	}
 	cub3d->map[*idx_line] = NULL;

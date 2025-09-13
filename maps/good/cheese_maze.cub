@@ -2,13 +2,13 @@
 
 NO ./textures/cartoon_bark.xpm
 SO ./textures/cartoon_bricks.xpm 
-EA ./textures/cartoon_wood.xpm
+EA ./textures/cartoon_wood.abc
 WE ./textures/cartoon_wood.xpm
 
 F 32, 32, 32
 C 0, 0, 102
 
-1
+
 
 111111111111111111111
 1N1000001000000000001

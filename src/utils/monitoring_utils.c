@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 17:18:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 11:22:46 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,13 @@ void	exit_error(char *err, t_cub3d *cub3d)
 	ft_free(cub3d);
 	exit(1);
 }
+
+int	try_to_open(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), 0);
+	return (close(fd), 1);
+} 

@@ -3,39 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   color_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/10 17:12:38 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 12:02:10 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /* Valide toutes les couleurs du fichier de configuration */
-int	validate_all_colors(t_cub3d *cub3d, char **file, int *idx)
+int	validate_all_colors(t_cub3d *cub3d, int *idx)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	(*idx) = 0;
-	while (file[i])
+	while (cub3d->file[i])
 	{
 		j = 0;
-		skip_spaces(file[i], &j);
-		if (!file[i][j])
+		skip_spaces(cub3d->file[i], &j);
+		if (!cub3d->file[i][j])
 		{
 			i++;
 			continue ;
 		}
-		if (!is_letter(file[i][j]) && file[i][j] != '1')
+		if (!is_letter(cub3d->file[i][j]) && cub3d->file[i][j] != '1')
 		{
-			cub3d->invalid_arg = ft_strdup(file[i]);
+			cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
 			cub3d->nb_error_line = i;
 			exit_error("Invalid line", cub3d);
 		}
-		parse_color_line(cub3d, file[i], idx, i);
+		parse_color_line(cub3d, cub3d->file[i], idx, i);
 		i++;
 	}
 	validate_colors_complete(cub3d);

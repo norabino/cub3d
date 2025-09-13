@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 17:08:47 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 11:53:11 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void	init_view(t_cub3d *cub3d)
 /* Fonction principale d'initialisation */
 void	init(t_cub3d *cub3d)
 {
+	cub3d->file = NULL;
 	cub3d->map = NULL;
 	cub3d->invalid_arg = NULL;
 	cub3d->nb_error_line = -1;

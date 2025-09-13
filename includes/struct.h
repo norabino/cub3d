@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 17:05:45 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 11:52:49 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_mouse
 
 typedef struct s_cub3d
 {
+	char			**file;
 	char			**map;
 	t_mlx			mlx;
 	t_player		player;

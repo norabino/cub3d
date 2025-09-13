@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 17:31:56 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 11:58:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,27 @@ static void	texture_duplicate(char c, t_cub3d *cub3d)
 		exit_error("Duplicate portal folder", cub3d);
 }
 
-int	parse_texture_line(t_cub3d *cub3d, char *line)
+int	parse_texture_line(t_cub3d *cub3d, int i)
 {
 	int		j;
 	int		z;
 
 	j = 0;
-	skip_spaces(line, &j);
-	if ((line[j] == 'N' && cub3d->textures.north)
-		|| (line[j] == 'S' && cub3d->textures.south)
-		|| (line[j] == 'W' && cub3d->textures.west)
-		|| (line[j] == 'E' && cub3d->textures.east)
-		|| (line[j] == 'F' && cub3d->textures.floor)
-		|| (line[j] == 'C' && cub3d->textures.ceiling)
-		|| (line[j] == 'P' && cub3d->textures.portals))
-		texture_duplicate(line[j], cub3d);
-	if (is_letter(line[j]))
+	skip_spaces(cub3d->file[i], &j);
+	if ((cub3d->file[i][j] == 'N' && cub3d->textures.north)
+		|| (cub3d->file[i][j] == 'S' && cub3d->textures.south)
+		|| (cub3d->file[i][j] == 'W' && cub3d->textures.west)
+		|| (cub3d->file[i][j] == 'E' && cub3d->textures.east)
+		|| (cub3d->file[i][j] == 'F' && cub3d->textures.floor)
+		|| (cub3d->file[i][j] == 'C' && cub3d->textures.ceiling)
+		|| (cub3d->file[i][j] == 'P' && cub3d->textures.portals))
+		texture_duplicate(cub3d->file[i][j], cub3d);
+	if (is_letter(cub3d->file[i][j]))
 	{
 		z = j;
-		j += skip_letter(line[j], line[j + 1]);
-		skip_spaces(line, &j);
-		process_texture_path_found(cub3d, line, j, z);
+		j += skip_letter(cub3d->file[i][j], cub3d->file[i][j + 1]);
+		skip_spaces(cub3d->file[i], &j);
+		process_texture_path_found(cub3d, j, z, i);
 	}
 	return (all_text_set(cub3d));
 }

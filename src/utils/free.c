@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/09 22:14:48 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/13 12:04:20 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,13 @@ void	ft_free(t_cub3d *cub3d)
 	if (!cub3d || already_freed)
 		return ;
 	already_freed = 1;
+	secure_free(cub3d->invalid_arg);
 	if (cub3d->nb_portals > 0)
 		free_portal_sprites(cub3d);
 	free_textures(cub3d);
 	ft_free_textures_paths(&cub3d->textures);
+	if (cub3d->file)
+		free_map(cub3d->file);
 	if (cub3d->map)
 		free_map(cub3d->map);
 	ft_free_mlx(&cub3d->mlx);
