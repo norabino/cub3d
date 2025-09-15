@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/13 11:59:46 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:27:06 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	extract_filename_from_line(char *line, int j, char **filename)
 	int	len;
 	int	i;
 
-	*filename = ft_substr(line, j, ft_strlen(line) - j, 0);
+	*filename = ft_substr(line, j, ft_strlen(line) - j);
 	len = ft_strlen(*filename);
 	i = len - 1;
 	while (i >= 0 && ((*filename)[i] == ' ' || (*filename)[i] == '\t'
@@ -30,40 +30,29 @@ int	extract_filename_from_line(char *line, int j, char **filename)
 	return (1);
 }
 
-/* Vérifie si la chaîne contient un chemin de fichier valide */
-int	is_valid_file_path(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '/' || str[i] == '.')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 /* Traite un chemin de texture trouvé dans une ligne */
 void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i)
 {
 	char	*filename;
 
 	extract_filename_from_line(cub3d->file[i], j, &filename);
-	if ((cub3d->file[i][z] == 'P') || (is_valid_file_path(filename)
-			&& check_extension(cub3d, filename, ".xpm")
-			&& try_to_open(filename)))
+	if ((cub3d->file[i][z] == 'P') || (try_to_open(filename)
+			&& check_extension(cub3d, filename, ".xpm")))
 	{
-		free(filename);
 		set_texture(cub3d->file[i][z], j, cub3d->file[i], cub3d);
+		free(filename);
 	}
-	else
+	else if ((!cub3d->textures.ceiling && cub3d->file[i][j] == 'C')
+		|| (!cub3d->textures.floor && cub3d->file[i][j] == 'F'))
 	{
 		free(filename);
 		cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
 		cub3d->nb_error_line = i;
 		exit_error("Wrong texture path", cub3d);
+	}
+	else
+	{
+		free(filename);
 	}
 }
 
@@ -112,7 +101,7 @@ void	set_texture(char c, int j, char *line, t_cub3d *cub3d)
 	int		i;
 
 	len = ft_strlen(line) - j;
-	sub = ft_substr(line, j, len, 0);
+	sub = ft_substr(line, j, len);
 	len = ft_strlen(sub);
 	i = len - 1;
 	while (i >= 0 && (sub[i] == ' ' || sub[i] == '\t'

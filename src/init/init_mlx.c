@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:19:02 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/10 16:54:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:34:10 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@
 void	init_minilibx(t_cub3d *cub3d)
 {
 	cub3d->mlx.img = malloc(sizeof(t_img));
+	if (!cub3d->mlx.img)
+		exit_error("Memory allocation failed for image", cub3d);
+	ft_bzero(cub3d->mlx.img, sizeof(t_img));
 	cub3d->mlx.mlx = mlx_init();
+	if (!cub3d->mlx.mlx)
+		exit_error("MLX init failed", cub3d);
 	cub3d->mlx.win = mlx_new_window(cub3d->mlx.mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT, "Cub3D");
 	if (!cub3d->mlx.win)
@@ -31,6 +36,8 @@ void	init_minilibx(t_cub3d *cub3d)
 	cub3d->mlx.img->addr = mlx_get_data_addr(cub3d->mlx.img->img,
 			&cub3d->mlx.img->bits_per_pixel, &cub3d->mlx.img->line_length,
 			&cub3d->mlx.img->endian);
+	if (!cub3d->mlx.img->addr)
+		exit_error("Failed to get image address", cub3d);
 	load_all_textures(cub3d);
 	if (cub3d->nb_portals > 0)
 		init_prtl_sprites(cub3d);

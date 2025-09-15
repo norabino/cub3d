@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 12:09:50 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:07:24 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int		extract_filename_from_line(char *line, int j, char **filename);
 int		validate_all_colors(t_cub3d *cub3d, int *idx);
 int		ft_check_map(t_cub3d *cub3d, int *idx_line);
 int		validate_all_textures(t_cub3d *cub3d, int *idx);
-int		is_valid_file_path(char *str);
 char	**open_file(t_cub3d *cub3d, char *filename);
 int		parse_color_line(t_cub3d *cub3d, char *line, int *idx, int i);
 int		process_single_texture_line(t_cub3d *cub3d, int i,

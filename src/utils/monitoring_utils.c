@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 11:22:46 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:23:44 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	try_to_open(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (close(fd), 0);
-	return (close(fd), 1);
+		return (0);
+	close(fd);
+	return (1);
 } 

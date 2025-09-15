@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/13 12:02:10 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:57:48 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ int	all_colors_set(t_cub3d *cub3d)
 	int	ceiling_complete;
 	int	floor_complete;
 
-	ceiling_complete = (cub3d->textures.ceiling != NULL)
-		|| (cub3d->colors.ceiling[0] != -1 && cub3d->colors.ceiling[1] != -1
-			&& cub3d->colors.ceiling[2] != -1);
-	floor_complete = (cub3d->textures.floor != NULL)
-		|| (cub3d->colors.floor[0] != -1 && cub3d->colors.floor[1] != -1
-			&& cub3d->colors.floor[2] != -1);
+	ceiling_complete = (cub3d->textures.ceiling)
+		|| (cub3d->colors.ceiling[0] != -1
+		&& cub3d->colors.ceiling[1] != -1
+		&& cub3d->colors.ceiling[2] != -1);
+	floor_complete = (cub3d->textures.floor)
+		|| (cub3d->colors.floor[0] != -1
+		&& cub3d->colors.floor[1] != -1
+		&& cub3d->colors.floor[2] != -1);
 	return (ceiling_complete && floor_complete);
 }
 

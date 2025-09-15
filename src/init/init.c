@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 11:53:11 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:34:10 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	init_portals(t_cub3d *cub3d)
 {
+	int	i;
+
 	cub3d->tp_portals = NULL;
 	cub3d->prtl_sprites.current_frame = 0;
 	cub3d->prtl_sprites.frame_counter = 0;
@@ -21,6 +23,13 @@ static void	init_portals(t_cub3d *cub3d)
 	cub3d->prtl_sprites.last_frame_time = 0;
 	cub3d->prtl_sprites.path = 0;
 	cub3d->nb_portals = 0;
+	ft_bzero(cub3d->prtl_sprites.color_tint, sizeof(int) * 3);
+	i = 0;
+	while (i < 26)
+	{
+		cub3d->portals[i] = 0;
+		i++;
+	}
 }
 
 /* Initialise les valeurs de base de la structure principale */
@@ -33,6 +42,13 @@ static void	init_textures(t_cub3d *cub3d)
 	cub3d->textures.floor = NULL;
 	cub3d->textures.ceiling = NULL;
 	cub3d->textures.portals = NULL;
+	ft_bzero(&cub3d->textures.north_img, sizeof(t_texture_img));
+	ft_bzero(&cub3d->textures.south_img, sizeof(t_texture_img));
+	ft_bzero(&cub3d->textures.west_img, sizeof(t_texture_img));
+	ft_bzero(&cub3d->textures.east_img, sizeof(t_texture_img));
+	ft_bzero(&cub3d->textures.floor_img, sizeof(t_texture_img));
+	ft_bzero(&cub3d->textures.ceiling_img, sizeof(t_texture_img));
+	ft_bzero(&cub3d->textures.prtl_sprites, sizeof(t_prtl_sprite));
 }
 
 /* Initialise les valeurs de base de la structure principale */

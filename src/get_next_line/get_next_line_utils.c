@@ -3,27 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 10:19:40 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 17:59:42 by jdupuis          ###   ########.fr       */
+/*   Created: 2024/11/21 08:41:00 by norabino          #+#    #+#             */
+/*   Updated: 2025/09/15 16:35:17 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/* Calcule la longueur d'une chaîne */
 int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str && str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
 
-/* Cherche un caractère dans une chaîne */
 char	*ft_strchr(char *str, char c)
 {
 	int	i;
@@ -40,8 +38,7 @@ char	*ft_strchr(char *str, char c)
 	return (NULL);
 }
 
-/* Extrait une sous-chaîne à partir d'une position donnée */
-char	*ft_substr(char *s, int start, int len, int flg)
+char	*ft_substr(char *s, int start, int len)
 {
 	int		i;
 	char	*str;
@@ -62,26 +59,32 @@ char	*ft_substr(char *s, int start, int len, int flg)
 		i++;
 	}
 	str[i] = 0;
-	if (flg)
-		free(s);
 	return (str);
 }
 
-/* Joint deux chaînes de caractères - version spéciale pour get_next_line */
+void	*ft_check_join(char **s1, char **s2)
+{
+	if (!*s1 && !*s2)
+		return (NULL);
+	if (!*s1)
+	{
+		*s1 = (char *)malloc(1 * sizeof(char));
+		if (!*s1)
+			return (NULL);
+		(*s1)[0] = 0;
+	}
+	if (!*s2)
+		return (NULL);
+	return ("CHECK OK");
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
-	if (!s1)
-	{
-		s1 = (char *)malloc(1 * sizeof(char));
-		if (!s1)
-			return (NULL);
-		s1[0] = 0;
-	}
-	if (!s2)
+	if (!ft_check_join(&s1, &s2))
 		return (NULL);
 	str = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!str)
@@ -94,5 +97,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j] != '\0')
 		str[i++] = s2[j++];
 	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
 	return (str);
 }

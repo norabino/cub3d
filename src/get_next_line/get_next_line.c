@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 10:16:40 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
+/*   Created: 2024/11/19 09:38:08 by norabino          #+#    #+#             */
+/*   Updated: 2025/09/15 16:35:17 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/* Lit le fichier et stocke le contenu dans remainder */
 char	*ft_read_to_remainder(int fd, char *remainder)
 {
 	char	*buffer;
@@ -36,7 +35,6 @@ char	*ft_read_to_remainder(int fd, char *remainder)
 	return (remainder);
 }
 
-/* Extrait une ligne complète du buffer */
 char	*ft_get_a_line(char *str)
 {
 	int		i;
@@ -47,7 +45,7 @@ char	*ft_get_a_line(char *str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	line = ft_substr(str, 0, i + 1, 0);
+	line = ft_substr(str, 0, i + 1);
 	if (!line)
 	{
 		free(str);
@@ -56,7 +54,6 @@ char	*ft_get_a_line(char *str)
 	return (line);
 }
 
-/* Prépare le remainder pour la prochaine lecture */
 char	*ft_new_remainder(char *remainder)
 {
 	int		i;
@@ -71,7 +68,7 @@ char	*ft_new_remainder(char *remainder)
 		return (NULL);
 	}
 	i++;
-	str = ft_substr(remainder, i, ft_strlen(remainder) - i, 0);
+	str = ft_substr(remainder, i, ft_strlen(remainder) - i);
 	if (!str)
 	{
 		free(remainder);
@@ -81,18 +78,17 @@ char	*ft_new_remainder(char *remainder)
 	return (str);
 }
 
-/* Fonction principale qui lit la prochaine ligne */
 char	*get_next_line(int fd)
 {
-	static char		*remainder[4096];
+	static char		*remainder;
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	remainder[fd] = ft_read_to_remainder(fd, remainder[fd]);
-	if (!remainder[fd])
+	remainder = ft_read_to_remainder(fd, remainder);
+	if (!remainder)
 		return (NULL);
-	line = ft_get_a_line(remainder[fd]);
-	remainder[fd] = ft_new_remainder(remainder[fd]);
+	line = ft_get_a_line(remainder);
+	remainder = ft_new_remainder(remainder);
 	return (line);
 }

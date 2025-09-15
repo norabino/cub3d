@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 16:34:59 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/15 16:49:24 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,27 +92,69 @@ static void	init_single_portal(t_cub3d *cub3d, int i)
 	
 }*/
 
+/* Concatene deux chaînes */
+static char	*ft_strcat(char *dest, char *src)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (dest[i])
+		i++;
+	j = 0;
+	while (src[j])
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+/* Crée un chemin sans libérer les arguments d'entrée */
+static char	*create_portal_path(char *base_path, int frame_num)
+{
+	char	*result;
+	char	*frame_str;
+	int		base_len;
+	int		frame_len;
+	int		total_len;
+
+	frame_str = ft_itoa(frame_num);
+	if (!frame_str)
+		return (NULL);
+	base_len = ft_strlen(base_path);
+	frame_len = ft_strlen(frame_str);
+	total_len = base_len + 8 + frame_len + 4 + 1; // "/Portal_" + frame + ".xpm" + \0
+	result = malloc(total_len);
+	if (!result)
+	{
+		free(frame_str);
+		return (NULL);
+	}
+	ft_strcpy(result, base_path);
+	ft_strcat(result, "/Portal_");
+	ft_strcat(result, frame_str);
+	ft_strcat(result, ".xpm");
+	free(frame_str);
+	return (result);
+}
+
 int	load_portal_texture(t_cub3d *cub3d)
 {
 	int		i;
 	int		fd;
-	char	*frame_num;
-	char	*temp1;
-	char	*temp2;
 	char	*full_path;
 
 	i = 0;
 	cub3d->prtl_sprites.frame_counter = 0;
 	while (i < 100)
 	{
-		frame_num = ft_itoa(i);
-		temp1 = ft_strjoin(frame_num, ".xpm");
-		temp2 = ft_strjoin("/Portal_", temp1);
-		full_path = ft_strjoin(cub3d->textures.portals, temp2);
+		full_path = create_portal_path(cub3d->textures.portals, i);
+		if (!full_path)
+			return (0);
 		fd = open(full_path, O_RDONLY);
-		free(frame_num);
-		free(temp1);
-		free(temp2);
 		free(full_path);
 		if (fd == -1)
 			break ;
@@ -141,14 +183,10 @@ int	load_portal_texture(t_cub3d *cub3d)
 	i = 0;
 	while (i < cub3d->prtl_sprites.frame_counter)
 	{
-		frame_num = ft_itoa(i);
-		temp1 = ft_strjoin(frame_num, ".xpm");
-		temp2 = ft_strjoin("/Portal_", temp1);
-		cub3d->prtl_sprites.path[i] = ft_strjoin(cub3d->textures.portals, temp2);
+		cub3d->prtl_sprites.path[i] = create_portal_path(cub3d->textures.portals, i);
+		if (!cub3d->prtl_sprites.path[i])
+			return (0);
 		load_texture(cub3d, &cub3d->prtl_sprites.frames[i], cub3d->prtl_sprites.path[i]);
-		free(frame_num);
-		free(temp1);
-		free(temp2);
 		i++;
 	}
 	cub3d->prtl_sprites.path[cub3d->prtl_sprites.frame_counter] = NULL;

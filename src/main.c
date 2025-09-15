@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 11:53:58 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:23:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parse_config_file(t_cub3d *cub3d, int ac, char **av)
 		exit_error("Wrong extension.\nMust be '.cub'.", cub3d);
 	cub3d->file = open_file(cub3d, av[1]);
 	validate_config_file(cub3d);
-	free_map(cub3d->file);
 }
 
 /* Point d'entrée principal du programme */
@@ -34,6 +33,7 @@ int	main(int ac, char **av)
 	cub3d = malloc(sizeof(t_cub3d));
 	if (!cub3d)
 		return (1);
+	ft_bzero(cub3d, sizeof(t_cub3d));
 	init(cub3d);
 	parse_config_file(cub3d, ac, av);
 	init_minilibx(cub3d);
