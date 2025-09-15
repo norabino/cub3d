@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 01:25:54 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/15 19:28:31 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	cast_single_ray(t_cub3d *cub3d, int screen_x)
 	perform_dda_algorithm(cub3d, &dda);
 	perp_wall_dist = calc_perpendicular_wall_distance(&dda, ray_dir_x,
 			ray_dir_y, cub3d);
+	update_zbuffer(cub3d, screen_x, perp_wall_dist);
 	draw_wall_slice(cub3d, screen_x, perp_wall_dist, &dda);
 }
 

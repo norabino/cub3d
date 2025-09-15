@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 18:14:37 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:58:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ static void	init_portals(t_cub3d *cub3d)
 		cub3d->portals[i] = 0;
 		i++;
 	}
+}
+
+static void	init_sprites_struct(t_cub3d *cub3d)
+{
+	cub3d->sprites = NULL;
+	cub3d->sprite_count = 0;
+	cub3d->zbuffer.buffer = NULL;
+	cub3d->zbuffer.width = 0;
 }
 
 /* Initialise les valeurs de base de la structure principale */
@@ -116,5 +124,6 @@ void	init(t_cub3d *cub3d)
 	init_view(cub3d);
 	init_mouse(cub3d);
 	init_portals(cub3d);
+	init_sprites_struct(cub3d);
 	ft_bzero(cub3d->input_state, 256);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 17:53:54 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:58:48 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,26 @@ void	set_prtls(t_cub3d *cub3d);
 void	teleportation(t_cub3d *cub3d, t_prtl portal);
 int		tp_already_set(t_cub3d *cub3d, char name);
 void	update_portal_animations(t_cub3d *cub3d);
+
+// ============================================================================
+// SPRITE FUNCTIONS
+// ============================================================================
+
+void	calc_sprite_properties(t_cub3d *cub3d, t_sprite *sprite,
+			t_sprite_calc *calc);
+void	calc_sprite_screen_bounds(t_sprite_calc *calc);
+void	collect_portal_sprites(t_cub3d *cub3d);
+void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
+			t_sprite_calc *calc);
+void	draw_transparent_pixel(t_cub3d *cub3d, int x, int y,
+			int color);
+void	free_sprites(t_cub3d *cub3d);
+void	init_sprites(t_cub3d *cub3d);
+void	init_zbuffer(t_cub3d *cub3d);
+int		is_transparent_color(int color);
+void	render_sprites(t_cub3d *cub3d);
+void	sort_sprites_by_distance(t_cub3d *cub3d);
+void	update_zbuffer(t_cub3d *cub3d, int x, double distance);
 
 // ============================================================================
 // RAYCASTING FUNCTIONS

@@ -1,0 +1,20 @@
+NO ./textures/cartoon_bark.xpm
+SO ./textures/cartoon_bark.xpm
+EA ./textures/cartoon_bark.xpm
+WE ./textures/cartoon_bark.xpm
+
+PO ./textures/portal2/
+
+F 55,55,55
+C 0,0,0
+
+1111111111
+1000000001
+1000a00001
+1000000001
+1000000001
+1000000001
+1000a00001
+1000000001
+10000S0001
+1111111111

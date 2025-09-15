@@ -63,6 +63,15 @@ RENDERING_SRC = \
 	src/rendering/texture_utils.c \
 	src/rendering/textures.c \
 
+# Sprite rendering system
+SPRITE_SRC = \
+	src/rendering/sprites/sprite_init.c \
+	src/rendering/sprites/sprite_collect.c \
+	src/rendering/sprites/sprite_sort.c \
+	src/rendering/sprites/sprite_calc.c \
+	src/rendering/sprites/sprite_render.c \
+	src/rendering/sprites/sprite_main.c \
+
 # User Interface
 UI_SRC = \
 	src/ui/minimap.c \
@@ -87,7 +96,7 @@ UTILS_SRC = \
 	src/utils/time.c \
 
 # All source files
-SRC = $(MAIN_SRC) $(GNL_SRC) $(INIT_SRC) $(INPUT_SRC) $(PARSING_SRC) $(RAYCASTING_SRC) $(RENDERING_SRC) $(UI_SRC) $(UTILS_SRC)
+SRC = $(MAIN_SRC) $(GNL_SRC) $(INIT_SRC) $(INPUT_SRC) $(PARSING_SRC) $(RAYCASTING_SRC) $(RENDERING_SRC) $(SPRITE_SRC) $(UI_SRC) $(UTILS_SRC)
 
 OBJ = $(SRC:src/%.c=$(OBJDIR)/%.o)
 
@@ -121,6 +130,6 @@ re: fclean $(NAME)
 re_mac: fclean mac
 
 dev : fclean clean_minilibx
-	git add .; git commit -m "auto/dev"; git push --force
+	git add .; git commit -m "auto/dev sprite"; git push --force
 
 .PHONY: all clean clean_minilibx fclean re re_mac mac minilibx dev

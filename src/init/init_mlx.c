@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:19:02 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 17:34:10 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:58:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	init_minilibx(t_cub3d *cub3d)
 	load_all_textures(cub3d);
 	if (cub3d->nb_portals > 0)
 		init_prtl_sprites(cub3d);
+	init_sprites(cub3d);
 }

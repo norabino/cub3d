@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook3.c                                            :+:      :+:    :+:   */
+/*   hook_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 22:21:13 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/15 19:49:07 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	refresh_image(t_cub3d *cub3d)
 	if (!cub3d->mlx.img->img)
 		return ;
 	raycast(cub3d);
+	render_sprites(cub3d);
 	draw_minimap(cub3d);
 	mlx_put_image_to_window(cub3d->mlx.mlx, cub3d->mlx.win,
 		cub3d->mlx.img->img, 0, 0);

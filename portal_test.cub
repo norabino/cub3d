@@ -1,0 +1,19 @@
+NO ./textures/cartoon_bark.xpm
+SO ./textures/cartoon_bricks.xpm 
+EA ./textures/cartoon_wood.xpm
+WE ./textures/cartoon_wood.xpm
+
+PO ./textures/portal/
+
+F 32, 32, 32
+C 0, 0, 102
+
+        111111111
+        1a000a001
+        100000001
+        100000001
+        100000001
+        100000001
+        100000001
+        1000N0001
+        111111111

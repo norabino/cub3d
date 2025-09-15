@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 18:01:16 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:58:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./cub3d.h"
+#ifndef STRUCT_H
+# define STRUCT_H
+
+# include "variables.h"
 
 typedef struct s_texture_img
 {
@@ -37,6 +40,37 @@ typedef struct s_portal_sprite
 	int				frame_counter;
 	long			last_frame_time;
 }	t_prtl_sprite;
+
+typedef struct s_sprite
+{
+	double	x;
+	double	y;
+	double	distance;
+	int		portal_index;
+	char	portal_name;
+}	t_sprite;
+
+typedef struct s_sprite_calc
+{
+	double	sprite_x;
+	double	sprite_y;
+	double	inv_det;
+	double	transform_x;
+	double	transform_y;
+	int		sprite_screen_x;
+	int		sprite_height;
+	int		sprite_width;
+	int		draw_start_y;
+	int		draw_end_y;
+	int		draw_start_x;
+	int		draw_end_x;
+}	t_sprite_calc;
+
+typedef struct s_zbuffer
+{
+	double	*buffer;
+	int		width;
+}	t_zbuffer;
 
 typedef struct s_portal
 {
@@ -207,9 +241,14 @@ typedef struct s_cub3d
 	t_mouse			mouse;
 	t_prtl			*tp_portals;
 	t_prtl_sprite	prtl_sprites;
+	t_sprite		*sprites;
+	t_zbuffer		zbuffer;
+	int				sprite_count;
 	int				portals[26];
 	int				nb_portals;
 	char			input_state[256];
 	char 			*invalid_arg;
 	int				nb_error_line;
 }	t_cub3d;
+
+#endif

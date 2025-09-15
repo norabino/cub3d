@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/15 19:28:31 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 			dda->side = 1;
 		}
 		if (dda->map_y >= 0 && dda->map_x >= 0 && cub3d->map[(int)dda->map_y]
-			&& (cub3d->map[(int)dda->map_y][(int)dda->map_x] == '1'
-			|| is_lowercase(cub3d->map[(int)dda->map_y][(int)dda->map_x])))
+			&& cub3d->map[(int)dda->map_y][(int)dda->map_x] == '1')
 			dda->hit = 1;
 	}
 }
