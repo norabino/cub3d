@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 11:52:49 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:01:16 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_portal_sprite
 	char			**path;
 	int				current_frame;
 	int				frame_counter;
-	int				color_tint[3];
 	long			last_frame_time;
 }	t_prtl_sprite;
 
@@ -61,7 +60,6 @@ typedef struct s_textures
 	t_texture_img	east_img;
 	t_texture_img	floor_img;
 	t_texture_img	ceiling_img;
-	t_prtl_sprite	prtl_sprites;
 }	t_textures;
 
 typedef struct s_colors
@@ -115,7 +113,6 @@ typedef struct s_texture_calc
 	t_texture_img	*current_text;
 	int				is_portal;
 	int				portal_index;
-	int				portal_color[3];
 }	t_texture_calc;
 
 typedef struct s_dda

@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 17:07:24 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:53:54 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,9 @@ void	load_all_textures(t_cub3d *cub3d);
 int		load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path);
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
-void	select_wall_texture_extended(t_cub3d *cub3d, t_dda *dda,
+void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
+			char map_char);
+void	select_wall_normal_texture(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
 int		load_portal_texture(t_cub3d *cub3d);
 

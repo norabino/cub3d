@@ -33,7 +33,6 @@ t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x)
 {
 	int		y;
 	int		x;
-	t_point	result;
 
 	y = 0;
 	while (cub3d->map[y])
@@ -43,16 +42,10 @@ t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x)
 		{
 			if (cub3d->map[y][x] == cub3d->map[tmp_y][tmp_x]
 				&& !(y == tmp_y && x == tmp_x))
-			{
-				result.x = x;
-				result.y = y;
-				return (result);
-			}
+				return ((t_point){x, y});
 			x++;
 		}
 		y++;
 	}
-	result.x = -1;
-	result.y = -1;
-	return (result);
+	return ((t_point){-1, -1});
 }

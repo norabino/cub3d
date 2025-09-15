@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:44:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:12:20 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,6 @@ void	init_texture_draw_params(t_texture_calc *tex_calc,
 	*tex_height = tex_calc->current_text->height;
 }
 
-/* Applique une teinte colorée à la couleur du pixel */
-static int	apply_portal_tint(int color, t_texture_calc *tex_calc)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = ((color >> 16) & 0xFF) * tex_calc->portal_color[0] / 255;
-	g = ((color >> 8) & 0xFF) * tex_calc->portal_color[1] / 255;
-	b = (color & 0xFF) * tex_calc->portal_color[2] / 255;
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return ((r << 16) | (g << 8) | b);
-}
-
 /* Dessine un pixel unique de texture à l'écran */
 void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
 	t_texture_calc *tex_calc)
@@ -68,7 +49,5 @@ void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
 	tex_calc->tex_pos += tex_calc->step;
 	color = get_texture_pixel_color(tex_calc->current_text,
 			tex_calc->tex_x, tex_calc->tex_y);
-	if (tex_calc->is_portal)
-		color = apply_portal_tint(color, tex_calc);
 	my_mlx_pixel_put(cub3d->mlx.img, screen_x, y, color);
 }

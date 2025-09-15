@@ -3,7 +3,7 @@ SO ./textures/neon_wall.xpm
 EA ./textures/neon_wall.xpm
 WE ./textures/neon_wall.xpm
 
-PO ./textures/portal/
+PO ./textures/portal2/
 
 C ./textures/neon_wall.xpm
 F 139,69,19

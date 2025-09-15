@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 01:55:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:14:37 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int	load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path)
 /* Charge toutes les textures des 4 murs */
 void	load_all_textures(t_cub3d *cub3d)
 {
-	if (!cub3d)
-		return ;
 	if (!load_texture(cub3d, &cub3d->textures.north_img,
 			cub3d->textures.north))
 		exit_error("Error: Failed to load north texture", cub3d);
@@ -101,5 +99,14 @@ void	free_textures(t_cub3d *cub3d)
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {
-	select_wall_texture_extended(cub3d, dda, tex_calc);
+		char	map_char;
+
+	if (!tex_calc)
+		return ;
+	map_char = cub3d->map[(int)dda->map_y][(int)dda->map_x];
+	tex_calc->is_portal = 0;
+	if (is_lowercase(map_char))
+		select_prtl_texture(cub3d, tex_calc, map_char);
+	else
+		select_wall_normal_texture(cub3d, dda, tex_calc);
 }
