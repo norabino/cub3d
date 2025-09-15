@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 16:49:24 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:30:28 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,38 +59,6 @@ void	teleportation(t_cub3d *cub3d, t_prtl portal)
 	cub3d->player.pos_y = new.y + 0.5;
 	cub3d->player.last_prtl_pos = new;
 }
-
-/* Initialise un seul portail avec ses propriétés *//*
-static void	init_single_portal(t_cub3d *cub3d, int i)
-{
-	int		j;
-	char	*right_path;
-	char	*join1;
-	char	*join2;
-	char	*num_str;
-
-	cub3d->prtl_sprites.frames = malloc(sizeof(t_texture_img) * 16);
-	if (!cub3d->prtl_sprites.frames)
-		return ;
-	j = -1;
-	while (++j < 16)
-	{
-		num_str = ft_itoa(j);
-		join1 = ft_strjoin(num_str, ".xpm");
-		free(num_str);
-		num_str = NULL;
-		join2 = ft_strjoin("Portal_", join1);
-		free(join1);
-		join1 = NULL;
-		right_path = ft_strjoin(cub3d->textures.portals, join2);
-		free(join2);
-		join2 = NULL;
-		load_texture(cub3d, &cub3d->prtl_sprites.frames[j], right_path);
-		free(right_path);
-		right_path = NULL;
-	}
-	
-}*/
 
 /* Concatene deux chaînes */
 static char	*ft_strcat(char *dest, char *src)
@@ -149,6 +117,8 @@ int	load_portal_texture(t_cub3d *cub3d)
 
 	i = 0;
 	cub3d->prtl_sprites.frame_counter = 0;
+	if (!try_to_open(cub3d->textures.portals))
+		exit_error("Wrong folder for portal sprites", cub3d);
 	while (i < 100)
 	{
 		full_path = create_portal_path(cub3d->textures.portals, i);
