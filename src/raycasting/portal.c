@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 18:30:28 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/16 00:47:04 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,13 @@ int	load_portal_texture(t_cub3d *cub3d)
 		cub3d->prtl_sprites.path[i] = create_portal_path(cub3d->textures.portals, i);
 		if (!cub3d->prtl_sprites.path[i])
 			return (0);
-		load_texture(cub3d, &cub3d->prtl_sprites.frames[i], cub3d->prtl_sprites.path[i]);
+		if (!load_texture(cub3d, &cub3d->prtl_sprites.frames[i], cub3d->prtl_sprites.path[i]))
+		{
+			/* Si le chargement d'une texture échoue, nettoyer et arrêter */
+			printf("Warning: Failed to load portal texture: %s\n", cub3d->prtl_sprites.path[i]);
+			free_portal_sprites(cub3d);
+			return (0);
+		}
 		i++;
 	}
 	cub3d->prtl_sprites.path[cub3d->prtl_sprites.frame_counter] = NULL;

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:25:18 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/09 23:36:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 00:47:04 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,32 @@ void	update_portal_animations(t_cub3d *cub3d)
 void	free_portal_sprites(t_cub3d *cub3d)
 {
 	int	i;
-	int	frame_count_save;
 
 	if (!cub3d)
 		return ;
 	
-	frame_count_save = cub3d->prtl_sprites.frame_counter;
-	
-	// Libérer les frames de texture (sans détruire les images MLX)
-	if (cub3d->prtl_sprites.frames && frame_count_save > 0)
+	/* Libérer les frames de texture avec destruction des images MLX */
+	if (cub3d->prtl_sprites.frames)
 	{
-		// NOTE: On ne détruit pas les images MLX car cela peut causer des segfaults
-		// lors de la fermeture du programme. MLX s'occupe de les nettoyer automatiquement.
+		i = 0;
+		while (i < 16)
+		{
+			if (cub3d->prtl_sprites.frames[i].img && cub3d->mlx.mlx && cub3d->mlx.win)
+			{
+				mlx_destroy_image(cub3d->mlx.mlx, cub3d->prtl_sprites.frames[i].img);
+				cub3d->prtl_sprites.frames[i].img = NULL;
+				cub3d->prtl_sprites.frames[i].addr = NULL;
+			}
+			i++;
+		}
 		free(cub3d->prtl_sprites.frames);
 		cub3d->prtl_sprites.frames = NULL;
 	}
-	
-	// Libérer les paths
-	if (cub3d->prtl_sprites.path && frame_count_save > 0)
+	/* Libérer les paths */
+	if (cub3d->prtl_sprites.path)
 	{
 		i = 0;
-		while (i < frame_count_save && cub3d->prtl_sprites.path[i])
+		while (i < 16 && cub3d->prtl_sprites.path[i])
 		{
 			free(cub3d->prtl_sprites.path[i]);
 			cub3d->prtl_sprites.path[i] = NULL;
