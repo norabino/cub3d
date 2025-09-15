@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 19:56:49 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:27:28 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	collect_portal_sprites(t_cub3d *cub3d)
 {
 	int	i;
 
-	printf("collect_portal_sprites: Starting\n");
+	i = 0;
 	if (!cub3d)
 		return ;
 	
@@ -103,23 +103,16 @@ void	collect_portal_sprites(t_cub3d *cub3d)
 		cub3d->sprites = malloc(sizeof(t_sprite) * MAX_SPRITES);
 		if (!cub3d->sprites)
 			return ;
-		printf("collect_portal_sprites: Allocated sprites array\n");
 	}
 	
 	cub3d->sprite_count = 0;
 	if (!cub3d->tp_portals || cub3d->nb_portals <= 0)
-	{
-		printf("collect_portal_sprites: No portals found\n");
 		return ;
-	}
-	printf("collect_portal_sprites: Processing %d portals\n", cub3d->nb_portals);
-	i = 0;
+		
 	while (i < cub3d->nb_portals)
 	{
-		printf("collect_portal_sprites: Processing portal %d\n", i);
 		add_portal_sprite(cub3d, i);
 		add_portal_sprite_p2(cub3d, i);
 		i++;
 	}
-	printf("collect_portal_sprites: Done, count=%d\n", cub3d->sprite_count);
 }

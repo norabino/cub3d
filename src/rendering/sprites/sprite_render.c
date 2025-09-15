@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 19:45:46 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:31:53 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 /* Check if color should be treated as transparent */
 int	is_transparent_color(int color)
 {
-	return (color == 0x000000 || color == (int)0xFF000000 || (color & 0xFF000000) == 0);
+	if (color < 0x014B63)
+		return (1);
+	return (0);
 }
 
 /* Update z-buffer for depth testing */
@@ -45,19 +47,37 @@ void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 	int				color;
 	int				current_frame;
 	t_texture_img	*current_texture;
+	double			sprite_tex_x;
 
 	(void)sprite;
 	if (calc->transform_y <= 0)
 		return ;
+	
+	// Vérifier que les textures de portail sont initialisées
+	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
+		return ;
+	
 	current_frame = cub3d->prtl_sprites.current_frame
 		% cub3d->prtl_sprites.frame_counter;
 	current_texture = &cub3d->prtl_sprites.frames[current_frame];
+	
+	// Vérifier que la texture courante est valide
+	if (!current_texture || !current_texture->img || current_texture->width <= 0 || current_texture->height <= 0)
+		return ;
+		
 	x = calc->draw_start_x;
 	while (x < calc->draw_end_x)
 	{
-		tex_x = (x - calc->draw_start_x) * current_texture->width
-			/ calc->sprite_width;
-		if (x > 0 && x < SCREEN_WIDTH && calc->transform_y > 0.1)
+		// CORRECTION : calcul correct de la position dans la texture
+		// comme pour les murs, basé sur la position relative du pixel
+		sprite_tex_x = (double)(x - calc->sprite_screen_x + calc->sprite_width / 2) / calc->sprite_width;
+		tex_x = (int)(sprite_tex_x * current_texture->width);
+		
+		// S'assurer que tex_x est dans les limites
+		if (tex_x < 0) tex_x = 0;
+		if (tex_x >= current_texture->width) tex_x = current_texture->width - 1;
+		
+		if (x >= 0 && x < SCREEN_WIDTH && calc->transform_y > 0.1)
 		{
 			y = calc->draw_start_y;
 			while (y < calc->draw_end_y)
@@ -67,9 +87,13 @@ void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 				if (tex_x >= 0 && tex_x < current_texture->width
 					&& tex_y >= 0 && tex_y < current_texture->height)
 				{
-					color = get_texture_pixel_color(current_texture, tex_x, tex_y);
-					if (!is_transparent_color(color))
-						my_mlx_pixel_put(cub3d->mlx.img, x, y, color);
+					// DEPTH TEST : vérifier si le sprite est devant le mur à cette position
+					if (calc->transform_y < cub3d->zbuffer.buffer[x])
+					{
+						color = get_texture_pixel_color(current_texture, tex_x, tex_y);
+						if (!is_transparent_color(color))
+							my_mlx_pixel_put(cub3d->mlx.img, x, y, color);
+					}
 				}
 				y++;
 			}

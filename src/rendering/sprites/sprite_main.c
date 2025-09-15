@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 19:56:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:21:34 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@ void	render_sprites(t_cub3d *cub3d)
 
 	if (!cub3d)
 		return ;
-	printf("render_sprites: Starting\n");
-	collect_portal_sprites(cub3d);
-	printf("render_sprites: After collect, sprite_count=%d\n", cub3d->sprite_count);
+	
+	// Si aucun portail n'est configuré, pas de sprites à afficher
+	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
+		return ;
+	
+	// MODIFIÉ : ne collect que si pas encore fait ou si sprites vides
+	if (!cub3d->sprites || cub3d->sprite_count <= 0)
+		collect_portal_sprites(cub3d);
+		
 	if (!cub3d->sprites || cub3d->sprite_count <= 0)
 		return ;
+		
 	sort_sprites_by_distance(cub3d);
-	printf("render_sprites: After sort\n");
 	i = 0;
 	while (i < cub3d->sprite_count)
 	{
@@ -35,5 +41,4 @@ void	render_sprites(t_cub3d *cub3d)
 		draw_sprite_pixels(cub3d, &cub3d->sprites[i], &calc);
 		i++;
 	}
-	printf("render_sprites: Done\n");
 }
