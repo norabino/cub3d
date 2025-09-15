@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 21:21:34 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:44:31 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	render_sprites(t_cub3d *cub3d)
 	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
 		return ;
 	
-	// MODIFIÉ : ne collect que si pas encore fait ou si sprites vides
-	if (!cub3d->sprites || cub3d->sprite_count <= 0)
-		collect_portal_sprites(cub3d);
+	// MODIFIÉ : collect à chaque frame pour vérification dynamique d'occlusion
+	collect_portal_sprites(cub3d);
 		
 	if (!cub3d->sprites || cub3d->sprite_count <= 0)
 		return ;

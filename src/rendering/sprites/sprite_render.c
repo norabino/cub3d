@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 21:31:53 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:40:53 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,9 @@ void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 				if (tex_x >= 0 && tex_x < current_texture->width
 					&& tex_y >= 0 && tex_y < current_texture->height)
 				{
-					// DEPTH TEST : vérifier si le sprite est devant le mur à cette position
-					if (calc->transform_y < cub3d->zbuffer.buffer[x])
-					{
-						color = get_texture_pixel_color(current_texture, tex_x, tex_y);
-						if (!is_transparent_color(color))
-							my_mlx_pixel_put(cub3d->mlx.img, x, y, color);
-					}
+					color = get_texture_pixel_color(current_texture, tex_x, tex_y);
+					if (!is_transparent_color(color))
+						my_mlx_pixel_put(cub3d->mlx.img, x, y, color);
 				}
 				y++;
 			}
