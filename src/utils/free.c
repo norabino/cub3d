@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 19:18:07 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	ft_free_textures_paths(t_textures *textures)
 		secure_free((void **)&textures->ceiling);
 	if (textures->floor)
 		secure_free((void **)&textures->floor);
+	if (textures->portals)
+		secure_free((void **)&textures->portals);
 }
 
 /* Libère les images de la bibliothèque graphique */
