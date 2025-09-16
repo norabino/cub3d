@@ -6,12 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:25:15 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 10:38:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 #include <math.h>
+#include <stdlib.h>
 
 static int	check_sprite_visibility(t_cub3d *cub3d, double x, double y)
 {
@@ -25,6 +26,8 @@ static int	check_sprite_visibility(t_cub3d *cub3d, double x, double y)
 	if (dist_sq > MAX_SPRITE_DISTANCE * MAX_SPRITE_DISTANCE)
 		return (0);
 	if (check_map_bounds(cub3d, x, y))
+		return (0);
+	if (!is_sprite_in_fov(cub3d, x, y))
 		return (0);
 	return (1);
 }
@@ -61,6 +64,8 @@ static void	add_single_portal_sprite(t_cub3d *cub3d, int idx, int type)
 	dx = cub3d->player.pos_x - pos[0];
 	dy = cub3d->player.pos_y - pos[1];
 	sprite->distance = dx * dx + dy * dy;
+	sprite->portal_index = idx;
+	sprite->portal_name = cub3d->tp_portals[idx].name;
 }
 
 static void	process_portal_pair(t_cub3d *cub3d, int idx)
@@ -78,9 +83,17 @@ void	collect_portal_sprites(t_cub3d *cub3d)
 {
 	int	i;
 
-	if (!cub3d || !cub3d->sprites)
+	if (!cub3d)
 		return ;
+	if (!cub3d->sprites)
+	{
+		cub3d->sprites = malloc(sizeof(t_sprite) * MAX_SPRITES);
+		if (!cub3d->sprites)
+			return ;
+	}
 	cub3d->sprite_count = 0;
+	if (!cub3d->tp_portals || cub3d->nb_portals <= 0)
+		return ;
 	i = 0;
 	while (i < cub3d->nb_portals)
 	{

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:22:54 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 10:31:43 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ void	calc_sprite_screen_bounds(t_sprite_calc *calc);
 void	collect_portal_sprites(t_cub3d *cub3d);
 int		check_map_bounds(t_cub3d *cub3d, double x, double y);
 int		is_wall_at_position(t_cub3d *cub3d, double x, double y);
+int		is_sprite_in_fov(t_cub3d *cub3d, double sprite_x, double sprite_y);
 void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 			t_sprite_calc *calc);
 void	draw_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc, int x);
