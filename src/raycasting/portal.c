@@ -6,13 +6,40 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 00:47:04 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 02:09:38 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Vérifie si le joueur est sur un portail */
+char	*create_portal_path(char *base_path, int frame_num)
+{
+	char	*result;
+	char	*frame_str;
+	int		base_len;
+	int		frame_len;
+	int		total_len;
+
+	frame_str = ft_itoa(frame_num);
+	if (!frame_str)
+		return (NULL);
+	base_len = ft_strlen(base_path);
+	frame_len = ft_strlen(frame_str);
+	total_len = base_len + 8 + frame_len + 4 + 1;
+	result = malloc(total_len);
+	if (!result)
+	{
+		free(frame_str);
+		return (NULL);
+	}
+	ft_strcpy(result, base_path);
+	ft_strcat(result, "/Portal_");
+	ft_strcat(result, frame_str);
+	ft_strcat(result, ".xpm");
+	free(frame_str);
+	return (result);
+}
+
 char	is_portal(t_cub3d *cub3d)
 {
 	int		pos_x;
@@ -60,118 +87,20 @@ void	teleportation(t_cub3d *cub3d, t_prtl portal)
 	cub3d->player.last_prtl_pos = new;
 }
 
-/* Concatene deux chaînes */
-static char	*ft_strcat(char *dest, char *src)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (dest[i])
-		i++;
-	j = 0;
-	while (src[j])
-	{
-		dest[i] = src[j];
-		i++;
-		j++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-/* Crée un chemin sans libérer les arguments d'entrée */
-static char	*create_portal_path(char *base_path, int frame_num)
-{
-	char	*result;
-	char	*frame_str;
-	int		base_len;
-	int		frame_len;
-	int		total_len;
-
-	frame_str = ft_itoa(frame_num);
-	if (!frame_str)
-		return (NULL);
-	base_len = ft_strlen(base_path);
-	frame_len = ft_strlen(frame_str);
-	total_len = base_len + 8 + frame_len + 4 + 1; // "/Portal_" + frame + ".xpm" + \0
-	result = malloc(total_len);
-	if (!result)
-	{
-		free(frame_str);
-		return (NULL);
-	}
-	ft_strcpy(result, base_path);
-	ft_strcat(result, "/Portal_");
-	ft_strcat(result, frame_str);
-	ft_strcat(result, ".xpm");
-	free(frame_str);
-	return (result);
-}
-
+/* Charge la texture d'un portail dans une sprite */
 int	load_portal_texture(t_cub3d *cub3d)
 {
-	int		i;
-	int		fd;
-	char	*full_path;
-
-	i = 0;
-	cub3d->prtl_sprites.frame_counter = 0;
 	if (!try_to_open(cub3d->textures.portals))
 		exit_error("Wrong folder for portal sprites", cub3d);
-	while (i < 100)
-	{
-		full_path = create_portal_path(cub3d->textures.portals, i);
-		if (!full_path)
-			return (0);
-		fd = open(full_path, O_RDONLY);
-		free(full_path);
-		if (fd == -1)
-			break ;
-		close(fd);
-		cub3d->prtl_sprites.frame_counter++;
-		i++;
-	}
+	if (!count_portal_frames_part2(cub3d))
+		return (0);
 	if (cub3d->prtl_sprites.frame_counter == 0)
 		return (0);
-	cub3d->prtl_sprites.path = malloc(sizeof(char*) * (cub3d->prtl_sprites.frame_counter + 1));
-	if (!cub3d->prtl_sprites.path)
+	if (!init_portal_arrays(cub3d))
 		return (0);
-	cub3d->prtl_sprites.frames = malloc(sizeof(t_texture_img) * cub3d->prtl_sprites.frame_counter);
-	if (!cub3d->prtl_sprites.frames)
-	{
-		free(cub3d->prtl_sprites.path);
-		return (0);
-	}
-	i = 0;
-	while (i < cub3d->prtl_sprites.frame_counter)
-	{
-		cub3d->prtl_sprites.frames[i].img = NULL;
-		cub3d->prtl_sprites.frames[i].addr = NULL;
-		i++;
-	}
-	i = 0;
-	while (i < cub3d->prtl_sprites.frame_counter)
-	{
-		cub3d->prtl_sprites.path[i] = create_portal_path(cub3d->textures.portals, i);
-		if (!cub3d->prtl_sprites.path[i])
-			return (0);
-		if (!load_texture(cub3d, &cub3d->prtl_sprites.frames[i], cub3d->prtl_sprites.path[i]))
-		{
-			/* Si le chargement d'une texture échoue, nettoyer et arrêter */
-			printf("Warning: Failed to load portal texture: %s\n", cub3d->prtl_sprites.path[i]);
-			free_portal_sprites(cub3d);
-			return (0);
-		}
-		i++;
-	}
-	cub3d->prtl_sprites.path[cub3d->prtl_sprites.frame_counter] = NULL;
-	cub3d->prtl_sprites.current_frame = 0;
-	cub3d->prtl_sprites.last_frame_time = 0;
-	return (1);
+	return (load_portal_textures_part2(cub3d));
 }
 
-/* Initialise tous les sprites de portails */
 void	init_prtl_sprites(t_cub3d *cub3d)
 {
 	if (cub3d->nb_portals > 0)

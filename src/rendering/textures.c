@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 18:14:37 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/16 02:22:18 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*clean_path(char *path)
 }
 
 /* Charge une texture depuis un fichier XPM */
-int	load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path)
+int	load_texture(t_cub3d *cub3d, t_txt_i *tex_img, char *path)
 {
 	char	*clean_path_str;
 
@@ -99,7 +99,7 @@ void	free_textures(t_cub3d *cub3d)
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {
-		char	map_char;
+	char	map_char;
 
 	if (!tex_calc)
 		return ;

@@ -6,13 +6,28 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:19:02 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 01:29:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Initialise MinilibX et prépare l'affichage */
+static void	init_mlx_image(t_cub3d *cub3d)
+{
+	cub3d->mlx.img->img = mlx_new_image(cub3d->mlx.mlx, SCREEN_WIDTH,
+			SCREEN_HEIGHT);
+	if (!cub3d->mlx.img->img)
+	{
+		mlx_destroy_window(cub3d->mlx.mlx, cub3d->mlx.win);
+		exit_error("No image", cub3d);
+	}
+	cub3d->mlx.img->addr = mlx_get_data_addr(cub3d->mlx.img->img,
+			&cub3d->mlx.img->bits_per_pixel, &cub3d->mlx.img->line_length,
+			&cub3d->mlx.img->endian);
+	if (!cub3d->mlx.img->addr)
+		exit_error("Failed to get image address", cub3d);
+}
+
 void	init_minilibx(t_cub3d *cub3d)
 {
 	cub3d->mlx.img = malloc(sizeof(t_img));
@@ -26,18 +41,7 @@ void	init_minilibx(t_cub3d *cub3d)
 			SCREEN_HEIGHT, "Cub3D");
 	if (!cub3d->mlx.win)
 		exit_error("No window", cub3d);
-	cub3d->mlx.img->img = mlx_new_image(cub3d->mlx.mlx, SCREEN_WIDTH,
-			SCREEN_HEIGHT);
-	if (!cub3d->mlx.img->img)
-	{
-		mlx_destroy_window(cub3d->mlx.mlx, cub3d->mlx.win);
-		exit_error("No image", cub3d);
-	}
-	cub3d->mlx.img->addr = mlx_get_data_addr(cub3d->mlx.img->img,
-			&cub3d->mlx.img->bits_per_pixel, &cub3d->mlx.img->line_length,
-			&cub3d->mlx.img->endian);
-	if (!cub3d->mlx.img->addr)
-		exit_error("Failed to get image address", cub3d);
+	init_mlx_image(cub3d);
 	load_all_textures(cub3d);
 	if (cub3d->nb_portals > 0)
 		init_prtl_sprites(cub3d);

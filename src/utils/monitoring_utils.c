@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 16:23:44 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/16 02:09:39 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,4 @@ int	try_to_open(char *path)
 		return (0);
 	close(fd);
 	return (1);
-} 
+}

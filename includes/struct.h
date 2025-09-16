@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 02:27:08 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "variables.h"
 
-typedef struct s_texture_img
+typedef struct s_txt_i
 {
 	void	*img;
 	char	*addr;
@@ -24,7 +24,7 @@ typedef struct s_texture_img
 	int		endian;
 	int		width;
 	int		height;
-}	t_texture_img;
+}	t_txt_i;
 
 typedef struct s_point
 {
@@ -34,11 +34,11 @@ typedef struct s_point
 
 typedef struct s_portal_sprite
 {
-	t_texture_img	*frames;
-	char			**path;
-	int				current_frame;
-	int				frame_counter;
-	long			last_frame_time;
+	t_txt_i	*frames;
+	char	**path;
+	int		current_frame;
+	int		frame_counter;
+	long	last_frame_time;
 }	t_prtl_sprite;
 
 typedef struct s_sprite
@@ -81,19 +81,19 @@ typedef struct s_portal
 
 typedef struct s_textures
 {
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
-	char			*floor;
-	char			*ceiling;
-	char			*portals;
-	t_texture_img	north_img;
-	t_texture_img	south_img;
-	t_texture_img	west_img;
-	t_texture_img	east_img;
-	t_texture_img	floor_img;
-	t_texture_img	ceiling_img;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	char		*floor;
+	char		*ceiling;
+	char		*portals;
+	t_txt_i		north_img;
+	t_txt_i		south_img;
+	t_txt_i		west_img;
+	t_txt_i		east_img;
+	t_txt_i		floor_img;
+	t_txt_i		ceiling_img;
 }	t_textures;
 
 typedef struct s_colors
@@ -138,15 +138,15 @@ typedef struct s_view
 
 typedef struct s_texture_calc
 {
-	double			wall_x;
-	int				tex_x;
-	int				tex_y;
-	double			step;
-	double			tex_pos;
-	double			perp_wall_dist;
-	t_texture_img	*current_text;
-	int				is_portal;
-	int				portal_index;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+	double	perp_wall_dist;
+	t_txt_i	*current_text;
+	int		is_portal;
+	int		portal_index;
 }	t_texture_calc;
 
 typedef struct s_dda
@@ -247,7 +247,7 @@ typedef struct s_cub3d
 	int				portals[26];
 	int				nb_portals;
 	char			input_state[256];
-	char 			*invalid_arg;
+	char			*invalid_arg;
 	int				nb_error_line;
 }	t_cub3d;
 

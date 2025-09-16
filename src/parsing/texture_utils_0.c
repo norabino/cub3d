@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 17:27:06 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/16 02:09:39 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,23 +110,5 @@ void	set_texture(char c, int j, char *line, t_cub3d *cub3d)
 		sub[i] = '\0';
 		i--;
 	}
-	if (c == 'N' && !cub3d->textures.north)
-		cub3d->textures.north = sub;
-	else if (c == 'S' && !cub3d->textures.south)
-		cub3d->textures.south = sub;
-	else if (c == 'W' && !cub3d->textures.west)
-		cub3d->textures.west = sub;
-	else if (c == 'E' && !cub3d->textures.east)
-		cub3d->textures.east = sub;
-	else if (c == 'P' && !cub3d->textures.portals)
-		cub3d->textures.portals = sub;
-	else if (c == 'F' && !cub3d->textures.floor)
-		cub3d->textures.floor = sub;
-	else if (c == 'C' && !cub3d->textures.ceiling)
-		cub3d->textures.ceiling = sub;
-	else
-	{
-		free(sub);
-		exit_error("Duplicate or invalid texture identifier.", cub3d);
-	}
+	assign_texture(c, sub, cub3d);
 }

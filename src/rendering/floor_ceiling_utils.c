@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:50:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:18:48 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 02:22:18 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Rend un pixel de sol ou plafond avec texture */
 void	render_fc_pixel(t_cub3d *cub3d, int screen_x, int y,
-	t_texture_img *texture)
+	t_txt_i *texture)
 {
 	double		row_distance;
 	double		floor_step_x;
@@ -43,7 +43,7 @@ void	render_fc_pixel(t_cub3d *cub3d, int screen_x, int y,
 }
 
 /* Applique une texture au sol ou plafond */
-void	apply_fc_texture(t_cub3d *cub3d, t_texture_img *texture,
+void	apply_fc_texture(t_cub3d *cub3d, t_txt_i *texture,
 	t_fc_coords *coords)
 {
 	int	tex_x;

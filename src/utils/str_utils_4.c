@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 16:41:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 23:43:22 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 02:09:38 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,9 @@ char	safe_map_access(t_cub3d *cub3d, int y, int x)
 		return ('1');
 	if (y < 0 || x < 0)
 		return ('1');
-	// Calculer la hauteur de la carte de manière sécurisée
 	map_height = 0;
 	i = 0;
-	while (i < 2000 && cub3d->map[i] != NULL) // Limite de sécurité
+	while (i < 2000 && cub3d->map[i] != NULL)
 	{
 		map_height++;
 		i++;

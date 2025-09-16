@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:48 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 02:22:54 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include "./struct.h"
 # include "./variables.h"
 
-
 // ============================================================================
 // COLLISION FUNCTIONS
 // ============================================================================
@@ -43,7 +42,6 @@ int		move_player(t_cub3d *cub3d, double delta_x, double delta_y);
 
 void	exit_error(char *err, t_cub3d *cub3d);
 void	ft_free(t_cub3d *s_cub3d);
-
 
 // ============================================================================
 // FILE PARSING FUNCTIONS
@@ -68,11 +66,24 @@ void	read_file_lines(char **file, int fd);
 void	set_ceiling(t_cub3d *cub3d, char **split);
 void	set_floor(t_cub3d *cub3d, char **split);
 void	set_texture(char c, int j, char *line, t_cub3d *cub3d);
+void	assign_texture(char c, char *sub, t_cub3d *cub3d);
+int		process_texture_line(t_cub3d *cub3d, int i, int *found_all);
 void	assign_color_values(t_cub3d *cub3d, char **split, char c);
 void	validate_colors_complete(t_cub3d *cub3d);
 int		parse_texture_line(t_cub3d *cub3d, int i);
 void	parse_config_file(t_cub3d *cub3d, int ac, char **av);
 int		validate_config_file(t_cub3d *cub3d);
+
+// ============================================================================
+// INIT FUNCTIONS
+// ============================================================================
+
+void	init(t_cub3d *cub3d);
+void	init_colors(t_cub3d *cub3d);
+void	init_mouse(t_cub3d *cub3d);
+void	init_sprites_struct(t_cub3d *cub3d);
+void	init_time(t_cub3d *cub3d);
+void	init_view(t_cub3d *cub3d);
 
 // ============================================================================
 // FPS AND TIME FUNCTIONS
@@ -146,7 +157,6 @@ char	*ft_itoa(int n);
 void	secure_free(void *data);
 int		try_to_open(char *path);
 
-
 // ============================================================================
 // MINIMAP FUNCTIONS
 // ============================================================================
@@ -186,11 +196,19 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 void	check_correspondance(t_cub3d *cub3d);
 t_prtl	find_a_portal(t_cub3d *cub3d, char **map);
+// PORTAL FUNCTIONS
+// ============================================================================
+
+int		allocate_portal_arrays(t_cub3d *cub3d);
+int		count_portal_frames(t_cub3d *cub3d);
+char	*create_portal_path(char *base_path, int frame_num);
 t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x);
+void	free_portal_paths(t_cub3d *cub3d);
 void	free_portal_sprites(t_cub3d *cub3d);
 void	ft_check_portals(t_cub3d *cub3d);
 void	init_prtl_sprites(t_cub3d *cub3d);
 char	is_portal(t_cub3d *cub3d);
+int		load_portal_texture(t_cub3d *cub3d);
 void	set_direction(t_cub3d *cub3d, char dir);
 void	set_prtls(t_cub3d *cub3d);
 void	teleportation(t_cub3d *cub3d, t_prtl portal);
@@ -205,8 +223,13 @@ void	calc_sprite_properties(t_cub3d *cub3d, t_sprite *sprite,
 			t_sprite_calc *calc);
 void	calc_sprite_screen_bounds(t_sprite_calc *calc);
 void	collect_portal_sprites(t_cub3d *cub3d);
+int		check_map_bounds(t_cub3d *cub3d, double x, double y);
+int		is_wall_at_position(t_cub3d *cub3d, double x, double y);
 void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 			t_sprite_calc *calc);
+void	draw_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc, int x);
+t_txt_i	*get_current_portal_texture(t_cub3d *cub3d);
+int		get_texture_pixel(t_txt_i *texture, int x, int y);
 void	draw_transparent_pixel(t_cub3d *cub3d, int x, int y,
 			int color);
 void	free_sprites(t_cub3d *cub3d);
@@ -238,7 +261,7 @@ void	raycast(t_cub3d *cub3d);
 // RENDERING FUNCTIONS
 // ============================================================================
 
-void	apply_fc_texture(t_cub3d *cub3d, t_texture_img *texture,
+void	apply_fc_texture(t_cub3d *cub3d, t_txt_i *texture,
 			t_fc_coords *coords);
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
 void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
@@ -249,7 +272,7 @@ void	render_ceiling_texture(t_cub3d *cub3d, int screen_x, int draw_start);
 void	render_fc_colors(t_cub3d *cub3d, int screen_x,
 			int draw_start, int draw_end);
 void	render_fc_pixel(t_cub3d *cub3d, int screen_x, int y,
-			t_texture_img *texture);
+			t_txt_i *texture);
 void	render_fc_textures(t_cub3d *cub3d, int screen_x,
 			int draw_start, int draw_end);
 void	render_floor_texture(t_cub3d *cub3d, int screen_x, int draw_end);
@@ -264,6 +287,7 @@ int		ft_atoi(char *str);
 int		ft_isdigit(char c);
 char	**ft_split(char *str, char c);
 int		ft_strcmp(char *s1, char *s2);
+char	*ft_strcat(char *dest, char *src);
 char	*ft_strcpy(char *dest, char *str);
 char	*ft_strdup(char *s);
 char	*ft_strndup(char *str, int n);
@@ -290,11 +314,11 @@ void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
 void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x,
 			t_texture_calc *tex_calc, int draw_params[2]);
 void	free_textures(t_cub3d *cub3d);
-int		get_texture_pixel_color(t_texture_img *texture, int x, int y);
+int		get_texture_pixel_color(t_txt_i *texture, int x, int y);
 void	init_texture_draw_params(t_texture_calc *tex_calc,
 			int draw_params[2], int *tex_height, int *draw_bounds[2]);
 void	load_all_textures(t_cub3d *cub3d);
-int		load_texture(t_cub3d *cub3d, t_texture_img *tex_img, char *path);
+int		load_texture(t_cub3d *cub3d, t_txt_i *tex_img, char *path);
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
 void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
@@ -302,5 +326,8 @@ void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 void	select_wall_normal_texture(t_cub3d *cub3d, t_dda *dda,
 			t_texture_calc *tex_calc);
 int		load_portal_texture(t_cub3d *cub3d);
+int		load_portal_textures_part2(t_cub3d *cub3d);
+int		count_portal_frames_part2(t_cub3d *cub3d);
+int		init_portal_arrays(t_cub3d *cub3d);
 
 #endif

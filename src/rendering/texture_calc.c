@@ -32,7 +32,7 @@ void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
 }
 
 /* Récupère la couleur d'un pixel dans une texture */
-int	get_texture_pixel_color(t_texture_img *texture, int x, int y)
+int	get_texture_pixel_color(t_txt_i *texture, int x, int y)
 {
 	int	offset;
 

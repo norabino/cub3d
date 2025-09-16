@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 21:44:31 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/16 02:09:38 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,11 @@ void	render_sprites(t_cub3d *cub3d)
 
 	if (!cub3d)
 		return ;
-	
-	// Si aucun portail n'est configuré, pas de sprites à afficher
 	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
 		return ;
-	
-	// MODIFIÉ : collect à chaque frame pour vérification dynamique d'occlusion
 	collect_portal_sprites(cub3d);
-		
 	if (!cub3d->sprites || cub3d->sprite_count <= 0)
 		return ;
-		
 	sort_sprites_by_distance(cub3d);
 	i = 0;
 	while (i < cub3d->sprite_count)

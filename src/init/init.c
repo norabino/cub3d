@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 02:22:18 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ static void	init_portals(t_cub3d *cub3d)
 	}
 }
 
-static void	init_sprites_struct(t_cub3d *cub3d)
-{
-	cub3d->sprites = NULL;
-	cub3d->sprite_count = 0;
-	cub3d->zbuffer.buffer = NULL;
-	cub3d->zbuffer.width = 0;
-}
-
-/* Initialise les valeurs de base de la structure principale */
 static void	init_textures(t_cub3d *cub3d)
 {
 	cub3d->textures.north = NULL;
@@ -49,16 +40,15 @@ static void	init_textures(t_cub3d *cub3d)
 	cub3d->textures.floor = NULL;
 	cub3d->textures.ceiling = NULL;
 	cub3d->textures.portals = NULL;
-	ft_bzero(&cub3d->textures.north_img, sizeof(t_texture_img));
-	ft_bzero(&cub3d->textures.south_img, sizeof(t_texture_img));
-	ft_bzero(&cub3d->textures.west_img, sizeof(t_texture_img));
-	ft_bzero(&cub3d->textures.east_img, sizeof(t_texture_img));
-	ft_bzero(&cub3d->textures.floor_img, sizeof(t_texture_img));
-	ft_bzero(&cub3d->textures.ceiling_img, sizeof(t_texture_img));
+	ft_bzero(&cub3d->textures.north_img, sizeof(t_txt_i));
+	ft_bzero(&cub3d->textures.south_img, sizeof(t_txt_i));
+	ft_bzero(&cub3d->textures.west_img, sizeof(t_txt_i));
+	ft_bzero(&cub3d->textures.east_img, sizeof(t_txt_i));
+	ft_bzero(&cub3d->textures.floor_img, sizeof(t_txt_i));
+	ft_bzero(&cub3d->textures.ceiling_img, sizeof(t_txt_i));
 	ft_bzero(&cub3d->prtl_sprites, sizeof(t_prtl_sprite));
 }
 
-/* Initialise les valeurs de base de la structure principale */
 static void	init_mlx(t_cub3d *cub3d)
 {
 	cub3d->mlx.mlx = NULL;
@@ -74,42 +64,6 @@ static void	init_player(t_cub3d *cub3d)
 	cub3d->player.last_prtl_pos.y = -1;
 }
 
-/* Initialise les paramètres de la souris et du temps */
-static void	init_mouse(t_cub3d *cub3d)
-{
-	cub3d->mouse.x = SCREEN_WIDTH / 2;
-	cub3d->mouse.y = SCREEN_HEIGHT / 2;
-	cub3d->mouse.last_x = SCREEN_WIDTH / 2;
-	cub3d->mouse.captured = 0;
-}
-
-static void	init_time(t_cub3d *cub3d)
-{
-	cub3d->time.last_refresh = 0;
-	cub3d->time.fps_last_time = 0;
-	cub3d->time.fps_frame_count = 0;
-	cub3d->time.current_fps = 0.0;
-	cub3d->time.delta_time = 0.0;
-}
-
-/* Initialise les couleurs et les touches du clavier */
-static void	init_colors(t_cub3d *cub3d)
-{
-	cub3d->colors.floor[0] = -1;
-	cub3d->colors.floor[1] = -1;
-	cub3d->colors.floor[2] = -1;
-	cub3d->colors.ceiling[0] = -1;
-	cub3d->colors.ceiling[1] = -1;
-	cub3d->colors.ceiling[2] = -1;
-}
-
-static void	init_view(t_cub3d *cub3d)
-{
-	cub3d->view.plane_x = -1;
-	cub3d->view.plane_y = -1;
-}
-
-/* Fonction principale d'initialisation */
 void	init(t_cub3d *cub3d)
 {
 	cub3d->file = NULL;

@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_validator.c                                :+:      :+:    :+:   */
+/*   str_utils_5.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
+/*   Created: 2025/12/21 00:00:00 by jdupuis           #+#    #+#             */
 /*   Updated: 2025/09/16 02:09:39 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Valide toutes les textures présentes dans le fichier de configuration */
-int	validate_all_textures(t_cub3d *cub3d, int *idx)
+char	*ft_strcat(char *dest, char *src)
 {
 	int	i;
-	int	found_all;
-	int	result;
+	int	j;
 
 	i = 0;
-	*idx = 0;
-	found_all = 0;
-	while (cub3d->file[i])
-	{
-		result = process_texture_line(cub3d, i, &found_all);
-		if (result != -1)
-			*idx = result;
+	while (dest[i])
 		i++;
+	j = 0;
+	while (src[j])
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
-	if (!all_text_set(cub3d))
-		exit_error("Missing texture(s)", cub3d);
-	return (1);
+	dest[i] = '\0';
+	return (dest);
 }

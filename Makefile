@@ -12,6 +12,7 @@ MAIN_SRC = \
 INIT_SRC = \
 	src/init/init.c \
 	src/init/init_mlx.c \
+	src/init/init_utils.c \
 
 # Get Next Line
 GNL_SRC = \
@@ -39,12 +40,14 @@ PARSING_SRC = \
 	src/parsing/portal_utils.c \
 	src/parsing/texture_parser.c \
 	src/parsing/texture_utils_0.c \
+	src/parsing/texture_utils_1.c \
 	src/parsing/texture_validator.c \
 
 # Raycasting system
 RAYCASTING_SRC = \
 	src/raycasting/collision_utils.c \
 	src/raycasting/portal.c \
+	src/raycasting/portal_helpers.c \
 	src/raycasting/portal_textures.c \
 	src/raycasting/portal_utils.c \
 	src/raycasting/raycasting_utils.c \
@@ -67,9 +70,11 @@ RENDERING_SRC = \
 SPRITE_SRC = \
 	src/rendering/sprites/sprite_init.c \
 	src/rendering/sprites/sprite_collect.c \
+	src/rendering/sprites/sprite_collect_utils.c \
 	src/rendering/sprites/sprite_sort.c \
 	src/rendering/sprites/sprite_calc.c \
 	src/rendering/sprites/sprite_render.c \
+	src/rendering/sprites/sprite_render_utils.c \
 	src/rendering/sprites/sprite_main.c \
 
 # User Interface
@@ -93,6 +98,7 @@ UTILS_SRC = \
 	src/utils/str_utils_2.c \
 	src/utils/str_utils_3.c \
 	src/utils/str_utils_4.c \
+	src/utils/str_utils_5.c \
 	src/utils/time.c \
 
 # All source files
