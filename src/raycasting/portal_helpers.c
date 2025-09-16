@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:22:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,6 @@ int	count_portal_frames(t_cub3d *cub3d)
 	return (cub3d->prtl_sprites.frame_counter > 0);
 }
 
-int	allocate_portal_arrays(t_cub3d *cub3d)
-{
-	int	i;
-
-	cub3d->prtl_sprites.path = malloc(sizeof(char *)
-			* (cub3d->prtl_sprites.frame_counter + 1));
-	if (!cub3d->prtl_sprites.path)
-		return (0);
-	cub3d->prtl_sprites.frames = malloc(sizeof(t_txt_i)
-			* cub3d->prtl_sprites.frame_counter);
-	if (!cub3d->prtl_sprites.frames)
-	{
-		free(cub3d->prtl_sprites.path);
-		return (0);
-	}
-	i = 0;
-	while (i < cub3d->prtl_sprites.frame_counter)
-	{
-		cub3d->prtl_sprites.frames[i].img = NULL;
-		cub3d->prtl_sprites.frames[i].addr = NULL;
-		i++;
-	}
-	return (1);
-}
-
 int	count_portal_frames_part2(t_cub3d *cub3d)
 {
 	int		i;
@@ -91,6 +66,8 @@ int	init_portal_arrays(t_cub3d *cub3d)
 {
 	int	i;
 
+	if (cub3d->prtl_sprites.path || cub3d->prtl_sprites.frames)
+		free_portal_paths(cub3d);
 	cub3d->prtl_sprites.path = malloc(sizeof(char *)
 			* (cub3d->prtl_sprites.frame_counter + 1));
 	if (!cub3d->prtl_sprites.path)
@@ -100,6 +77,7 @@ int	init_portal_arrays(t_cub3d *cub3d)
 	if (!cub3d->prtl_sprites.frames)
 	{
 		free(cub3d->prtl_sprites.path);
+		cub3d->prtl_sprites.path = NULL;
 		return (0);
 	}
 	i = 0;

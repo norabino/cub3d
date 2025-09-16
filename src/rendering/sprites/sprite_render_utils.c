@@ -5,59 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/21 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:25:31 by jdupuis          ###   ########.fr       */
+/*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/09/16 15:46:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	draw_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc, int x)
+static void	render_sprite_column_pixels(t_cub3d *cub3d, t_sprite_calc *calc,
+	t_sprite_render_data *render_data)
 {
-	int			y;
-	int			tex_x;
-	int			tex_y;
-	int			color;
-	t_txt_i		*texture;
+	int	tex_y;
+	int	color;
+	int	y;
 
-	if (x < calc->draw_start_x || x >= calc->draw_end_x)
-		return ;
-	texture = get_current_portal_texture(cub3d);
-	if (!texture || !texture->addr)
-		return ;
-	tex_x = (int)((x - calc->draw_start_x) * texture->width
-			/ calc->sprite_width);
 	y = calc->draw_start_y;
 	while (y < calc->draw_end_y)
 	{
-		tex_y = (int)((y - calc->draw_start_y) * texture->height
-				/ calc->sprite_height);
-		color = get_texture_pixel(texture, tex_x, tex_y);
-		if (!is_transparent_color(color))
-			my_mlx_pixel_put(cub3d->mlx.img, x, y, color);
+		tex_y = (y - calc->draw_start_y) * render_data->current_texture->height
+			/ calc->sprite_height;
+		if (render_data->tex_x >= 0
+			&& render_data->tex_x < render_data->current_texture->width
+			&& tex_y >= 0 && tex_y < render_data->current_texture->height)
+		{
+			color = get_texture_pixel_color(render_data->current_texture,
+					render_data->tex_x, tex_y);
+			if (!is_transparent_color(color))
+				my_mlx_pixel_put(cub3d->mlx.img, render_data->x, y, color);
+		}
 		y++;
 	}
 }
 
-t_txt_i	*get_current_portal_texture(t_cub3d *cub3d)
+void	render_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc,
+	t_sprite_render_data *render_data)
 {
-	int	current_frame;
+	double	sprite_tex_x;
 
-	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
-		return (NULL);
-	current_frame = cub3d->prtl_sprites.current_frame
-		% cub3d->prtl_sprites.frame_counter;
-	return (&cub3d->prtl_sprites.frames[current_frame]);
-}
-
-int	get_texture_pixel(t_txt_i *texture, int x, int y)
-{
-	int	*data;
-	int	index;
-
-	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
-		return (0);
-	data = (int *)texture->addr;
-	index = y * texture->width + x;
-	return (data[index]);
+	sprite_tex_x = (double)(render_data->x - calc->sprite_screen_x
+			+ calc->sprite_width / 2) / calc->sprite_width;
+	render_data->tex_x = (int)(sprite_tex_x
+			* render_data->current_texture->width);
+	if (render_data->tex_x < 0)
+		render_data->tex_x = 0;
+	if (render_data->tex_x >= render_data->current_texture->width)
+		render_data->tex_x = render_data->current_texture->width - 1;
+	if (render_data->x >= 0 && render_data->x < SCREEN_WIDTH
+		&& calc->transform_y > 0.1)
+	{
+		render_sprite_column_pixels(cub3d, calc, render_data);
+	}
 }

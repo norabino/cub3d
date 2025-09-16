@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 static void	ft_free_textures_paths(t_textures *textures)
 {
 	if (textures->north)
-		secure_free(textures->north);
+		secure_free((void **)&textures->north);
 	if (textures->south)
-		secure_free(textures->south);
+		secure_free((void **)&textures->south);
 	if (textures->west)
-		secure_free(textures->west);
+		secure_free((void **)&textures->west);
 	if (textures->east)
-		secure_free(textures->east);
+		secure_free((void **)&textures->east);
 	if (textures->ceiling)
-		secure_free(textures->ceiling);
+		secure_free((void **)&textures->ceiling);
 	if (textures->floor)
-		secure_free(textures->floor);
+		secure_free((void **)&textures->floor);
 }
 
 /* Libère les images de la bibliothèque graphique */
@@ -38,7 +38,7 @@ static void	ft_free_mlx(t_mlx *mlx)
 		mlx->img->img = NULL;
 	}
 	if (mlx->img)
-		secure_free(mlx->img);
+		secure_free((void **)&mlx->img);
 	if (mlx->win && mlx->mlx)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
@@ -47,7 +47,7 @@ static void	ft_free_mlx(t_mlx *mlx)
 	if (mlx->mlx)
 	{
 		mlx_destroy_display(mlx->mlx);
-		secure_free(mlx->mlx);
+		secure_free((void **)&mlx->mlx);
 	}
 }
 
@@ -59,7 +59,7 @@ void	ft_free(t_cub3d *cub3d)
 	if (!cub3d || already_freed)
 		return ;
 	already_freed = 1;
-	secure_free(cub3d->invalid_arg);
+	secure_free((void **)&cub3d->invalid_arg);
 	if (cub3d->nb_portals > 0)
 		free_portal_sprites(cub3d);
 	free_sprites(cub3d);
@@ -70,6 +70,6 @@ void	ft_free(t_cub3d *cub3d)
 	if (cub3d->map)
 		free_map(cub3d->map);
 	ft_free_mlx(&cub3d->mlx);
-	secure_free(cub3d);
+	secure_free((void **)&cub3d);
 	already_freed = 0;
 }

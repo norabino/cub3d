@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_0.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 12:06:43 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	free_map(char **map)
 	i = 0;
 	while (map[i])
 	{
-		secure_free(map[i]);
+		secure_free((void **)&map[i]);
 		i++;
 	}
-	secure_free(map);
+	secure_free((void **)&map);
 	map = NULL;
 }

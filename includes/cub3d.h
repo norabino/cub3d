@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 10:31:43 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	free_map(char **map);
 void	ft_bzero(void *s, int n);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_itoa(int n);
-void	secure_free(void *data);
+void	secure_free(void **data);
 int		try_to_open(char *path);
 
 // ============================================================================
@@ -199,7 +199,7 @@ t_prtl	find_a_portal(t_cub3d *cub3d, char **map);
 // PORTAL FUNCTIONS
 // ============================================================================
 
-int		allocate_portal_arrays(t_cub3d *cub3d);
+
 int		count_portal_frames(t_cub3d *cub3d);
 char	*create_portal_path(char *base_path, int frame_num);
 t_point	find_correspondance(t_cub3d *cub3d, int tmp_y, int tmp_x);
@@ -222,13 +222,18 @@ void	update_portal_animations(t_cub3d *cub3d);
 void	calc_sprite_properties(t_cub3d *cub3d, t_sprite *sprite,
 			t_sprite_calc *calc);
 void	calc_sprite_screen_bounds(t_sprite_calc *calc);
+double	calc_sprite_distance(t_cub3d *cub3d, double sprite_x, double sprite_y);
 void	collect_portal_sprites(t_cub3d *cub3d);
 int		check_map_bounds(t_cub3d *cub3d, double x, double y);
 int		is_wall_at_position(t_cub3d *cub3d, double x, double y);
 int		is_sprite_in_fov(t_cub3d *cub3d, double sprite_x, double sprite_y);
+int		is_sprite_occluded(t_cub3d *cub3d, double sprite_x, double sprite_y);
+int		should_cull_sprite(t_cub3d *cub3d, double sprite_x, double sprite_y);
 void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 			t_sprite_calc *calc);
 void	draw_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc, int x);
+void	render_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc,
+			t_sprite_render_data *render_data);
 t_txt_i	*get_current_portal_texture(t_cub3d *cub3d);
 int		get_texture_pixel(t_txt_i *texture, int x, int y);
 void	draw_transparent_pixel(t_cub3d *cub3d, int x, int y,

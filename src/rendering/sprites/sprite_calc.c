@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 02:09:38 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	calc_sprite_properties(t_cub3d *cub3d, t_sprite *sprite,
 	calc->sprite_screen_x = (int)((SCREEN_WIDTH / 2)
 			* (1 + calc->transform_x / calc->transform_y));
 	calc->sprite_height = ft_abs((int)(SCREEN_HEIGHT / calc->transform_y
-				* 0.85));
+				* 0.75));
 	calc->sprite_width = calc->sprite_height;
 }
 

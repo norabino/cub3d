@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:27:08 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ typedef struct s_sprite_calc
 	int		draw_start_x;
 	int		draw_end_x;
 }	t_sprite_calc;
+
+typedef struct s_sprite_render_data
+{
+	int		x;
+	int		tex_x;
+	int		current_frame;
+	t_txt_i	*current_texture;
+}	t_sprite_render_data;
 
 typedef struct s_zbuffer
 {

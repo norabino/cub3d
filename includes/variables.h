@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:21:04 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 19:45:46 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:19:24 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@
 #define MINIMAP_COLOR_PORTAL 0x6A5ACD
 
 #define TRANSPARENT_COLOR 0x000000
-#define MAX_SPRITE_DISTANCE 200.0
+#define MAX_SPRITE_DISTANCE 1000.0
 #define SPRITE_CULLING_THRESHOLD 0.5
 #define MAX_SPRITES 64

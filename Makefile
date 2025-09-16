@@ -71,6 +71,8 @@ SPRITE_SRC = \
 	src/rendering/sprites/sprite_init.c \
 	src/rendering/sprites/sprite_collect.c \
 	src/rendering/sprites/sprite_collect_utils.c \
+	src/rendering/sprites/sprite_collect_helpers.c \
+	src/rendering/sprites/sprite_collect_helpers2.c \
 	src/rendering/sprites/sprite_sort.c \
 	src/rendering/sprites/sprite_calc.c \
 	src/rendering/sprites/sprite_render.c \

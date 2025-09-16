@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_main.c                                      :+:      :+:    :+:   */
+/*   sprite_collect_helpers.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
+/*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
 /*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+#include <math.h>
 
-/* Main sprite rendering function */
-void	render_sprites(t_cub3d *cub3d)
+int	should_cull_sprite(t_cub3d *cub3d, double sprite_x, double sprite_y)
 {
-	int				i;
-	t_sprite_calc	calc;
+	double	distance;
 
-	if (!cub3d)
-		return ;
-	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
-		return ;
-	collect_portal_sprites(cub3d);
-	if (!cub3d->sprites || cub3d->sprite_count <= 0)
-		return ;
-	sort_sprites_by_distance(cub3d);
-	i = 0;
-	while (i < cub3d->sprite_count)
-	{
-		calc_sprite_properties(cub3d, &cub3d->sprites[i], &calc);
-		calc_sprite_screen_bounds(&calc);
-		draw_sprite_pixels(cub3d, &cub3d->sprites[i], &calc);
-		i++;
-	}
+	distance = calc_sprite_distance(cub3d, sprite_x, sprite_y);
+	if (distance > MAX_SPRITE_DISTANCE * MAX_SPRITE_DISTANCE)
+		return (1);
+	if (!is_sprite_in_fov(cub3d, sprite_x, sprite_y))
+		return (1);
+	if (is_sprite_occluded(cub3d, sprite_x, sprite_y))
+		return (1);
+	return (0);
 }
