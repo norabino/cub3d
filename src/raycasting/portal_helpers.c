@@ -6,37 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:44:14 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	count_portal_frames(t_cub3d *cub3d)
-{
-	int		i;
-	int		fd;
-	char	*full_path;
-
-	i = 0;
-	cub3d->prtl_sprites.frame_counter = 0;
-	if (!try_to_open(cub3d->textures.portals))
-		exit_error("Wrong folder for portal sprites", cub3d);
-	while (i < 100)
-	{
-		full_path = create_portal_path(cub3d->textures.portals, i);
-		if (!full_path)
-			return (0);
-		fd = open(full_path, O_RDONLY);
-		free(full_path);
-		if (fd == -1)
-			break ;
-		close(fd);
-		cub3d->prtl_sprites.frame_counter++;
-		i++;
-	}
-	return (cub3d->prtl_sprites.frame_counter > 0);
-}
 
 int	count_portal_frames_part2(t_cub3d *cub3d)
 {

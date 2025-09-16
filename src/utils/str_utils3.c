@@ -1,12 +1,15 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*   	if (x >= (int)ft_strlen(cub3d->map[y]))
+		return ('1');
+	return (cub3d->map[y][x]);
+}                                                                      */
 /*                                                        :::      ::::::::   */
-/*   str_utils_4.c                                      :+:      :+:    :+:   */
+/*   str_utils3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 16:41:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:09:38 by jdupuis          ###   ########.fr       */
+/*   Created: 2025/09/16 16:45:00 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/09/16 16:45:00 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +90,4 @@ char	safe_map_access(t_cub3d *cub3d, int y, int x)
 	if (x >= (int)ft_strlen(cub3d->map[y]))
 		return ('1');
 	return (cub3d->map[y][x]);
-}
-
-/* Copie une chaîne dans une autre */
-char	*ft_strcpy(char *dest, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		dest[i] = str[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }

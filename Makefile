@@ -96,11 +96,11 @@ UTILS_SRC = \
 	src/utils/memory_1.c \
 	src/utils/monitoring_utils.c \
 	src/utils/str_utils_0.c \
-	src/utils/str_utils_1.c \
-	src/utils/str_utils_2.c \
-	src/utils/str_utils_3.c \
-	src/utils/str_utils_4.c \
-	src/utils/str_utils_5.c \
+	src/utils/str_utils.c \
+	src/utils/str_utils2.c \
+	src/utils/str_utils3.c \
+	src/utils/str_utils4.c \
+	src/utils/map_utils.c \
 	src/utils/time.c \
 
 # All source files
