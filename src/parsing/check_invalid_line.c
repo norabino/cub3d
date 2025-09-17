@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_validator.c                                :+:      :+:    :+:   */
+/*   check_invalid_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/17 21:50:22 by jdupuis          ###   ########.fr       */
+/*   Created: 2025/09/17 20:53:27 by jdupuis           #+#    #+#             */
+/*   Updated: 2025/09/17 22:36:25 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Valide toutes les textures présentes dans le fichier de configuration */
-int	validate_all_textures(t_cub3d *cub3d, int *idx)
+void	ft_check_invalid_line(t_cub3d *cub3d, int *idx)
 {
 	int	i;
-	int	result;
+	int	j;
 
 	i = 0;
-	*idx = 0;
-	while (cub3d->file[i])
+	while (cub3d->file[*idx] && !ft_strchr(cub3d->file[*idx], '1'))
+		(*idx)++;
+	while (i < *idx)
 	{
-		result = process_texture_line(cub3d, i);
-		if (result != -1)
-			*idx = result;
+		j = 0;
+		skip_spaces(cub3d->file[i], &j);
+		if (cub3d->file[i][j] == '\0')
+		{
+			i++;
+			continue ;
+		}
+		if (!is_letter(cub3d->file[i][j]))
+		{
+			cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
+			cub3d->nb_error_line = i;
+			exit_error("Invalid line", cub3d);
+		}
 		i++;
 	}
-	if (!all_text_set(cub3d))
-		exit_error("Missing texture(s)", cub3d);
-	return (1);
 }

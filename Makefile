@@ -28,7 +28,7 @@ INPUT_SRC = \
 
 # Parsing and file handling
 PARSING_SRC = \
-	src/parsing/check_and_set_file.c \
+	src/parsing/check_invalid_line.c \
 	src/parsing/check_map.c \
 	src/parsing/color_parser.c \
 	src/parsing/color_validator.c \

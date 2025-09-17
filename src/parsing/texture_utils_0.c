@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/17 18:05:48 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:42:06 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,15 @@ void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i)
 	char	*filename;
 
 	extract_filename_from_line(cub3d->file[i], j, &filename);
-	if ((cub3d->file[i][z] == 'P') || (try_to_open(filename)))
+	if (cub3d->file[i][z] != 'P' && !check_extension(filename, ".xpm"))
+	{
+		cub3d->nb_error_line = i;
+		cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
+		exit_error("Wrong texture file extension", cub3d);
+	}
+	if (cub3d->file[i][z] == 'P' || try_to_open(filename))
 		set_texture(cub3d->file[i][z], j, cub3d->file[i], cub3d);
-	else if ((!cub3d->textures.ceiling && cub3d->file[i][j] == 'C')
-		|| (!cub3d->textures.floor && cub3d->file[i][j] == 'F'))
+	else
 	{
 		free(filename);
 		cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
@@ -47,20 +52,6 @@ void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i)
 		exit_error("Wrong texture path", cub3d);
 	}
 	free(filename);
-}
-
-/* Traite une ligne de texture et met à jour l'état de validation */
-int	process_single_texture_line(t_cub3d *cub3d, int i,
-	int *found_all)
-{
-	if (!(*found_all) && parse_texture_line(cub3d, i))
-	{
-		*found_all = 1;
-		return (i + 1);
-	}
-	else if (*found_all)
-		parse_texture_line(cub3d, i);
-	return (-1);
 }
 
 /* Vérifie que toutes les cub3d->textures sont définies et valides */

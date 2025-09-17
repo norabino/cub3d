@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 17:58:30 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:43:42 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	check_extension(char *filename, char *extension)
 	ext = extract_extension(filename);
 	if (!ext || !ft_strcmp(ext, filename))
 	{
-		printf("ext = %s\n", ext);
-		printf("extension = %s\n", extension);
 		if (ext)
 			free(ext);
 		return (0);
@@ -46,7 +44,6 @@ int	check_extension(char *filename, char *extension)
 	if (ft_strcmp(ext, extension))
 	{
 		free(ext);
-		printf("b\n");
 		return (0);
 	}
 	free(ext);

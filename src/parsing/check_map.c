@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 12:02:46 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:48:24 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	process_flood(t_cub3d *cub3d, char **work_map)
 		{
 			free(p);
 			free_map(work_map);
-			exit_error("Map ouverte", cub3d);
+			exit_error("Open map", cub3d);
 		}
 		free(p);
 		return (1);

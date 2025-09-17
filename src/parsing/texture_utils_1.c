@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:09:38 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/17 22:04:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	assign_texture(char c, char *sub, t_cub3d *cub3d)
 	}
 }
 
-int	process_texture_line(t_cub3d *cub3d, int i, int *found_all)
+int	process_texture_line(t_cub3d *cub3d, int i)
 {
 	int	j;
 	int	result;
@@ -44,17 +44,27 @@ int	process_texture_line(t_cub3d *cub3d, int i, int *found_all)
 	skip_spaces(cub3d->file[i], &j);
 	if (!cub3d->file[i][j])
 		return (-1);
-	if (!is_letter(cub3d->file[i][j]) && (!all_text_set(cub3d)
-		&& !all_colors_set(cub3d)))
-	{
-		cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
-		cub3d->nb_error_line = i;
-		exit_error("Invalid line", cub3d);
-	}
 	if (is_letter(cub3d->file[i][j]))
 	{
-		result = process_single_texture_line(cub3d, i, found_all);
-		return (result);
+		result = parse_texture_line(cub3d, i);
+		return (result + 1);
+	}
+	return (-1);
+}
+
+int	process_color_line(t_cub3d *cub3d, int i)
+{
+	int	j;
+	int	result;
+
+	j = 0;
+	skip_spaces(cub3d->file[i], &j);
+	if (!cub3d->file[i][j])
+		return (-1);
+	if (is_letter(cub3d->file[i][j]))
+	{
+		result = parse_color_line(cub3d, i);
+		return (result + 1);
 	}
 	return (-1);
 }

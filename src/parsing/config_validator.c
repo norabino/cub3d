@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   config_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/13 12:01:51 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:41:12 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	set_direction(t_cub3d *cub3d, char dir)
+{
+	if (dir == 'N')
+	{
+		cub3d->player.dir_x = 0;
+		cub3d->player.dir_y = -1;
+	}
+	else if (dir == 'S')
+	{
+		cub3d->player.dir_x = 0;
+		cub3d->player.dir_y = 1;
+	}
+	else if (dir == 'E')
+	{
+		cub3d->player.dir_x = 1;
+		cub3d->player.dir_y = 0;
+	}
+	else if (dir == 'W')
+	{
+		cub3d->player.dir_x = -1;
+		cub3d->player.dir_y = 0;
+	}
+}
 
 /* Valide un fichier de configuration .cub complet */
 int	validate_config_file(t_cub3d *cub3d)
@@ -19,9 +43,12 @@ int	validate_config_file(t_cub3d *cub3d)
 	int	tmp;
 
 	idx_line = 0;
+	if (cub3d->file[idx_line] == NULL)
+		exit_error("Empty file", cub3d);
 	validate_all_textures(cub3d, &idx_line);
 	tmp = idx_line;
 	validate_all_colors(cub3d, &idx_line);
+	ft_check_invalid_line(cub3d, &idx_line);
 	if (tmp > idx_line)
 		idx_line = tmp;
 	ft_check_map(cub3d, &idx_line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 18:11:54 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:58:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,10 @@ int	parse_texture_line(t_cub3d *cub3d, int i)
 		|| (cub3d->file[i][j] == 'C' && cub3d->textures.ceiling)
 		|| (cub3d->file[i][j] == 'P' && cub3d->textures.portals))
 		texture_duplicate(cub3d->file[i][j], cub3d);
-	if (is_letter(cub3d->file[i][j]))
-	{
-		z = j;
-		j += skip_letter(cub3d->file[i][j], cub3d->file[i][j + 1]);
-		skip_spaces(cub3d->file[i], &j);
-		if (check_extension(cub3d->file[i], ".xpm"))
-			process_texture_path_found(cub3d, j, z, i);
-		else if (check_path(cub3d->file[i], j))
-		{
-			cub3d->nb_error_line = i;
-			cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
-			exit_error("Wrong texture file extension", cub3d);
-		}
-	}
-	return (all_text_set(cub3d));
+	z = j;
+	j += skip_letter(cub3d->file[i][j], cub3d->file[i][j + 1]);
+	skip_spaces(cub3d->file[i], &j);
+	if (check_path(cub3d->file[i], j))
+		process_texture_path_found(cub3d, j, z, i);
+	return (i);
 }

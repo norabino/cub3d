@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/17 17:29:25 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:17:19 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,15 @@
 int	validate_all_colors(t_cub3d *cub3d, int *idx)
 {
 	int	i;
-	int	j;
+	int	result;
 
 	i = 0;
-	(*idx) = 0;
+	*idx = 0;
 	while (cub3d->file[i])
 	{
-		j = 0;
-		skip_spaces(cub3d->file[i], &j);
-		if (!cub3d->file[i][j])
-		{
-			i++;
-			continue ;
-		}
-		if (!is_letter(cub3d->file[i][j]) && cub3d->file[i][j] != '1')
-		{
-			cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
-			cub3d->nb_error_line = i;
-			exit_error("Invalid line", cub3d);
-		}
-		parse_color_line(cub3d, cub3d->file, idx, i);
+		result = process_color_line(cub3d, i);
+		if (result != -1)
+			*idx = result;
 		i++;
 	}
 	validate_colors_complete(cub3d);
