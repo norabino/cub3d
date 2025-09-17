@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 22:09:09 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/17 23:01:58 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,6 @@ void	check_correspondance(t_cub3d *cub3d);
 t_prtl	find_a_portal(t_cub3d *cub3d, char **map);
 // PORTAL FUNCTIONS
 // ============================================================================
-
 
 int		count_portal_frames(t_cub3d *cub3d);
 char	*create_portal_path(char *base_path, int frame_num);
