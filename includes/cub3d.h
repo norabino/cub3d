@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/17 18:11:29 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	ft_free(t_cub3d *s_cub3d);
 int		all_colors_set(t_cub3d *cub3d);
 int		all_text_set(t_cub3d *cub3d);
 int		check_and_set_file(t_cub3d *cub3d);
-int		check_extension(t_cub3d *cub3d, char *filename, char *ext);
+int		check_extension(char *filename, char *ext);
 int		count_file_lines(int fd);
 int		extract_filename_from_line(char *line, int j, char **filename);
 int		validate_all_colors(t_cub3d *cub3d, int *idx);
 int		ft_check_map(t_cub3d *cub3d, int *idx_line);
 int		validate_all_textures(t_cub3d *cub3d, int *idx);
 char	**open_file(t_cub3d *cub3d, char *filename);
-int		parse_color_line(t_cub3d *cub3d, char *line, int *idx, int i);
+int		parse_color_line(t_cub3d *cub3d, char **file, int *idx, int i);
 int		process_single_texture_line(t_cub3d *cub3d, int i,
 			int *found_all);
 void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i);
@@ -307,6 +307,7 @@ int		only_numbers(char *str);
 int		skip_letter(char current, char next);
 void	skip_spaces(char *str, int *i);
 char	safe_map_access(t_cub3d *cub3d, int y, int x);
+int		check_path(char *str, int i);
 
 // ============================================================================
 // TEXTURE FUNCTIONS

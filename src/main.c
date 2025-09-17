@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 16:23:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:34:29 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parse_config_file(t_cub3d *cub3d, int ac, char **av)
 	if (ac != 2)
 		exit_error("Too few/much arguments.\nTry : ./cub3d [filename]",
 			cub3d);
-	if (!check_extension(cub3d, av[1], ".cub"))
+	if (!check_extension(av[1], ".cub"))
 		exit_error("Wrong extension.\nMust be '.cub'.", cub3d);
 	cub3d->file = open_file(cub3d, av[1]);
 	validate_config_file(cub3d);

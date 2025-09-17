@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 02:09:39 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/17 17:29:25 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	validate_all_colors(t_cub3d *cub3d, int *idx)
 			cub3d->nb_error_line = i;
 			exit_error("Invalid line", cub3d);
 		}
-		parse_color_line(cub3d, cub3d->file[i], idx, i);
+		parse_color_line(cub3d, cub3d->file, idx, i);
 		i++;
 	}
 	validate_colors_complete(cub3d);
@@ -83,7 +83,7 @@ void	set_floor(t_cub3d *cub3d, char **split)
 	i = -1;
 	while (split[++i])
 	{
-		if (i >= 3)
+		if (ft_tablen(split) != 3)
 			exit_error("Invalid RGB floor nbs, must be 3", cub3d);
 		cub3d->colors.floor[i] = ft_atoi(split[i]);
 		if (cub3d->colors.floor[i] < 0 || cub3d->colors.floor[i] > 255)

@@ -1,7 +1,7 @@
 NO ./textures/cartoon_bark.xpm
 SO ./textures/cartoon_bricks.xpm 
 WE ./textures/cartoon_wood.xpm
-EA ./textures/
+EA ./textures/a.xpm
 
 F 32, 32, 32
 C 0, 0, 102

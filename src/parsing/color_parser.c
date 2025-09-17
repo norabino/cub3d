@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/10 17:13:39 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/17 17:56:06 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,18 @@ void	validate_colors_complete(t_cub3d *cub3d)
 }
 
 /* Parse une ligne de couleur et met à jour les structures */
-int	parse_color_line(t_cub3d *cub3d, char *line, int *idx, int i)
+int	parse_color_line(t_cub3d *cub3d, char **file, int *idx, int i)
 {
 	int	j;
 	int	z;
 
 	j = 0;
-	skip_spaces(line, &j);
-	if ((line[j] == 'C' || line[j] == 'F'))
+	skip_spaces(file[i], &j);
+	if ((file[i][j] == 'C' || file[i][j] == 'F'))
 	{
-		if (check_extension(cub3d, line, ".xpm"))
-			return (0);
-		validate_no_color_duplicate(cub3d, line[j], j);
+		validate_no_color_duplicate(cub3d, file[i][j], j);
 		z = j;
-		parse_color_values(cub3d, line, j, z);
+		parse_color_values(cub3d, file[i], j, z);
 	}
 	if ((*idx) == 0 && all_colors_set(cub3d))
 		(*idx) = i + 1;

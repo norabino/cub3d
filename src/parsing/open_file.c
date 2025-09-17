@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 17:21:21 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:58:30 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,23 @@ static char	*extract_extension(char *filename)
 }
 
 /* Vérifie si l'extension du fichier est correcte */
-int	check_extension(t_cub3d *cub3d, char *filename, char *extension)
+int	check_extension(char *filename, char *extension)
 {
 	char	*ext;
 
 	ext = extract_extension(filename);
 	if (!ext || !ft_strcmp(ext, filename))
 	{
+		printf("ext = %s\n", ext);
+		printf("extension = %s\n", extension);
 		if (ext)
 			free(ext);
-		exit_error("No file extension.", cub3d);
+		return (0);
 	}
 	if (ft_strcmp(ext, extension))
 	{
 		free(ext);
+		printf("b\n");
 		return (0);
 	}
 	free(ext);

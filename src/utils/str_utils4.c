@@ -48,3 +48,10 @@ char	*ft_strcat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
+int	check_path(char *str, int i)
+{
+	if (str[i] == '.' || str[i + 1] == '/')
+		return (1);
+	return (0);
+}
