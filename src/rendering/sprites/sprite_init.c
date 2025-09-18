@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 17:41:00 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:06:33 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_sprites(t_cub3d *cub3d)
 		exit_error("Failed to allocate depth_buffer", cub3d);
 	i = 0;
 	while (i < SCREEN_WIDTH)
-		cub3d->depth_buffer.buffer[i++] = INT16_MAX;
+		cub3d->depth_buffer.buffer[i++] = 999999;
 }
 
 /* Free sprite resources */
