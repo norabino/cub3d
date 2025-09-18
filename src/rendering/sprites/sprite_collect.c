@@ -6,12 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:54:40 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-#include <math.h>
 
 double	calc_sprite_distance(t_cub3d *cub3d, double sprite_x, double sprite_y)
 {

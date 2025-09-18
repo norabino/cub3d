@@ -6,12 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 15:46:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:54:55 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-#include <math.h>
 
 static int	check_raycast_bounds(t_cub3d *cub3d, double current_x,
 	double current_y)

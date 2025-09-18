@@ -46,19 +46,18 @@ PARSING_SRC = \
 # Raycasting system
 RAYCASTING_SRC = \
 	src/raycasting/collision_utils.c \
-	src/raycasting/portal.c \
 	src/raycasting/portal_helpers.c \
 	src/raycasting/portal_textures.c \
 	src/raycasting/portal_utils.c \
+	src/raycasting/portal.c \
 	src/raycasting/raycasting_utils.c \
 
 # Rendering system
 RENDERING_SRC = \
 	src/rendering/camera.c \
 	src/rendering/collision.c \
-	src/rendering/dda_utils.c \
-	src/rendering/floor_ceiling.c \
 	src/rendering/floor_ceiling_utils.c \
+	src/rendering/floor_ceiling.c \
 	src/rendering/pixel_utils.c \
 	src/rendering/raycasting.c \
 	src/rendering/render.c \
@@ -68,39 +67,39 @@ RENDERING_SRC = \
 
 # Sprite rendering system
 SPRITE_SRC = \
-	src/rendering/sprites/sprite_init.c \
-	src/rendering/sprites/sprite_collect.c \
-	src/rendering/sprites/sprite_collect_utils.c \
+	src/rendering/sprites/sprite_calc.c \
 	src/rendering/sprites/sprite_collect_helpers.c \
 	src/rendering/sprites/sprite_collect_helpers2.c \
-	src/rendering/sprites/sprite_sort.c \
-	src/rendering/sprites/sprite_calc.c \
-	src/rendering/sprites/sprite_render.c \
+	src/rendering/sprites/sprite_collect_utils.c \
+	src/rendering/sprites/sprite_collect.c \
+	src/rendering/sprites/sprite_init.c \
 	src/rendering/sprites/sprite_render_utils.c \
-	src/rendering/sprites/sprite_main.c \
+	src/rendering/sprites/sprite_render.c \
+	src/rendering/sprites/sprite_sort.c \
+	src/rendering/sprites/sprite.c \
 
 # User Interface
 UI_SRC = \
-	src/ui/minimap.c \
 	src/ui/minimap_alpha.c \
 	src/ui/minimap_draw.c \
 	src/ui/minimap_player.c \
 	src/ui/minimap_utils.c \
+	src/ui/minimap.c \
 
 # Utility functions
 UTILS_SRC = \
 	src/utils/fps_utils.c \
 	src/utils/free.c \
 	src/utils/ft_split.c \
-	src/utils/memory_0.c \
-	src/utils/memory_1.c \
+	src/utils/map_utils.c \
+	src/utils/memory0.c \
+	src/utils/memory1.c \
 	src/utils/monitoring_utils.c \
-	src/utils/str_utils_0.c \
-	src/utils/str_utils.c \
+	src/utils/str_utils0.c \
+	src/utils/str_utils1.c \
 	src/utils/str_utils2.c \
 	src/utils/str_utils3.c \
 	src/utils/str_utils4.c \
-	src/utils/map_utils.c \
 	src/utils/time.c \
 
 # All source files
