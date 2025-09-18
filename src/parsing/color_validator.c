@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 13:41:40 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:10:22 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,16 @@ void	set_ceiling(t_cub3d *cub3d, char **split)
 	while (split[++i])
 	{
 		if (i >= 3)
+		{
+			free_map(split);
 			exit_error("Invalid RGB ceiling nbs, must be 3", cub3d);
+		}
 		cub3d->colors.ceiling[i] = ft_atoi(split[i]);
 		if (cub3d->colors.ceiling[i] < 0 || cub3d->colors.ceiling[i] > 255)
+		{
+			free_map(split);
 			exit_error("Wrong ceiling color args [0-255]", cub3d);
+		}
 	}
 }
 
@@ -56,9 +62,15 @@ void	set_floor(t_cub3d *cub3d, char **split)
 	while (split[++i])
 	{
 		if (ft_tablen(split) != 3)
+		{
+			free_map(split);
 			exit_error("Invalid RGB floor nbs, must be 3", cub3d);
+		}
 		cub3d->colors.floor[i] = ft_atoi(split[i]);
 		if (cub3d->colors.floor[i] < 0 || cub3d->colors.floor[i] > 255)
+		{
+			free_map(split);
 			exit_error("Wrong floor color args [0-255]", cub3d);
+		}
 	}
 }

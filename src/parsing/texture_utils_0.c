@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/17 21:42:06 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:03:38 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i)
 	extract_filename_from_line(cub3d->file[i], j, &filename);
 	if (cub3d->file[i][z] != 'P' && !check_extension(filename, ".xpm"))
 	{
+		free(filename);
 		cub3d->nb_error_line = i;
 		cub3d->invalid_arg = ft_strdup(cub3d->file[i]);
 		exit_error("Wrong texture file extension", cub3d);

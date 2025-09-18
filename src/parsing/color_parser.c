@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 22:35:50 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:10:40 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	parse_color_values(t_cub3d *cub3d, char *line, int j, int z)
 	j += skip_letter(line[z], line[j + 1]);
 	skip_spaces(line, &j);
 	split = ft_split(&line[j], ',');
+	if (!split)
+		exit_error("Memory allocation error for color split", cub3d);
 	assign_color_values(cub3d, split, line[z]);
 	free_map(split);
 }

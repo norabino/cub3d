@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:09:39 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:06:53 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	exit_error(char *err, t_cub3d *cub3d)
 		write(2, itoa, ft_strlen(itoa));
 		write(2, " : ", 3);
 		write(2, cub3d->invalid_arg, ft_strlen(cub3d->invalid_arg));
+		free(itoa);
 	}
 	else
 		write(2, "\n", 1);

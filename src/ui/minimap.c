@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 14:01:48 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:35:23 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,20 @@ void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
+/* Vérifie si une position est un mur dans la carte */
+static int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
+{
+	if (world_x < 0 || world_y < 0)
+		return (0);
+	if ((int)world_y >= ft_tablen(cub3d->map))
+		return (0);
+	if (!cub3d->map[(int)world_y])
+		return (0);
+	if ((int)world_x >= (int)ft_strlen(cub3d->map[(int)world_y]))
+		return (0);
+	return (cub3d->map[(int)world_y][(int)world_x] == '1');
+}
+
 /* Dessine les murs de la carte sur la minimap */
 void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 {
@@ -67,7 +81,7 @@ void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 			screen.y = render.screen_y;
 			calculate_world_pos(&render.world_x, &render.world_y,
 				&calc, &screen);
-			if (is_wall_at_position(cub3d, render.world_x, render.world_y)
+			if (is_wall_at_pos(cub3d, render.world_x, render.world_y)
 				&& is_point_in_circle(render.screen_x, render.screen_y,
 					MINIMAP_SIZE / 2 - 2))
 				my_mlx_pixel_put(cub3d->mlx.img, center_x + render.screen_x,
