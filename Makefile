@@ -76,6 +76,7 @@ SPRITE_SRC = \
 	src/rendering/sprites/sprite_render_utils.c \
 	src/rendering/sprites/sprite_render.c \
 	src/rendering/sprites/sprite_sort.c \
+	src/rendering/sprites/sprite_utils.c \
 	src/rendering/sprites/sprite.c \
 
 # User Interface

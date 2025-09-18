@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:21:04 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 18:04:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:08:08 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 #define MOVE_SPEED 2.0
 #define SENSIBILITY 3.0
-#define FPS 70
+#define FPS 26
 #define FOV 66
 #define COLLISION_MARGIN 0.05
 

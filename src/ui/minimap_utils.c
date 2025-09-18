@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 14:03:07 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,15 @@ void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc)
 	player_angle = atan2(cub3d->player.dir_y, cub3d->player.dir_x) + PI / 2;
 	calc->cos_angle = cos(player_angle);
 	calc->sin_angle = sin(player_angle);
+}
+
+/* Vérifie si un point est dans le cercle de la minimap */
+int	is_point_in_circle(int x, int y, int radius)
+{
+	int	dx;
+	int	dy;
+
+	dx = x;
+	dy = y;
+	return (dx * dx + dy * dy <= radius * radius);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_render.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 19:25:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,35 @@ int	is_transparent_color(int color)
 	return (0);
 }
 
-/* Update z-buffer for depth testing */
-void	update_depth_buffer(t_cub3d *cub3d, int x, double distance)
+/* Check if sprite is valid and visible */
+static int	is_sprite_valid(t_cub3d *cub3d, t_sprite_calc *calc)
 {
-	if (x >= 0 && x < SCREEN_WIDTH && distance < cub3d->depth_buffer.buffer[x])
-		cub3d->depth_buffer.buffer[x] = distance;
+	if (calc->transform_y <= 0)
+		return (0);
+	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
+		return (0);
+	return (1);
 }
 
-/* Draw a pixel with transparency check */
-void	draw_transparent_pixel(t_cub3d *cub3d, int x, int y, int color)
+/* Initialize sprite render data */
+static void	init_sprite_render_data(t_cub3d *cub3d,
+	t_sprite_render_data *render_data)
 {
-	if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
-		return ;
-	if (!is_transparent_color(color))
-		my_mlx_pixel_put(cub3d->mlx.img, x, y, color);
+	render_data->current_frame = cub3d->prtl_sprites.current_frame
+		% cub3d->prtl_sprites.frame_counter;
+	render_data->current_texture = &cub3d->prtl_sprites.frames[
+		render_data->current_frame];
+}
+
+/* Validate sprite texture */
+static int	is_texture_valid(t_sprite_render_data *render_data)
+{
+	if (!render_data->current_texture
+		|| !render_data->current_texture->img
+		|| render_data->current_texture->width <= 0
+		|| render_data->current_texture->height <= 0)
+		return (0);
+	return (1);
 }
 
 /* Draw sprite pixels with transparency and depth testing */
@@ -43,23 +58,14 @@ void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 	t_sprite_render_data	render_data;
 	double					sprite_distance;
 
-	if (calc->transform_y <= 0)
+	if (!is_sprite_valid(cub3d, calc))
 		return ;
-	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
-		return ;
-	
-	sprite_distance = sqrt((sprite->x - cub3d->player.pos_x) 
-		* (sprite->x - cub3d->player.pos_x) 
-		+ (sprite->y - cub3d->player.pos_y) 
-		* (sprite->y - cub3d->player.pos_y));
-	
-	render_data.current_frame = cub3d->prtl_sprites.current_frame
-		% cub3d->prtl_sprites.frame_counter;
-	render_data.current_texture = &cub3d->prtl_sprites.frames[
-		render_data.current_frame];
-	if (!render_data.current_texture || !render_data.current_texture->img
-		|| render_data.current_texture->width <= 0
-		|| render_data.current_texture->height <= 0)
+	sprite_distance = sqrt((sprite->x - cub3d->player.pos_x)
+			* (sprite->x - cub3d->player.pos_x)
+			+ (sprite->y - cub3d->player.pos_y)
+			* (sprite->y - cub3d->player.pos_y));
+	init_sprite_render_data(cub3d, &render_data);
+	if (!is_texture_valid(&render_data))
 		return ;
 	render_data.x = calc->draw_start_x;
 	while (render_data.x < calc->draw_end_x)

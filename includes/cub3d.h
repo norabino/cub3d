@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 19:25:51 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	free_textures(t_cub3d *cub3d);
 void	ft_bzero(void *s, int n);
 void	secure_free(void **data);
 void	free_sprites(t_cub3d *cub3d);
-
 
 // --- Time & Performance ---
 void	calculate_fps(t_cub3d *cub3d);

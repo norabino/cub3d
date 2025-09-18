@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 19:46:02 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-/* Vérifie si un point est dans le cercle de la minimap */
-int	is_point_in_circle(int x, int y, int radius)
-{
-	int	dx;
-	int	dy;
-
-	dx = x;
-	dy = y;
-	return (dx * dx + dy * dy <= radius * radius);
-}
 
 /* Dessine le fond rond gris de la minimap avec contour */
 void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y)

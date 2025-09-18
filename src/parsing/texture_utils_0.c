@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 17:06:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:17:10 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,6 @@ int	all_text_set(t_cub3d *cub3d)
 	if (!cub3d->textures.north || !cub3d->textures.south
 		|| !cub3d->textures.west || !cub3d->textures.east)
 		return (0);
-		// a check
-	if (!check_extension(cub3d->textures.north, ".xpm"))
-		exit_error("Wrong north texture extension.", cub3d);
-	if (!check_extension(cub3d->textures.south, ".xpm"))
-		exit_error("Wrong south texture extension.", cub3d);
-	if (!check_extension(cub3d->textures.west, ".xpm"))
-		exit_error("Wrong west texture extension.", cub3d);
-	if (!check_extension(cub3d->textures.east, ".xpm"))
-		exit_error("Wrong east texture extension.", cub3d);
-	if (cub3d->textures.floor && !check_extension(
-			cub3d->textures.floor, ".xpm"))
-		exit_error("Wrong floor texture extension.", cub3d);
-	if (cub3d->textures.ceiling && !check_extension(
-			cub3d->textures.ceiling, ".xpm"))
-		exit_error("Wrong ceiling texture extension.", cub3d);
 	return (1);
 }
 

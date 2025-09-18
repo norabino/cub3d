@@ -44,4 +44,3 @@ void	init_view(t_cub3d *cub3d)
 	cub3d->view.plane_x = -1;
 	cub3d->view.plane_y = -1;
 }
-

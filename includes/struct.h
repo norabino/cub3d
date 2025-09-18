@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:39:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,25 +238,25 @@ typedef struct s_mouse
 
 typedef struct s_cub3d
 {
-	char			**file;
-	char			**map;
-	t_mlx			mlx;
-	t_player		player;
-	t_colors		colors;
-	t_textures		textures;
-	t_time			time;
-	t_view			view;
-	t_mouse			mouse;
-	t_prtl			*tp_portals;
-	t_prtl_sprite	prtl_sprites;
-	t_sprite		*sprites;
+	char				**file;
+	char				**map;
+	t_mlx				mlx;
+	t_player			player;
+	t_colors			colors;
+	t_textures			textures;
+	t_time				time;
+	t_view				view;
+	t_mouse				mouse;
+	t_prtl				*tp_portals;
+	t_prtl_sprite		prtl_sprites;
+	t_sprite			*sprites;
 	t_depth_buffer		depth_buffer;
-	int				sprite_count;
-	int				portals[26];
-	int				nb_portals;
-	char			input_state[256];
-	char			*invalid_arg;
-	int				nb_error_line;
+	int					sprite_count;
+	int					portals[26];
+	int					nb_portals;
+	char				input_state[256];
+	char				*invalid_arg;
+	int					nb_error_line;
 }	t_cub3d;
 
 #endif

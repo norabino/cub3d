@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 19:30:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,12 @@ void	raycast(t_cub3d *cub3d)
 
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.img)
 		return ;
-	
-	// Réinitialiser le z-buffer à chaque frame
 	if (cub3d->depth_buffer.buffer)
 	{
 		i = 0;
 		while (i < SCREEN_WIDTH)
 			cub3d->depth_buffer.buffer[i++] = 999999.0;
 	}
-	
 	calc_camera_plane(cub3d);
 	x = 0;
 	while (x < SCREEN_WIDTH)
