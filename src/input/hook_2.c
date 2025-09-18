@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 19:49:07 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:13:30 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,21 @@
 /* Boucle principale du jeu qui s'exécute en continu */
 int	handle_loop(t_cub3d *cub3d)
 {
+	long	current_time;
+
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.win || !cub3d->mlx.img)
 		return (0);
-	if (limit_fps(cub3d))
+	
+	current_time = gettime_ms();
+	if ((current_time - cub3d->time.last_refresh) >= (1000 / FPS))
 	{
-		update_delta_time(cub3d);
+		update_delta_time_from_timestamp(cub3d, current_time);
 		handle_movement(cub3d);
 		handle_direction(cub3d);
 		check_any_key_pressed(cub3d);
 		if (cub3d->nb_portals > 0)
 			update_portal_animations(cub3d);
-		cub3d->time.last_refresh = gettime_ms();
+		cub3d->time.last_refresh = current_time;
 		calculate_fps(cub3d);
 		refresh_image(cub3d);
 	}

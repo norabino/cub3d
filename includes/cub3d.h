@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:54:23 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:14:44 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	calculate_fps(t_cub3d *cub3d);
 void	display_fps(t_cub3d *cub3d);
 long	gettime_ms(void);
 int		limit_fps(t_cub3d *cub3d);
-void	update_delta_time(t_cub3d *cub3d);
+void	update_delta_time_from_timestamp(t_cub3d *cub3d, long current_time);
 
 // ============================================================================
 // 2. INPUT/OUTPUT SYSTEM

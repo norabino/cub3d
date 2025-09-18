@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 18:03:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:14:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ void	calculate_fps(t_cub3d *cub3d)
 	}
 }
 
-/* Met à jour le temps écoulé entre deux frames */
-void	update_delta_time(t_cub3d *cub3d)
+/* Version optimisée qui réutilise un timestamp existant */
+void	update_delta_time_from_timestamp(t_cub3d *cub3d, long current_time)
 {
 	static long	last_time = 0;
-	long		current_time;
 
-	current_time = gettime_ms();
 	if (last_time == 0)
 		last_time = current_time;
 	cub3d->time.delta_time = (current_time - last_time) / 1000.0;
