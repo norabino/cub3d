@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:52:19 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	calc_sprite_properties(t_cub3d *cub3d, t_sprite *sprite,
 			+ cub3d->view.plane_x * calc->sprite_y);
 	calc->sprite_screen_x = (int)((SCREEN_WIDTH / 2)
 			* (1 + calc->transform_x / calc->transform_y));
-	calc->sprite_height = ft_abs((int)(SCREEN_HEIGHT / calc->transform_y
-				* 0.75));
+	calc->sprite_height = ft_abs((int)(SCREEN_HEIGHT / calc->transform_y));
 	calc->sprite_width = calc->sprite_height;
 }
 
@@ -41,9 +40,9 @@ void	calc_sprite_screen_bounds(t_sprite_calc *calc)
 	if (calc->draw_end_y >= SCREEN_HEIGHT)
 		calc->draw_end_y = SCREEN_HEIGHT - 1;
 	calc->draw_start_x = -calc->sprite_width / 2 + calc->sprite_screen_x;
+	calc->draw_end_x = calc->sprite_width / 2 + calc->sprite_screen_x;
 	if (calc->draw_start_x < 0)
 		calc->draw_start_x = 0;
-	calc->draw_end_x = calc->sprite_width / 2 + calc->sprite_screen_x;
 	if (calc->draw_end_x >= SCREEN_WIDTH)
 		calc->draw_end_x = SCREEN_WIDTH - 1;
 }

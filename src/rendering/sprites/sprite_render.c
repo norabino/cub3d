@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 17:39:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:25:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,18 @@ void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 	t_sprite_calc *calc)
 {
 	t_sprite_render_data	render_data;
+	double					sprite_distance;
 
-	(void)sprite;
 	if (calc->transform_y <= 0)
 		return ;
 	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
 		return ;
+	
+	sprite_distance = sqrt((sprite->x - cub3d->player.pos_x) 
+		* (sprite->x - cub3d->player.pos_x) 
+		+ (sprite->y - cub3d->player.pos_y) 
+		* (sprite->y - cub3d->player.pos_y));
+	
 	render_data.current_frame = cub3d->prtl_sprites.current_frame
 		% cub3d->prtl_sprites.frame_counter;
 	render_data.current_texture = &cub3d->prtl_sprites.frames[
@@ -58,7 +64,7 @@ void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 	render_data.x = calc->draw_start_x;
 	while (render_data.x < calc->draw_end_x)
 	{
-		render_sprite_column(cub3d, calc, &render_data);
+		render_sprite_column(cub3d, calc, &render_data, sprite_distance);
 		render_data.x++;
 	}
 }

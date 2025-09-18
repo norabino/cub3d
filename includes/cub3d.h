@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 18:15:25 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:25:51 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	init_colors(t_cub3d *cub3d);
 void	init_minilibx(t_cub3d *cub3d);
 void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc);
 void	init_mouse(t_cub3d *cub3d);
+void	init_depth_buffer(t_cub3d *cub3d);
 void	init_sprites(t_cub3d *cub3d);
-void	init_sprites_struct(t_cub3d *cub3d);
 void	init_time(t_cub3d *cub3d);
 void	init_view(t_cub3d *cub3d);
 
@@ -55,6 +55,8 @@ void	free_sprites(t_cub3d *cub3d);
 void	free_textures(t_cub3d *cub3d);
 void	ft_bzero(void *s, int n);
 void	secure_free(void **data);
+void	free_sprites(t_cub3d *cub3d);
+
 
 // --- Time & Performance ---
 void	calculate_fps(t_cub3d *cub3d);
@@ -202,15 +204,15 @@ void	calc_sprite_screen_bounds(t_sprite_calc *calc);
 
 // --- Sprite Culling ---
 int		is_sprite_in_fov(t_cub3d *cub3d, double sprite_x, double sprite_y);
-int		is_sprite_occluded(t_cub3d *cub3d, double sprite_x, double sprite_y);
-int		should_cull_sprite(t_cub3d *cub3d, double sprite_x, double sprite_y);
+int		is_sprite_hidden(t_cub3d *cub3d, double sprite_x, double sprite_y);
+int		should_display_sprite(t_cub3d *cub3d, double sprite_x, double sprite_y);
 
 // --- Sprite Rendering ---
 void	collect_portal_sprites(t_cub3d *cub3d);
 void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 			t_sprite_calc *calc);
 void	render_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc,
-			t_sprite_render_data *render_data);
+			t_sprite_render_data *render_data, double sprite_distance);
 void	render_sprites(t_cub3d *cub3d);
 void	sort_sprites_by_distance(t_cub3d *cub3d);
 

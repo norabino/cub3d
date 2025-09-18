@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_0.c                                         :+:      :+:    :+:   */
+/*   memory0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:14:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,15 @@ void	free_map(char **map)
 	}
 	secure_free((void **)&map);
 	map = NULL;
+}
+
+void	free_sprites(t_cub3d *cub3d)
+{
+	if (!cub3d)
+		return ;
+	if (cub3d->sprites)
+		secure_free((void **)&cub3d->sprites);
+	cub3d->sprite_count = 0;
+	if (cub3d->depth_buffer.buffer)
+		secure_free((void **)&cub3d->depth_buffer.buffer);
 }

@@ -12,6 +12,7 @@ MAIN_SRC = \
 INIT_SRC = \
 	src/init/init.c \
 	src/init/init_mlx.c \
+	src/init/init_sprites.c \
 	src/init/init_utils.c \
 
 # Get Next Line
@@ -72,7 +73,6 @@ SPRITE_SRC = \
 	src/rendering/sprites/sprite_collect_helpers2.c \
 	src/rendering/sprites/sprite_collect_utils.c \
 	src/rendering/sprites/sprite_collect.c \
-	src/rendering/sprites/sprite_init.c \
 	src/rendering/sprites/sprite_render_utils.c \
 	src/rendering/sprites/sprite_render.c \
 	src/rendering/sprites/sprite_sort.c \

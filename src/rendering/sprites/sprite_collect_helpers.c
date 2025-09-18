@@ -6,13 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 16:54:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:15:29 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-int	should_cull_sprite(t_cub3d *cub3d, double sprite_x, double sprite_y)
+int	should_display_sprite(t_cub3d *cub3d, double sprite_x, double sprite_y)
 {
 	double	distance;
 
@@ -21,7 +21,7 @@ int	should_cull_sprite(t_cub3d *cub3d, double sprite_x, double sprite_y)
 		return (1);
 	if (!is_sprite_in_fov(cub3d, sprite_x, sprite_y))
 		return (1);
-	if (is_sprite_occluded(cub3d, sprite_x, sprite_y))
+	if (is_sprite_hidden(cub3d, sprite_x, sprite_y))
 		return (1);
 	return (0);
 }

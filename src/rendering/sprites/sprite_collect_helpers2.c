@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 16:54:55 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:21:10 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	perform_raycast_check(t_cub3d *cub3d, double *raycast_data,
 	return (0);
 }
 
-int	is_sprite_occluded(t_cub3d *cub3d, double sprite_x, double sprite_y)
+int	is_sprite_hidden(t_cub3d *cub3d, double sprite_x, double sprite_y)
 {
 	double	raycast_data[6];
 	int		steps;

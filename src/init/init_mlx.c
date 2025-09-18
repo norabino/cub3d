@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:19:02 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 17:26:07 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:30:50 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	init_minilibx(t_cub3d *cub3d)
 	load_all_textures(cub3d);
 	if (cub3d->nb_portals > 0)
 		load_portal_texture(cub3d);
-	init_sprites(cub3d);
+	init_depth_buffer(cub3d);
 }

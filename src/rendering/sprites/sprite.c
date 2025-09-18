@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_main.c                                      :+:      :+:    :+:   */
+/*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:23:30 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	render_sprites(t_cub3d *cub3d)
 	int				i;
 	t_sprite_calc	calc;
 
-	if (!cub3d)
-		return ;
 	if (!cub3d->prtl_sprites.frames || cub3d->prtl_sprites.frame_counter <= 0)
 		return ;
 	collect_portal_sprites(cub3d);

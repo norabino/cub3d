@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:22:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:31:44 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	init(t_cub3d *cub3d)
 	init_view(cub3d);
 	init_mouse(cub3d);
 	init_portals(cub3d);
-	init_sprites_struct(cub3d);
+	init_sprites(cub3d);
 	ft_bzero(cub3d->input_state, 256);
 }

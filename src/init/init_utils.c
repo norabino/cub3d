@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:39:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:31:56 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,3 @@ void	init_view(t_cub3d *cub3d)
 	cub3d->view.plane_y = -1;
 }
 
-void	init_sprites_struct(t_cub3d *cub3d)
-{
-	cub3d->sprites = NULL;
-	cub3d->sprite_count = 0;
-	cub3d->depth_buffer.buffer = NULL;
-	cub3d->depth_buffer.width = 0;
-}
