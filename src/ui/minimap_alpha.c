@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 22:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:14:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 13:59:04 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,6 @@ static int	get_triangle_width_for_row(int y)
 		return (7);
 	else
 		return (9);
-}
-
-/* Vérifie si le pixel fait partie de la forme de la flèche */
-int	is_arrow_pixel(int x, int y)
-{
-	int	triangle_width;
-	int	half_width;
-
-	triangle_width = get_triangle_width_for_row(y);
-	if (triangle_width == 0)
-		return (0);
-	half_width = triangle_width / 2;
-	return (x >= -half_width && x <= half_width);
 }
 
 /* Vérifie si le pixel fait partie du contour noir */

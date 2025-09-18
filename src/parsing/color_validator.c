@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/17 22:17:19 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 13:41:40 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,6 @@ int	validate_all_colors(t_cub3d *cub3d, int *idx)
 	}
 	validate_colors_complete(cub3d);
 	return (1);
-}
-
-/* Vérifie si toutes les couleurs sont définies */
-int	all_colors_set(t_cub3d *cub3d)
-{
-	int	ceiling_complete;
-	int	floor_complete;
-
-	ceiling_complete = (cub3d->textures.ceiling)
-		|| (cub3d->colors.ceiling[0] != -1
-			&& cub3d->colors.ceiling[1] != -1
-			&& cub3d->colors.ceiling[2] != -1);
-	floor_complete = (cub3d->textures.floor)
-		|| (cub3d->colors.floor[0] != -1
-			&& cub3d->colors.floor[1] != -1
-			&& cub3d->colors.floor[2] != -1);
-	return (ceiling_complete && floor_complete);
 }
 
 /* Définit la couleur du plafond */

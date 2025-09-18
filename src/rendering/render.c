@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 01:35:20 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 14:11:18 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@ void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
 	*draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 	if (*draw_end >= SCREEN_HEIGHT)
 		*draw_end = SCREEN_HEIGHT - 1;
-}
-
-/* Dessine un mur en couleur unie (version simple sans texture) */
-void	draw_wall_pixels(t_cub3d *cub3d, int screen_x, int draw_start,
-	int draw_end)
-{
-	int	y;
-	int	wall_color;
-
-	wall_color = 0x00FF00;
-	y = draw_start;
-	while (y < draw_end)
-	{
-		my_mlx_pixel_put(cub3d->mlx.img, screen_x, y, wall_color);
-		y++;
-	}
 }
 
 /* Dessine une ligne verticale complète à l'écran : mur + sol + plafond */

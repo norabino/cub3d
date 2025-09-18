@@ -6,13 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 16:44:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 14:04:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	count_portal_frames_part2(t_cub3d *cub3d)
+int	count_portal_frames(t_cub3d *cub3d)
 {
 	int		i;
 	int		fd;

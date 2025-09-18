@@ -6,25 +6,11 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:05:10 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 14:03:07 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-/* Vérifie si une position est un mur dans la carte */
-int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
-{
-	if (world_x < 0 || world_y < 0)
-		return (0);
-	if ((int)world_y >= ft_tablen(cub3d->map))
-		return (0);
-	if (!cub3d->map[(int)world_y])
-		return (0);
-	if ((int)world_x >= ft_strlen(cub3d->map[(int)world_y]))
-		return (0);
-	return (cub3d->map[(int)world_y][(int)world_x] == '1');
-}
 
 /* Vérifie si une position est un portail dans la carte */
 int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
@@ -65,16 +51,4 @@ void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc)
 	player_angle = atan2(cub3d->player.dir_y, cub3d->player.dir_x) + PI / 2;
 	calc->cos_angle = cos(player_angle);
 	calc->sin_angle = sin(player_angle);
-}
-
-/* Fait tourner un point autour de l'origine */
-void	rotate_point(double *x, double *y, double angle)
-{
-	double	old_x;
-	double	old_y;
-
-	old_x = *x;
-	old_y = *y;
-	*x = old_x * cos(-angle) - old_y * sin(-angle);
-	*y = old_x * sin(-angle) + old_y * cos(-angle);
 }

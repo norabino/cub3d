@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 02:09:38 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 14:04:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	load_portal_texture(t_cub3d *cub3d)
 {
 	if (!try_to_open(cub3d->textures.portals))
 		exit_error("Wrong folder for portal sprites", cub3d);
-	if (!count_portal_frames_part2(cub3d))
+	if (!count_portal_frames(cub3d))
 		return (0);
 	if (cub3d->prtl_sprites.frame_counter == 0)
 		return (0);

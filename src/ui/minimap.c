@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 01:55:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 14:01:48 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y)
 		{
 			pixel.x = x;
 			pixel.y = y;
-			draw_minimap_pixel_optimized(cub3d, &pixel);
+			draw_minimap_pixel(cub3d, &pixel);
 			x++;
 		}
 		y++;
@@ -67,7 +67,7 @@ void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 			screen.y = render.screen_y;
 			calculate_world_pos(&render.world_x, &render.world_y,
 				&calc, &screen);
-			if (is_wall_at_pos(cub3d, render.world_x, render.world_y)
+			if (is_wall_at_position(cub3d, render.world_x, render.world_y)
 				&& is_point_in_circle(render.screen_x, render.screen_y,
 					MINIMAP_SIZE / 2 - 2))
 				my_mlx_pixel_put(cub3d->mlx.img, center_x + render.screen_x,

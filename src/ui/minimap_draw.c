@@ -6,14 +6,13 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 22:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:58:05 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 13:55:44 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Version optimisée de draw_minimap_pixel avec pré-calculs */
-void	draw_minimap_pixel_optimized(t_cub3d *cub3d, t_pixel_draw *pixel)
+void	draw_minimap_pixel(t_cub3d *cub3d, t_pixel_draw *pixel)
 {
 	int	dx;
 	int	dy;
@@ -76,9 +75,7 @@ void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw)
 	}
 }
 
-/*
-** Helper pour le blending des composantes de couleur
-*/
+// Helper pour le blending des composantes de couleur
 int	blend_color_component(int bg_color, int fg_color, int alpha_int,
 	int inv_alpha)
 {
