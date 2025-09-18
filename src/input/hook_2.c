@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 18:13:30 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:15:45 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int	handle_loop(t_cub3d *cub3d)
 
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.win || !cub3d->mlx.img)
 		return (0);
-	
 	current_time = gettime_ms();
 	if ((current_time - cub3d->time.last_refresh) >= (1000 / FPS))
 	{
-		update_delta_time_from_timestamp(cub3d, current_time);
+		update_delta_time(cub3d, current_time);
 		handle_movement(cub3d);
 		handle_direction(cub3d);
 		check_any_key_pressed(cub3d);
