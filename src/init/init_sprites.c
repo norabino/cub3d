@@ -17,10 +17,12 @@ void	init_depth_buffer(t_cub3d *cub3d)
 {
 	int	i;
 
-	i = 0;
 	cub3d->depth_buffer.buffer = malloc(sizeof(double) * SCREEN_WIDTH);
+	if (!cub3d->depth_buffer.buffer)
+		exit_error("Failed to allocate depth buffer", cub3d);
+	i = 0;
 	while (i < SCREEN_WIDTH)
-		cub3d->depth_buffer.buffer[i++] = 999999;
+		cub3d->depth_buffer.buffer[i++] = 999999.0;
 }
 
 void	init_sprites(t_cub3d *cub3d)

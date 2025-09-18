@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 19:52:23 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:54:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ void	collect_portal_sprites(t_cub3d *cub3d)
 
 	i = 0;
 	if (!cub3d->sprites)
+	{
 		cub3d->sprites = malloc(sizeof(t_sprite) * MAX_SPRITES);
+		if (!cub3d->sprites)
+			exit_error("Failed to allocate sprite memory", cub3d);
+	}
 	cub3d->sprite_count = 0;
 	if (!cub3d->tp_portals || cub3d->nb_portals <= 0)
 		return ;

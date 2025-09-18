@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 19:14:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:54:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ void	free_sprites(t_cub3d *cub3d)
 		secure_free((void **)&cub3d->sprites);
 	cub3d->sprite_count = 0;
 	if (cub3d->depth_buffer.buffer)
+	{
 		secure_free((void **)&cub3d->depth_buffer.buffer);
+		cub3d->depth_buffer.buffer = NULL;
+	}
 }

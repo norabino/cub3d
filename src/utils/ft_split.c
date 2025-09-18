@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:43 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:18:48 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 20:54:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_build_line(char *str, int *s, int *e, char *c)
 void	ft_free_dst(char ***dst, int *i)
 {
 	while ((*i)--)
-		free(*dst[*i]);
+		free((*dst)[*i]);
 	free(*dst);
 }
 
