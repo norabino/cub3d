@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 14:11:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:45:39 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
 }
 
 /* Dessine une ligne verticale complète à l'écran : mur + sol + plafond */
-void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
+void	render_ray_result(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	t_dda *dda)
 {
 	int				draw_start;

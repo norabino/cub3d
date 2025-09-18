@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:39:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ typedef struct s_sprite_render_data
 	t_txt_i	*current_texture;
 }	t_sprite_render_data;
 
-typedef struct s_zbuffer
+typedef struct s_depth_buffer
 {
 	double	*buffer;
 	int		width;
-}	t_zbuffer;
+}	t_depth_buffer;
 
 typedef struct s_portal
 {
@@ -250,7 +250,7 @@ typedef struct s_cub3d
 	t_prtl			*tp_portals;
 	t_prtl_sprite	prtl_sprites;
 	t_sprite		*sprites;
-	t_zbuffer		zbuffer;
+	t_depth_buffer		depth_buffer;
 	int				sprite_count;
 	int				portals[26];
 	int				nb_portals;

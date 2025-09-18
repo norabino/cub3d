@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:53:27 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 22:36:25 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:17:13 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_check_invalid_line(t_cub3d *cub3d, int *idx)
 	int	j;
 
 	i = 0;
-	while (cub3d->file[*idx] && !ft_strchr(cub3d->file[*idx], '1'))
+	while (cub3d->file[*idx] && !ft_search(cub3d->file[*idx], '1'))
 		(*idx)++;
 	while (i < *idx)
 	{

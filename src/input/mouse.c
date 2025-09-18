@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 22:21:39 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:56:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	handle_mouse_move(int x, int y, t_cub3d *cub3d)
 	double	mouse_sensitivity;
 
 	(void)y;
-	if (!cub3d->mouse.captured)
-		return (0);
 	delta_x = x - cub3d->mouse.last_x;
 	if (delta_x == 0)
 		return (0);

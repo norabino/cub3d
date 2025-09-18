@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 16:17:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:39:34 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	is_transparent_color(int color)
 }
 
 /* Update z-buffer for depth testing */
-void	update_zbuffer(t_cub3d *cub3d, int x, double distance)
+void	update_depth_buffer(t_cub3d *cub3d, int x, double distance)
 {
-	if (x >= 0 && x < SCREEN_WIDTH && distance < cub3d->zbuffer.buffer[x])
-		cub3d->zbuffer.buffer[x] = distance;
+	if (x >= 0 && x < SCREEN_WIDTH && distance < cub3d->depth_buffer.buffer[x])
+		cub3d->depth_buffer.buffer[x] = distance;
 }
 
 /* Draw a pixel with transparency check */

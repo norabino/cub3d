@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 16:10:40 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:11:49 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static void	parse_color_values(t_cub3d *cub3d, char *line, int j, int z)
 	j += skip_letter(line[z], line[j + 1]);
 	skip_spaces(line, &j);
 	split = ft_split(&line[j], ',');
-	if (!split)
-		exit_error("Memory allocation error for color split", cub3d);
 	assign_color_values(cub3d, split, line[z]);
 	free_map(split);
 }
@@ -70,7 +68,7 @@ int	parse_color_line(t_cub3d *cub3d, int i)
 	skip_spaces(cub3d->file[i], &j);
 	if ((cub3d->file[i][j] == 'C' || cub3d->file[i][j] == 'F'))
 	{
-		if (strstr(cub3d->file[i], ".xpm"))
+		if (ft_strstr(cub3d->file[i], ".xpm"))
 			return (-1);
 		color_duplicate(cub3d, cub3d->file[i][j], j);
 		z = j;

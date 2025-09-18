@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 14:24:12 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:54:23 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ void	init_colors(t_cub3d *cub3d);
 void	init_minilibx(t_cub3d *cub3d);
 void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc);
 void	init_mouse(t_cub3d *cub3d);
-void	init_prtl_sprites(t_cub3d *cub3d);
 void	init_sprites(t_cub3d *cub3d);
 void	init_sprites_struct(t_cub3d *cub3d);
 void	init_time(t_cub3d *cub3d);
 void	init_view(t_cub3d *cub3d);
-void	init_zbuffer(t_cub3d *cub3d);
 
 // --- Memory Management ---
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -170,7 +168,7 @@ void	raycast(t_cub3d *cub3d);
 
 // --- Wall Rendering ---
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end);
-void	draw_wall_slice(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
+void	render_ray_result(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 			t_dda *dda);
 
 // --- Floor/Ceiling Rendering ---
@@ -217,7 +215,7 @@ void	render_sprites(t_cub3d *cub3d);
 void	sort_sprites_by_distance(t_cub3d *cub3d);
 
 // --- Z-Buffer Management ---
-void	update_zbuffer(t_cub3d *cub3d, int x, double distance);
+void	update_depth_buffer(t_cub3d *cub3d, int x, double distance);
 
 // --- Color Utilities ---
 int		is_transparent_color(int color);
@@ -250,7 +248,7 @@ int		count_portal_frames(t_cub3d *cub3d);
 int		init_portal_arrays(t_cub3d *cub3d);
 void	load_all_textures(t_cub3d *cub3d);
 int		load_portal_texture(t_cub3d *cub3d);
-int		load_portal_textures_part2(t_cub3d *cub3d);
+int		load_portal_texture_bis(t_cub3d *cub3d);
 int		load_texture(t_cub3d *cub3d, t_txt_i *tex_img, char *path);
 
 // --- Texture Calculations ---
@@ -320,6 +318,8 @@ char	*ft_strcpy(char *dest, char *str);
 char	*ft_strdup(char *s);
 char	*ft_strndup(char *str, int n);
 int		ft_tablen(char **tab);
+char	*ft_strstr(char *str, char *finder);
+int		ft_search(char *str, char search);
 
 // --- Character Validation ---
 int		ft_isdigit(char c);

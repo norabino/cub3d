@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 14:04:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:35:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,5 @@ int	load_portal_texture(t_cub3d *cub3d)
 		return (0);
 	if (!init_portal_arrays(cub3d))
 		return (0);
-	return (load_portal_textures_part2(cub3d));
-}
-
-void	init_prtl_sprites(t_cub3d *cub3d)
-{
-	if (cub3d->nb_portals > 0)
-		load_portal_texture(cub3d);
+	return (load_portal_texture_bis(cub3d));
 }

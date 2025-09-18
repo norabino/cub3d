@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 16:03:38 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:06:01 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	all_text_set(t_cub3d *cub3d)
 	if (!cub3d->textures.north || !cub3d->textures.south
 		|| !cub3d->textures.west || !cub3d->textures.east)
 		return (0);
+		// a check
 	if (!check_extension(cub3d->textures.north, ".xpm"))
 		exit_error("Wrong north texture extension.", cub3d);
 	if (!check_extension(cub3d->textures.south, ".xpm"))

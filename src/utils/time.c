@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/09 22:46:02 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:03:20 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ long	gettime_ms(void)
 /* Limite les FPS à une valeur maximum définie */
 int	limit_fps(t_cub3d *cub3d)
 {
-	if ((gettime_ms() - cub3d->time.last_refresh) >= (1000 / FPS))
+	long	current_time;
+
+	current_time = gettime_ms();
+	if ((current_time - cub3d->time.last_refresh) >= (1000 / FPS))
+	{
+		cub3d->time.last_refresh = current_time;
 		return (1);
+	}
 	return (0);
 }
 

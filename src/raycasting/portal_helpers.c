@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 00:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 14:04:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:35:52 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	init_portal_arrays(t_cub3d *cub3d)
 	return (1);
 }
 
-int	load_portal_textures_part2(t_cub3d *cub3d)
+int	load_portal_texture_bis(t_cub3d *cub3d)
 {
 	int	i;
 

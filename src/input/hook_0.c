@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   hook_0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:54:26 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/08 19:10:50 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:47:57 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /* Gère la fermeture du programme (bouton X de la fenêtre) */
 int	handle_close(t_cub3d *cub3d)
 {
-	if (!cub3d)
-		exit(1);
 	ft_free(cub3d);
 	exit(0);
 	return (0);
@@ -25,8 +23,6 @@ int	handle_close(t_cub3d *cub3d)
 /* Gère l'appui sur une touche du clavier */
 int	handle_keypress(int keycode, t_cub3d *cub3d)
 {
-	if (!cub3d)
-		return (0);
 	if (keycode == KEY_ESC)
 		handle_close(cub3d);
 	if (keycode < 256)
@@ -41,8 +37,6 @@ int	handle_keypress(int keycode, t_cub3d *cub3d)
 /* Gère le relâchement d'une touche du clavier */
 int	handle_keyrelease(int keycode, t_cub3d *cub3d)
 {
-	if (!cub3d)
-		return (0);
 	if (keycode < 256)
 		cub3d->input_state[keycode] = 0;
 	else if (keycode == KEY_LEFT)
