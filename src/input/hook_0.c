@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hook_0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 11:54:26 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 17:47:57 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:53:22 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Gère la fermeture du programme (bouton X de la fenêtre) */
 int	handle_close(t_cub3d *cub3d)
 {
 	ft_free(cub3d);
@@ -20,7 +19,6 @@ int	handle_close(t_cub3d *cub3d)
 	return (0);
 }
 
-/* Gère l'appui sur une touche du clavier */
 int	handle_keypress(int keycode, t_cub3d *cub3d)
 {
 	if (keycode == KEY_ESC)
@@ -34,7 +32,6 @@ int	handle_keypress(int keycode, t_cub3d *cub3d)
 	return (0);
 }
 
-/* Gère le relâchement d'une touche du clavier */
 int	handle_keyrelease(int keycode, t_cub3d *cub3d)
 {
 	if (keycode < 256)

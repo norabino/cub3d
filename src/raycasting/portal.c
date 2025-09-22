@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:20:24 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:35:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:55:44 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	is_portal(t_cub3d *cub3d)
 	return (0);
 }
 
-/* Effectue la téléportation du joueur via un portail */
 void	teleportation(t_cub3d *cub3d, t_prtl portal)
 {
 	t_point	new;
@@ -87,7 +86,6 @@ void	teleportation(t_cub3d *cub3d, t_prtl portal)
 	cub3d->player.last_prtl_pos = new;
 }
 
-/* Charge la texture d'un portail dans une sprite */
 int	load_portal_texture(t_cub3d *cub3d)
 {
 	if (!try_to_open(cub3d->textures.portals))

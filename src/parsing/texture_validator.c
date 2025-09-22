@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   texture_validator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/17 21:50:22 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:55:16 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Valide toutes les textures présentes dans le fichier de configuration */
 int	validate_all_textures(t_cub3d *cub3d, int *idx)
 {
 	int	i;

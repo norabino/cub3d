@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:25:18 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 01:29:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:55:33 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	free_portal_paths(t_cub3d *cub3d)
 	}
 }
 
-/* Met à jour les animations des portails */
 void	update_portal_animations(t_cub3d *cub3d)
 {
 	int		i;

@@ -12,7 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-/* Sélectionne la texture animée d'un portail spécifique */
 void	select_prtl_texture(t_cub3d *cub3d, t_texture_calc *tex_calc,
 		char map_char)
 {

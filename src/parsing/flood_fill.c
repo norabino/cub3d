@@ -12,7 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-/* Teste si une zone est fermée avec l'algorithme de flood fill */
 int	flood_fill_z(char ***map, t_point here, char to_fill)
 {
 	if (here.y < 0 || here.x < 0)
@@ -30,7 +29,6 @@ int	flood_fill_z(char ***map, t_point here, char to_fill)
 	return (1);
 }
 
-/* Remplit une zone avec une nouvelle couleur et vérifie les limites */
 int	flood_fill(char ***map, t_point here, char to_f, char new)
 {
 	if (here.y < 0 || here.x < 0)
@@ -56,7 +54,6 @@ int	flood_fill(char ***map, t_point here, char to_f, char new)
 	return (1);
 }
 
-/* Vérifie que toutes les cases autour sont des murs ou marquées */
 int	check_adjacent(int y, int x, char **map, char new)
 {
 	if (x <= 0 || !map[y] || x >= ft_strlen(map[y]) - 1)
@@ -78,7 +75,6 @@ int	check_adjacent(int y, int x, char **map, char new)
 	return (1);
 }
 
-/* Cherche le joueur sur la carte et retourne sa position */
 t_point	find_player_position(t_cub3d *cub3d, char **map)
 {
 	int	y;

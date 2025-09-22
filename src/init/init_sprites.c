@@ -12,7 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-/* Initialize sprite system */
 void	init_depth_buffer(t_cub3d *cub3d)
 {
 	int	i;

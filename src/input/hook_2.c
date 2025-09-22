@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hook_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:31:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 18:15:45 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:53:37 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Boucle principale du jeu qui s'exécute en continu */
 int	handle_loop(t_cub3d *cub3d)
 {
 	long	current_time;
@@ -35,7 +34,6 @@ int	handle_loop(t_cub3d *cub3d)
 	return (0);
 }
 
-/* Vérifie si une touche du clavier est actuellement pressée */
 int	check_any_key_pressed(t_cub3d *cub3d)
 {
 	int	i;
@@ -52,7 +50,6 @@ int	check_any_key_pressed(t_cub3d *cub3d)
 	return (0);
 }
 
-/* Rafraîchit l'image à l'écran */
 void	refresh_image(t_cub3d *cub3d)
 {
 	if (!cub3d || !cub3d->mlx.mlx || !cub3d->mlx.win || !cub3d->mlx.img)

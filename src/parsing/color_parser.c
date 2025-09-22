@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 20:58:31 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:11:49 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:54:08 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include <string.h>
 
-/* Assigne les valeurs de couleur selon le type (C ou F) */
 void	assign_color_values(t_cub3d *cub3d, char **split, char c)
 {
 	if (c == 'C')
@@ -22,7 +21,6 @@ void	assign_color_values(t_cub3d *cub3d, char **split, char c)
 		set_floor(cub3d, split);
 }
 
-/* Valide qu'il n'y a pas de couleur dupliquée */
 static void	color_duplicate(t_cub3d *cub3d, char c, int i)
 {
 	if (c == 'C' && cub3d->colors.ceiling[0] != -1)
@@ -37,7 +35,6 @@ static void	color_duplicate(t_cub3d *cub3d, char c, int i)
 	}
 }
 
-/* Parse et valide les valeurs de couleur depuis une ligne */
 static void	parse_color_values(t_cub3d *cub3d, char *line, int j, int z)
 {
 	char	**split;
@@ -49,7 +46,6 @@ static void	parse_color_values(t_cub3d *cub3d, char *line, int j, int z)
 	free_map(split);
 }
 
-/* Valide que toutes les couleurs nécessaires sont définies */
 void	validate_colors_complete(t_cub3d *cub3d)
 {
 	if (!cub3d->textures.ceiling && cub3d->colors.ceiling[0] == -1)
@@ -58,7 +54,6 @@ void	validate_colors_complete(t_cub3d *cub3d)
 		exit_error("Floor color is missing", cub3d);
 }
 
-/* Parse une ligne de couleur et met à jour les structures */
 int	parse_color_line(t_cub3d *cub3d, int i)
 {
 	int	j;

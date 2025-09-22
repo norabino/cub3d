@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 20:17:10 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:55:13 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Extrait le nom de fichier d'une ligne de configuration */
 int	extract_filename_from_line(char *line, int j, char **filename)
 {
 	int	len;
@@ -30,7 +29,6 @@ int	extract_filename_from_line(char *line, int j, char **filename)
 	return (1);
 }
 
-/* Traite un chemin de texture trouvé dans une ligne */
 void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i)
 {
 	char	*filename;
@@ -55,7 +53,6 @@ void	process_texture_path_found(t_cub3d *cub3d, int j, int z, int i)
 	free(filename);
 }
 
-/* Vérifie que toutes les cub3d->textures sont définies et valides */
 int	all_text_set(t_cub3d *cub3d)
 {
 	if (!cub3d->textures.north || !cub3d->textures.south
@@ -64,7 +61,6 @@ int	all_text_set(t_cub3d *cub3d)
 	return (1);
 }
 
-/* Assigne une texture selon son identifiant */
 void	set_texture(char c, int j, char *line, t_cub3d *cub3d)
 {
 	char	*sub;

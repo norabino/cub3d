@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/15 19:28:31 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:56:09 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Prépare les paramètres de base pour l'algorithme DDA */
 void	init_dda_params(t_cub3d *cub3d, double ray_dir_x, double ray_dir_y,
 	t_dda *dda)
 {
@@ -74,7 +73,6 @@ void	init_step_and_side_dist_y(t_dda *dda, double ray_dir_y,
 	}
 }
 
-/* Exécute l'algorithme DDA pour trouver où le rayon touche un mur */
 void	perform_dda_algorithm(t_cub3d *cub3d, t_dda *dda)
 {
 	int	max_iterations;

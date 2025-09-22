@@ -44,7 +44,6 @@ t_prtl	find_a_portal(t_cub3d *cub3d, char **map)
 	return ((t_prtl){0, {-1, -1}, {-1, -1}});
 }
 
-/* Initialise les portails dans la structure du jeu */
 void	set_prtls(t_cub3d *cub3d)
 {
 	int	i;

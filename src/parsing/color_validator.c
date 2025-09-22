@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   color_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:40:54 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 16:10:22 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:54:14 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Valide toutes les couleurs du fichier de configuration */
 int	validate_all_colors(t_cub3d *cub3d, int *idx)
 {
 	int	i;
@@ -31,7 +30,6 @@ int	validate_all_colors(t_cub3d *cub3d, int *idx)
 	return (1);
 }
 
-/* Définit la couleur du plafond */
 void	set_ceiling(t_cub3d *cub3d, char **split)
 {
 	int	i;
@@ -53,7 +51,6 @@ void	set_ceiling(t_cub3d *cub3d, char **split)
 	}
 }
 
-/* Définit la couleur du sol */
 void	set_floor(t_cub3d *cub3d, char **split)
 {
 	int	i;

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/22 16:03:27 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:53:53 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Prépare une copie de la carte pour les vérifications */
 static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 {
 	t_point	player_pos;
@@ -27,7 +26,6 @@ static void	prepare_map(t_cub3d *cub3d, char ***work_map)
 	replace_portals_by_zero(work_map);
 }
 
-/* Teste si une zone de la carte est accessible avec flood fill */
 static int	process_flood(t_cub3d *cub3d, char **work_map)
 {
 	t_point	*p;
@@ -47,7 +45,6 @@ static int	process_flood(t_cub3d *cub3d, char **work_map)
 	return (0);
 }
 
-/* Vérifie la validité des portails sur la carte */
 void	ft_check_portals(t_cub3d *cub3d)
 {
 	int	x;
@@ -73,7 +70,6 @@ void	ft_check_portals(t_cub3d *cub3d)
 	check_correspondance(cub3d);
 }
 
-/* Vérifie que toutes les zones de la carte sont bien fermées */
 int	ft_check_map_valid(t_cub3d *cub3d)
 {
 	char	**work_map;
@@ -94,7 +90,6 @@ int	ft_check_map_valid(t_cub3d *cub3d)
 	return (1);
 }
 
-/* Extrait et stocke la carte depuis le fichier de configuration */
 int	ft_check_map(t_cub3d *cub3d, int *idx_line)
 {
 	int	begin;

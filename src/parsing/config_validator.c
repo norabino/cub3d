@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/22 16:32:16 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:54:20 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	set_direction(t_cub3d *cub3d, char dir)
 	}
 }
 
-/* Valide un fichier de configuration .cub complet */
 int	validate_config_file(t_cub3d *cub3d)
 {
 	int	idx_line;
