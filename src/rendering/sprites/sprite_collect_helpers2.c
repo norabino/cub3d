@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 19:21:10 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 19:19:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_raycast_collision(t_cub3d *cub3d, double current_x,
 {
 	char	cell;
 
-	cell = cub3d->map[(int)current_y][(int)current_x];
+	cell = safe_map_access(cub3d, (int)current_y, (int)current_x);
 	if (cell == '1')
 	{
 		if (!*hit_portal)

@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/22 16:41:04 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 19:19:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 
 	if (!tex_calc)
 		return ;
-	map_char = cub3d->map[(int)dda->map_y][(int)dda->map_x];
+	map_char = safe_map_access(cub3d, (int)dda->map_y, (int)dda->map_x);
 	tex_calc->is_portal = 0;
 	if (is_lowercase(map_char))
 		select_prtl_texture(cub3d, tex_calc, map_char);

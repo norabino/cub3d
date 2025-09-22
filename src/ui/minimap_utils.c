@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/22 18:03:56 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 19:19:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 		return (0);
 	if ((int)world_x >= ft_strlen(cub3d->map[(int)world_y]))
 		return (0);
-	return (is_lowercase(cub3d->map[(int)world_y][(int)world_x]));
+	return (is_lowercase(safe_map_access(cub3d, (int)world_y, (int)world_x)));
 }
 
 void	calculate_world_pos(double *world_x, double *world_y,

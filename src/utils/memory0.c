@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:04:37 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/22 18:21:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 19:19:44 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,16 @@ void	ft_bzero(void *s, int n)
 char	*ft_strdup(char *s)
 {
 	char	*res;
+	int		len;
 
-	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	res = malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (NULL);
 	ft_strcpy(res, s);
+	res[len] = '\0';
 	return (res);
 }
 

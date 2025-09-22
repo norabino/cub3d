@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/22 18:04:21 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 19:19:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 		return (0);
 	if ((int)world_x >= (int)ft_strlen(cub3d->map[(int)world_y]))
 		return (0);
-	return (cub3d->map[(int)world_y][(int)world_x] == '1');
+	return (safe_map_access(cub3d, (int)world_y, (int)world_x) == '1');
 }
 
 void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)

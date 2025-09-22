@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/22 16:25:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 19:19:46 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_wall_at_position(t_cub3d *cub3d, double x, double y)
 
 	if (check_map_bounds(cub3d, x, y))
 		return (1);
-	cell = cub3d->map[(int)y][(int)x];
+	cell = safe_map_access(cub3d, (int)y, (int)x);
 	return (cell == '1');
 }
 
