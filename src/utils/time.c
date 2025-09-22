@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/22 18:20:28 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:59:50 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	limit_fps(t_cub3d *cub3d)
 	}
 	return (0);
 }
-
 
 void	calculate_fps(t_cub3d *cub3d)
 {
