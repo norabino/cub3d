@@ -85,7 +85,6 @@ UI_SRC = \
 
 # Utility functions
 UTILS_SRC = \
-	src/utils/fps_utils.c \
 	src/utils/free.c \
 	src/utils/ft_split.c \
 	src/utils/map_utils.c \
