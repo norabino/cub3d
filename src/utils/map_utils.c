@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils_3.c                                      :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:07:42 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:21:33 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Vérifie s'il y a des zéros adjacents à une position */
 int	check_adjacent_zeros(char **map, int y, int x)
 {
 	if (map[y] && map[y][x + 1] && map[y][x + 1] == '0')
@@ -26,7 +25,6 @@ int	check_adjacent_zeros(char **map, int y, int x)
 	return (0);
 }
 
-/* Cherche un caractère donné dans la carte de travail */
 t_point	*check_char_remaining(char **work_map, char c)
 {
 	int		y;
@@ -56,7 +54,6 @@ t_point	*check_char_remaining(char **work_map, char c)
 	return (NULL);
 }
 
-/* Normalise la carte en marquant les murs et espaces adjacents */
 void	normalize_map(char **trash)
 {
 	t_point	*p;
@@ -81,7 +78,6 @@ void	normalize_map(char **trash)
 		free(p);
 }
 
-/* Compte le nombre d'îlots séparés dans la carte */
 int	count_islands(t_cub3d *cub3d, char **work_map)
 {
 	int		nb_islands;
@@ -109,7 +105,6 @@ int	count_islands(t_cub3d *cub3d, char **work_map)
 	return (nb_islands);
 }
 
-/* Retourne la valeur absolue d'un nombre à virgule flottante */
 double	ft_abs(double nb)
 {
 	if (nb < 0)

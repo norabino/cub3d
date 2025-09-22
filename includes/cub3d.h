@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:42:44 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 20:54:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 17:53:25 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,7 @@ void	draw_minimap_pixel(t_cub3d *cub3d, t_pixel_draw *pixel);
 void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y);
 void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y);
 void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y);
-void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw);
+void	init_player_arrow_pattern(int pattern[8][9]);
 
 // --- Geometric Utilities ---
 int		get_triangle_half_width(int y);

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 21:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:03:56 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Vérifie si une position est un portail dans la carte */
 int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 {
 	if (world_x < 0 || world_y < 0)
@@ -26,7 +25,6 @@ int	is_portal_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 	return (is_lowercase(cub3d->map[(int)world_y][(int)world_x]));
 }
 
-/* Calcule la position mondiale à partir des coordonnées d'écran */
 void	calculate_world_pos(double *world_x, double *world_y,
 	t_minimap_calc *calc, t_minimap_screen *screen)
 {
@@ -41,7 +39,6 @@ void	calculate_world_pos(double *world_x, double *world_y,
 			+ relative_y * calc->cos_angle);
 }
 
-/* Initialise les calculs pour la minimap */
 void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc)
 {
 	double	player_angle;
@@ -53,7 +50,6 @@ void	init_minimap_calc(t_cub3d *cub3d, t_minimap_calc *calc)
 	calc->sin_angle = sin(player_angle);
 }
 
-/* Vérifie si un point est dans le cercle de la minimap */
 int	is_point_in_circle(int x, int y, int radius)
 {
 	int	dx;

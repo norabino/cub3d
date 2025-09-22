@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:33:35 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 22:48:24 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:03:27 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ft_check_map(t_cub3d *cub3d, int *idx_line)
 	begin = *idx_line;
 	while (cub3d->file[*idx_line])
 		(*idx_line)++;
-	cub3d->map = calloc((*idx_line) - begin + 2, sizeof(char *));
+	cub3d->map = ft_calloc((*idx_line) - begin + 2, sizeof(char *));
 	(*idx_line) = 0;
 	while (cub3d->file[*idx_line + begin])
 	{

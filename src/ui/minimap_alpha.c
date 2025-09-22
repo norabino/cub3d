@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 22:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 13:59:04 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:02:40 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Lit la couleur d'un pixel existant dans l'image */
 int	get_pixel_color(t_img *img, int x, int y)
 {
 	char	*dst;
@@ -23,7 +22,6 @@ int	get_pixel_color(t_img *img, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-/* Applique un alpha blending entre deux couleurs */
 int	alpha_blend(int bg_color, int fg_color, double alpha)
 {
 	int	alpha_int;
@@ -36,37 +34,46 @@ int	alpha_blend(int bg_color, int fg_color, double alpha)
 	return (result);
 }
 
-/* Calcule la largeur pour une ligne donnée du triangle */
-static int	get_triangle_width_for_row(int y)
+int	blend_color_component(int bg_color, int fg_color, int alpha_int,
+		int inv_alpha)
 {
-	int	row_index;
+	int	bg_rgb[3];
+	int	fg_rgb[3];
+	int	result;
 
-	if (y < -9 || y > 0)
-		return (0);
-	row_index = y + 9;
-	if (row_index == 0 || row_index == 1)
-		return (1);
-	else if (row_index == 2 || row_index == 3)
-		return (3);
-	else if (row_index == 4 || row_index == 5)
-		return (5);
-	else if (row_index == 6 || row_index == 7)
-		return (7);
-	else
-		return (9);
+	bg_rgb[0] = (bg_color >> 16) & 0xFF;
+	bg_rgb[1] = (bg_color >> 8) & 0xFF;
+	bg_rgb[2] = bg_color & 0xFF;
+	fg_rgb[0] = (fg_color >> 16) & 0xFF;
+	fg_rgb[1] = (fg_color >> 8) & 0xFF;
+	fg_rgb[2] = fg_color & 0xFF;
+	bg_rgb[0] = (fg_rgb[0] * alpha_int + bg_rgb[0] * inv_alpha) >> 8;
+	bg_rgb[1] = (fg_rgb[1] * alpha_int + bg_rgb[1] * inv_alpha) >> 8;
+	bg_rgb[2] = (fg_rgb[2] * alpha_int + bg_rgb[2] * inv_alpha) >> 8;
+	result = (bg_rgb[0] << 16) | (bg_rgb[1] << 8) | bg_rgb[2];
+	return (result);
 }
 
-/* Vérifie si le pixel fait partie du contour noir */
-int	is_arrow_border(int x, int y)
+void	draw_minimap_pixel(t_cub3d *cub3d, t_pixel_draw *pixel)
 {
-	int	triangle_width;
-	int	half_width;
+	int		dx;
+	int		dy;
+	double	dist_sq;
 
-	triangle_width = get_triangle_width_for_row(y);
-	if (triangle_width == 0)
-		return (0);
-	half_width = triangle_width / 2;
-	if (y == 0)
-		return (x >= -half_width && x <= half_width);
-	return (x == -half_width || x == half_width);
+	dx = pixel->x - pixel->center_x;
+	dy = pixel->y - pixel->center_y;
+	dist_sq = dx * dx + dy * dy;
+	if (dist_sq <= (MINIMAP_SIZE / 2) * (MINIMAP_SIZE / 2))
+	{
+		if (dist_sq <= (MINIMAP_SIZE / 2 - 2) * (MINIMAP_SIZE / 2 - 2))
+		{
+			my_mlx_pixel_put(cub3d->mlx.img, pixel->x, pixel->y,
+				MINIMAP_COLOR_BG);
+		}
+		else
+		{
+			my_mlx_pixel_put(cub3d->mlx.img, pixel->x, pixel->y,
+				0x000000);
+		}
+	}
 }

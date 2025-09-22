@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:04:21 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Dessine le fond rond gris de la minimap avec contour */
 void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y)
 {
 	int				x;
@@ -38,7 +37,6 @@ void	draw_minimap_background(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
-/* Vérifie si une position est un mur dans la carte */
 static int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 {
 	if (world_x < 0 || world_y < 0)
@@ -52,7 +50,6 @@ static int	is_wall_at_pos(t_cub3d *cub3d, double world_x, double world_y)
 	return (cub3d->map[(int)world_y][(int)world_x] == '1');
 }
 
-/* Dessine les murs de la carte sur la minimap */
 void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 {
 	t_minimap_calc		calc;
@@ -81,7 +78,6 @@ void	draw_minimap_walls(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
-/* Dessine les portails sur la minimap en couleur bleu */
 void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y)
 {
 	t_minimap_calc		calc;
@@ -110,7 +106,6 @@ void	draw_minimap_portals(t_cub3d *cub3d, int center_x, int center_y)
 	}
 }
 
-/* Fonction principale qui dessine toute la minimap */
 void	draw_minimap(t_cub3d *cub3d)
 {
 	int	center_x;

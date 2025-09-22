@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 02:22:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:41:04 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Nettoie le chemin d'un fichier en enlevant les espaces */
 static char	*clean_path(char *path)
 {
 	int	len;
@@ -31,7 +30,6 @@ static char	*clean_path(char *path)
 	return (path);
 }
 
-/* Charge une texture depuis un fichier XPM */
 int	load_texture(t_cub3d *cub3d, t_txt_i *tex_img, char *path)
 {
 	char	*clean_path_str;
@@ -53,7 +51,6 @@ int	load_texture(t_cub3d *cub3d, t_txt_i *tex_img, char *path)
 	return (1);
 }
 
-/* Charge toutes les textures des 4 murs */
 void	load_all_textures(t_cub3d *cub3d)
 {
 	if (!load_texture(cub3d, &cub3d->textures.north_img,
@@ -76,7 +73,6 @@ void	load_all_textures(t_cub3d *cub3d)
 		exit_error("Error: Failed to load ceiling texture", cub3d);
 }
 
-/* Libère la mémoire de toutes les textures */
 void	free_textures(t_cub3d *cub3d)
 {
 	if (!cub3d || !cub3d->mlx.mlx)
@@ -95,7 +91,6 @@ void	free_textures(t_cub3d *cub3d)
 		mlx_destroy_image(cub3d->mlx.mlx, cub3d->textures.ceiling_img.img);
 }
 
-/* Choisit la bonne texture selon la direction du mur */
 void	select_wall_texture(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc)
 {

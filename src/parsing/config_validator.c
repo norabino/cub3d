@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:43:09 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:08:55 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:32:16 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ int	validate_config_file(t_cub3d *cub3d)
 	set_direction(cub3d, cub3d->player.dir);
 	cub3d->player.pos_x = (double)cub3d->player.pos_x + 0.5;
 	cub3d->player.pos_y = (double)cub3d->player.pos_y + 0.5;
-	cub3d->player.fov = FOV;
 	return (1);
 }

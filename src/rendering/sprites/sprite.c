@@ -6,13 +6,18 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 18:23:30 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:24:19 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-/* Main sprite rendering function */
+void	update_depth_buffer(t_cub3d *cub3d, int x, double distance)
+{
+	if (x >= 0 && x < SCREEN_WIDTH && distance < cub3d->depth_buffer.buffer[x])
+		cub3d->depth_buffer.buffer[x] = distance;
+}
+
 void	render_sprites(t_cub3d *cub3d)
 {
 	int				i;

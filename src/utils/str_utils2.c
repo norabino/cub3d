@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:45:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 23:02:21 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:23:18 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Convertit une chaîne en entier avec validation */
 int	ft_atoi(char *str)
 {
 	int	res;
@@ -42,7 +41,6 @@ int	ft_atoi(char *str)
 	return (res * sign);
 }
 
-/* Vérifie si un caractère appartient à la carte (mur ou espace vide) */
 int	in_map(char c)
 {
 	if (c == '1' || c == '0')
@@ -50,7 +48,6 @@ int	in_map(char c)
 	return (0);
 }
 
-/* Vérifie si un caractère est une position de départ du joueur */
 int	is_player_spawn(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
@@ -58,7 +55,6 @@ int	is_player_spawn(char c)
 	return (0);
 }
 
-/* Vérifie qu'il y a exactement une position de départ sur la carte */
 void	ft_check_letter(t_cub3d *cub3d)
 {
 	int	y;

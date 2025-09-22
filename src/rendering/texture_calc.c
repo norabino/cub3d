@@ -12,7 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-/* Calcule les coordonnées de texture pour mapper une image sur un mur */
 void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
 	t_texture_calc *tex_calc, double perp_wall_dist)
 {
@@ -31,7 +30,6 @@ void	calc_texture_coordinates(t_cub3d *cub3d, t_dda *dda,
 		tex_calc->tex_x = tex_calc->current_text->width - tex_calc->tex_x - 1;
 }
 
-/* Récupère la couleur d'un pixel dans une texture */
 int	get_texture_pixel_color(t_txt_i *texture, int x, int y)
 {
 	int	offset;
@@ -44,7 +42,6 @@ int	get_texture_pixel_color(t_txt_i *texture, int x, int y)
 	return (*(int *)(texture->addr + offset));
 }
 
-/* Dessine une colonne verticale de mur avec sa texture */
 void	draw_textured_wall_pixels(t_cub3d *cub3d, int screen_x,
 	t_texture_calc *tex_calc, int draw_params[2])
 {

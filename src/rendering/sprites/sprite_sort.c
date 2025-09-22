@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 15:50:36 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:29:12 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-/* Swap two sprites */
 static void	swap_sprites(t_sprite *a, t_sprite *b)
 {
 	t_sprite	temp;
@@ -22,7 +21,6 @@ static void	swap_sprites(t_sprite *a, t_sprite *b)
 	*b = temp;
 }
 
-/* Sort sprites by distance using bubble sort (back to front) */
 void	sort_sprites_by_distance(t_cub3d *cub3d)
 {
 	int	i;

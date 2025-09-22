@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 23:02:47 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:20:23 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:23:37 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Copie une chaîne dans une autre */
 char	*ft_strcpy(char *dest, char *str)
 {
 	int	i;
@@ -27,7 +26,6 @@ char	*ft_strcpy(char *dest, char *str)
 	return (dest);
 }
 
-/* Concatène une chaîne à la fin d'une autre */
 char	*ft_strcat(char *dest, char *src)
 {
 	int	i;

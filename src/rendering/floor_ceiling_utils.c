@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:50:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 02:22:18 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:36:08 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Rend un pixel de sol ou plafond avec texture */
 void	render_fc_pixel(t_cub3d *cub3d, int screen_x, int y,
 	t_txt_i *texture)
 {
@@ -42,7 +41,6 @@ void	render_fc_pixel(t_cub3d *cub3d, int screen_x, int y,
 	apply_fc_texture(cub3d, texture, &coords);
 }
 
-/* Applique une texture au sol ou plafond */
 void	apply_fc_texture(t_cub3d *cub3d, t_txt_i *texture,
 	t_fc_coords *coords)
 {

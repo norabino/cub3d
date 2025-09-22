@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils_0.c                                      :+:      :+:    :+:   */
+/*   str_utils0.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:55:14 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/09 23:08:01 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:22:56 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Copie n caractères d'une chaîne vers une nouvelle chaîne */
 char	*ft_strndup(char *str, int n)
 {
 	char	*tab;
@@ -33,7 +32,6 @@ char	*ft_strndup(char *str, int n)
 	return (tab);
 }
 
-/* Compte le nombre de lignes dans un tableau de chaînes */
 int	ft_tablen(char **tab)
 {
 	int	i;
@@ -44,7 +42,6 @@ int	ft_tablen(char **tab)
 	return (i);
 }
 
-/* Compare deux chaînes pour vérifier si elles sont identiques */
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -55,7 +52,6 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-/* Détermine le nombre de caractères à ignorer selon l'identifiant */
 int	skip_letter(char current, char next)
 {
 	if (current == 'N' && next == 'O')

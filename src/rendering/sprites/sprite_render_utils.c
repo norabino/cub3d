@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_render_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:46:46 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:28:27 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-/* Draw a pixel with transparency check */
 void	draw_transparent_pixel(t_cub3d *cub3d, int x, int y, int color)
 {
 	if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
@@ -22,7 +21,7 @@ void	draw_transparent_pixel(t_cub3d *cub3d, int x, int y, int color)
 }
 
 /* Check depth buffer for occlusion */
-static int	is_pixel_occluded(t_cub3d *cub3d, int x, double sprite_distance)
+static int	is_pixel_hidden(t_cub3d *cub3d, int x, double sprite_distance)
 {
 	if (!cub3d->depth_buffer.buffer || x < 0 || x >= SCREEN_WIDTH)
 		return (0);
@@ -31,7 +30,6 @@ static int	is_pixel_occluded(t_cub3d *cub3d, int x, double sprite_distance)
 	return (0);
 }
 
-/* Render a single sprite pixel */
 static void	render_sprite_pixel(t_cub3d *cub3d, t_sprite_render_data *data,
 	int tex_y, int y)
 {
@@ -47,7 +45,6 @@ static void	render_sprite_pixel(t_cub3d *cub3d, t_sprite_render_data *data,
 	}
 }
 
-/* Render sprite column pixels */
 static void	render_sprite_column_pixels(t_cub3d *cub3d, t_sprite_calc *calc,
 	t_sprite_render_data *render_data, double sprite_distance)
 {
@@ -57,7 +54,7 @@ static void	render_sprite_column_pixels(t_cub3d *cub3d, t_sprite_calc *calc,
 	y = calc->draw_start_y;
 	while (y < calc->draw_end_y)
 	{
-		if (is_pixel_occluded(cub3d, render_data->x, sprite_distance))
+		if (is_pixel_hidden(cub3d, render_data->x, sprite_distance))
 		{
 			y++;
 			continue ;
@@ -84,7 +81,5 @@ void	render_sprite_column(t_cub3d *cub3d, t_sprite_calc *calc,
 		render_data->tex_x = render_data->current_texture->width - 1;
 	if (render_data->x >= 0 && render_data->x < SCREEN_WIDTH
 		&& calc->transform_y > 0.1)
-	{
 		render_sprite_column_pixels(cub3d, calc, render_data, sprite_distance);
-	}
 }

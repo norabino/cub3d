@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 18:15:25 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:20:28 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Obtient le temps actuel en millisecondes */
 long	gettime_ms(void)
 {
 	struct timeval	current_time;
@@ -21,7 +20,6 @@ long	gettime_ms(void)
 	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }
 
-/* Limite les FPS à une valeur maximum définie */
 int	limit_fps(t_cub3d *cub3d)
 {
 	long	current_time;
@@ -35,7 +33,7 @@ int	limit_fps(t_cub3d *cub3d)
 	return (0);
 }
 
-/* Calcule et affiche les FPS actuels */
+
 void	calculate_fps(t_cub3d *cub3d)
 {
 	long	current_time;
@@ -48,14 +46,16 @@ void	calculate_fps(t_cub3d *cub3d)
 	elapsed_time = current_time - cub3d->time.fps_last_time;
 	if (elapsed_time >= 1000)
 	{
-		cub3d->time.current_fps = (double)cub3d->time.fps_frame_count * 1000.0
-			/ elapsed_time;
+		if (elapsed_time > 0)
+		{
+			cub3d->time.current_fps = (double)cub3d->time.fps_frame_count
+				* 1000.0 / elapsed_time;
+		}
 		cub3d->time.fps_frame_count = 0;
 		cub3d->time.fps_last_time = current_time;
 	}
 }
 
-/* Version optimisée qui réutilise un timestamp existant */
 void	update_delta_time(t_cub3d *cub3d, long current_time)
 {
 	static long	last_time = 0;
@@ -64,4 +64,22 @@ void	update_delta_time(t_cub3d *cub3d, long current_time)
 		last_time = current_time;
 	cub3d->time.delta_time = (current_time - last_time) / 1000.0;
 	last_time = current_time;
+}
+
+void	display_fps(t_cub3d *cub3d)
+{
+	char	*temp_str;
+	char	fps_buffer[32];
+	int		fps_int;
+
+	fps_int = (int)(cub3d->time.current_fps + 0.5);
+	ft_strcpy(fps_buffer, "FPS: ");
+	temp_str = ft_itoa(fps_int);
+	if (temp_str)
+	{
+		ft_strcat(fps_buffer, temp_str);
+		free(temp_str);
+		mlx_string_put(cub3d->mlx.mlx, cub3d->mlx.win,
+			SCREEN_WIDTH - 80, 25, 0x00FF00, fps_buffer);
+	}
 }

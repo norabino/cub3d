@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:19:22 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:42:03 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ typedef struct s_player
 	char		dir;
 	float		dir_x;
 	float		dir_y;
-	int			fov;
 	char		direction;
 	t_point		last_prtl_pos;
 }	t_player;
@@ -185,6 +184,8 @@ typedef struct s_minimap_screen
 {
 	int	x;
 	int	y;
+	int	init;
+	int	arrow[8][9];
 }	t_minimap_screen;
 
 typedef struct s_fc_coords
@@ -246,6 +247,7 @@ typedef struct s_cub3d
 	t_textures			textures;
 	t_time				time;
 	t_view				view;
+	t_minimap_screen	mini_map;
 	t_mouse				mouse;
 	t_prtl				*tp_portals;
 	t_prtl_sprite		prtl_sprites;

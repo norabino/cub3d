@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:54:49 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 16:06:53 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:22:42 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Affiche une erreur et termine le programme */
 void	exit_error(char *err, t_cub3d *cub3d)
 {
 	char	*itoa;

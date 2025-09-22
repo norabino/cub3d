@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 17:45:39 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:38:18 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Calcule la hauteur du mur à l'écran et les limites de dessin */
 void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
 {
 	int	line_height;
@@ -30,7 +29,6 @@ void	calc_line_bounds(double perp_wall_dist, int *draw_start, int *draw_end)
 		*draw_end = SCREEN_HEIGHT - 1;
 }
 
-/* Dessine une ligne verticale complète à l'écran : mur + sol + plafond */
 void	render_ray_result(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	t_dda *dda)
 {
@@ -48,4 +46,14 @@ void	render_ray_result(t_cub3d *cub3d, int screen_x, double perp_wall_dist,
 	draw_textured_wall_pixels(cub3d, screen_x, &tex_calc, draw_params);
 	render_fc_textures(cub3d, screen_x, draw_start, draw_end);
 	render_fc_colors(cub3d, screen_x, draw_start, draw_end);
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (!img->addr)
+		return ;
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

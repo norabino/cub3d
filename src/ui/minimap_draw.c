@@ -6,88 +6,86 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 22:30:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 13:55:44 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:03:41 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_minimap_pixel(t_cub3d *cub3d, t_pixel_draw *pixel)
+static void	copy_pattern_row(int *dst, int *src, int size)
 {
-	int	dx;
-	int	dy;
-	int	dist_sq;
-	int	existing_color;
-	int	blended_color;
+	int	i;
+	int	count;
 
-	dx = pixel->x - pixel->center_x;
-	dy = pixel->y - pixel->center_y;
-	dist_sq = dx * dx + dy * dy;
-	if (dist_sq <= (MINIMAP_SIZE / 2) * (MINIMAP_SIZE / 2))
+	count = size / sizeof(int);
+	i = 0;
+	while (i < count)
 	{
-		if (dist_sq <= (MINIMAP_SIZE / 2 - 2) * (MINIMAP_SIZE / 2 - 2))
+		dst[i] = src[i];
+		i++;
+	}
+}
+
+void	init_player_arrow_pattern(int pattern[8][9])
+{
+	copy_pattern_row(pattern[0], (int []){0, 0, 0, 0, 2, 0, 0, 0, 0}, 36);
+	copy_pattern_row(pattern[1], (int []){0, 0, 0, 2, 1, 2, 0, 0, 0}, 36);
+	copy_pattern_row(pattern[2], (int []){0, 0, 0, 2, 1, 2, 0, 0, 0}, 36);
+	copy_pattern_row(pattern[3], (int []){0, 0, 2, 1, 1, 1, 2, 0, 0}, 36);
+	copy_pattern_row(pattern[4], (int []){0, 0, 2, 1, 1, 1, 2, 0, 0}, 36);
+	copy_pattern_row(pattern[5], (int []){0, 2, 1, 1, 1, 1, 1, 2, 0}, 36);
+	copy_pattern_row(pattern[6], (int []){0, 2, 1, 1, 1, 1, 1, 2, 0}, 36);
+	copy_pattern_row(pattern[7], (int []){2, 2, 2, 2, 2, 2, 2, 2, 2}, 36);
+}
+
+static int	get_arrow_pixel_color(t_cub3d *cub3d, int x, int y)
+{
+	if (cub3d->mini_map.arrow[y][x] == 1)
+		return (MINIMAP_COLOR_PLAYER);
+	else if (cub3d->mini_map.arrow[y][x] == 2)
+		return (MINIMAP_COLOR_WALL);
+	return (-1);
+}
+
+static void	draw_arrow_pixel(t_cub3d *cub3d, t_pixel_draw *pixel)
+{
+	int	final_color;
+	int	pixel_x;
+	int	pixel_y;
+
+	final_color = get_arrow_pixel_color(cub3d, pixel->x, pixel->y);
+	if (final_color != -1)
+	{
+		pixel_x = pixel->center_x - 4 + pixel->x;
+		pixel_y = pixel->center_y - 5 + pixel->y;
+		my_mlx_pixel_put(cub3d->mlx.img, pixel_x, pixel_y, final_color);
+	}
+}
+
+void	draw_minimap_player(t_cub3d *cub3d, int center_x, int center_y)
+{
+	t_pixel_draw	pixel;
+	int				y;
+	int				x;
+
+	if (!cub3d->mini_map.init)
+	{
+		init_player_arrow_pattern(cub3d->mini_map.arrow);
+		cub3d->mini_map.init = 1;
+	}
+	pixel.center_x = center_x;
+	pixel.center_y = center_y;
+	y = 0;
+	while (y < 8)
+	{
+		x = 0;
+		while (x < 9)
 		{
-			existing_color = get_pixel_color(cub3d->mlx.img, pixel->x,
-					pixel->y);
-			blended_color = alpha_blend(existing_color, 0x808080, 0.7);
-			my_mlx_pixel_put(cub3d->mlx.img, pixel->x, pixel->y,
-				blended_color);
+			pixel.x = x;
+			pixel.y = y;
+			draw_arrow_pixel(cub3d, &pixel);
+			x++;
 		}
-		else
-			my_mlx_pixel_put(cub3d->mlx.img, pixel->x, pixel->y,
-				MINIMAP_COLOR_BORDER);
+		y++;
 	}
-}
-
-/* Calcule la largeur du triangle pour une ligne donnée */
-int	get_triangle_half_width(int y)
-{
-	int	row_index;
-
-	row_index = y + 9;
-	if (row_index == 0 || row_index == 1)
-		return (0);
-	else if (row_index == 2 || row_index == 3)
-		return (1);
-	else if (row_index == 4 || row_index == 5)
-		return (2);
-	else if (row_index == 6 || row_index == 7)
-		return (3);
-	else
-		return (4);
-}
-
-/* Dessine une ligne du triangle */
-void	draw_triangle_line(t_cub3d *cub3d, t_triangle_draw *draw)
-{
-	int	x;
-
-	x = -draw->half_width;
-	while (x <= draw->half_width)
-	{
-		if (is_arrow_border(x, draw->y))
-			my_mlx_pixel_put(cub3d->mlx.img, draw->center_x + x,
-				draw->center_y + draw->y, MINIMAP_COLOR_WALL);
-		else
-			my_mlx_pixel_put(cub3d->mlx.img, draw->center_x + x,
-				draw->center_y + draw->y, MINIMAP_COLOR_PLAYER);
-		x++;
-	}
-}
-
-// Helper pour le blending des composantes de couleur
-int	blend_color_component(int bg_color, int fg_color, int alpha_int,
-	int inv_alpha)
-{
-	int	bg_r;
-	int	bg_g;
-	int	bg_b;
-
-	bg_r = (bg_color >> 16) & 0xFF;
-	bg_g = (bg_color >> 8) & 0xFF;
-	bg_b = bg_color & 0xFF;
-	bg_r = (bg_r * inv_alpha + ((fg_color >> 16) & 0xFF) * alpha_int) >> 8;
-	bg_g = (bg_g * inv_alpha + ((fg_color >> 8) & 0xFF) * alpha_int) >> 8;
-	bg_b = (bg_b * inv_alpha + (fg_color & 0xFF) * alpha_int) >> 8;
-	return ((bg_r << 16) | (bg_g << 8) | bg_b);
 }

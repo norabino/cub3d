@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_render.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:28:41 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-/* Check if color should be treated as transparent */
 int	is_transparent_color(int color)
 {
 	if (color < 0x014B63)
@@ -20,7 +19,6 @@ int	is_transparent_color(int color)
 	return (0);
 }
 
-/* Check if sprite is valid and visible */
 static int	is_sprite_valid(t_cub3d *cub3d, t_sprite_calc *calc)
 {
 	if (calc->transform_y <= 0)
@@ -30,7 +28,6 @@ static int	is_sprite_valid(t_cub3d *cub3d, t_sprite_calc *calc)
 	return (1);
 }
 
-/* Initialize sprite render data */
 static void	init_sprite_render_data(t_cub3d *cub3d,
 	t_sprite_render_data *render_data)
 {
@@ -40,7 +37,6 @@ static void	init_sprite_render_data(t_cub3d *cub3d,
 		render_data->current_frame];
 }
 
-/* Validate sprite texture */
 static int	is_texture_valid(t_sprite_render_data *render_data)
 {
 	if (!render_data->current_texture
@@ -51,7 +47,6 @@ static int	is_texture_valid(t_sprite_render_data *render_data)
 	return (1);
 }
 
-/* Draw sprite pixels with transparency and depth testing */
 void	draw_sprite_pixels(t_cub3d *cub3d, t_sprite *sprite,
 	t_sprite_calc *calc)
 {

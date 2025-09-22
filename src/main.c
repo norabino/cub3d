@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:00:28 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 17:57:07 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:23:44 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-/* Parse et valide le fichier de configuration */
 void	parse_config_file(t_cub3d *cub3d, int ac, char **av)
 {
 	if (ac != 2)
@@ -24,7 +23,6 @@ void	parse_config_file(t_cub3d *cub3d, int ac, char **av)
 	validate_config_file(cub3d);
 }
 
-/* Point d'entrée principal du programme */
 int	main(int ac, char **av)
 {
 	t_cub3d	*cub3d;

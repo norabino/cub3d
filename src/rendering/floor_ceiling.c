@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:32:24 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 01:55:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:36:45 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Rend les textures du sol et plafond si disponibles */
 void	render_fc_textures(t_cub3d *cub3d, int screen_x,
 	int draw_start, int draw_end)
 {
@@ -24,7 +23,6 @@ void	render_fc_textures(t_cub3d *cub3d, int screen_x,
 		render_floor_texture(cub3d, screen_x, draw_end);
 }
 
-/* Rend la texture du plafond */
 void	render_ceiling_texture(t_cub3d *cub3d, int screen_x, int draw_start)
 {
 	int	y;
@@ -37,7 +35,6 @@ void	render_ceiling_texture(t_cub3d *cub3d, int screen_x, int draw_start)
 	}
 }
 
-/* Rend la texture du sol */
 void	render_floor_texture(t_cub3d *cub3d, int screen_x, int draw_end)
 {
 	int	y;
@@ -50,7 +47,6 @@ void	render_floor_texture(t_cub3d *cub3d, int screen_x, int draw_end)
 	}
 }
 
-/* Rend les couleurs du sol et plafond */
 void	render_fc_colors(t_cub3d *cub3d, int screen_x,
 	int draw_start, int draw_end)
 {

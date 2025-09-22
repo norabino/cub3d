@@ -59,7 +59,6 @@ RENDERING_SRC = \
 	src/rendering/collision.c \
 	src/rendering/floor_ceiling_utils.c \
 	src/rendering/floor_ceiling.c \
-	src/rendering/pixel_utils.c \
 	src/rendering/raycasting.c \
 	src/rendering/render.c \
 	src/rendering/texture_calc.c \
@@ -68,23 +67,20 @@ RENDERING_SRC = \
 
 # Sprite rendering system
 SPRITE_SRC = \
-	src/rendering/sprites/sprite_calc.c \
-	src/rendering/sprites/sprite_collect_helpers.c \
 	src/rendering/sprites/sprite_collect_helpers2.c \
 	src/rendering/sprites/sprite_collect_utils.c \
 	src/rendering/sprites/sprite_collect.c \
 	src/rendering/sprites/sprite_render_utils.c \
 	src/rendering/sprites/sprite_render.c \
 	src/rendering/sprites/sprite_sort.c \
-	src/rendering/sprites/sprite_utils.c \
 	src/rendering/sprites/sprite.c \
 
 # User Interface
 UI_SRC = \
 	src/ui/minimap_alpha.c \
 	src/ui/minimap_draw.c \
-	src/ui/minimap_player.c \
 	src/ui/minimap_utils.c \
+	src/ui/minimap_utils2.c \
 	src/ui/minimap.c \
 
 # Utility functions

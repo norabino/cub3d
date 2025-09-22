@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils.c                                        :+:      :+:    :+:   */
+/*   str_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:45:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/17 23:03:00 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:23:07 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Passe les espaces et caractères de contrôle dans une chaîne */
 void	skip_spaces(char *str, int *i)
 {
 	while (str[*i] && ((str[*i] >= 8 && str[*i] <= 13) || str[*i] == ' '))
 		(*i)++;
 }
 
-/* Vérifie si un caractère est une lettre de direction, couleur ou texture */
 int	is_letter(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W'
@@ -28,7 +26,6 @@ int	is_letter(char c)
 	return (0);
 }
 
-/* Vérifie si un caractère est un chiffre */
 int	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
@@ -36,7 +33,6 @@ int	ft_isdigit(char c)
 	return (0);
 }
 
-/* Vérifie si une chaîne contient uniquement des nombres et espaces */
 int	only_numbers(char *str)
 {
 	int	i;
@@ -52,7 +48,6 @@ int	only_numbers(char *str)
 	return (1);
 }
 
-/* Vérifie si une chaîne contient au moins un chiffre */
 int	is_nbr(char *str)
 {
 	int	i;

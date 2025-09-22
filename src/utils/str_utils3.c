@@ -15,7 +15,6 @@
 
 #include "../../includes/cub3d.h"
 
-/* Vérifie si un caractère est une lettre minuscule */
 int	is_lowercase(char c)
 {
 	if (c >= 'a' && c <= 'z')
@@ -23,7 +22,6 @@ int	is_lowercase(char c)
 	return (0);
 }
 
-/* Vérifie que chaque portail a exactement un correspondant */
 void	check_correspondance(t_cub3d *cub3d)
 {
 	int	i;
@@ -45,7 +43,6 @@ void	check_correspondance(t_cub3d *cub3d)
 	cub3d->nb_portals = cpt;
 }
 
-/* Remplace tous les portails par des zéros dans la carte */
 void	replace_portals_by_zero(char ***map)
 {
 	int	x;
@@ -66,7 +63,6 @@ void	replace_portals_by_zero(char ***map)
 	}
 }
 
-/* Accède sécurisé à la carte en évitant les débordements */
 char	safe_map_access(t_cub3d *cub3d, int y, int x)
 {
 	int	map_height;

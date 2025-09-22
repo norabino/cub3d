@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 14:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/16 19:18:07 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:21:19 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Libère les chemins des textures Nord et Sud */
 static void	ft_free_textures_paths(t_textures *textures)
 {
 	if (textures->north)
@@ -31,7 +30,6 @@ static void	ft_free_textures_paths(t_textures *textures)
 		secure_free((void **)&textures->portals);
 }
 
-/* Libère les images de la bibliothèque graphique */
 static void	ft_free_mlx(t_mlx *mlx)
 {
 	if (mlx->img && mlx->img->img && mlx->mlx)
@@ -53,7 +51,6 @@ static void	ft_free_mlx(t_mlx *mlx)
 	}
 }
 
-/* Fonction principale de nettoyage de toute la mémoire */
 void	ft_free(t_cub3d *cub3d)
 {
 	static int	already_freed = 0;

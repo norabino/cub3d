@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_1.c                                         :+:      :+:    :+:   */
+/*   memory1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:47:21 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/16 16:26:34 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 18:21:55 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Alloue et initialise à zéro un bloc de mémoire */
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*res;
@@ -44,7 +43,6 @@ void	*ft_memalloc(size_t size)
 	return (res);
 }
 
-/* Convertit un entier en chaîne de caractères */
 char	*ft_alloc(int *i, int signe, long n)
 {
 	char	*a;

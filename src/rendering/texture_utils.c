@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/15 18:12:20 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:40:42 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	calc_texture_step_pos(t_texture_calc *tex_calc, int draw_start)
 			+ real_wall_height / 2) * tex_calc->step;
 }
 
-/* Prépare tous les paramètres avant de dessiner */
 void	init_texture_draw_params(t_texture_calc *tex_calc,
 	int draw_params[2], int *tex_height, int *draw_bounds[2])
 {
@@ -35,7 +34,6 @@ void	init_texture_draw_params(t_texture_calc *tex_calc,
 	*tex_height = tex_calc->current_text->height;
 }
 
-/* Dessine un pixel unique de texture à l'écran */
 void	draw_single_texture_pixel(t_cub3d *cub3d, int screen_x, int y,
 	t_texture_calc *tex_calc)
 {

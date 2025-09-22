@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 13:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 20:14:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:38:06 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Lance un rayon pour calculer une colonne de l'écran */
 void	cast_single_ray(t_cub3d *cub3d, int screen_x)
 {
 	double	camera_x;
@@ -35,7 +34,6 @@ void	cast_single_ray(t_cub3d *cub3d, int screen_x)
 	render_ray_result(cub3d, screen_x, perp_wall_dist, &dda);
 }
 
-/* Fonction principale du raycasting - dessine tout l'écran */
 void	raycast(t_cub3d *cub3d)
 {
 	int	x;

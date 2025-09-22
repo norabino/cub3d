@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 19:24:01 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/18 18:31:44 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:32:18 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	init_mlx(t_cub3d *cub3d)
 
 static void	init_player(t_cub3d *cub3d)
 {
-	cub3d->player.fov = 0;
 	cub3d->player.direction = 0;
 	cub3d->player.last_prtl_pos.x = -1;
 	cub3d->player.last_prtl_pos.y = -1;

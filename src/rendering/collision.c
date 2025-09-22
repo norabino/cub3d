@@ -6,13 +6,12 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/05 02:52:14 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:34:56 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/* Vérifie les collisions autour du joueur avec marge de sécurité */
 int	is_valid_position(t_cub3d *cub3d, double x, double y)
 {
 	char	map_char;
@@ -29,8 +28,7 @@ int	is_valid_position(t_cub3d *cub3d, double x, double y)
 	return (1);
 }
 
-/* Tente un mouvement perpendiculaire (diagonal) */
-int	perpendicular_move(t_cub3d *cub3d, double new_x, double new_y)
+int	diagonal_move(t_cub3d *cub3d, double new_x, double new_y)
 {
 	if (is_valid_position(cub3d, new_x, new_y))
 	{
@@ -41,7 +39,6 @@ int	perpendicular_move(t_cub3d *cub3d, double new_x, double new_y)
 	return (0);
 }
 
-/* Tente un mouvement horizontal uniquement */
 int	horizontal_move(t_cub3d *cub3d, double new_x, double y)
 {
 	if (is_valid_position(cub3d, new_x, y))
@@ -53,7 +50,6 @@ int	horizontal_move(t_cub3d *cub3d, double new_x, double y)
 	return (0);
 }
 
-/* Tente un mouvement vertical uniquement */
 int	vertical_move(t_cub3d *cub3d, double x, double new_y)
 {
 	if (is_valid_position(cub3d, x, new_y))
@@ -65,7 +61,6 @@ int	vertical_move(t_cub3d *cub3d, double x, double new_y)
 	return (0);
 }
 
-/* Déplace le joueur en vérifiant les collisions */
 int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 {
 	double		new_x;
@@ -75,7 +70,7 @@ int	move_player(t_cub3d *cub3d, double delta_x, double delta_y)
 
 	new_x = cub3d->player.pos_x + delta_x;
 	new_y = cub3d->player.pos_y + delta_y;
-	if (!perpendicular_move(cub3d, new_x, new_y)
+	if (!diagonal_move(cub3d, new_x, new_y)
 		&& !horizontal_move(cub3d, new_x, cub3d->player.pos_y)
 		&& !vertical_move(cub3d, cub3d->player.pos_x, new_y))
 		return (0);

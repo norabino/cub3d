@@ -6,7 +6,7 @@
 /*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/18 20:54:52 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:18:30 by jdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	is_sprite_in_fov(t_cub3d *cub3d, double sprite_x, double sprite_y)
 	dy = sprite_y - cub3d->player.pos_y;
 	dot_product = dx * cub3d->player.dir_x + dy * cub3d->player.dir_y;
 	cross_product = dx * cub3d->player.dir_y - dy * cub3d->player.dir_x;
-	return (fabs(atan2(cross_product, dot_product)) < M_PI / 2);
+	return (ft_abs(atan2(cross_product, dot_product)) < PI / 2);
 }
 
 static void	add_portal_sprite(t_cub3d *cub3d, int portal_idx, int flg)
