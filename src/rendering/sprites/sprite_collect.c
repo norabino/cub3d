@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_collect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:00:00 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/22 16:18:30 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:26:42 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	add_portal_sprite(t_cub3d *cub3d, int portal_idx, int flg)
 	}
 	if (should_display_sprite(cub3d, sprite_x, sprite_y))
 		return ;
-	if (cub3d->sprite_count >= MAX_SPRITES)
+	if (cub3d->sprite_count >= 64)
 		return ;
 	cub3d->sprites[cub3d->sprite_count].x = sprite_x;
 	cub3d->sprites[cub3d->sprite_count].y = sprite_y;
@@ -72,7 +72,7 @@ void	collect_portal_sprites(t_cub3d *cub3d)
 	i = 0;
 	if (!cub3d->sprites)
 	{
-		cub3d->sprites = malloc(sizeof(t_sprite) * MAX_SPRITES);
+		cub3d->sprites = malloc(sizeof(t_sprite) * 64);
 		if (!cub3d->sprites)
 			exit_error("Failed to allocate sprite memory", cub3d);
 	}

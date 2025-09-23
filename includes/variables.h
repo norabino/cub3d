@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 19:21:04 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/23 15:01:47 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:36:50 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 #define MOVE_SPEED 2.0
 #define SENSIBILITY 3.0
-#define FPS 120
+#define FPS 200
 #define FOV 66
 #define COLLISION_MARGIN 0.05
 
@@ -33,13 +33,10 @@
 #define MINIMAP_X 20
 #define MINIMAP_Y 20
 #define MINIMAP_SCALE 16.0
-#define MINIMAP_COLOR_BG 0x808080
+#define MINIMAP_COLOR_BG 0x606060
 #define MINIMAP_COLOR_WALL 0x000000
-#define MINIMAP_COLOR_BORDER 0x000000
-#define MINIMAP_COLOR_PLAYER 0xFF0000
-#define MINIMAP_COLOR_PORTAL 0x6A5ACD
+#define MINIMAP_COLOR_PLAYER 0xFFFF00
+#define MINIMAP_COLOR_PORTAL 0x77B5FE
+#define FPS_COLOR 0x00FF00
 
-#define TRANSPARENT_COLOR 0x000000
-#define MAX_SPRITE_DISTANCE 1000.0
-#define SPRITE_CULLING_THRESHOLD 0.5
-#define MAX_SPRITES 64
+#define MAX_SPRITE_DISTANCE 100.0

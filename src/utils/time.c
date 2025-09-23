@@ -6,7 +6,7 @@
 /*   By: norabino <norabino@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 16:17:12 by norabino          #+#    #+#             */
-/*   Updated: 2025/09/22 18:59:50 by norabino         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:37:36 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void	display_fps(t_cub3d *cub3d)
 		ft_strcat(fps_buffer, temp_str);
 		free(temp_str);
 		mlx_string_put(cub3d->mlx.mlx, cub3d->mlx.win,
-			SCREEN_WIDTH - 80, 25, 0x00FF00, fps_buffer);
+			SCREEN_WIDTH - 80, 25, FPS_COLOR, fps_buffer);
 	}
 }
