@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdupuis <jdupuis@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: norabino <norabino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 20:00:00 by jdupuis           #+#    #+#             */
-/*   Updated: 2025/09/22 19:19:46 by jdupuis          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:00:39 by norabino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@ void	draw_minimap(t_cub3d *cub3d)
 	int	center_x;
 	int	center_y;
 
+	if (SCREEN_HEIGHT <= MINIMAP_SIZE
+		|| SCREEN_WIDTH <= MINIMAP_SIZE)
+		return ;
 	center_x = MINIMAP_X + MINIMAP_SIZE / 2;
 	center_y = MINIMAP_Y + MINIMAP_SIZE / 2;
 	draw_minimap_background(cub3d, center_x, center_y);
